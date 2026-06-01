@@ -1,21 +1,104 @@
-import pandas as pd
-import numpy as np
 from audio_features import *
 import os
-from pathlib import Path
+import pandas as pd
 
-# def import_vector_to_file():
-#     base_input_path = "accents_samples/accent_archive/"
-#
-#     # file load
-#     y, sr = librosa.load(audio_path, sr=None)
+def import_vector_to_file():
+    #create columns name for all features except MFCC
+    columns = [
+        'pitch_mean', 'pitch_std', 'average_volume', 'volume_variance',
+        'volume_max', 'volume_min', 'mean_centroid', 'mean_rolloff',
+        'mean_zcr', 'total_duration', 'phonation_time', 'phonation_ratio',
+        'syllable_rate', 'vowel_consonant_ratio', 'f1', 'f2'
+    ]
 
+    # create MFCC and delta 1 & 2 columns names
+    columns += [f'mfcc_{i}' for i in range(1, 14)]
+    columns += [f'delta_{i}' for i in range(1, 14)]
+    columns += [f'delta2_{i}' for i in range(1, 14)]
+
+    base_input_path = "accents_samples/accent_archive/"
+    base_output_path = "spectrograms"
+
+    for folder_name in os.listdir(base_input_path):
+        input_folder_path = os.path.join(base_input_path, folder_name)
+
+        # Skip files, process directories only
+        if not os.path.isdir(input_folder_path):
+            continue
+
+        # Create output folder
+        spectrogram_folder = os.path.join(base_output_path, folder_name)
+        os.makedirs(spectrogram_folder, exist_ok=True)
+
+        # iterate audio files on each language folder
+        for file_name in os.listdir(input_folder_path):
+            # Validate standard audio file extensions
+            if not file_name.lower().endswith(('.wav', '.mp3', '.m4a', '.flac')):
+                continue
+
+
+
+            input_file_path = os.path.join(input_folder_path, file_name)
+            features_vector = create_features_vector(input_file_path)
+            df = pd.DataFrame(features_vector, columns=[pitch_mean,])
+            df.to_csv("my_file.csv", index=False)
+
+
+def create_features_vector(file_path):
+    #load audio with  standardized sampling rate (16kHz)
+    y, sr = librosa.load(file_path, sr=16000)
+    y, _ = librosa.effects.trim(y) #TODO: DO I need it # Strip leading/trailing structural silence
+
+    #basic features
+
+    # 1. Extract acoustic components
+    rms, average_volume, volume_variance, volume_max, volume_min = extract_rms_features(y)
+    zcr, mean_zcr = extract_zero_crossing_rate(y)
+    f0, pitch_mean, pitch_std = extract_pitch_features(y, sr)
+
+    # 2. Extract spectral shape and brightness features
+    spec_centroid, mean_centroid = extract_spectral_centroid(y, sr)
+    spec_rolloff, mean_rolloff = extract_spectral_rolloff(y, sr)
+
+    # 3. Extract physical time and fluency features
+    total_duration, phonation_time, phonation_ratio = extract_duration_and_phonation(y,sr,f0)
+
+    #4. Extract advanced linguistic features
+    syllable_rate = extract_advanced_syllable_rate(y, sr, phonation_time)
+    vowel_consonant_ratio = extract_vowel_consonant_ratio(f0, zcr, rms)
+    f1, f2 = extract_formant_frequencies(y, sr)
+
+    # 5. Extract dynamic MFCC features -This captures the static vocal filter alongside its 1st (Delta) and 2nd (Delta-Delta) time derivatives
+    mfcc, delta_mfcc, delta2_mfcc, mfcc_dynamic = extract_mfcc_features(y, sr)
+
+    #the vector contains 16 scalars
+    features_vector = np.array([
+        pitch_mean,             # Pitch global center (Hz)
+        pitch_std,              # Intonation volatility / Tonal marker (Hz)
+        average_volume,         # Signal root mean square intensity average
+        volume_variance,        # Syllable stress rhythm / Energy variance
+        volume_max,             # Peak articulatory vocal stress
+        volume_min,             # Floor energy limits
+        mean_centroid,          # Spectral center of mass / Perceived brightness (Hz)
+        mean_rolloff,           # Spectral asymmetry / 85% energy cutoff boundary (Hz)
+        mean_zcr,               # Average zero crossing rate / Fricative noise proxy
+        total_duration,         # Complete phrase file length (Seconds)
+        phonation_time,         # True voiced duration excluding structural gaps (Seconds)
+        phonation_ratio,        # Speech fluency index / Hesitation marker
+        syllable_rate,          # Rhythm pacing score / Syllable count per speech second
+        vowel_consonant_ratio,  # Phonetic balance profile
+        f1,                     # Tongue height indicator / Open-closed jaw resonance (Hz)
+        f2                      # Tongue advancement indicator / Front-back resonance (Hz)
+    ])
+    #Concatenate the 16 base scalars with the 39-dimensional MFCC dynamic vector
+    # Total vector shape will be exactly 55 dimensions
+    complete_feature_vector = np.concatenate([features_vector, mfcc_dynamic])
+    return complete_feature_vector
 
 def create_spectrogram_folder():
     """
     Iterates through language folders, extracts linear-scale Mel-Spectrograms from
-    audio samples, removes visual artifacts (axes, labels, borders), and exports
-    them as clean PNG images formatted specifically for CNN training.
+    audio folders, then exports them as clean PNG images formatted specifically for CNN training.
     """
     base_input_path = "accents_samples/accent_archive/"
     base_output_path = "spectrograms"

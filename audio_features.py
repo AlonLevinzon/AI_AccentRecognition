@@ -3,7 +3,7 @@ import librosa.display
 import matplotlib.pyplot as plt
 import noisereduce as nr
 import numpy as np
-
+import scipy.signal
 """
 this is the features from the 3 articles I was mentioning in the bibliography
 """
@@ -151,8 +151,105 @@ def extract_duration_and_phonation(y: np.ndarray, sr: int, f0: np.ndarray) -> tu
     return total_duration, phonation_time, phonation_ratio
 
 """
-end of the features 
+end of basic of features 
 """
+
+"""
+advanced features 
+"""
+
+def extract_advanced_syllable_rate(y: np.ndarray, sr: int, phonation_time: float) -> float:
+    """
+    Estimates the speaking rate by detecting energetic peaks (syllable nuclei)
+    in the RMS envelope and normalizing by the active speech phonation time.
+
+    This linguistic feature is vital for distinguishing between syllable-timed
+    languages (e.g., Spanish, French) and stress-timed languages (e.g., native English).
+    Non-native speakers typically carry over their mother tongue's rhythmic pace.
+    """
+    # Isolate the 1D RMS energy envelope over time
+    rms_envelope = librosa.feature.rms(y=y, frame_length=1024, hop_length=512)[0]
+
+    # Calculate a dynamic energy threshold based on the average signal intensity
+    mean_energy = np.mean(rms_envelope)
+
+    # Detect local peaks representing the vowel nuclei of articulated syllables
+    # 'distance=5' ensures a realistic minimum duration between individual syllables (~160ms)
+    peaks, _ = scipy.signal.find_peaks(rms_envelope, height=mean_energy * 0.5, distance=5)
+
+    total_syllables = len(peaks)
+
+    # Calculate syllable rate per second of active speech (prevent division by zero)
+    syllable_rate = float(total_syllables / phonation_time) if phonation_time > 0 else 0.0
+
+    return syllable_rate
+
+
+def extract_vowel_consonant_ratio(f0: np.ndarray, zcr: np.ndarray, rms: np.ndarray) -> float:
+    """
+    Computes the temporal ratio between voiced segments (vowels) and unvoiced/noisy
+    fricative segments (consonants) by cross-referencing F0, ZCR, and RMS features.
+
+    Non-native speakers often elongate vowel durations or struggle to properly articulate
+    English consonants, altering the natural vowel-to-consonant phonetic balance.
+    """
+    # Flatten multi-dimensional arrays to 1D for unified frame-by-frame filtering
+    f0_flat = f0.flatten()
+    zcr_flat = zcr.flatten()
+    rms_flat = rms.flatten()
+
+    # Define acoustic baselines for voice presence and high frequency friction noise
+    energy_threshold = np.mean(rms_flat) * 0.2
+    zcr_threshold = np.mean(zcr_flat)
+
+    # Rule 1: Vowels have active vocal cord vibration (F0 > 0) and sufficient volume
+    vowel_frames = np.sum((~np.isnan(f0_flat)) & (f0_flat > 0) & (rms_flat > energy_threshold))
+
+    # Rule 2: Consonants lack vocal cord vibration but generate turbulent friction noise (High ZCR)
+    consonant_frames = np.sum(((np.isnan(f0_flat)) | (f0_flat == 0)) & (zcr_flat > zcr_threshold))
+
+    # Calculate the ratio (safeguard against division by zero)
+    vowel_consonant_ratio = float(vowel_frames / consonant_frames) if consonant_frames > 0 else 0.0
+
+    return vowel_consonant_ratio
+
+
+def extract_formant_frequencies(y: np.ndarray, sr: int) -> tuple[float, float]:
+    """
+    Estimates the average first and second formant frequencies (F1 and F2)
+    using Linear Predictive Coding (LPC) coefficients over the speech signal.
+
+    Acoustically, F1 correlates with tongue height (open/closed jaw), and F2
+    correlates with tongue advancement (front/back position) inside the vocal tract trapezoid.
+    Foreign accents typically display rigid or shifted formant patterns rooted in their native phonology.
+    """
+    # High-pass pre-emphasis filter to boost higher frequencies and stabilize LPC roots
+    y_preemphasized = librosa.effects.preemphasis(y)
+
+    # Determine the ideal LPC order based on the sampling rate (standard formulation)
+    # 2 coefficients for each formant pair, plus 2-4 additional coefficients for the glottal source
+    lpc_order = int(2 + sr / 1000)
+
+    # Extract global LPC coefficients across the pre-emphasized signal
+    lpc_coeffs = librosa.lpc(y_preemphasized, order=lpc_order)
+
+    # Calculate the roots of the LPC polynomial equation to find resonant peak frequencies
+    roots = np.roots(lpc_coeffs)
+    roots = roots[np.imag(roots) >= 0]  # Keep only the positive imaginary half of the complex plane
+
+    # Convert the raw polynomial roots back to physical frequency values in Hertz
+    frequencies = np.arctan2(np.imag(roots), np.real(roots)) * (sr / (2 * np.pi))
+    frequencies = np.sort(frequencies)  # Sort from lowest to highest frequency resonances
+
+    # Isolate valid speech formants by filtering out the DC offset near 0Hz
+    valid_formants = [f for f in frequencies if f > 90]
+
+    # Safely extract F1 and F2, defaulting to standard human baseline averages if estimation fails
+    f1 = float(valid_formants[0]) if len(valid_formants) > 0 else 500.0
+    f2 = float(valid_formants[1]) if len(valid_formants) > 1 else 1500.0
+
+    return f1, f2
+
 
 """
 features from website medium
