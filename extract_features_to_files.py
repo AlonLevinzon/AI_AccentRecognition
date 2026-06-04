@@ -3,46 +3,67 @@ import os
 import pandas as pd
 
 def import_vector_to_file():
+    """
+       Iterates through language folders,uses function create_features_vector to extracts linear-scale Mel-Spectrograms from
+       audio folders, then exports them a csv file .
+       """
     #create columns name for all features except MFCC
-    columns = [
+    feature_names = [
         'pitch_mean', 'pitch_std', 'average_volume', 'volume_variance',
         'volume_max', 'volume_min', 'mean_centroid', 'mean_rolloff',
         'mean_zcr', 'total_duration', 'phonation_time', 'phonation_ratio',
         'syllable_rate', 'vowel_consonant_ratio', 'f1', 'f2'
     ]
 
-    # create MFCC and delta 1 & 2 columns names
-    columns += [f'mfcc_{i}' for i in range(1, 14)]
-    columns += [f'delta_{i}' for i in range(1, 14)]
-    columns += [f'delta2_{i}' for i in range(1, 14)]
+    # adding MFCC and delta 1 & 2 columns names
+    feature_names += [f'mfcc_{i}' for i in range(1, 14)]
+    feature_names += [f'delta_{i}' for i in range(1, 14)]
+    feature_names += [f'delta2_{i}' for i in range(1, 14)]
+    all_columns = ['file_name', 'speaker_id'] + feature_names + ['accent']
 
-    base_input_path = "accents_samples/accent_archive/"
-    base_output_path = "spectrograms"
+    dataset_rows=[]
 
-    for folder_name in os.listdir(base_input_path):
-        input_folder_path = os.path.join(base_input_path, folder_name)
+    base_dir = "accents_samples/accent_archive/"
+
+    for folder_name in os.listdir(base_dir):
+        accent_folder_path = os.path.join(base_dir, folder_name)
 
         # Skip files, process directories only
-        if not os.path.isdir(input_folder_path):
+        if not os.path.isdir(accent_folder_path):
             continue
 
-        # Create output folder
-        spectrogram_folder = os.path.join(base_output_path, folder_name)
-        os.makedirs(spectrogram_folder, exist_ok=True)
+        accent_label = folder_name
+        # Ensure we are processing an actual directory
+        if os.path.isdir(accent_folder_path):
+            print(f"Processing accent group: {accent_label}")
 
         # iterate audio files on each language folder
-        for file_name in os.listdir(input_folder_path):
+        for file_name in os.listdir(accent_folder_path):
             # Validate standard audio file extensions
             if not file_name.lower().endswith(('.wav', '.mp3', '.m4a', '.flac')):
                 continue
+            audio_file_path = os.path.join(accent_folder_path, file_name)
 
+            # Derive a unique speaker ID from the filename (example 'arabic45')
+            speaker_id = os.path.splitext(file_name)[0]
 
+            try:
+                #extract features for audio using create_features_vector below (55 features)
+                features_vector = create_features_vector(audio_file_path)
+                row_data = [file_name, speaker_id] + list(features_vector) + [accent_label]
+                dataset_rows.append(row_data)
+            except Exception as e:
+                print(f"Error processing file {file_name}: {e}")
 
-            input_file_path = os.path.join(input_folder_path, file_name)
-            features_vector = create_features_vector(input_file_path)
-            df = pd.DataFrame(features_vector, columns=[pitch_mean,])
-            df.to_csv("my_file.csv", index=False)
+        #convering the columns and rows to data structure with labeled axes (rows and columns) from Pandas Python Library
+        df = pd.DataFrame(dataset_rows, columns=all_columns)
+        #creating the csv file
+        df.to_csv('accent_features_dataset.csv', index=False)
+        print("csv file successfully created")
 
+        # # Dropping unnumerical features for the Machine Learning Model
+        # X = df.drop(columns=['file_name', 'speaker_id', 'accent'])
+        # y = df['accent']  # Now 'y' contains the automatically extracted labels
 
 def create_features_vector(file_path):
     #load audio with  standardized sampling rate (16kHz)
@@ -154,7 +175,7 @@ def create_spectrogram_folder():
             plt.close()
 
 def main():
-    create_spectrogram_folder()
+    import_vector_to_file()
 
 if __name__ == "__main__":
     main()
