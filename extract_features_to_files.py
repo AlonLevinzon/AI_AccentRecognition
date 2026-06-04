@@ -23,7 +23,7 @@ def import_vector_to_file():
 
     dataset_rows=[]
 
-    base_dir = "accents_samples/accent_archive/"
+    base_dir = "sentences_samples"
 
     for folder_name in os.listdir(base_dir):
         accent_folder_path = os.path.join(base_dir, folder_name)
@@ -36,34 +36,36 @@ def import_vector_to_file():
         # Ensure we are processing an actual directory
         if os.path.isdir(accent_folder_path):
             print(f"Processing accent group: {accent_label}")
-
         # iterate audio files on each language folder
-        for file_name in os.listdir(accent_folder_path):
-            # Validate standard audio file extensions
-            if not file_name.lower().endswith(('.wav', '.mp3', '.m4a', '.flac')):
-                continue
-            audio_file_path = os.path.join(accent_folder_path, file_name)
+        for sentence in os.listdir(accent_folder_path):
+            # iterate audio files on each sentence folder
+            sentence_file_path = os.path.join(accent_folder_path, sentence)
+            for file_name in os.listdir(sentence_file_path):
+                # Validate standard audio file extensions
+                if not file_name.lower().endswith(('.wav', '.mp3', '.m4a', '.flac')):
+                    continue
+                audio_file_path = os.path.join(accent_folder_path,sentence, file_name)
+                print(audio_file_path)
+                # Derive a unique speaker ID from the filename (example 'arabic45')
+                speaker_id = os.path.splitext(file_name)[0]
 
-            # Derive a unique speaker ID from the filename (example 'arabic45')
-            speaker_id = os.path.splitext(file_name)[0]
+                try:
+                    #extract features for audio using create_features_vector below (55 features)
+                    features_vector = create_features_vector(audio_file_path)
+                    row_data = [sentence, speaker_id] + list(features_vector) + [accent_label]
+                    dataset_rows.append(row_data)
+                except Exception as e:
+                    print(f"Error processing file {file_name}: {e}")
 
-            try:
-                #extract features for audio using create_features_vector below (55 features)
-                features_vector = create_features_vector(audio_file_path)
-                row_data = [file_name, speaker_id] + list(features_vector) + [accent_label]
-                dataset_rows.append(row_data)
-            except Exception as e:
-                print(f"Error processing file {file_name}: {e}")
+    #convering the columns and rows to data structure with labeled axes (rows and columns) from Pandas Python Library
+    df = pd.DataFrame(dataset_rows, columns=all_columns)
+    #creating the csv file
+    df.to_csv('accent_features_dataset.csv', index=False)
+    print("csv file successfully created")
 
-        #convering the columns and rows to data structure with labeled axes (rows and columns) from Pandas Python Library
-        df = pd.DataFrame(dataset_rows, columns=all_columns)
-        #creating the csv file
-        df.to_csv('accent_features_dataset.csv', index=False)
-        print("csv file successfully created")
-
-        # # Dropping unnumerical features for the Machine Learning Model
-        # X = df.drop(columns=['file_name', 'speaker_id', 'accent'])
-        # y = df['accent']  # Now 'y' contains the automatically extracted labels
+    # # Dropping unnumerical features for the Machine Learning Model
+    # X = df.drop(columns=['file_name', 'speaker_id', 'accent'])
+    # y = df['accent']  # Now 'y' contains the automatically extracted labels
 
 def create_features_vector(file_path):
     #load audio with  standardized sampling rate (16kHz)

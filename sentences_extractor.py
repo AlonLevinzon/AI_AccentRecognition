@@ -6,7 +6,7 @@ from audio_time_split import *
 def cut_audio_to_sentences():
 
     base_input_path = "accents_samples/accent_archive/"
-    base_output_path = "sentences"
+    base_output_path = "sentences_samples"
 
     # Define the 6 segments exactly as we planned
     stella_target_segments = [
