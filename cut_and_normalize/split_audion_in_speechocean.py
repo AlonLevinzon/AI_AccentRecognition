@@ -4,10 +4,10 @@ import pandas as pd
 
 DATA_GROUPS = ['train', 'test']
 # Note: Adjusted to point to the directory containing the 'WAVE' folder based on image paths
-AUDIO_BASE_DIR = 'accents_audio/speechocean762'
+AUDIO_BASE_DIR = '../accents_audio/speechocean762'
 # Updated template extension to .xlsx
 METADATA_PATH_TEMPLATE = 'accents_audio/speechocean762/{group}_metadata.xlsx'
-TARGET_DIR = './audio_by_accent/chinese'
+TARGET_DIR = '../audio_by_accent_raw/chinese'
 
 for group in DATA_GROUPS:
     print(f"--- Processing group: {group} ---")
@@ -21,7 +21,7 @@ for group in DATA_GROUPS:
     # Changed from pd.read_csv to pd.read_excel
     df = pd.read_excel(metadata_path)
 
-    # Define target path for the current group (e.g., ./audio_by_accent/chinese/train)
+    # Define target path for the current group (e.g., ./audio_by_accent_raw/chinese/train)
     dest_group_path = os.path.join(TARGET_DIR, group)
     os.makedirs(dest_group_path, exist_ok=True)
 
