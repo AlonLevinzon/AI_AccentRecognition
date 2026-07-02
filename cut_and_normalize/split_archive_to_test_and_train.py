@@ -78,25 +78,40 @@ def split_dataset():
         train_speakers, temp_speakers = train_test_split(all_speakers, test_size=0.30, random_state=42)
         val_speakers, test_speakers = train_test_split(temp_speakers, test_size=0.50, random_state=42)
 
+        # --- THE SPEAKER-LEVEL CAP FOR USA ACCENT ---
+        # If the current accent is 'usa', strictly slice the speaker lists to the requested speaker counts
+        if accent_folder == 'usa':
+            train_speakers = train_speakers[:50]
+            val_speakers = val_speakers[:10]
+            test_speakers = test_speakers[:10]
+            print(f" -> [USA Speaker Cap Applied] Retained exact speakers: Train=50, Val=10, Test=10")
+
         # Create a mapping dictionary for quick lookup during file distribution
         speaker_split_map = {}
         for sp in train_speakers: speaker_split_map[sp] = 'train'
         for sp in val_speakers: speaker_split_map[sp] = 'val'
         for sp in test_speakers: speaker_split_map[sp] = 'test'
 
+        # Track how many total files are actually processed for reporting
+        files_processed_count = {'train': 0, 'val': 0, 'test': 0}
+
         # Copy files to flat directory structures and assemble metadata rows
         for speaker, files in speaker_to_files.items():
+            # Skip if the speaker did not make it into the sliced maps (relevant for USA capping)
+            if speaker not in speaker_split_map:
+                continue
+
             target_split = speaker_split_map[speaker]
             target_dir = base_output_path / target_split
 
             for file_name, src_path in files:
                 dest_path = target_dir / file_name
+                files_processed_count[target_split] += 1
 
                 # Physical copy directly into the flat split folder
                 shutil.copy2(src_path, dest_path)
 
                 # 1. Build a base fallback dictionary containing ALL columns found in the original sheet
-                # This ensures no columns are missing or blank, initializing with None
                 row_data = {'filename': file_name, 'accent': accent_folder, 'speaker': speaker}
                 if meta_rows:
                     for key in meta_rows[0].keys():
@@ -117,7 +132,6 @@ def split_dataset():
                         break
 
                 # 3. CRITICAL FALLBACK: If the specific file chunk isn't listed, find ANY row belonging to this speaker
-                # This guarantees that features like accent, age, sex, etc., are recovered for the Train split
                 if not matched_attributes and meta_rows:
                     for row in meta_rows:
                         orig_filename = str(row.get('filename', '')).strip()
@@ -134,7 +148,9 @@ def split_dataset():
                 metadata_accumulators[target_split].append(row_data)
 
         print(
-            f" -> Allocation breakdown: Train={len(train_speakers)} speakers, Val={len(val_speakers)}, Test={len(test_speakers)}")
+            f" -> Allocation breakdown: Train={len(train_speakers)} speakers ({files_processed_count['train']} files), "
+            f"Val={len(val_speakers)} speakers ({files_processed_count['val']} files), "
+            f"Test={len(test_speakers)} speakers ({files_processed_count['test']} files)")
 
     # Generate and save independent metadata files for each split directory
     print("\nWriting consolidated metadata sheets...")

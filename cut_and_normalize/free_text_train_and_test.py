@@ -15,12 +15,34 @@ def merge_dataset_clean():
         print(f"Error: Source directory {source_base} does not exist.")
         return
 
-    # מילון שיחזיק את ה-DataFrames המאוחדים לכל split
+    # =========================================================================
+    # FUTURE CONFIGURATION PANEL: Change these values to adjust dataset sizes
+    # =========================================================================
+    max_train_samples = 900  # Hard limit for train samples per accent
+    train_ratio = 0.70  # Target ratio for train split (70%)
+    val_test_ratio = 0.15  # Target ratio for val and test splits (15% each)
+    # =========================================================================
+
+    # Mathematically calculate the limits for validation and test splits dynamically
+    total_calculated_samples = round(max_train_samples / train_ratio)
+    max_val_samples = round(total_calculated_samples * val_test_ratio)
+    max_test_samples = round(total_calculated_samples * val_test_ratio)
+
+    # Dictionary mapping each split to its specific calculated limit
+    split_limits = {
+        'train': max_train_samples,
+        'validation': max_val_samples,
+        'test': max_test_samples
+    }
+
+    print("=============================================")
+    print(f"Calculated limits per accent: Train={max_train_samples}, Val={max_val_samples}, Test={max_test_samples}")
+    print("=============================================")
+
+    # Accumulator to hold dataframes for the final split merge
     split_frames = {split: [] for split in splits}
 
-    print("Starting clean dataset unification (dropping age and gender)...")
-
-    # עוברים על כל תיקיות המבטאים
+    # Iterate through each accent folder
     for accent_folder in os.listdir(source_base):
         accent_dir = source_base / accent_folder
         if not accent_dir.is_dir():
@@ -33,7 +55,7 @@ def merge_dataset_clean():
             if not split_dir.exists():
                 continue
 
-            # איתור קובץ המטא-דאטה
+            # Locate metadata file
             meta_file_path = None
             for file in os.listdir(split_dir):
                 if file.endswith(('.csv', '.xlsx', '.xls')):
@@ -43,7 +65,7 @@ def merge_dataset_clean():
             if not meta_file_path or not meta_file_path.exists():
                 continue
 
-            # קריאה בטוחה של הקובץ
+            # Read dataset safely
             try:
                 if meta_file_path.suffix.lower() in ['.xlsx', '.xls']:
                     df = pd.read_excel(meta_file_path)
@@ -57,14 +79,14 @@ def merge_dataset_clean():
 
             df_cleaned = pd.DataFrame()
 
-            # פונקציית עזר לבחירת העמודה הקיימת הראשונה מתוך רשימת אפשרויות
+            # Helper function to get first existing column variant
             def get_first_existing_column(dataframe, alternative_keys):
                 for key in alternative_keys:
                     if key in dataframe.columns:
                         return dataframe[key]
                 return None
 
-            # מיפוי ארבעת עמודות הליבה בלבד
+            # Standardized column extraction mappings
             if accent_folder == 'chinese':
                 df_cleaned['filename'] = get_first_existing_column(df, ['wav_path', 'filename', 'file', 'audio'])
                 df_cleaned['speaker_id'] = get_first_existing_column(df,
@@ -86,13 +108,21 @@ def merge_dataset_clean():
                 df_cleaned['accent'] = 'usa'
                 df_cleaned['text'] = get_first_existing_column(df, ['text', 'sentence', 'transcription'])
 
-            # סינון שורות שאין בהן שם קובץ תקני
             if 'filename' in df_cleaned.columns and df_cleaned['filename'] is not None:
                 df_cleaned = df_cleaned.dropna(subset=['filename'])
             else:
                 continue
 
-            # יצירת תיקיית היעד והעתקת קובצי האודיו הפיזיים
+            # --- THE SAMPLING LIMITATION BLOCK ---
+            # Get the exact hard limit allowed for the current active split type
+            current_split_limit = split_limits[split]
+
+            # Slice the dataframe to contain only up to the maximum allowed records
+            if len(df_cleaned) > current_split_limit:
+                df_cleaned = df_cleaned.head(current_split_limit)
+                print(f" -> Notice: Capped data down to {current_split_limit} rows.")
+
+            # Create destination folder and transfer physical files
             dest_split_dir = output_base / split
             os.makedirs(dest_split_dir, exist_ok=True)
 
@@ -103,17 +133,14 @@ def merge_dataset_clean():
                 if src_file.exists():
                     shutil.copy2(src_file, dest_split_dir / pure_name)
                 else:
-                    # חיפוש גמיש (Case-Insensitive) למקרה של סיומות כמו .WAV גדולות
                     for f in os.listdir(split_dir):
                         if f.lower() == pure_name.lower():
                             shutil.copy2(split_dir / f, dest_split_dir / f)
                             break
 
-            # ניקוי נתיבים משם הקובץ בטבלה הסופית
+            # Metadata sanitization and structural cleaning
             df_cleaned['filename'] = df_cleaned['filename'].apply(
                 lambda x: os.path.basename(str(x)) if pd.notna(x) else x)
-
-            # ניקוי והחלקה של ה-speaker_id שיוצג בצורה אחידה כטקסט נקי
             df_cleaned['speaker_id'] = df_cleaned['speaker_id'].apply(lambda x: str(int(float(x))) if pd.notna(x) and (
                         isinstance(x, float) or (isinstance(x, str) and '.' in str(x))) else (
                 str(x).strip() if pd.notna(x) else x))
@@ -121,13 +148,12 @@ def merge_dataset_clean():
             split_frames[split].append(df_cleaned)
             print(f" -> Merged {len(df_cleaned)} rows for {accent_folder} ({split})")
 
-    # כתיבת קובצי המטא-דאטה המאוחדים הסופיים
+    # Compile final standalone output csv sheets
     print("\nWriting final unified metadata sheets...")
     for split in splits:
         if split_frames[split]:
             df_final = pd.concat(split_frames[split], ignore_index=True)
 
-            # סדר עמודות אחיד וסופי
             column_order = ['filename', 'speaker_id', 'accent', 'text']
             df_final = df_final[column_order]
 
@@ -137,8 +163,5 @@ def merge_dataset_clean():
 
 
 if __name__ == "__main__":
-    print("=============================================")
-    print("Initializing Core-Feature Dataset Unifier... ")
-    print("=============================================")
     merge_dataset_clean()
-    print("\nProcess finished! Unified dataset is ready in 'free_text_train_and_test'.")
+    print("\nProcess finished! Balances applied accurately.")

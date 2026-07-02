@@ -6,7 +6,7 @@ import noisereduce as nr
 _short_audio_discard_counter = 0
 
 
-def process_raw_audio_pipeline(input_path, target_sr=16000, min_sec=2.5):
+def process_raw_audio_pipeline(input_path, target_sr=16000, min_sec=0.1):
     """
     Processes raw audio by filtering out short samples (< 3s), reducing noise,
     and normalizing amplitude. Keeps long files (> 7s) as they are without padding.
