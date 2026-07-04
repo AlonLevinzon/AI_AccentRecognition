@@ -1,0 +1,18 @@
+=============================================
+RUNNING MODE: official_audio_mixed (Full Merge)
+=============================================
+
+Writing synchronized official metadata sheets...
+ -> Created: official_audio_mixed\train\train_metadata.csv (4548 samples)
+ -> Created: official_audio_mixed\validation\validation_metadata.csv (957 samples)
+ -> Created: official_audio_mixed\test\test_metadata.csv (996 samples)
+
+Execution Report Summary for [official_audio_mixed]:
+ - TRAIN Split samples:      4548
+ - VALIDATION Split samples: 957
+ - TEST Split samples:       996
+ Total clean samples retained: 6501
+
+=========================================================================
+ALL PROCESSING TASKS COMPLETED SUCCESSFULLY!
+=========================================================================
