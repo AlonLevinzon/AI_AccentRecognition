@@ -52,6 +52,16 @@ def merge_and_normalize_splits(mode="mixed"):
         print("RUNNING MODE: official_audio_free_text_only")
         print("=============================================")
 
+    # Hardcoded list containing the 6 standardized Stella sentences for the Archive dataset split
+    stella_sentences = [
+        "Please call Stella. Ask her to bring these things",
+        "with her from the store: Six spoons of fresh snow peas,",
+        "five thick slabs of blue cheese, and maybe a snack for her brother Bob.",
+        "We also need a small plastic snake and a big toy frog for the kids.",
+        "She can scoop these things into three red bags,",
+        "and we will go meet her Wednesday at the train station."
+    ]
+
     # Tracker dictionaries to count valid samples per split for the final report
     final_counts = {'train': 0, 'validation': 0, 'test': 0}
     split_metadata_accumulators = {split: [] for split in splits}
@@ -64,6 +74,9 @@ def merge_and_normalize_splits(mode="mixed"):
         for src_base in sources_to_read:
             if not src_base.exists():
                 continue
+
+            # Check if the active folder layout corresponds to the archive dataset
+            is_archive_source = "archive" in src_base.name.lower()
 
             # Locate the exact split subfolder inside the active dataset base
             active_split_dir = None
@@ -130,14 +143,46 @@ def merge_and_normalize_splits(mode="mixed"):
                 is_saved = process_and_save_audio(src_audio_file, dest_split_dir)
 
                 if is_saved:
-                    # Increment counter and append to clean metadata sheet ONLY if audio passed filter
                     final_counts[split] += 1
+
+                    # Initialize text variable to hold final sanitized transcription string
+                    final_text = ""
+
+                    # If file originates from archive data or explicitly contains the naming partition flag
+                    if is_archive_source or "_part_" in raw_filename.lower():
+                        try:
+                            # Parse out the segment segment digit from filename structure (e.g., mandarin1_part_3.wav -> 3)
+                            part_str = raw_filename.lower().split("_part_")[-1].split(".")[0]
+                            part_index = int(part_str)
+
+                            # Safely fetch matching sentence index layout from the hardcoded Stella array
+                            if 0 <= part_index < len(stella_sentences):
+                                final_text = stella_sentences[part_index]
+                        except Exception:
+                            # Fallback to structural row string if filename mapping execution fails
+                            final_text = text_col.iloc[idx] if text_col is not None else ""
+                    else:
+                        # Fetch original string natively from CSV sheet for typical free text inputs
+                        final_text = text_col.iloc[idx] if text_col is not None else ""
+
+                    # Guarantee that any residual NaN values are safely coerced to blank strings
+                    if pd.isna(final_text):
+                        final_text = ""
+
+                    # Fetch the raw accent label value safely
+                    raw_accent = accent_col.iloc[idx] if accent_col is not None else None
+
+                    # FIX: Enforce centralized accent sanitization mapping 'hindi' target labels to 'indian'
+                    if isinstance(raw_accent, str):
+                        cleaned_accent = raw_accent.strip().lower()
+                        if cleaned_accent == 'hindi':
+                            raw_accent = 'indian'
 
                     split_metadata_accumulators[split].append({
                         'filename': raw_filename,
                         'speaker_id': speaker_col.iloc[idx] if speaker_col is not None else None,
-                        'accent': accent_col.iloc[idx] if accent_col is not None else None,
-                        'text': text_col.iloc[idx] if text_col is not None else None
+                        'accent': raw_accent,
+                        'text': final_text
                     })
 
     # Generate and export the newly compiled and cleaned metadata sheets

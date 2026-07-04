@@ -2,11 +2,11 @@ import numpy as np
 
 
 class KernelELMClassifier:
+    """
+    Kernel Extreme Learning Machine custom classifier optimized for matrix operations.
+    """
+
     def __init__(self, C=1.0, gamma=0.1):
-        """
-        C regulazation paramater
-        gamma: width paramater RBF Kernel (1 / (2 * sigma^2))
-        """
         self.C = C
         self.gamma = gamma
         self.X_train = None
@@ -14,43 +14,40 @@ class KernelELMClassifier:
         self.n_classes = None
 
     def rbf_kernel(self, X1, X2):
-        """  RBF Kernel between two samples matrics """
-        #algebraic expansion of squared Euclidean distance
+        """ Computes RBF Kernel between two matrices """
         X1_sq = np.sum(X1 ** 2, axis=1).reshape(-1, 1)
         X2_sq = np.sum(X2 ** 2, axis=1).reshape(1, -1)
         distances_sq = X1_sq + X2_sq - 2 * np.dot(X1, X2.T)
         return np.exp(-self.gamma * distances_sq)
 
     def convert_to_label_matrix(self, y):
-        """ turn labels to matrix of [1. 0. 0.] etc...so we can multiplay with  """
-        classes = np.unique(y)
-        self.n_classes = len(classes)
-        one_hot = np.zeros((len(y), self.n_classes))
-        for idx, val in enumerate(y):
-            one_hot[idx, val] = 1
+        """ Converts integer array labels to a One-Hot binary matrix """
+        # Force conversion to integer indices (0, 1, 2...) for array indexing
+        y_int = y.astype(int)
+        self.n_classes = len(np.unique(y_int))
+        one_hot = np.zeros((len(y_int), self.n_classes))
+        for idx, val in enumerate(y_int):
+            one_hot[idx, val] = 1.0
         return one_hot
 
     def fit(self, X, y):
-        """ training the model """
-        self.X_train = X
+        """ Trains the Kernel ELM model using analytical linear system solving """
+        # Convert X to a numpy array if it comes as a Pandas DataFrame
+        self.X_train = X.values if hasattr(X, 'values') else X
         y_label_matrix = self.convert_to_label_matrix(y)
-        num_samples = X.shape[0]
+        num_samples = self.X_train.shape[0]
 
-        # 1. (N x N) kernel matrix for training
-        K = self.rbf_kernel(X, X)
-
-        #  we calculate beta from  y_pred=K_test * beta
-        # beta = (K + I/C)^(-1) * Y
+        # Calculate the kernel matrix (N x N)
+        K = self.rbf_kernel(self.X_train, self.X_train)
         identity_matrix = np.eye(num_samples)
+
+        # Analytically solve for weights beta: (K + I/C) * beta = Y_matrix
         self.beta = np.linalg.solve(K + identity_matrix / self.C, y_label_matrix)
         return self
 
     def predict(self, X):
-        # kernel calculation between X data and X we were training on
-        K_test = self.rbf_kernel(X, self.X_train)
-
-        #raw output from   y_pred=K_test * beta
+        """ Predicts the class with the highest analytical output """
+        X_data = X.values if hasattr(X, 'values') else X
+        K_test = self.rbf_kernel(X_data, self.X_train)
         raw_output = np.dot(K_test, self.beta)
-
-        # taking the argmax with the highest value
         return np.argmax(raw_output, axis=1)

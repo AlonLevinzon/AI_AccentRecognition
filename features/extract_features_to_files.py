@@ -1,25 +1,40 @@
 import os
+import numpy as np
+import librosa
+import matplotlib.pyplot as plt
 import pandas as pd
 from features.audio_features import *
 from features.Dynamic_features import *
 from features.phonetic_features import *
+import traceback
 
-def import_vector_to_file():
-    """
-    Iterates through language folders, maps safe folder names (e.g., sentence_0) back
-    to their original English text, extracts all acoustic and phonetic features, and saves to CSV.
-    """
-    # Define the exact target text segments mapped by their structural index (from sentences_extractor.py)
-    STELLA_TEXT_MAP = {
-        "sentence_0": "Please call Stella. Ask her to bring these things",
-        "sentence_1": "with her from the store: Six spoons of fresh snow peas,",
-        "sentence_2": "five thick slabs of blue cheese, and maybe a snack for her brother Bob.",
-        "sentence_3": "We also need a small plastic snake and a big toy frog for the kids.",
-        "sentence_4": "She can scoop these things into three red bags,",
-        "sentence_5": "and we will go meet her Wednesday at the train station."
-    }
 
-    # Create column names for the 16 baseline scalar features
+def find_file_in_dir(base_dir, filename):
+    """
+    Helper function to locate a file within base_dir or any of its subdirectories.
+    Returns the full path if found, else None.
+    """
+    for root, dirs, files in os.walk(base_dir):
+        if filename in files:
+            return os.path.join(root, filename)
+    return None
+
+
+def import_vector_to_file(metadata_csv_path, audio_base_dir="../official_audio_mixed"):
+    """
+    Reads a metadata CSV file, iterates through its rows, locates the corresponding
+    audio files in audio_base_dir, extracts acoustic/phonetic features using the
+    provided text, and exports a unified feature matrix.
+    """
+    # 1. Load the metadata file
+    if not os.path.exists(metadata_csv_path):
+        print(f"Error: Metadata file not found at {metadata_csv_path}")
+        return
+
+    print(f"Loading metadata from {metadata_csv_path}...")
+    metadata_df = pd.read_csv(metadata_csv_path)
+
+    # 2. Define column names for the final feature file
     base_feature_names = [
         'pitch_mean', 'pitch_std', 'average_volume', 'volume_variance',
         'volume_max', 'volume_min', 'mean_centroid', 'mean_rolloff',
@@ -27,26 +42,23 @@ def import_vector_to_file():
         'syllable_rate', 'vowel_consonant_ratio', 'f1', 'f2'
     ]
 
-    # Add 13 MFCC and their 1st & 2nd time derivatives (39 features)
     mfcc_feature_names = []
     mfcc_feature_names += [f'mfcc_{i}' for i in range(1, 14)]
     mfcc_feature_names += [f'delta_{i}' for i in range(1, 14)]
     mfcc_feature_names += [f'delta2_{i}' for i in range(1, 14)]
 
-    # Add 9 advanced dynamic biomarkers from Dynamic_features.py (Praat/Parselmouth)
     advanced_acoustic_names = [
         'praat_mean_f0', 'praat_std_f0', 'pitch_velocity_std',
         'jitter', 'shimmer', 'mean_F1', 'mean_F2', 'mean_F3', 'F2_F1_ratio'
     ]
 
-    # Add 5 structural phonetic vector features (Theoretical linguistics)
     phonetic_feature_names = [
         'phn_voiced', 'phn_fricative', 'phn_plosive', 'phn_nasal', 'phn_long_vowel'
     ]
 
-    # Master columns layout (Total length: 2 metadata columns + 69 features + 1 label = 72 columns)
+    # Layout of columns in the final exported DataFrame
     all_columns = (
-            ['file_name', 'speaker_id'] +
+            ['filename', 'speaker_id', 'text'] +
             base_feature_names +
             mfcc_feature_names +
             advanced_acoustic_names +
@@ -55,59 +67,54 @@ def import_vector_to_file():
     )
 
     dataset_rows = []
-    base_dir = "../sentences_samples"
 
-    for folder_name in os.listdir(base_dir):
-        accent_folder_path = os.path.join(base_dir, folder_name)
+    # 3. Iterate through each row in the metadata file for feature extraction
+    print(f"Starting feature extraction for {len(metadata_df)} files...")
 
-        # Skip files, process directories only
-        if not os.path.isdir(accent_folder_path):
+    for idx, row in metadata_df.iterrows():
+        filename = row['filename']
+
+        # Removed the temporary archive '_part' restriction to process all files natively
+        speaker_id = row['speaker_id']
+        accent = row['accent']
+        ground_truth_text = row['text']
+
+        # Locate the audio file path within the base directory (including subdirectories)
+        audio_file_path = find_file_in_dir(audio_base_dir, filename)
+
+        if audio_file_path is None:
             continue
 
-        accent_label = folder_name
-        print(f"Processing accent group: {accent_label}")
+        print(f"[{idx + 1}/{len(metadata_df)}] Processing: {filename} ({accent})")
 
-        # Iterate through sentence folders (e.g., "sentence_0", "sentence_1")
-        for sentence_folder in os.listdir(accent_folder_path):
-            sentence_file_path = os.path.join(accent_folder_path, sentence_folder)
+        try:
+            # Pass the file path and corresponding ground truth text to the extraction engine
+            features_vector = create_features_vector(audio_file_path, ground_truth_text=ground_truth_text)
 
-            if not os.path.isdir(sentence_file_path):
-                continue
+            # Construct the dataset row: initial metadata + extracted features + accent label at the end
+            row_data = [filename, speaker_id, ground_truth_text] + list(features_vector) + [accent]
+            dataset_rows.append(row_data)
 
-            # Retrieve the true English text corresponding to this safe folder name
-            # Fallback to empty string if folder name doesn't match the expected dictionary keys
-            ground_truth_text = STELLA_TEXT_MAP.get(sentence_folder, "")
+        except Exception as e:
+            # Cleaned exception handling printing detailed stack trace without emojis
+            print(f"\nCRITICAL ERROR on file {filename}!")
+            print(f"Error Message: {e}")
+            print("--- Full Stack Trace ---")
+            traceback.print_exc()
+            print("------------------------\n")
 
-            # Iterate through the actual audio files inside the sentence partition folder
-            for file_name in os.listdir(sentence_file_path):
-                # Validate standard audio file extensions
-                if not file_name.lower().endswith(('.wav', '.mp3', '.m4a', '.flac')):
-                    continue
-
-                audio_file_path = os.path.join(accent_folder_path, sentence_folder, file_name)
-
-                # Derive a unique speaker ID from the filename (e.g., 'arabic45')
-                speaker_id = os.path.splitext(file_name)[0]
-
-                try:
-                    # Pass the recovered English text into the feature extraction engine
-                    features_vector = create_features_vector(audio_file_path, ground_truth_text=ground_truth_text)
-
-                    # Store row data using the directory name (sentence_folder) as the file identifier
-                    row_data = [sentence_folder, speaker_id] + list(features_vector) + [accent_label]
-                    dataset_rows.append(row_data)
-                except Exception as e:
-                    print(f"Error processing file {file_name}: {e}")
-
-    # Convert structural rows and columns into a Pandas DataFrame
-    df = pd.DataFrame(dataset_rows, columns=all_columns)
-
-    # Export the engineered feature matrix to a CSV file
-    df.to_csv('accent_features_dataset.csv', index=False)
-    print("CSV dataset successfully created with safe text mapping!")
+    # 4. Convert rows into a DataFrame and export to CSV
+    if dataset_rows:
+        df_result = pd.DataFrame(dataset_rows, columns=all_columns)
+        output_filename = 'accent_features_dataset.csv'
+        df_result.to_csv(output_filename, index=False)
+        print(f"\nSUCCESS: CSV dataset successfully created with {len(df_result)} rows!")
+        print(f"Saved as: '{output_filename}'")
+    else:
+        print("\nFailure: No features were extracted. Check your audio files or metadata.")
 
 
-def create_features_vector(file_path, ground_truth_text=None):#we put NONE so it can work only on acoustic features if no text is known
+def create_features_vector(file_path, ground_truth_text=None):
     """
     Extracts 16 base scalars, 39 MFCC dynamic components, 9 advanced physiological features,
     and 5 normalized phonetic attributes, returning a unified flat vector.
@@ -142,24 +149,34 @@ def create_features_vector(file_path, ground_truth_text=None):#we put NONE so it
         volume_max, volume_min, mean_centroid, mean_rolloff,
         mean_zcr, total_duration, phonation_time, phonation_ratio,
         syllable_rate, vowel_consonant_ratio, f1, f2
-    ])
+    ], dtype=float)
 
     # 6. Extract the 9 advanced dynamic biomarkers from Dynamic_features.py (Praat backend)
-    # Using try/except in case Praat fails on extremely short or corrupted audio frames
     try:
         advanced_acoustic_features = extract_advanced_acoustic_features(file_path)
+        advanced_acoustic_features = np.array(advanced_acoustic_features, dtype=float).flatten()
+    except Exception as e:
+        print(f"Praat Extraction Failed on {file_path}. Reason: {e}")
+        advanced_acoustic_features = np.zeros(9, dtype=float)
+
+    # 7. Extract and defend phonetic features against scalar float returns
+    try:
+        phonetic_features = get_phonetic_features(file_path, ground_truth_text=ground_truth_text, allow_asr=False)
+        # If the returned object is a float, scalar or non-iterable, force it to 5 zeroes
+        if phonetic_features is None or not hasattr(phonetic_features, "__iter__") or isinstance(phonetic_features,
+                                                                                                 (float, int)):
+            phonetic_features = np.zeros(5, dtype=float)
+        else:
+            phonetic_features = np.array(phonetic_features, dtype=float).flatten()
+            if len(phonetic_features) != 5:
+                phonetic_features = np.zeros(5, dtype=float)
     except Exception:
-        advanced_acoustic_features = np.zeros(9)
+        phonetic_features = np.zeros(5, dtype=float)
 
-    # 7. Extract the 5 normalized theoretical phonetic features using the hybrid pipeline
-    # Disabling internal ASR (allow_asr=False) since the text context is provided directly from the directory structure
-    phonetic_features = get_phonetic_features(file_path, ground_truth_text=ground_truth_text, allow_asr=False)
-    phonetic_features = np.array(phonetic_features)
+    # Ensure mfcc_dynamic is flat and float
+    mfcc_dynamic = np.array(mfcc_dynamic, dtype=float).flatten()
 
-    # -------------------------------------------------------------------------
-    # MULTI-MODAL FEATURE FUSION (Concatenation)
-    # Total Matrix Shape calculation: 16 (base) + 39 (mfcc) + 9 (praat) + 5 (phonetic) = 69 Dimensions
-    # -------------------------------------------------------------------------
+    # FUSION
     complete_feature_vector = np.concatenate([
         base_scalars,
         mfcc_dynamic,
@@ -169,66 +186,42 @@ def create_features_vector(file_path, ground_truth_text=None):#we put NONE so it
 
     return complete_feature_vector
 
+
 def create_spectrogram_folder():
-    """
-    Iterates through language folders, extracts linear-scale Mel-Spectrograms from
-    audio folders, then exports them as clean PNG images formatted specifically for CNN training.
-    """
     base_input_path = "../accents_samples/accent_archive/"
     base_output_path = "../spectrograms"
 
-    # Iterate language folders inside the base folder
     for folder_name in os.listdir(base_input_path):
         input_folder_path = os.path.join(base_input_path, folder_name)
-
-        # Skip files, process directories only
         if not os.path.isdir(input_folder_path):
             continue
 
-        # Create output folder
         spectrogram_folder = os.path.join(base_output_path, folder_name)
         os.makedirs(spectrogram_folder, exist_ok=True)
 
-        # iterate audio files on each language folder
         for file_name in os.listdir(input_folder_path):
-            # Validate standard audio file extensions
             if not file_name.lower().endswith(('.wav', '.mp3', '.m4a', '.flac')):
                 continue
 
             input_file_path = os.path.join(input_folder_path, file_name)
-
-            # Load audio with forced unified sampling rate (16kHz) for CNN consistency
             y, sr = librosa.load(input_file_path, sr=16000)
+            mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=2048, hop_length=512, n_mels=128)
 
-            # Extract Mel-Spectrogram with explicit standard parameters matching the research paper
-            mel_spec = librosa.feature.melspectrogram(
-                y=y, sr=sr, n_fft=2048, hop_length=512, n_mels=128
-            )
-
-            # Isolate the raw file name without its audio extension (e.g., 'speaker1')
             raw_file_name = os.path.splitext(file_name)[0]
             output_file_path = os.path.join(spectrogram_folder, f"{raw_file_name}.png")
 
-            # Initialize a clean canvas for visual plotting
             plt.figure(figsize=(6, 4))
-
-            # Render the spectrogram matrix without displaying time or frequency ticks/axes
             librosa.display.specshow(mel_spec, sr=sr, hop_length=512, x_axis=None, y_axis=None)
-
-            # Turn off all axis lines and labels entirely
             plt.axis('off')
-
-            # Stretch the visual representation to fill up the entire canvas space
             plt.subplots_adjust(left=0, right=1, bottom=0, top=1)
-
-            # Export canvas to disk as PNG to keep fine-grained variance intact without lossy artifacts
             plt.savefig(output_file_path, bbox_inches='tight', pad_inches=0, format='png', dpi=300)
-
-            # Close the figure instance immediately to prevent RAM accumulation over massive dataset iterations
             plt.close()
 
+
 def main():
-    import_vector_to_file()
+    metadata_file = "metadata.csv"
+    import_vector_to_file(metadata_csv_path=metadata_file)
+
 
 if __name__ == "__main__":
     main()
