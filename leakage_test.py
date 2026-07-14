@@ -7,7 +7,7 @@ def run_dataset_sanity_checks():
     Performs rigorous validation on Train, Validation, and Test feature sheets
     to detect Speaker Leakage, row duplications, and data anomalies.
     """
-    BASE_DIR = "official_audio_mixed"
+    BASE_DIR = "official_audio_free_text_only"
 
     print("\n=============================================")
     print("RUNNING ANTI-DATA-LEAKAGE SANITY CHECKS")

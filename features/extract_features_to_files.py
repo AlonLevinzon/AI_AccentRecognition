@@ -80,7 +80,11 @@ def import_vector_to_file(metadata_csv_path, audio_base_dir="../official_audio_m
         ground_truth_text = row['text']
 
         # Locate the audio file path within the base directory (including subdirectories)
-        audio_file_path = find_file_in_dir(audio_base_dir, filename)
+        # FIXED: Supports both absolute file_path column and traditional dynamic directory search fallbacks
+        if 'file_path' in row and pd.notna(row['file_path']) and os.path.exists(str(row['file_path'])):
+            audio_file_path = str(row['file_path'])
+        else:
+            audio_file_path = find_file_in_dir(audio_base_dir, filename)
 
         if audio_file_path is None:
             continue
@@ -112,7 +116,6 @@ def import_vector_to_file(metadata_csv_path, audio_base_dir="../official_audio_m
         print(f"Saved as: '{output_filename}'")
     else:
         print("\nFailure: No features were extracted. Check your audio files or metadata.")
-
 
 def create_features_vector(file_path, ground_truth_text=None):
     """

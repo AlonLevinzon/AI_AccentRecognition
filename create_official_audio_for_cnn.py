@@ -176,7 +176,7 @@ def merge_and_normalize_splits(mode="mixed"):
                     if isinstance(raw_accent, str):
                         cleaned_accent = raw_accent.strip().lower()
                         if cleaned_accent == 'hindi':
-                            raw_accent = 'indian'
+                            raw_accent = 'Indian'
 
                     split_metadata_accumulators[split].append({
                         'filename': raw_filename,
@@ -214,7 +214,7 @@ if __name__ == "__main__":
     mixed_stats = merge_and_normalize_splits(mode="mixed")
 
     # Task 2: Generate the independent free-text only pipeline (official_audio_free_text_only)
-    free_text_stats = merge_and_normalize_splits(mode="free_text_only")
+    #free_text_stats = merge_and_normalize_splits(mode="free_text_only")
 
     print("=========================================================================")
     print("ALL PROCESSING TASKS COMPLETED SUCCESSFULLY!")

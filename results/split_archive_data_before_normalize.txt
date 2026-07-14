@@ -1,0 +1,17 @@
+[Processing Accent] Grouping speakers for: 'chinese'
+ -> Allocation breakdown: Train=44 speakers (228 files), Val=9 speakers (41 files), Test=10 speakers (54 files)
+
+[Processing Accent] Grouping speakers for: 'hindi'
+ -> Allocation breakdown: Train=49 speakers (255 files), Val=10 speakers (48 files), Test=11 speakers (62 files)
+
+[Processing Accent] Grouping speakers for: 'nigerian'
+ -> Allocation breakdown: Train=32 speakers (167 files), Val=7 speakers (38 files), Test=8 speakers (48 files)
+
+[Processing Accent] Grouping speakers for: 'usa'
+ -> [USA Speaker Cap Applied] Retained exact speakers: Train=50, Val=10, Test=10
+ -> Allocation breakdown: Train=50 speakers (298 files), Val=10 speakers (58 files), Test=10 speakers (60 files)
+
+Writing consolidated metadata sheets...
+ -> Successfully created: archive_train_and_test\train\train_metadata.csv (948 records)
+ -> Successfully created: archive_train_and_test\val\val_metadata.csv (185 records)
+ -> Successfully created: archive_train_and_test\test\test_metadata.csv (224 records)

@@ -1,0 +1,95 @@
+
+SUCCESS: CSV dataset successfully created with 996 rows!
+Saved as: 'accent_features_dataset.csv'
+Normalizing features dynamically in RAM...
+
+Data matrices initialized successfully:
+ - Train Shape:      (4547, 69)
+ - Validation Shape: (957, 69)
+ - Test Shape:       (996, 69)
+
+Training and evaluating classifiers...
+
+--- Running Gaussian NB ---
+Gaussian NB Test Accuracy: 59.74%
+              precision    recall  f1-score   support
+
+      Indian       0.59      0.48      0.53       255
+     chinese       0.72      0.79      0.75       247
+    nigerian       0.85      0.29      0.44       241
+         usa       0.48      0.81      0.60       253
+
+    accuracy                           0.60       996
+   macro avg       0.66      0.60      0.58       996
+weighted avg       0.65      0.60      0.58       996
+
+
+--- Running Logistic Regression ---
+Logistic Regression Test Accuracy: 79.92%
+              precision    recall  f1-score   support
+
+      Indian       0.70      0.73      0.71       255
+     chinese       0.77      0.82      0.79       247
+    nigerian       0.95      0.78      0.86       241
+         usa       0.81      0.87      0.84       253
+
+    accuracy                           0.80       996
+   macro avg       0.81      0.80      0.80       996
+weighted avg       0.81      0.80      0.80       996
+
+
+--- Running SVM (RBF) ---
+SVM (RBF) Test Accuracy: 81.93%
+              precision    recall  f1-score   support
+
+      Indian       0.68      0.82      0.74       255
+     chinese       0.82      0.82      0.82       247
+    nigerian       0.97      0.79      0.87       241
+         usa       0.88      0.84      0.86       253
+
+    accuracy                           0.82       996
+   macro avg       0.84      0.82      0.82       996
+weighted avg       0.83      0.82      0.82       996
+
+
+--- Running Random Forest ---
+Random Forest Test Accuracy: 80.32%
+              precision    recall  f1-score   support
+
+      Indian       0.66      0.83      0.73       255
+     chinese       0.80      0.82      0.81       247
+    nigerian       0.93      0.75      0.83       241
+         usa       0.90      0.81      0.85       253
+
+    accuracy                           0.80       996
+   macro avg       0.82      0.80      0.81       996
+weighted avg       0.82      0.80      0.81       996
+
+
+--- Running XGBoost ---
+XGBoost Test Accuracy: 81.22%
+              precision    recall  f1-score   support
+
+      Indian       0.70      0.80      0.75       255
+     chinese       0.82      0.82      0.82       247
+    nigerian       0.89      0.80      0.84       241
+         usa       0.87      0.83      0.85       253
+
+    accuracy                           0.81       996
+   macro avg       0.82      0.81      0.81       996
+weighted avg       0.82      0.81      0.81       996
+
+
+--- Running Kernel ELM ---
+Kernel ELM Test Accuracy: 79.12%
+              precision    recall  f1-score   support
+
+      Indian       0.69      0.73      0.70       255
+     chinese       0.87      0.78      0.82       247
+    nigerian       0.81      0.81      0.81       241
+         usa       0.82      0.85      0.83       253
+
+    accuracy                           0.79       996
+   macro avg       0.80      0.79      0.79       996
+weighted avg       0.79      0.79      0.79       996
+
