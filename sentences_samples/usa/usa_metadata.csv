@@ -1,0 +1,595 @@
+﻿age,age_onset,birthplace,filename,native_language,sex,speakerid,country,file_missing?,sentence_index,split_filename,relative_audio_path
+23,0.0,"miami, florida, usa",english100,english,female,63,usa,False,0,english100_part_0.wav,./sentence_0/english100_part_0.wav
+22,0.0,"torrington, connecticut, usa",english102,english,male,65,usa,False,0,english102_part_0.wav,./sentence_0/english102_part_0.wav
+21,0.0,"staten island, new york, usa",english103,english,male,66,usa,False,0,english103_part_0.wav,./sentence_0/english103_part_0.wav
+18,0.0,"youngstown, ohio, usa",english104,english,female,67,usa,False,0,english104_part_0.wav,./sentence_0/english104_part_0.wav
+39,0.0,"los angeles, california, usa",english106,english,female,408,usa,False,0,english106_part_0.wav,./sentence_0/english106_part_0.wav
+19,0.0,"chicago, illinois, usa",english107,english,male,416,usa,False,0,english107_part_0.wav,./sentence_0/english107_part_0.wav
+26,0.0,"concord, new hampshire, usa",english109,english,female,420,usa,False,0,english109_part_0.wav,./sentence_0/english109_part_0.wav
+35,0.0,"davenport, iowa, usa",english10,english,female,62,usa,False,0,english10_part_0.wav,./sentence_0/english10_part_0.wav
+38,0.0,"birmingham 2, alabama, usa",english114,english,female,442,usa,False,0,english114_part_0.wav,./sentence_0/english114_part_0.wav
+56,0.0,"atlanta, georgia, usa",english116,english,male,444,usa,False,0,english116_part_0.wav,./sentence_0/english116_part_0.wav
+60,0.0,"elmore, alabama, usa",english117,english,female,445,usa,False,0,english117_part_0.wav,./sentence_0/english117_part_0.wav
+19,0.0,"akron, ohio, usa",english118,english,male,446,usa,False,0,english118_part_0.wav,./sentence_0/english118_part_0.wav
+21,0.0,"waconia, minnesota, usa",english121,english,male,465,usa,False,0,english121_part_0.wav,./sentence_0/english121_part_0.wav
+28,0.0,"riverside, california, usa",english123,english,female,469,usa,False,0,english123_part_0.wav,./sentence_0/english123_part_0.wav
+38,0.0,"brooklyn, new york, usa",english124,english,male,480,usa,False,0,english124_part_0.wav,./sentence_0/english124_part_0.wav
+34,0.0,"cincinnati, ohio, usa",english126,english,female,487,usa,False,0,english126_part_0.wav,./sentence_0/english126_part_0.wav
+39,0.0,"new britain, connecticut, usa",english127,english,male,489,usa,False,0,english127_part_0.wav,./sentence_0/english127_part_0.wav
+20,0.0,"miami, florida, usa",english128,english,female,490,usa,False,0,english128_part_0.wav,./sentence_0/english128_part_0.wav
+23,0.0,"west palm beach, florida, usa",english131,english,male,497,usa,False,0,english131_part_0.wav,./sentence_0/english131_part_0.wav
+36,0.0,"norwich, new york, usa",english133,english,female,504,usa,False,0,english133_part_0.wav,./sentence_0/english133_part_0.wav
+22,0.0,"orange beach, alabama, usa",english135,english,male,507,usa,False,0,english135_part_0.wav,./sentence_0/english135_part_0.wav
+26,0.0,"charleston, west virginia, usa",english137,english,male,509,usa,False,0,english137_part_0.wav,./sentence_0/english137_part_0.wav
+25,0.0,"palmer, alaska, usa",english138,english,female,510,usa,False,0,english138_part_0.wav,./sentence_0/english138_part_0.wav
+20,0.0,"providence, rhode island, usa",english139,english,male,511,usa,False,0,english139_part_0.wav,./sentence_0/english139_part_0.wav
+19,0.0,"avon, new york, usa",english142,english,male,517,usa,False,0,english142_part_0.wav,./sentence_0/english142_part_0.wav
+42,0.0,"minneapolis, minnesota, usa",english143,english,male,518,usa,False,0,english143_part_0.wav,./sentence_0/english143_part_0.wav
+22,0.0,"blytheville, arkansas, usa",english146,english,male,522,usa,False,0,english146_part_0.wav,./sentence_0/english146_part_0.wav
+40,0.0,"merced, california, usa",english147,english,female,523,usa,False,0,english147_part_0.wav,./sentence_0/english147_part_0.wav
+31,0.0,"brownsville, kentucky, usa",english150,english,male,527,usa,False,0,english150_part_0.wav,./sentence_0/english150_part_0.wav
+18,0.0,"baltimore, maryland, usa",english151,english,male,528,usa,False,0,english151_part_0.wav,./sentence_0/english151_part_0.wav
+35,0.0,"oakland, california, usa",english155,english,male,535,usa,False,0,english155_part_0.wav,./sentence_0/english155_part_0.wav
+35,0.0,"fort worth, texas, usa",english157,english,male,538,usa,False,0,english157_part_0.wav,./sentence_0/english157_part_0.wav
+18,0.0,"washington, district of columbia, usa",english158,english,female,540,usa,False,0,english158_part_0.wav,./sentence_0/english158_part_0.wav
+7,0.0,"norton, virginia, usa",english15,english,female,72,usa,False,0,english15_part_0.wav,./sentence_0/english15_part_0.wav
+21,0.0,"redwood falls, minnesota, usa",english160,english,female,542,usa,False,0,english160_part_0.wav,./sentence_0/english160_part_0.wav
+75,0.0,"wakefield, ohio, usa",english161,english,female,546,usa,False,0,english161_part_0.wav,./sentence_0/english161_part_0.wav
+41,0.0,"delaware, ohio, usa",english162,english,female,548,usa,False,0,english162_part_0.wav,./sentence_0/english162_part_0.wav
+41,0.0,"fairview park, ohio, usa",english163,english,male,547,usa,False,0,english163_part_0.wav,./sentence_0/english163_part_0.wav
+43,0.0,"detroit, michigan, usa",english165,english,female,550,usa,False,0,english165_part_0.wav,./sentence_0/english165_part_0.wav
+18,0.0,"glenside, pennsylvania, usa",english166,english,male,551,usa,False,0,english166_part_0.wav,./sentence_0/english166_part_0.wav
+43,0.0,"lakeview, michigan, usa",english167,english,male,552,usa,False,0,english167_part_0.wav,./sentence_0/english167_part_0.wav
+40,0.0,"oceanside, california, usa",english168,english,male,554,usa,False,0,english168_part_0.wav,./sentence_0/english168_part_0.wav
+18,0.0,"cleveland, mississippi, usa",english169,english,male,555,usa,False,0,english169_part_0.wav,./sentence_0/english169_part_0.wav
+50,0.0,"belmont, mississippi, usa",english170,english,female,556,usa,False,0,english170_part_0.wav,./sentence_0/english170_part_0.wav
+21,0.0,"st. louis, missouri, usa",english171,english,male,563,usa,False,0,english171_part_0.wav,./sentence_0/english171_part_0.wav
+19,0.0,"libertyville, illinois, usa",english173,english,male,567,usa,False,0,english173_part_0.wav,./sentence_0/english173_part_0.wav
+24,0.0,"seattle, washington, usa",english175,english,male,572,usa,False,0,english175_part_0.wav,./sentence_0/english175_part_0.wav
+18,0.0,"elizabeth city, north carolina, usa",english176,english,female,573,usa,False,0,english176_part_0.wav,./sentence_0/english176_part_0.wav
+23,0.0,"new orleans, louisiana, usa",english177,english,female,574,usa,False,0,english177_part_0.wav,./sentence_0/english177_part_0.wav
+30,0.0,"wilkes-barre, pennsylvania, usa",english178,english,male,583,usa,False,0,english178_part_0.wav,./sentence_0/english178_part_0.wav
+57,0.0,"huron, south dakota, usa",english179,english,male,584,usa,False,0,english179_part_0.wav,./sentence_0/english179_part_0.wav
+79,0.0,"darwin va, virginia, usa",english17,english,male,74,usa,False,0,english17_part_0.wav,./sentence_0/english17_part_0.wav
+20,0.0,"newport, rhode island, usa",english180,english,male,585,usa,False,0,english180_part_0.wav,./sentence_0/english180_part_0.wav
+68,0.0,"new eagle, pennsylvania, usa",english181,english,male,586,usa,False,0,english181_part_0.wav,./sentence_0/english181_part_0.wav
+50,0.0,"troy, new york, usa",english182,english,male,590,usa,False,0,english182_part_0.wav,./sentence_0/english182_part_0.wav
+18,0.0,"hillsboro, oregon, usa",english184,english,female,597,usa,False,0,english184_part_0.wav,./sentence_0/english184_part_0.wav
+39,0.0,"gadsden, alabama, usa",english186,english,female,605,usa,False,0,english186_part_0.wav,./sentence_0/english186_part_0.wav
+42,0.0,"algona, iowa, usa",english187,english,female,606,usa,False,0,english187_part_0.wav,./sentence_0/english187_part_0.wav
+19,0.0,"grand forks, north dakota, usa",english189,english,male,617,usa,False,0,english189_part_0.wav,./sentence_0/english189_part_0.wav
+39,0.0,"dickenson county, virginia, usa",english18,english,female,75,usa,False,0,english18_part_0.wav,./sentence_0/english18_part_0.wav
+27,0.0,"oak park, illinois, usa",english190,english,male,618,usa,False,0,english190_part_0.wav,./sentence_0/english190_part_0.wav
+19,0.0,"las cruces, new mexico, usa",english191,english,male,631,usa,False,0,english191_part_0.wav,./sentence_0/english191_part_0.wav
+27,0.0,"east lansing, michigan, usa",english192,english,female,636,usa,False,0,english192_part_0.wav,./sentence_0/english192_part_0.wav
+32,0.0,"honolulu, hawaii, usa",english193,english,male,637,usa,False,0,english193_part_0.wav,./sentence_0/english193_part_0.wav
+21,0.0,"delavan, wisconsin, usa",english195,english,female,639,usa,False,0,english195_part_0.wav,./sentence_0/english195_part_0.wav
+22,0.0,"iowa city, iowa, usa",english197,english,male,662,usa,False,0,english197_part_0.wav,./sentence_0/english197_part_0.wav
+56,0.0,"washington, district of columbia, usa",english198,english,male,663,usa,False,0,english198_part_0.wav,./sentence_0/english198_part_0.wav
+25,0.0,"bay shore, new york, usa",english199,english,male,664,usa,False,0,english199_part_0.wav,./sentence_0/english199_part_0.wav
+42,0.0,"pittsburgh, pennsylvania, usa",english1,english,male,61,usa,False,0,english1_part_0.wav,./sentence_0/english1_part_0.wav
+22,0.0,"berkeley, california, usa",english200,english,female,667,usa,False,0,english200_part_0.wav,./sentence_0/english200_part_0.wav
+26,0.0,"warren, michigan, usa",english201,english,female,668,usa,False,0,english201_part_0.wav,./sentence_0/english201_part_0.wav
+19,0.0,"crisfield, maryland, usa",english202,english,male,673,usa,False,0,english202_part_0.wav,./sentence_0/english202_part_0.wav
+63,0.0,"boston, massachusetts, usa",english203,english,female,674,usa,False,0,english203_part_0.wav,./sentence_0/english203_part_0.wav
+53,0.0,"chicago, illinois, usa",english204,english,male,678,usa,False,0,english204_part_0.wav,./sentence_0/english204_part_0.wav
+45,0.0,"blue earth, minnesota, usa",english205,english,female,679,usa,False,0,english205_part_0.wav,./sentence_0/english205_part_0.wav
+23,0.0,"wilkes-barre, pennsylvania, usa",english207,english,female,684,usa,False,0,english207_part_0.wav,./sentence_0/english207_part_0.wav
+46,0.0,"washington, dc, usa",english208,english,male,695,usa,False,0,english208_part_0.wav,./sentence_0/english208_part_0.wav
+27,0.0,"mt. holly, north carolina, usa",english20,english,female,78,usa,False,0,english20_part_0.wav,./sentence_0/english20_part_0.wav
+30,0.0,"worcester, massachusetts, usa",english211,english,male,720,usa,False,0,english211_part_0.wav,./sentence_0/english211_part_0.wav
+24,0.0,"spartanburg, south carolina, usa",english212,english,male,729,usa,False,0,english212_part_0.wav,./sentence_0/english212_part_0.wav
+38,0.0,"dodge city, kansas, usa",english213,english,male,734,usa,False,0,english213_part_0.wav,./sentence_0/english213_part_0.wav
+48,0.0,"chicago, illinois, usa",english216,english,female,739,usa,False,0,english216_part_0.wav,./sentence_0/english216_part_0.wav
+27,0.0,"abingdon, virginia, usa",english218,english,female,747,usa,False,0,english218_part_0.wav,./sentence_0/english218_part_0.wav
+38,0.0,"oakland, california, usa",english219,english,female,748,usa,False,0,english219_part_0.wav,./sentence_0/english219_part_0.wav
+37,0.0,"boston, massachusetts, usa",english21,english,female,79,usa,False,0,english21_part_0.wav,./sentence_0/english21_part_0.wav
+18,0.0,"anaheim, california, usa",english220,english,female,749,usa,False,0,english220_part_0.wav,./sentence_0/english220_part_0.wav
+18,0.0,"auburn, indiana, usa",english222,english,female,764,usa,False,0,english222_part_0.wav,./sentence_0/english222_part_0.wav
+18,0.0,"erie, pennsylvania, usa",english223,english,male,767,usa,False,0,english223_part_0.wav,./sentence_0/english223_part_0.wav
+25,0.0,"burlington, vermont, usa",english229,english,male,775,usa,False,0,english229_part_0.wav,./sentence_0/english229_part_0.wav
+22,0.0,"tampa, florida, usa",english231,english,male,791,usa,False,0,english231_part_0.wav,./sentence_0/english231_part_0.wav
+32,0.0,"metairie, louisiana, usa",english232,english,female,798,usa,False,0,english232_part_0.wav,./sentence_0/english232_part_0.wav
+49,0.0,"bloomington, indiana, usa",english234,english,male,794,usa,False,0,english234_part_0.wav,./sentence_0/english234_part_0.wav
+52,0.0,"richmond, virginia, usa",english235,english,female,795,usa,False,0,english235_part_0.wav,./sentence_0/english235_part_0.wav
+44,0.0,"st. charles, illinois, usa",english236,english,male,799,usa,False,0,english236_part_0.wav,./sentence_0/english236_part_0.wav
+22,0.0,"jeffersonville, ohio, usa",english237,english,female,801,usa,False,0,english237_part_0.wav,./sentence_0/english237_part_0.wav
+43,0.0,"englewood, tennessee, usa",english23,english,male,81,usa,False,0,english23_part_0.wav,./sentence_0/english23_part_0.wav
+23,0.0,"miami, florida, usa",english100,english,female,63,usa,False,1,english100_part_1.wav,./sentence_1/english100_part_1.wav
+22,0.0,"torrington, connecticut, usa",english102,english,male,65,usa,False,1,english102_part_1.wav,./sentence_1/english102_part_1.wav
+21,0.0,"staten island, new york, usa",english103,english,male,66,usa,False,1,english103_part_1.wav,./sentence_1/english103_part_1.wav
+18,0.0,"youngstown, ohio, usa",english104,english,female,67,usa,False,1,english104_part_1.wav,./sentence_1/english104_part_1.wav
+39,0.0,"los angeles, california, usa",english106,english,female,408,usa,False,1,english106_part_1.wav,./sentence_1/english106_part_1.wav
+19,0.0,"chicago, illinois, usa",english107,english,male,416,usa,False,1,english107_part_1.wav,./sentence_1/english107_part_1.wav
+26,0.0,"concord, new hampshire, usa",english109,english,female,420,usa,False,1,english109_part_1.wav,./sentence_1/english109_part_1.wav
+35,0.0,"davenport, iowa, usa",english10,english,female,62,usa,False,1,english10_part_1.wav,./sentence_1/english10_part_1.wav
+38,0.0,"birmingham 2, alabama, usa",english114,english,female,442,usa,False,1,english114_part_1.wav,./sentence_1/english114_part_1.wav
+56,0.0,"atlanta, georgia, usa",english116,english,male,444,usa,False,1,english116_part_1.wav,./sentence_1/english116_part_1.wav
+60,0.0,"elmore, alabama, usa",english117,english,female,445,usa,False,1,english117_part_1.wav,./sentence_1/english117_part_1.wav
+19,0.0,"akron, ohio, usa",english118,english,male,446,usa,False,1,english118_part_1.wav,./sentence_1/english118_part_1.wav
+21,0.0,"waconia, minnesota, usa",english121,english,male,465,usa,False,1,english121_part_1.wav,./sentence_1/english121_part_1.wav
+28,0.0,"riverside, california, usa",english123,english,female,469,usa,False,1,english123_part_1.wav,./sentence_1/english123_part_1.wav
+38,0.0,"brooklyn, new york, usa",english124,english,male,480,usa,False,1,english124_part_1.wav,./sentence_1/english124_part_1.wav
+34,0.0,"cincinnati, ohio, usa",english126,english,female,487,usa,False,1,english126_part_1.wav,./sentence_1/english126_part_1.wav
+39,0.0,"new britain, connecticut, usa",english127,english,male,489,usa,False,1,english127_part_1.wav,./sentence_1/english127_part_1.wav
+20,0.0,"miami, florida, usa",english128,english,female,490,usa,False,1,english128_part_1.wav,./sentence_1/english128_part_1.wav
+23,0.0,"west palm beach, florida, usa",english131,english,male,497,usa,False,1,english131_part_1.wav,./sentence_1/english131_part_1.wav
+36,0.0,"norwich, new york, usa",english133,english,female,504,usa,False,1,english133_part_1.wav,./sentence_1/english133_part_1.wav
+22,0.0,"orange beach, alabama, usa",english135,english,male,507,usa,False,1,english135_part_1.wav,./sentence_1/english135_part_1.wav
+26,0.0,"charleston, west virginia, usa",english137,english,male,509,usa,False,1,english137_part_1.wav,./sentence_1/english137_part_1.wav
+25,0.0,"palmer, alaska, usa",english138,english,female,510,usa,False,1,english138_part_1.wav,./sentence_1/english138_part_1.wav
+20,0.0,"providence, rhode island, usa",english139,english,male,511,usa,False,1,english139_part_1.wav,./sentence_1/english139_part_1.wav
+19,0.0,"avon, new york, usa",english142,english,male,517,usa,False,1,english142_part_1.wav,./sentence_1/english142_part_1.wav
+42,0.0,"minneapolis, minnesota, usa",english143,english,male,518,usa,False,1,english143_part_1.wav,./sentence_1/english143_part_1.wav
+22,0.0,"blytheville, arkansas, usa",english146,english,male,522,usa,False,1,english146_part_1.wav,./sentence_1/english146_part_1.wav
+40,0.0,"merced, california, usa",english147,english,female,523,usa,False,1,english147_part_1.wav,./sentence_1/english147_part_1.wav
+31,0.0,"brownsville, kentucky, usa",english150,english,male,527,usa,False,1,english150_part_1.wav,./sentence_1/english150_part_1.wav
+18,0.0,"baltimore, maryland, usa",english151,english,male,528,usa,False,1,english151_part_1.wav,./sentence_1/english151_part_1.wav
+35,0.0,"oakland, california, usa",english155,english,male,535,usa,False,1,english155_part_1.wav,./sentence_1/english155_part_1.wav
+35,0.0,"fort worth, texas, usa",english157,english,male,538,usa,False,1,english157_part_1.wav,./sentence_1/english157_part_1.wav
+18,0.0,"washington, district of columbia, usa",english158,english,female,540,usa,False,1,english158_part_1.wav,./sentence_1/english158_part_1.wav
+7,0.0,"norton, virginia, usa",english15,english,female,72,usa,False,1,english15_part_1.wav,./sentence_1/english15_part_1.wav
+21,0.0,"redwood falls, minnesota, usa",english160,english,female,542,usa,False,1,english160_part_1.wav,./sentence_1/english160_part_1.wav
+75,0.0,"wakefield, ohio, usa",english161,english,female,546,usa,False,1,english161_part_1.wav,./sentence_1/english161_part_1.wav
+41,0.0,"delaware, ohio, usa",english162,english,female,548,usa,False,1,english162_part_1.wav,./sentence_1/english162_part_1.wav
+41,0.0,"fairview park, ohio, usa",english163,english,male,547,usa,False,1,english163_part_1.wav,./sentence_1/english163_part_1.wav
+43,0.0,"detroit, michigan, usa",english165,english,female,550,usa,False,1,english165_part_1.wav,./sentence_1/english165_part_1.wav
+18,0.0,"glenside, pennsylvania, usa",english166,english,male,551,usa,False,1,english166_part_1.wav,./sentence_1/english166_part_1.wav
+43,0.0,"lakeview, michigan, usa",english167,english,male,552,usa,False,1,english167_part_1.wav,./sentence_1/english167_part_1.wav
+40,0.0,"oceanside, california, usa",english168,english,male,554,usa,False,1,english168_part_1.wav,./sentence_1/english168_part_1.wav
+18,0.0,"cleveland, mississippi, usa",english169,english,male,555,usa,False,1,english169_part_1.wav,./sentence_1/english169_part_1.wav
+50,0.0,"belmont, mississippi, usa",english170,english,female,556,usa,False,1,english170_part_1.wav,./sentence_1/english170_part_1.wav
+21,0.0,"st. louis, missouri, usa",english171,english,male,563,usa,False,1,english171_part_1.wav,./sentence_1/english171_part_1.wav
+19,0.0,"libertyville, illinois, usa",english173,english,male,567,usa,False,1,english173_part_1.wav,./sentence_1/english173_part_1.wav
+24,0.0,"seattle, washington, usa",english175,english,male,572,usa,False,1,english175_part_1.wav,./sentence_1/english175_part_1.wav
+18,0.0,"elizabeth city, north carolina, usa",english176,english,female,573,usa,False,1,english176_part_1.wav,./sentence_1/english176_part_1.wav
+23,0.0,"new orleans, louisiana, usa",english177,english,female,574,usa,False,1,english177_part_1.wav,./sentence_1/english177_part_1.wav
+30,0.0,"wilkes-barre, pennsylvania, usa",english178,english,male,583,usa,False,1,english178_part_1.wav,./sentence_1/english178_part_1.wav
+57,0.0,"huron, south dakota, usa",english179,english,male,584,usa,False,1,english179_part_1.wav,./sentence_1/english179_part_1.wav
+79,0.0,"darwin va, virginia, usa",english17,english,male,74,usa,False,1,english17_part_1.wav,./sentence_1/english17_part_1.wav
+20,0.0,"newport, rhode island, usa",english180,english,male,585,usa,False,1,english180_part_1.wav,./sentence_1/english180_part_1.wav
+68,0.0,"new eagle, pennsylvania, usa",english181,english,male,586,usa,False,1,english181_part_1.wav,./sentence_1/english181_part_1.wav
+50,0.0,"troy, new york, usa",english182,english,male,590,usa,False,1,english182_part_1.wav,./sentence_1/english182_part_1.wav
+18,0.0,"hillsboro, oregon, usa",english184,english,female,597,usa,False,1,english184_part_1.wav,./sentence_1/english184_part_1.wav
+39,0.0,"gadsden, alabama, usa",english186,english,female,605,usa,False,1,english186_part_1.wav,./sentence_1/english186_part_1.wav
+42,0.0,"algona, iowa, usa",english187,english,female,606,usa,False,1,english187_part_1.wav,./sentence_1/english187_part_1.wav
+19,0.0,"grand forks, north dakota, usa",english189,english,male,617,usa,False,1,english189_part_1.wav,./sentence_1/english189_part_1.wav
+39,0.0,"dickenson county, virginia, usa",english18,english,female,75,usa,False,1,english18_part_1.wav,./sentence_1/english18_part_1.wav
+27,0.0,"oak park, illinois, usa",english190,english,male,618,usa,False,1,english190_part_1.wav,./sentence_1/english190_part_1.wav
+19,0.0,"las cruces, new mexico, usa",english191,english,male,631,usa,False,1,english191_part_1.wav,./sentence_1/english191_part_1.wav
+27,0.0,"east lansing, michigan, usa",english192,english,female,636,usa,False,1,english192_part_1.wav,./sentence_1/english192_part_1.wav
+32,0.0,"honolulu, hawaii, usa",english193,english,male,637,usa,False,1,english193_part_1.wav,./sentence_1/english193_part_1.wav
+21,0.0,"delavan, wisconsin, usa",english195,english,female,639,usa,False,1,english195_part_1.wav,./sentence_1/english195_part_1.wav
+22,0.0,"iowa city, iowa, usa",english197,english,male,662,usa,False,1,english197_part_1.wav,./sentence_1/english197_part_1.wav
+56,0.0,"washington, district of columbia, usa",english198,english,male,663,usa,False,1,english198_part_1.wav,./sentence_1/english198_part_1.wav
+25,0.0,"bay shore, new york, usa",english199,english,male,664,usa,False,1,english199_part_1.wav,./sentence_1/english199_part_1.wav
+42,0.0,"pittsburgh, pennsylvania, usa",english1,english,male,61,usa,False,1,english1_part_1.wav,./sentence_1/english1_part_1.wav
+22,0.0,"berkeley, california, usa",english200,english,female,667,usa,False,1,english200_part_1.wav,./sentence_1/english200_part_1.wav
+26,0.0,"warren, michigan, usa",english201,english,female,668,usa,False,1,english201_part_1.wav,./sentence_1/english201_part_1.wav
+19,0.0,"crisfield, maryland, usa",english202,english,male,673,usa,False,1,english202_part_1.wav,./sentence_1/english202_part_1.wav
+63,0.0,"boston, massachusetts, usa",english203,english,female,674,usa,False,1,english203_part_1.wav,./sentence_1/english203_part_1.wav
+53,0.0,"chicago, illinois, usa",english204,english,male,678,usa,False,1,english204_part_1.wav,./sentence_1/english204_part_1.wav
+45,0.0,"blue earth, minnesota, usa",english205,english,female,679,usa,False,1,english205_part_1.wav,./sentence_1/english205_part_1.wav
+23,0.0,"wilkes-barre, pennsylvania, usa",english207,english,female,684,usa,False,1,english207_part_1.wav,./sentence_1/english207_part_1.wav
+46,0.0,"washington, dc, usa",english208,english,male,695,usa,False,1,english208_part_1.wav,./sentence_1/english208_part_1.wav
+27,0.0,"mt. holly, north carolina, usa",english20,english,female,78,usa,False,1,english20_part_1.wav,./sentence_1/english20_part_1.wav
+30,0.0,"worcester, massachusetts, usa",english211,english,male,720,usa,False,1,english211_part_1.wav,./sentence_1/english211_part_1.wav
+24,0.0,"spartanburg, south carolina, usa",english212,english,male,729,usa,False,1,english212_part_1.wav,./sentence_1/english212_part_1.wav
+38,0.0,"dodge city, kansas, usa",english213,english,male,734,usa,False,1,english213_part_1.wav,./sentence_1/english213_part_1.wav
+48,0.0,"chicago, illinois, usa",english216,english,female,739,usa,False,1,english216_part_1.wav,./sentence_1/english216_part_1.wav
+27,0.0,"abingdon, virginia, usa",english218,english,female,747,usa,False,1,english218_part_1.wav,./sentence_1/english218_part_1.wav
+38,0.0,"oakland, california, usa",english219,english,female,748,usa,False,1,english219_part_1.wav,./sentence_1/english219_part_1.wav
+37,0.0,"boston, massachusetts, usa",english21,english,female,79,usa,False,1,english21_part_1.wav,./sentence_1/english21_part_1.wav
+18,0.0,"anaheim, california, usa",english220,english,female,749,usa,False,1,english220_part_1.wav,./sentence_1/english220_part_1.wav
+18,0.0,"auburn, indiana, usa",english222,english,female,764,usa,False,1,english222_part_1.wav,./sentence_1/english222_part_1.wav
+18,0.0,"erie, pennsylvania, usa",english223,english,male,767,usa,False,1,english223_part_1.wav,./sentence_1/english223_part_1.wav
+25,0.0,"burlington, vermont, usa",english229,english,male,775,usa,False,1,english229_part_1.wav,./sentence_1/english229_part_1.wav
+22,0.0,"tampa, florida, usa",english231,english,male,791,usa,False,1,english231_part_1.wav,./sentence_1/english231_part_1.wav
+32,0.0,"metairie, louisiana, usa",english232,english,female,798,usa,False,1,english232_part_1.wav,./sentence_1/english232_part_1.wav
+49,0.0,"bloomington, indiana, usa",english234,english,male,794,usa,False,1,english234_part_1.wav,./sentence_1/english234_part_1.wav
+52,0.0,"richmond, virginia, usa",english235,english,female,795,usa,False,1,english235_part_1.wav,./sentence_1/english235_part_1.wav
+44,0.0,"st. charles, illinois, usa",english236,english,male,799,usa,False,1,english236_part_1.wav,./sentence_1/english236_part_1.wav
+22,0.0,"jeffersonville, ohio, usa",english237,english,female,801,usa,False,1,english237_part_1.wav,./sentence_1/english237_part_1.wav
+43,0.0,"englewood, tennessee, usa",english23,english,male,81,usa,False,1,english23_part_1.wav,./sentence_1/english23_part_1.wav
+23,0.0,"miami, florida, usa",english100,english,female,63,usa,False,2,english100_part_2.wav,./sentence_2/english100_part_2.wav
+22,0.0,"torrington, connecticut, usa",english102,english,male,65,usa,False,2,english102_part_2.wav,./sentence_2/english102_part_2.wav
+21,0.0,"staten island, new york, usa",english103,english,male,66,usa,False,2,english103_part_2.wav,./sentence_2/english103_part_2.wav
+18,0.0,"youngstown, ohio, usa",english104,english,female,67,usa,False,2,english104_part_2.wav,./sentence_2/english104_part_2.wav
+39,0.0,"los angeles, california, usa",english106,english,female,408,usa,False,2,english106_part_2.wav,./sentence_2/english106_part_2.wav
+19,0.0,"chicago, illinois, usa",english107,english,male,416,usa,False,2,english107_part_2.wav,./sentence_2/english107_part_2.wav
+26,0.0,"concord, new hampshire, usa",english109,english,female,420,usa,False,2,english109_part_2.wav,./sentence_2/english109_part_2.wav
+35,0.0,"davenport, iowa, usa",english10,english,female,62,usa,False,2,english10_part_2.wav,./sentence_2/english10_part_2.wav
+38,0.0,"birmingham 2, alabama, usa",english114,english,female,442,usa,False,2,english114_part_2.wav,./sentence_2/english114_part_2.wav
+56,0.0,"atlanta, georgia, usa",english116,english,male,444,usa,False,2,english116_part_2.wav,./sentence_2/english116_part_2.wav
+60,0.0,"elmore, alabama, usa",english117,english,female,445,usa,False,2,english117_part_2.wav,./sentence_2/english117_part_2.wav
+19,0.0,"akron, ohio, usa",english118,english,male,446,usa,False,2,english118_part_2.wav,./sentence_2/english118_part_2.wav
+21,0.0,"waconia, minnesota, usa",english121,english,male,465,usa,False,2,english121_part_2.wav,./sentence_2/english121_part_2.wav
+28,0.0,"riverside, california, usa",english123,english,female,469,usa,False,2,english123_part_2.wav,./sentence_2/english123_part_2.wav
+38,0.0,"brooklyn, new york, usa",english124,english,male,480,usa,False,2,english124_part_2.wav,./sentence_2/english124_part_2.wav
+34,0.0,"cincinnati, ohio, usa",english126,english,female,487,usa,False,2,english126_part_2.wav,./sentence_2/english126_part_2.wav
+39,0.0,"new britain, connecticut, usa",english127,english,male,489,usa,False,2,english127_part_2.wav,./sentence_2/english127_part_2.wav
+20,0.0,"miami, florida, usa",english128,english,female,490,usa,False,2,english128_part_2.wav,./sentence_2/english128_part_2.wav
+23,0.0,"west palm beach, florida, usa",english131,english,male,497,usa,False,2,english131_part_2.wav,./sentence_2/english131_part_2.wav
+36,0.0,"norwich, new york, usa",english133,english,female,504,usa,False,2,english133_part_2.wav,./sentence_2/english133_part_2.wav
+22,0.0,"orange beach, alabama, usa",english135,english,male,507,usa,False,2,english135_part_2.wav,./sentence_2/english135_part_2.wav
+26,0.0,"charleston, west virginia, usa",english137,english,male,509,usa,False,2,english137_part_2.wav,./sentence_2/english137_part_2.wav
+25,0.0,"palmer, alaska, usa",english138,english,female,510,usa,False,2,english138_part_2.wav,./sentence_2/english138_part_2.wav
+20,0.0,"providence, rhode island, usa",english139,english,male,511,usa,False,2,english139_part_2.wav,./sentence_2/english139_part_2.wav
+19,0.0,"avon, new york, usa",english142,english,male,517,usa,False,2,english142_part_2.wav,./sentence_2/english142_part_2.wav
+42,0.0,"minneapolis, minnesota, usa",english143,english,male,518,usa,False,2,english143_part_2.wav,./sentence_2/english143_part_2.wav
+22,0.0,"blytheville, arkansas, usa",english146,english,male,522,usa,False,2,english146_part_2.wav,./sentence_2/english146_part_2.wav
+40,0.0,"merced, california, usa",english147,english,female,523,usa,False,2,english147_part_2.wav,./sentence_2/english147_part_2.wav
+31,0.0,"brownsville, kentucky, usa",english150,english,male,527,usa,False,2,english150_part_2.wav,./sentence_2/english150_part_2.wav
+18,0.0,"baltimore, maryland, usa",english151,english,male,528,usa,False,2,english151_part_2.wav,./sentence_2/english151_part_2.wav
+35,0.0,"oakland, california, usa",english155,english,male,535,usa,False,2,english155_part_2.wav,./sentence_2/english155_part_2.wav
+35,0.0,"fort worth, texas, usa",english157,english,male,538,usa,False,2,english157_part_2.wav,./sentence_2/english157_part_2.wav
+18,0.0,"washington, district of columbia, usa",english158,english,female,540,usa,False,2,english158_part_2.wav,./sentence_2/english158_part_2.wav
+7,0.0,"norton, virginia, usa",english15,english,female,72,usa,False,2,english15_part_2.wav,./sentence_2/english15_part_2.wav
+21,0.0,"redwood falls, minnesota, usa",english160,english,female,542,usa,False,2,english160_part_2.wav,./sentence_2/english160_part_2.wav
+75,0.0,"wakefield, ohio, usa",english161,english,female,546,usa,False,2,english161_part_2.wav,./sentence_2/english161_part_2.wav
+41,0.0,"delaware, ohio, usa",english162,english,female,548,usa,False,2,english162_part_2.wav,./sentence_2/english162_part_2.wav
+41,0.0,"fairview park, ohio, usa",english163,english,male,547,usa,False,2,english163_part_2.wav,./sentence_2/english163_part_2.wav
+43,0.0,"detroit, michigan, usa",english165,english,female,550,usa,False,2,english165_part_2.wav,./sentence_2/english165_part_2.wav
+18,0.0,"glenside, pennsylvania, usa",english166,english,male,551,usa,False,2,english166_part_2.wav,./sentence_2/english166_part_2.wav
+43,0.0,"lakeview, michigan, usa",english167,english,male,552,usa,False,2,english167_part_2.wav,./sentence_2/english167_part_2.wav
+40,0.0,"oceanside, california, usa",english168,english,male,554,usa,False,2,english168_part_2.wav,./sentence_2/english168_part_2.wav
+18,0.0,"cleveland, mississippi, usa",english169,english,male,555,usa,False,2,english169_part_2.wav,./sentence_2/english169_part_2.wav
+50,0.0,"belmont, mississippi, usa",english170,english,female,556,usa,False,2,english170_part_2.wav,./sentence_2/english170_part_2.wav
+21,0.0,"st. louis, missouri, usa",english171,english,male,563,usa,False,2,english171_part_2.wav,./sentence_2/english171_part_2.wav
+19,0.0,"libertyville, illinois, usa",english173,english,male,567,usa,False,2,english173_part_2.wav,./sentence_2/english173_part_2.wav
+24,0.0,"seattle, washington, usa",english175,english,male,572,usa,False,2,english175_part_2.wav,./sentence_2/english175_part_2.wav
+18,0.0,"elizabeth city, north carolina, usa",english176,english,female,573,usa,False,2,english176_part_2.wav,./sentence_2/english176_part_2.wav
+23,0.0,"new orleans, louisiana, usa",english177,english,female,574,usa,False,2,english177_part_2.wav,./sentence_2/english177_part_2.wav
+30,0.0,"wilkes-barre, pennsylvania, usa",english178,english,male,583,usa,False,2,english178_part_2.wav,./sentence_2/english178_part_2.wav
+57,0.0,"huron, south dakota, usa",english179,english,male,584,usa,False,2,english179_part_2.wav,./sentence_2/english179_part_2.wav
+79,0.0,"darwin va, virginia, usa",english17,english,male,74,usa,False,2,english17_part_2.wav,./sentence_2/english17_part_2.wav
+20,0.0,"newport, rhode island, usa",english180,english,male,585,usa,False,2,english180_part_2.wav,./sentence_2/english180_part_2.wav
+68,0.0,"new eagle, pennsylvania, usa",english181,english,male,586,usa,False,2,english181_part_2.wav,./sentence_2/english181_part_2.wav
+50,0.0,"troy, new york, usa",english182,english,male,590,usa,False,2,english182_part_2.wav,./sentence_2/english182_part_2.wav
+18,0.0,"hillsboro, oregon, usa",english184,english,female,597,usa,False,2,english184_part_2.wav,./sentence_2/english184_part_2.wav
+39,0.0,"gadsden, alabama, usa",english186,english,female,605,usa,False,2,english186_part_2.wav,./sentence_2/english186_part_2.wav
+42,0.0,"algona, iowa, usa",english187,english,female,606,usa,False,2,english187_part_2.wav,./sentence_2/english187_part_2.wav
+19,0.0,"grand forks, north dakota, usa",english189,english,male,617,usa,False,2,english189_part_2.wav,./sentence_2/english189_part_2.wav
+39,0.0,"dickenson county, virginia, usa",english18,english,female,75,usa,False,2,english18_part_2.wav,./sentence_2/english18_part_2.wav
+27,0.0,"oak park, illinois, usa",english190,english,male,618,usa,False,2,english190_part_2.wav,./sentence_2/english190_part_2.wav
+19,0.0,"las cruces, new mexico, usa",english191,english,male,631,usa,False,2,english191_part_2.wav,./sentence_2/english191_part_2.wav
+27,0.0,"east lansing, michigan, usa",english192,english,female,636,usa,False,2,english192_part_2.wav,./sentence_2/english192_part_2.wav
+32,0.0,"honolulu, hawaii, usa",english193,english,male,637,usa,False,2,english193_part_2.wav,./sentence_2/english193_part_2.wav
+21,0.0,"delavan, wisconsin, usa",english195,english,female,639,usa,False,2,english195_part_2.wav,./sentence_2/english195_part_2.wav
+22,0.0,"iowa city, iowa, usa",english197,english,male,662,usa,False,2,english197_part_2.wav,./sentence_2/english197_part_2.wav
+56,0.0,"washington, district of columbia, usa",english198,english,male,663,usa,False,2,english198_part_2.wav,./sentence_2/english198_part_2.wav
+25,0.0,"bay shore, new york, usa",english199,english,male,664,usa,False,2,english199_part_2.wav,./sentence_2/english199_part_2.wav
+42,0.0,"pittsburgh, pennsylvania, usa",english1,english,male,61,usa,False,2,english1_part_2.wav,./sentence_2/english1_part_2.wav
+22,0.0,"berkeley, california, usa",english200,english,female,667,usa,False,2,english200_part_2.wav,./sentence_2/english200_part_2.wav
+26,0.0,"warren, michigan, usa",english201,english,female,668,usa,False,2,english201_part_2.wav,./sentence_2/english201_part_2.wav
+19,0.0,"crisfield, maryland, usa",english202,english,male,673,usa,False,2,english202_part_2.wav,./sentence_2/english202_part_2.wav
+63,0.0,"boston, massachusetts, usa",english203,english,female,674,usa,False,2,english203_part_2.wav,./sentence_2/english203_part_2.wav
+53,0.0,"chicago, illinois, usa",english204,english,male,678,usa,False,2,english204_part_2.wav,./sentence_2/english204_part_2.wav
+45,0.0,"blue earth, minnesota, usa",english205,english,female,679,usa,False,2,english205_part_2.wav,./sentence_2/english205_part_2.wav
+23,0.0,"wilkes-barre, pennsylvania, usa",english207,english,female,684,usa,False,2,english207_part_2.wav,./sentence_2/english207_part_2.wav
+46,0.0,"washington, dc, usa",english208,english,male,695,usa,False,2,english208_part_2.wav,./sentence_2/english208_part_2.wav
+27,0.0,"mt. holly, north carolina, usa",english20,english,female,78,usa,False,2,english20_part_2.wav,./sentence_2/english20_part_2.wav
+30,0.0,"worcester, massachusetts, usa",english211,english,male,720,usa,False,2,english211_part_2.wav,./sentence_2/english211_part_2.wav
+24,0.0,"spartanburg, south carolina, usa",english212,english,male,729,usa,False,2,english212_part_2.wav,./sentence_2/english212_part_2.wav
+38,0.0,"dodge city, kansas, usa",english213,english,male,734,usa,False,2,english213_part_2.wav,./sentence_2/english213_part_2.wav
+48,0.0,"chicago, illinois, usa",english216,english,female,739,usa,False,2,english216_part_2.wav,./sentence_2/english216_part_2.wav
+27,0.0,"abingdon, virginia, usa",english218,english,female,747,usa,False,2,english218_part_2.wav,./sentence_2/english218_part_2.wav
+38,0.0,"oakland, california, usa",english219,english,female,748,usa,False,2,english219_part_2.wav,./sentence_2/english219_part_2.wav
+37,0.0,"boston, massachusetts, usa",english21,english,female,79,usa,False,2,english21_part_2.wav,./sentence_2/english21_part_2.wav
+18,0.0,"anaheim, california, usa",english220,english,female,749,usa,False,2,english220_part_2.wav,./sentence_2/english220_part_2.wav
+18,0.0,"auburn, indiana, usa",english222,english,female,764,usa,False,2,english222_part_2.wav,./sentence_2/english222_part_2.wav
+18,0.0,"erie, pennsylvania, usa",english223,english,male,767,usa,False,2,english223_part_2.wav,./sentence_2/english223_part_2.wav
+25,0.0,"burlington, vermont, usa",english229,english,male,775,usa,False,2,english229_part_2.wav,./sentence_2/english229_part_2.wav
+22,0.0,"tampa, florida, usa",english231,english,male,791,usa,False,2,english231_part_2.wav,./sentence_2/english231_part_2.wav
+32,0.0,"metairie, louisiana, usa",english232,english,female,798,usa,False,2,english232_part_2.wav,./sentence_2/english232_part_2.wav
+49,0.0,"bloomington, indiana, usa",english234,english,male,794,usa,False,2,english234_part_2.wav,./sentence_2/english234_part_2.wav
+52,0.0,"richmond, virginia, usa",english235,english,female,795,usa,False,2,english235_part_2.wav,./sentence_2/english235_part_2.wav
+44,0.0,"st. charles, illinois, usa",english236,english,male,799,usa,False,2,english236_part_2.wav,./sentence_2/english236_part_2.wav
+22,0.0,"jeffersonville, ohio, usa",english237,english,female,801,usa,False,2,english237_part_2.wav,./sentence_2/english237_part_2.wav
+43,0.0,"englewood, tennessee, usa",english23,english,male,81,usa,False,2,english23_part_2.wav,./sentence_2/english23_part_2.wav
+23,0.0,"miami, florida, usa",english100,english,female,63,usa,False,3,english100_part_3.wav,./sentence_3/english100_part_3.wav
+22,0.0,"torrington, connecticut, usa",english102,english,male,65,usa,False,3,english102_part_3.wav,./sentence_3/english102_part_3.wav
+21,0.0,"staten island, new york, usa",english103,english,male,66,usa,False,3,english103_part_3.wav,./sentence_3/english103_part_3.wav
+18,0.0,"youngstown, ohio, usa",english104,english,female,67,usa,False,3,english104_part_3.wav,./sentence_3/english104_part_3.wav
+39,0.0,"los angeles, california, usa",english106,english,female,408,usa,False,3,english106_part_3.wav,./sentence_3/english106_part_3.wav
+19,0.0,"chicago, illinois, usa",english107,english,male,416,usa,False,3,english107_part_3.wav,./sentence_3/english107_part_3.wav
+26,0.0,"concord, new hampshire, usa",english109,english,female,420,usa,False,3,english109_part_3.wav,./sentence_3/english109_part_3.wav
+35,0.0,"davenport, iowa, usa",english10,english,female,62,usa,False,3,english10_part_3.wav,./sentence_3/english10_part_3.wav
+38,0.0,"birmingham 2, alabama, usa",english114,english,female,442,usa,False,3,english114_part_3.wav,./sentence_3/english114_part_3.wav
+56,0.0,"atlanta, georgia, usa",english116,english,male,444,usa,False,3,english116_part_3.wav,./sentence_3/english116_part_3.wav
+60,0.0,"elmore, alabama, usa",english117,english,female,445,usa,False,3,english117_part_3.wav,./sentence_3/english117_part_3.wav
+19,0.0,"akron, ohio, usa",english118,english,male,446,usa,False,3,english118_part_3.wav,./sentence_3/english118_part_3.wav
+21,0.0,"waconia, minnesota, usa",english121,english,male,465,usa,False,3,english121_part_3.wav,./sentence_3/english121_part_3.wav
+28,0.0,"riverside, california, usa",english123,english,female,469,usa,False,3,english123_part_3.wav,./sentence_3/english123_part_3.wav
+38,0.0,"brooklyn, new york, usa",english124,english,male,480,usa,False,3,english124_part_3.wav,./sentence_3/english124_part_3.wav
+34,0.0,"cincinnati, ohio, usa",english126,english,female,487,usa,False,3,english126_part_3.wav,./sentence_3/english126_part_3.wav
+39,0.0,"new britain, connecticut, usa",english127,english,male,489,usa,False,3,english127_part_3.wav,./sentence_3/english127_part_3.wav
+20,0.0,"miami, florida, usa",english128,english,female,490,usa,False,3,english128_part_3.wav,./sentence_3/english128_part_3.wav
+23,0.0,"west palm beach, florida, usa",english131,english,male,497,usa,False,3,english131_part_3.wav,./sentence_3/english131_part_3.wav
+36,0.0,"norwich, new york, usa",english133,english,female,504,usa,False,3,english133_part_3.wav,./sentence_3/english133_part_3.wav
+22,0.0,"orange beach, alabama, usa",english135,english,male,507,usa,False,3,english135_part_3.wav,./sentence_3/english135_part_3.wav
+26,0.0,"charleston, west virginia, usa",english137,english,male,509,usa,False,3,english137_part_3.wav,./sentence_3/english137_part_3.wav
+25,0.0,"palmer, alaska, usa",english138,english,female,510,usa,False,3,english138_part_3.wav,./sentence_3/english138_part_3.wav
+20,0.0,"providence, rhode island, usa",english139,english,male,511,usa,False,3,english139_part_3.wav,./sentence_3/english139_part_3.wav
+19,0.0,"avon, new york, usa",english142,english,male,517,usa,False,3,english142_part_3.wav,./sentence_3/english142_part_3.wav
+42,0.0,"minneapolis, minnesota, usa",english143,english,male,518,usa,False,3,english143_part_3.wav,./sentence_3/english143_part_3.wav
+22,0.0,"blytheville, arkansas, usa",english146,english,male,522,usa,False,3,english146_part_3.wav,./sentence_3/english146_part_3.wav
+40,0.0,"merced, california, usa",english147,english,female,523,usa,False,3,english147_part_3.wav,./sentence_3/english147_part_3.wav
+31,0.0,"brownsville, kentucky, usa",english150,english,male,527,usa,False,3,english150_part_3.wav,./sentence_3/english150_part_3.wav
+18,0.0,"baltimore, maryland, usa",english151,english,male,528,usa,False,3,english151_part_3.wav,./sentence_3/english151_part_3.wav
+35,0.0,"oakland, california, usa",english155,english,male,535,usa,False,3,english155_part_3.wav,./sentence_3/english155_part_3.wav
+35,0.0,"fort worth, texas, usa",english157,english,male,538,usa,False,3,english157_part_3.wav,./sentence_3/english157_part_3.wav
+18,0.0,"washington, district of columbia, usa",english158,english,female,540,usa,False,3,english158_part_3.wav,./sentence_3/english158_part_3.wav
+7,0.0,"norton, virginia, usa",english15,english,female,72,usa,False,3,english15_part_3.wav,./sentence_3/english15_part_3.wav
+21,0.0,"redwood falls, minnesota, usa",english160,english,female,542,usa,False,3,english160_part_3.wav,./sentence_3/english160_part_3.wav
+75,0.0,"wakefield, ohio, usa",english161,english,female,546,usa,False,3,english161_part_3.wav,./sentence_3/english161_part_3.wav
+41,0.0,"delaware, ohio, usa",english162,english,female,548,usa,False,3,english162_part_3.wav,./sentence_3/english162_part_3.wav
+41,0.0,"fairview park, ohio, usa",english163,english,male,547,usa,False,3,english163_part_3.wav,./sentence_3/english163_part_3.wav
+43,0.0,"detroit, michigan, usa",english165,english,female,550,usa,False,3,english165_part_3.wav,./sentence_3/english165_part_3.wav
+18,0.0,"glenside, pennsylvania, usa",english166,english,male,551,usa,False,3,english166_part_3.wav,./sentence_3/english166_part_3.wav
+43,0.0,"lakeview, michigan, usa",english167,english,male,552,usa,False,3,english167_part_3.wav,./sentence_3/english167_part_3.wav
+40,0.0,"oceanside, california, usa",english168,english,male,554,usa,False,3,english168_part_3.wav,./sentence_3/english168_part_3.wav
+18,0.0,"cleveland, mississippi, usa",english169,english,male,555,usa,False,3,english169_part_3.wav,./sentence_3/english169_part_3.wav
+50,0.0,"belmont, mississippi, usa",english170,english,female,556,usa,False,3,english170_part_3.wav,./sentence_3/english170_part_3.wav
+21,0.0,"st. louis, missouri, usa",english171,english,male,563,usa,False,3,english171_part_3.wav,./sentence_3/english171_part_3.wav
+19,0.0,"libertyville, illinois, usa",english173,english,male,567,usa,False,3,english173_part_3.wav,./sentence_3/english173_part_3.wav
+24,0.0,"seattle, washington, usa",english175,english,male,572,usa,False,3,english175_part_3.wav,./sentence_3/english175_part_3.wav
+18,0.0,"elizabeth city, north carolina, usa",english176,english,female,573,usa,False,3,english176_part_3.wav,./sentence_3/english176_part_3.wav
+23,0.0,"new orleans, louisiana, usa",english177,english,female,574,usa,False,3,english177_part_3.wav,./sentence_3/english177_part_3.wav
+30,0.0,"wilkes-barre, pennsylvania, usa",english178,english,male,583,usa,False,3,english178_part_3.wav,./sentence_3/english178_part_3.wav
+57,0.0,"huron, south dakota, usa",english179,english,male,584,usa,False,3,english179_part_3.wav,./sentence_3/english179_part_3.wav
+79,0.0,"darwin va, virginia, usa",english17,english,male,74,usa,False,3,english17_part_3.wav,./sentence_3/english17_part_3.wav
+20,0.0,"newport, rhode island, usa",english180,english,male,585,usa,False,3,english180_part_3.wav,./sentence_3/english180_part_3.wav
+68,0.0,"new eagle, pennsylvania, usa",english181,english,male,586,usa,False,3,english181_part_3.wav,./sentence_3/english181_part_3.wav
+50,0.0,"troy, new york, usa",english182,english,male,590,usa,False,3,english182_part_3.wav,./sentence_3/english182_part_3.wav
+18,0.0,"hillsboro, oregon, usa",english184,english,female,597,usa,False,3,english184_part_3.wav,./sentence_3/english184_part_3.wav
+39,0.0,"gadsden, alabama, usa",english186,english,female,605,usa,False,3,english186_part_3.wav,./sentence_3/english186_part_3.wav
+42,0.0,"algona, iowa, usa",english187,english,female,606,usa,False,3,english187_part_3.wav,./sentence_3/english187_part_3.wav
+19,0.0,"grand forks, north dakota, usa",english189,english,male,617,usa,False,3,english189_part_3.wav,./sentence_3/english189_part_3.wav
+39,0.0,"dickenson county, virginia, usa",english18,english,female,75,usa,False,3,english18_part_3.wav,./sentence_3/english18_part_3.wav
+27,0.0,"oak park, illinois, usa",english190,english,male,618,usa,False,3,english190_part_3.wav,./sentence_3/english190_part_3.wav
+19,0.0,"las cruces, new mexico, usa",english191,english,male,631,usa,False,3,english191_part_3.wav,./sentence_3/english191_part_3.wav
+27,0.0,"east lansing, michigan, usa",english192,english,female,636,usa,False,3,english192_part_3.wav,./sentence_3/english192_part_3.wav
+32,0.0,"honolulu, hawaii, usa",english193,english,male,637,usa,False,3,english193_part_3.wav,./sentence_3/english193_part_3.wav
+21,0.0,"delavan, wisconsin, usa",english195,english,female,639,usa,False,3,english195_part_3.wav,./sentence_3/english195_part_3.wav
+22,0.0,"iowa city, iowa, usa",english197,english,male,662,usa,False,3,english197_part_3.wav,./sentence_3/english197_part_3.wav
+56,0.0,"washington, district of columbia, usa",english198,english,male,663,usa,False,3,english198_part_3.wav,./sentence_3/english198_part_3.wav
+25,0.0,"bay shore, new york, usa",english199,english,male,664,usa,False,3,english199_part_3.wav,./sentence_3/english199_part_3.wav
+42,0.0,"pittsburgh, pennsylvania, usa",english1,english,male,61,usa,False,3,english1_part_3.wav,./sentence_3/english1_part_3.wav
+22,0.0,"berkeley, california, usa",english200,english,female,667,usa,False,3,english200_part_3.wav,./sentence_3/english200_part_3.wav
+26,0.0,"warren, michigan, usa",english201,english,female,668,usa,False,3,english201_part_3.wav,./sentence_3/english201_part_3.wav
+19,0.0,"crisfield, maryland, usa",english202,english,male,673,usa,False,3,english202_part_3.wav,./sentence_3/english202_part_3.wav
+63,0.0,"boston, massachusetts, usa",english203,english,female,674,usa,False,3,english203_part_3.wav,./sentence_3/english203_part_3.wav
+53,0.0,"chicago, illinois, usa",english204,english,male,678,usa,False,3,english204_part_3.wav,./sentence_3/english204_part_3.wav
+45,0.0,"blue earth, minnesota, usa",english205,english,female,679,usa,False,3,english205_part_3.wav,./sentence_3/english205_part_3.wav
+23,0.0,"wilkes-barre, pennsylvania, usa",english207,english,female,684,usa,False,3,english207_part_3.wav,./sentence_3/english207_part_3.wav
+46,0.0,"washington, dc, usa",english208,english,male,695,usa,False,3,english208_part_3.wav,./sentence_3/english208_part_3.wav
+27,0.0,"mt. holly, north carolina, usa",english20,english,female,78,usa,False,3,english20_part_3.wav,./sentence_3/english20_part_3.wav
+30,0.0,"worcester, massachusetts, usa",english211,english,male,720,usa,False,3,english211_part_3.wav,./sentence_3/english211_part_3.wav
+24,0.0,"spartanburg, south carolina, usa",english212,english,male,729,usa,False,3,english212_part_3.wav,./sentence_3/english212_part_3.wav
+38,0.0,"dodge city, kansas, usa",english213,english,male,734,usa,False,3,english213_part_3.wav,./sentence_3/english213_part_3.wav
+48,0.0,"chicago, illinois, usa",english216,english,female,739,usa,False,3,english216_part_3.wav,./sentence_3/english216_part_3.wav
+27,0.0,"abingdon, virginia, usa",english218,english,female,747,usa,False,3,english218_part_3.wav,./sentence_3/english218_part_3.wav
+38,0.0,"oakland, california, usa",english219,english,female,748,usa,False,3,english219_part_3.wav,./sentence_3/english219_part_3.wav
+37,0.0,"boston, massachusetts, usa",english21,english,female,79,usa,False,3,english21_part_3.wav,./sentence_3/english21_part_3.wav
+18,0.0,"anaheim, california, usa",english220,english,female,749,usa,False,3,english220_part_3.wav,./sentence_3/english220_part_3.wav
+18,0.0,"auburn, indiana, usa",english222,english,female,764,usa,False,3,english222_part_3.wav,./sentence_3/english222_part_3.wav
+18,0.0,"erie, pennsylvania, usa",english223,english,male,767,usa,False,3,english223_part_3.wav,./sentence_3/english223_part_3.wav
+25,0.0,"burlington, vermont, usa",english229,english,male,775,usa,False,3,english229_part_3.wav,./sentence_3/english229_part_3.wav
+22,0.0,"tampa, florida, usa",english231,english,male,791,usa,False,3,english231_part_3.wav,./sentence_3/english231_part_3.wav
+32,0.0,"metairie, louisiana, usa",english232,english,female,798,usa,False,3,english232_part_3.wav,./sentence_3/english232_part_3.wav
+49,0.0,"bloomington, indiana, usa",english234,english,male,794,usa,False,3,english234_part_3.wav,./sentence_3/english234_part_3.wav
+52,0.0,"richmond, virginia, usa",english235,english,female,795,usa,False,3,english235_part_3.wav,./sentence_3/english235_part_3.wav
+44,0.0,"st. charles, illinois, usa",english236,english,male,799,usa,False,3,english236_part_3.wav,./sentence_3/english236_part_3.wav
+22,0.0,"jeffersonville, ohio, usa",english237,english,female,801,usa,False,3,english237_part_3.wav,./sentence_3/english237_part_3.wav
+43,0.0,"englewood, tennessee, usa",english23,english,male,81,usa,False,3,english23_part_3.wav,./sentence_3/english23_part_3.wav
+23,0.0,"miami, florida, usa",english100,english,female,63,usa,False,4,english100_part_4.wav,./sentence_4/english100_part_4.wav
+22,0.0,"torrington, connecticut, usa",english102,english,male,65,usa,False,4,english102_part_4.wav,./sentence_4/english102_part_4.wav
+21,0.0,"staten island, new york, usa",english103,english,male,66,usa,False,4,english103_part_4.wav,./sentence_4/english103_part_4.wav
+18,0.0,"youngstown, ohio, usa",english104,english,female,67,usa,False,4,english104_part_4.wav,./sentence_4/english104_part_4.wav
+39,0.0,"los angeles, california, usa",english106,english,female,408,usa,False,4,english106_part_4.wav,./sentence_4/english106_part_4.wav
+19,0.0,"chicago, illinois, usa",english107,english,male,416,usa,False,4,english107_part_4.wav,./sentence_4/english107_part_4.wav
+26,0.0,"concord, new hampshire, usa",english109,english,female,420,usa,False,4,english109_part_4.wav,./sentence_4/english109_part_4.wav
+35,0.0,"davenport, iowa, usa",english10,english,female,62,usa,False,4,english10_part_4.wav,./sentence_4/english10_part_4.wav
+38,0.0,"birmingham 2, alabama, usa",english114,english,female,442,usa,False,4,english114_part_4.wav,./sentence_4/english114_part_4.wav
+56,0.0,"atlanta, georgia, usa",english116,english,male,444,usa,False,4,english116_part_4.wav,./sentence_4/english116_part_4.wav
+60,0.0,"elmore, alabama, usa",english117,english,female,445,usa,False,4,english117_part_4.wav,./sentence_4/english117_part_4.wav
+19,0.0,"akron, ohio, usa",english118,english,male,446,usa,False,4,english118_part_4.wav,./sentence_4/english118_part_4.wav
+21,0.0,"waconia, minnesota, usa",english121,english,male,465,usa,False,4,english121_part_4.wav,./sentence_4/english121_part_4.wav
+28,0.0,"riverside, california, usa",english123,english,female,469,usa,False,4,english123_part_4.wav,./sentence_4/english123_part_4.wav
+38,0.0,"brooklyn, new york, usa",english124,english,male,480,usa,False,4,english124_part_4.wav,./sentence_4/english124_part_4.wav
+34,0.0,"cincinnati, ohio, usa",english126,english,female,487,usa,False,4,english126_part_4.wav,./sentence_4/english126_part_4.wav
+39,0.0,"new britain, connecticut, usa",english127,english,male,489,usa,False,4,english127_part_4.wav,./sentence_4/english127_part_4.wav
+20,0.0,"miami, florida, usa",english128,english,female,490,usa,False,4,english128_part_4.wav,./sentence_4/english128_part_4.wav
+23,0.0,"west palm beach, florida, usa",english131,english,male,497,usa,False,4,english131_part_4.wav,./sentence_4/english131_part_4.wav
+36,0.0,"norwich, new york, usa",english133,english,female,504,usa,False,4,english133_part_4.wav,./sentence_4/english133_part_4.wav
+22,0.0,"orange beach, alabama, usa",english135,english,male,507,usa,False,4,english135_part_4.wav,./sentence_4/english135_part_4.wav
+26,0.0,"charleston, west virginia, usa",english137,english,male,509,usa,False,4,english137_part_4.wav,./sentence_4/english137_part_4.wav
+25,0.0,"palmer, alaska, usa",english138,english,female,510,usa,False,4,english138_part_4.wav,./sentence_4/english138_part_4.wav
+20,0.0,"providence, rhode island, usa",english139,english,male,511,usa,False,4,english139_part_4.wav,./sentence_4/english139_part_4.wav
+19,0.0,"avon, new york, usa",english142,english,male,517,usa,False,4,english142_part_4.wav,./sentence_4/english142_part_4.wav
+42,0.0,"minneapolis, minnesota, usa",english143,english,male,518,usa,False,4,english143_part_4.wav,./sentence_4/english143_part_4.wav
+22,0.0,"blytheville, arkansas, usa",english146,english,male,522,usa,False,4,english146_part_4.wav,./sentence_4/english146_part_4.wav
+40,0.0,"merced, california, usa",english147,english,female,523,usa,False,4,english147_part_4.wav,./sentence_4/english147_part_4.wav
+31,0.0,"brownsville, kentucky, usa",english150,english,male,527,usa,False,4,english150_part_4.wav,./sentence_4/english150_part_4.wav
+18,0.0,"baltimore, maryland, usa",english151,english,male,528,usa,False,4,english151_part_4.wav,./sentence_4/english151_part_4.wav
+35,0.0,"oakland, california, usa",english155,english,male,535,usa,False,4,english155_part_4.wav,./sentence_4/english155_part_4.wav
+35,0.0,"fort worth, texas, usa",english157,english,male,538,usa,False,4,english157_part_4.wav,./sentence_4/english157_part_4.wav
+18,0.0,"washington, district of columbia, usa",english158,english,female,540,usa,False,4,english158_part_4.wav,./sentence_4/english158_part_4.wav
+7,0.0,"norton, virginia, usa",english15,english,female,72,usa,False,4,english15_part_4.wav,./sentence_4/english15_part_4.wav
+21,0.0,"redwood falls, minnesota, usa",english160,english,female,542,usa,False,4,english160_part_4.wav,./sentence_4/english160_part_4.wav
+75,0.0,"wakefield, ohio, usa",english161,english,female,546,usa,False,4,english161_part_4.wav,./sentence_4/english161_part_4.wav
+41,0.0,"delaware, ohio, usa",english162,english,female,548,usa,False,4,english162_part_4.wav,./sentence_4/english162_part_4.wav
+41,0.0,"fairview park, ohio, usa",english163,english,male,547,usa,False,4,english163_part_4.wav,./sentence_4/english163_part_4.wav
+43,0.0,"detroit, michigan, usa",english165,english,female,550,usa,False,4,english165_part_4.wav,./sentence_4/english165_part_4.wav
+18,0.0,"glenside, pennsylvania, usa",english166,english,male,551,usa,False,4,english166_part_4.wav,./sentence_4/english166_part_4.wav
+43,0.0,"lakeview, michigan, usa",english167,english,male,552,usa,False,4,english167_part_4.wav,./sentence_4/english167_part_4.wav
+40,0.0,"oceanside, california, usa",english168,english,male,554,usa,False,4,english168_part_4.wav,./sentence_4/english168_part_4.wav
+18,0.0,"cleveland, mississippi, usa",english169,english,male,555,usa,False,4,english169_part_4.wav,./sentence_4/english169_part_4.wav
+50,0.0,"belmont, mississippi, usa",english170,english,female,556,usa,False,4,english170_part_4.wav,./sentence_4/english170_part_4.wav
+21,0.0,"st. louis, missouri, usa",english171,english,male,563,usa,False,4,english171_part_4.wav,./sentence_4/english171_part_4.wav
+19,0.0,"libertyville, illinois, usa",english173,english,male,567,usa,False,4,english173_part_4.wav,./sentence_4/english173_part_4.wav
+24,0.0,"seattle, washington, usa",english175,english,male,572,usa,False,4,english175_part_4.wav,./sentence_4/english175_part_4.wav
+18,0.0,"elizabeth city, north carolina, usa",english176,english,female,573,usa,False,4,english176_part_4.wav,./sentence_4/english176_part_4.wav
+23,0.0,"new orleans, louisiana, usa",english177,english,female,574,usa,False,4,english177_part_4.wav,./sentence_4/english177_part_4.wav
+30,0.0,"wilkes-barre, pennsylvania, usa",english178,english,male,583,usa,False,4,english178_part_4.wav,./sentence_4/english178_part_4.wav
+57,0.0,"huron, south dakota, usa",english179,english,male,584,usa,False,4,english179_part_4.wav,./sentence_4/english179_part_4.wav
+79,0.0,"darwin va, virginia, usa",english17,english,male,74,usa,False,4,english17_part_4.wav,./sentence_4/english17_part_4.wav
+20,0.0,"newport, rhode island, usa",english180,english,male,585,usa,False,4,english180_part_4.wav,./sentence_4/english180_part_4.wav
+68,0.0,"new eagle, pennsylvania, usa",english181,english,male,586,usa,False,4,english181_part_4.wav,./sentence_4/english181_part_4.wav
+50,0.0,"troy, new york, usa",english182,english,male,590,usa,False,4,english182_part_4.wav,./sentence_4/english182_part_4.wav
+18,0.0,"hillsboro, oregon, usa",english184,english,female,597,usa,False,4,english184_part_4.wav,./sentence_4/english184_part_4.wav
+39,0.0,"gadsden, alabama, usa",english186,english,female,605,usa,False,4,english186_part_4.wav,./sentence_4/english186_part_4.wav
+42,0.0,"algona, iowa, usa",english187,english,female,606,usa,False,4,english187_part_4.wav,./sentence_4/english187_part_4.wav
+19,0.0,"grand forks, north dakota, usa",english189,english,male,617,usa,False,4,english189_part_4.wav,./sentence_4/english189_part_4.wav
+39,0.0,"dickenson county, virginia, usa",english18,english,female,75,usa,False,4,english18_part_4.wav,./sentence_4/english18_part_4.wav
+27,0.0,"oak park, illinois, usa",english190,english,male,618,usa,False,4,english190_part_4.wav,./sentence_4/english190_part_4.wav
+19,0.0,"las cruces, new mexico, usa",english191,english,male,631,usa,False,4,english191_part_4.wav,./sentence_4/english191_part_4.wav
+27,0.0,"east lansing, michigan, usa",english192,english,female,636,usa,False,4,english192_part_4.wav,./sentence_4/english192_part_4.wav
+32,0.0,"honolulu, hawaii, usa",english193,english,male,637,usa,False,4,english193_part_4.wav,./sentence_4/english193_part_4.wav
+21,0.0,"delavan, wisconsin, usa",english195,english,female,639,usa,False,4,english195_part_4.wav,./sentence_4/english195_part_4.wav
+22,0.0,"iowa city, iowa, usa",english197,english,male,662,usa,False,4,english197_part_4.wav,./sentence_4/english197_part_4.wav
+56,0.0,"washington, district of columbia, usa",english198,english,male,663,usa,False,4,english198_part_4.wav,./sentence_4/english198_part_4.wav
+25,0.0,"bay shore, new york, usa",english199,english,male,664,usa,False,4,english199_part_4.wav,./sentence_4/english199_part_4.wav
+42,0.0,"pittsburgh, pennsylvania, usa",english1,english,male,61,usa,False,4,english1_part_4.wav,./sentence_4/english1_part_4.wav
+22,0.0,"berkeley, california, usa",english200,english,female,667,usa,False,4,english200_part_4.wav,./sentence_4/english200_part_4.wav
+26,0.0,"warren, michigan, usa",english201,english,female,668,usa,False,4,english201_part_4.wav,./sentence_4/english201_part_4.wav
+19,0.0,"crisfield, maryland, usa",english202,english,male,673,usa,False,4,english202_part_4.wav,./sentence_4/english202_part_4.wav
+63,0.0,"boston, massachusetts, usa",english203,english,female,674,usa,False,4,english203_part_4.wav,./sentence_4/english203_part_4.wav
+53,0.0,"chicago, illinois, usa",english204,english,male,678,usa,False,4,english204_part_4.wav,./sentence_4/english204_part_4.wav
+45,0.0,"blue earth, minnesota, usa",english205,english,female,679,usa,False,4,english205_part_4.wav,./sentence_4/english205_part_4.wav
+23,0.0,"wilkes-barre, pennsylvania, usa",english207,english,female,684,usa,False,4,english207_part_4.wav,./sentence_4/english207_part_4.wav
+46,0.0,"washington, dc, usa",english208,english,male,695,usa,False,4,english208_part_4.wav,./sentence_4/english208_part_4.wav
+27,0.0,"mt. holly, north carolina, usa",english20,english,female,78,usa,False,4,english20_part_4.wav,./sentence_4/english20_part_4.wav
+30,0.0,"worcester, massachusetts, usa",english211,english,male,720,usa,False,4,english211_part_4.wav,./sentence_4/english211_part_4.wav
+24,0.0,"spartanburg, south carolina, usa",english212,english,male,729,usa,False,4,english212_part_4.wav,./sentence_4/english212_part_4.wav
+38,0.0,"dodge city, kansas, usa",english213,english,male,734,usa,False,4,english213_part_4.wav,./sentence_4/english213_part_4.wav
+48,0.0,"chicago, illinois, usa",english216,english,female,739,usa,False,4,english216_part_4.wav,./sentence_4/english216_part_4.wav
+27,0.0,"abingdon, virginia, usa",english218,english,female,747,usa,False,4,english218_part_4.wav,./sentence_4/english218_part_4.wav
+38,0.0,"oakland, california, usa",english219,english,female,748,usa,False,4,english219_part_4.wav,./sentence_4/english219_part_4.wav
+37,0.0,"boston, massachusetts, usa",english21,english,female,79,usa,False,4,english21_part_4.wav,./sentence_4/english21_part_4.wav
+18,0.0,"anaheim, california, usa",english220,english,female,749,usa,False,4,english220_part_4.wav,./sentence_4/english220_part_4.wav
+18,0.0,"auburn, indiana, usa",english222,english,female,764,usa,False,4,english222_part_4.wav,./sentence_4/english222_part_4.wav
+18,0.0,"erie, pennsylvania, usa",english223,english,male,767,usa,False,4,english223_part_4.wav,./sentence_4/english223_part_4.wav
+25,0.0,"burlington, vermont, usa",english229,english,male,775,usa,False,4,english229_part_4.wav,./sentence_4/english229_part_4.wav
+22,0.0,"tampa, florida, usa",english231,english,male,791,usa,False,4,english231_part_4.wav,./sentence_4/english231_part_4.wav
+32,0.0,"metairie, louisiana, usa",english232,english,female,798,usa,False,4,english232_part_4.wav,./sentence_4/english232_part_4.wav
+49,0.0,"bloomington, indiana, usa",english234,english,male,794,usa,False,4,english234_part_4.wav,./sentence_4/english234_part_4.wav
+52,0.0,"richmond, virginia, usa",english235,english,female,795,usa,False,4,english235_part_4.wav,./sentence_4/english235_part_4.wav
+44,0.0,"st. charles, illinois, usa",english236,english,male,799,usa,False,4,english236_part_4.wav,./sentence_4/english236_part_4.wav
+22,0.0,"jeffersonville, ohio, usa",english237,english,female,801,usa,False,4,english237_part_4.wav,./sentence_4/english237_part_4.wav
+43,0.0,"englewood, tennessee, usa",english23,english,male,81,usa,False,4,english23_part_4.wav,./sentence_4/english23_part_4.wav
+23,0.0,"miami, florida, usa",english100,english,female,63,usa,False,5,english100_part_5.wav,./sentence_5/english100_part_5.wav
+22,0.0,"torrington, connecticut, usa",english102,english,male,65,usa,False,5,english102_part_5.wav,./sentence_5/english102_part_5.wav
+21,0.0,"staten island, new york, usa",english103,english,male,66,usa,False,5,english103_part_5.wav,./sentence_5/english103_part_5.wav
+18,0.0,"youngstown, ohio, usa",english104,english,female,67,usa,False,5,english104_part_5.wav,./sentence_5/english104_part_5.wav
+39,0.0,"los angeles, california, usa",english106,english,female,408,usa,False,5,english106_part_5.wav,./sentence_5/english106_part_5.wav
+19,0.0,"chicago, illinois, usa",english107,english,male,416,usa,False,5,english107_part_5.wav,./sentence_5/english107_part_5.wav
+26,0.0,"concord, new hampshire, usa",english109,english,female,420,usa,False,5,english109_part_5.wav,./sentence_5/english109_part_5.wav
+35,0.0,"davenport, iowa, usa",english10,english,female,62,usa,False,5,english10_part_5.wav,./sentence_5/english10_part_5.wav
+38,0.0,"birmingham 2, alabama, usa",english114,english,female,442,usa,False,5,english114_part_5.wav,./sentence_5/english114_part_5.wav
+56,0.0,"atlanta, georgia, usa",english116,english,male,444,usa,False,5,english116_part_5.wav,./sentence_5/english116_part_5.wav
+60,0.0,"elmore, alabama, usa",english117,english,female,445,usa,False,5,english117_part_5.wav,./sentence_5/english117_part_5.wav
+19,0.0,"akron, ohio, usa",english118,english,male,446,usa,False,5,english118_part_5.wav,./sentence_5/english118_part_5.wav
+21,0.0,"waconia, minnesota, usa",english121,english,male,465,usa,False,5,english121_part_5.wav,./sentence_5/english121_part_5.wav
+28,0.0,"riverside, california, usa",english123,english,female,469,usa,False,5,english123_part_5.wav,./sentence_5/english123_part_5.wav
+38,0.0,"brooklyn, new york, usa",english124,english,male,480,usa,False,5,english124_part_5.wav,./sentence_5/english124_part_5.wav
+34,0.0,"cincinnati, ohio, usa",english126,english,female,487,usa,False,5,english126_part_5.wav,./sentence_5/english126_part_5.wav
+39,0.0,"new britain, connecticut, usa",english127,english,male,489,usa,False,5,english127_part_5.wav,./sentence_5/english127_part_5.wav
+20,0.0,"miami, florida, usa",english128,english,female,490,usa,False,5,english128_part_5.wav,./sentence_5/english128_part_5.wav
+23,0.0,"west palm beach, florida, usa",english131,english,male,497,usa,False,5,english131_part_5.wav,./sentence_5/english131_part_5.wav
+36,0.0,"norwich, new york, usa",english133,english,female,504,usa,False,5,english133_part_5.wav,./sentence_5/english133_part_5.wav
+22,0.0,"orange beach, alabama, usa",english135,english,male,507,usa,False,5,english135_part_5.wav,./sentence_5/english135_part_5.wav
+26,0.0,"charleston, west virginia, usa",english137,english,male,509,usa,False,5,english137_part_5.wav,./sentence_5/english137_part_5.wav
+25,0.0,"palmer, alaska, usa",english138,english,female,510,usa,False,5,english138_part_5.wav,./sentence_5/english138_part_5.wav
+20,0.0,"providence, rhode island, usa",english139,english,male,511,usa,False,5,english139_part_5.wav,./sentence_5/english139_part_5.wav
+19,0.0,"avon, new york, usa",english142,english,male,517,usa,False,5,english142_part_5.wav,./sentence_5/english142_part_5.wav
+42,0.0,"minneapolis, minnesota, usa",english143,english,male,518,usa,False,5,english143_part_5.wav,./sentence_5/english143_part_5.wav
+22,0.0,"blytheville, arkansas, usa",english146,english,male,522,usa,False,5,english146_part_5.wav,./sentence_5/english146_part_5.wav
+40,0.0,"merced, california, usa",english147,english,female,523,usa,False,5,english147_part_5.wav,./sentence_5/english147_part_5.wav
+31,0.0,"brownsville, kentucky, usa",english150,english,male,527,usa,False,5,english150_part_5.wav,./sentence_5/english150_part_5.wav
+18,0.0,"baltimore, maryland, usa",english151,english,male,528,usa,False,5,english151_part_5.wav,./sentence_5/english151_part_5.wav
+35,0.0,"oakland, california, usa",english155,english,male,535,usa,False,5,english155_part_5.wav,./sentence_5/english155_part_5.wav
+35,0.0,"fort worth, texas, usa",english157,english,male,538,usa,False,5,english157_part_5.wav,./sentence_5/english157_part_5.wav
+18,0.0,"washington, district of columbia, usa",english158,english,female,540,usa,False,5,english158_part_5.wav,./sentence_5/english158_part_5.wav
+7,0.0,"norton, virginia, usa",english15,english,female,72,usa,False,5,english15_part_5.wav,./sentence_5/english15_part_5.wav
+21,0.0,"redwood falls, minnesota, usa",english160,english,female,542,usa,False,5,english160_part_5.wav,./sentence_5/english160_part_5.wav
+75,0.0,"wakefield, ohio, usa",english161,english,female,546,usa,False,5,english161_part_5.wav,./sentence_5/english161_part_5.wav
+41,0.0,"delaware, ohio, usa",english162,english,female,548,usa,False,5,english162_part_5.wav,./sentence_5/english162_part_5.wav
+41,0.0,"fairview park, ohio, usa",english163,english,male,547,usa,False,5,english163_part_5.wav,./sentence_5/english163_part_5.wav
+43,0.0,"detroit, michigan, usa",english165,english,female,550,usa,False,5,english165_part_5.wav,./sentence_5/english165_part_5.wav
+18,0.0,"glenside, pennsylvania, usa",english166,english,male,551,usa,False,5,english166_part_5.wav,./sentence_5/english166_part_5.wav
+43,0.0,"lakeview, michigan, usa",english167,english,male,552,usa,False,5,english167_part_5.wav,./sentence_5/english167_part_5.wav
+40,0.0,"oceanside, california, usa",english168,english,male,554,usa,False,5,english168_part_5.wav,./sentence_5/english168_part_5.wav
+18,0.0,"cleveland, mississippi, usa",english169,english,male,555,usa,False,5,english169_part_5.wav,./sentence_5/english169_part_5.wav
+50,0.0,"belmont, mississippi, usa",english170,english,female,556,usa,False,5,english170_part_5.wav,./sentence_5/english170_part_5.wav
+21,0.0,"st. louis, missouri, usa",english171,english,male,563,usa,False,5,english171_part_5.wav,./sentence_5/english171_part_5.wav
+19,0.0,"libertyville, illinois, usa",english173,english,male,567,usa,False,5,english173_part_5.wav,./sentence_5/english173_part_5.wav
+24,0.0,"seattle, washington, usa",english175,english,male,572,usa,False,5,english175_part_5.wav,./sentence_5/english175_part_5.wav
+18,0.0,"elizabeth city, north carolina, usa",english176,english,female,573,usa,False,5,english176_part_5.wav,./sentence_5/english176_part_5.wav
+23,0.0,"new orleans, louisiana, usa",english177,english,female,574,usa,False,5,english177_part_5.wav,./sentence_5/english177_part_5.wav
+30,0.0,"wilkes-barre, pennsylvania, usa",english178,english,male,583,usa,False,5,english178_part_5.wav,./sentence_5/english178_part_5.wav
+57,0.0,"huron, south dakota, usa",english179,english,male,584,usa,False,5,english179_part_5.wav,./sentence_5/english179_part_5.wav
+79,0.0,"darwin va, virginia, usa",english17,english,male,74,usa,False,5,english17_part_5.wav,./sentence_5/english17_part_5.wav
+20,0.0,"newport, rhode island, usa",english180,english,male,585,usa,False,5,english180_part_5.wav,./sentence_5/english180_part_5.wav
+68,0.0,"new eagle, pennsylvania, usa",english181,english,male,586,usa,False,5,english181_part_5.wav,./sentence_5/english181_part_5.wav
+50,0.0,"troy, new york, usa",english182,english,male,590,usa,False,5,english182_part_5.wav,./sentence_5/english182_part_5.wav
+18,0.0,"hillsboro, oregon, usa",english184,english,female,597,usa,False,5,english184_part_5.wav,./sentence_5/english184_part_5.wav
+39,0.0,"gadsden, alabama, usa",english186,english,female,605,usa,False,5,english186_part_5.wav,./sentence_5/english186_part_5.wav
+42,0.0,"algona, iowa, usa",english187,english,female,606,usa,False,5,english187_part_5.wav,./sentence_5/english187_part_5.wav
+19,0.0,"grand forks, north dakota, usa",english189,english,male,617,usa,False,5,english189_part_5.wav,./sentence_5/english189_part_5.wav
+39,0.0,"dickenson county, virginia, usa",english18,english,female,75,usa,False,5,english18_part_5.wav,./sentence_5/english18_part_5.wav
+27,0.0,"oak park, illinois, usa",english190,english,male,618,usa,False,5,english190_part_5.wav,./sentence_5/english190_part_5.wav
+19,0.0,"las cruces, new mexico, usa",english191,english,male,631,usa,False,5,english191_part_5.wav,./sentence_5/english191_part_5.wav
+27,0.0,"east lansing, michigan, usa",english192,english,female,636,usa,False,5,english192_part_5.wav,./sentence_5/english192_part_5.wav
+32,0.0,"honolulu, hawaii, usa",english193,english,male,637,usa,False,5,english193_part_5.wav,./sentence_5/english193_part_5.wav
+21,0.0,"delavan, wisconsin, usa",english195,english,female,639,usa,False,5,english195_part_5.wav,./sentence_5/english195_part_5.wav
+22,0.0,"iowa city, iowa, usa",english197,english,male,662,usa,False,5,english197_part_5.wav,./sentence_5/english197_part_5.wav
+56,0.0,"washington, district of columbia, usa",english198,english,male,663,usa,False,5,english198_part_5.wav,./sentence_5/english198_part_5.wav
+25,0.0,"bay shore, new york, usa",english199,english,male,664,usa,False,5,english199_part_5.wav,./sentence_5/english199_part_5.wav
+42,0.0,"pittsburgh, pennsylvania, usa",english1,english,male,61,usa,False,5,english1_part_5.wav,./sentence_5/english1_part_5.wav
+22,0.0,"berkeley, california, usa",english200,english,female,667,usa,False,5,english200_part_5.wav,./sentence_5/english200_part_5.wav
+26,0.0,"warren, michigan, usa",english201,english,female,668,usa,False,5,english201_part_5.wav,./sentence_5/english201_part_5.wav
+19,0.0,"crisfield, maryland, usa",english202,english,male,673,usa,False,5,english202_part_5.wav,./sentence_5/english202_part_5.wav
+63,0.0,"boston, massachusetts, usa",english203,english,female,674,usa,False,5,english203_part_5.wav,./sentence_5/english203_part_5.wav
+53,0.0,"chicago, illinois, usa",english204,english,male,678,usa,False,5,english204_part_5.wav,./sentence_5/english204_part_5.wav
+45,0.0,"blue earth, minnesota, usa",english205,english,female,679,usa,False,5,english205_part_5.wav,./sentence_5/english205_part_5.wav
+23,0.0,"wilkes-barre, pennsylvania, usa",english207,english,female,684,usa,False,5,english207_part_5.wav,./sentence_5/english207_part_5.wav
+46,0.0,"washington, dc, usa",english208,english,male,695,usa,False,5,english208_part_5.wav,./sentence_5/english208_part_5.wav
+27,0.0,"mt. holly, north carolina, usa",english20,english,female,78,usa,False,5,english20_part_5.wav,./sentence_5/english20_part_5.wav
+30,0.0,"worcester, massachusetts, usa",english211,english,male,720,usa,False,5,english211_part_5.wav,./sentence_5/english211_part_5.wav
+24,0.0,"spartanburg, south carolina, usa",english212,english,male,729,usa,False,5,english212_part_5.wav,./sentence_5/english212_part_5.wav
+38,0.0,"dodge city, kansas, usa",english213,english,male,734,usa,False,5,english213_part_5.wav,./sentence_5/english213_part_5.wav
+48,0.0,"chicago, illinois, usa",english216,english,female,739,usa,False,5,english216_part_5.wav,./sentence_5/english216_part_5.wav
+27,0.0,"abingdon, virginia, usa",english218,english,female,747,usa,False,5,english218_part_5.wav,./sentence_5/english218_part_5.wav
+38,0.0,"oakland, california, usa",english219,english,female,748,usa,False,5,english219_part_5.wav,./sentence_5/english219_part_5.wav
+37,0.0,"boston, massachusetts, usa",english21,english,female,79,usa,False,5,english21_part_5.wav,./sentence_5/english21_part_5.wav
+18,0.0,"anaheim, california, usa",english220,english,female,749,usa,False,5,english220_part_5.wav,./sentence_5/english220_part_5.wav
+18,0.0,"auburn, indiana, usa",english222,english,female,764,usa,False,5,english222_part_5.wav,./sentence_5/english222_part_5.wav
+18,0.0,"erie, pennsylvania, usa",english223,english,male,767,usa,False,5,english223_part_5.wav,./sentence_5/english223_part_5.wav
+25,0.0,"burlington, vermont, usa",english229,english,male,775,usa,False,5,english229_part_5.wav,./sentence_5/english229_part_5.wav
+22,0.0,"tampa, florida, usa",english231,english,male,791,usa,False,5,english231_part_5.wav,./sentence_5/english231_part_5.wav
+32,0.0,"metairie, louisiana, usa",english232,english,female,798,usa,False,5,english232_part_5.wav,./sentence_5/english232_part_5.wav
+49,0.0,"bloomington, indiana, usa",english234,english,male,794,usa,False,5,english234_part_5.wav,./sentence_5/english234_part_5.wav
+52,0.0,"richmond, virginia, usa",english235,english,female,795,usa,False,5,english235_part_5.wav,./sentence_5/english235_part_5.wav
+44,0.0,"st. charles, illinois, usa",english236,english,male,799,usa,False,5,english236_part_5.wav,./sentence_5/english236_part_5.wav
+22,0.0,"jeffersonville, ohio, usa",english237,english,female,801,usa,False,5,english237_part_5.wav,./sentence_5/english237_part_5.wav
+43,0.0,"englewood, tennessee, usa",english23,english,male,81,usa,False,5,english23_part_5.wav,./sentence_5/english23_part_5.wav
+18,0.0,"lawrenceville, georgia, usa",english149,english,male,526,usa,False,0,english149_part_0.wav,./sentence_0/english149_part_0.wav
+18,0.0,"lawrenceville, georgia, usa",english149,english,male,526,usa,False,1,english149_part_1.wav,./sentence_1/english149_part_1.wav
+18,0.0,"lawrenceville, georgia, usa",english149,english,male,526,usa,False,2,english149_part_2.wav,./sentence_2/english149_part_2.wav
+18,0.0,"lawrenceville, georgia, usa",english149,english,male,526,usa,False,3,english149_part_3.wav,./sentence_3/english149_part_3.wav
+21,0.0,"wise, virginia, usa",english16,english,male,73,usa,False,0,english16_part_0.wav,./sentence_0/english16_part_0.wav
+21,0.0,"wise, virginia, usa",english16,english,male,73,usa,False,1,english16_part_1.wav,./sentence_1/english16_part_1.wav
+21,0.0,"wise, virginia, usa",english16,english,male,73,usa,False,2,english16_part_2.wav,./sentence_2/english16_part_2.wav
+21,0.0,"wise, virginia, usa",english16,english,male,73,usa,False,3,english16_part_3.wav,./sentence_3/english16_part_3.wav
+21,0.0,"wise, virginia, usa",english16,english,male,73,usa,False,4,english16_part_4.wav,./sentence_4/english16_part_4.wav
+53,0.0,"louisville, kentucky, usa",english19,english,male,76,usa,False,0,english19_part_0.wav,./sentence_0/english19_part_0.wav
+53,0.0,"louisville, kentucky, usa",english19,english,male,76,usa,False,1,english19_part_1.wav,./sentence_1/english19_part_1.wav
+53,0.0,"louisville, kentucky, usa",english19,english,male,76,usa,False,2,english19_part_2.wav,./sentence_2/english19_part_2.wav
+53,0.0,"louisville, kentucky, usa",english19,english,male,76,usa,False,3,english19_part_3.wav,./sentence_3/english19_part_3.wav
+26,0.0,"myrtle beach, south carolina, usa",english214,english,male,737,usa,False,0,english214_part_0.wav,./sentence_0/english214_part_0.wav
+26,0.0,"myrtle beach, south carolina, usa",english214,english,male,737,usa,False,1,english214_part_1.wav,./sentence_1/english214_part_1.wav
+26,0.0,"myrtle beach, south carolina, usa",english214,english,male,737,usa,False,2,english214_part_2.wav,./sentence_2/english214_part_2.wav
+26,0.0,"myrtle beach, south carolina, usa",english214,english,male,737,usa,False,3,english214_part_3.wav,./sentence_3/english214_part_3.wav
+26,0.0,"myrtle beach, south carolina, usa",english214,english,male,737,usa,False,4,english214_part_4.wav,./sentence_4/english214_part_4.wav
