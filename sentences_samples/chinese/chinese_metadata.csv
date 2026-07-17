@@ -1,0 +1,324 @@
+﻿age,age_onset,birthplace,filename,native_language,sex,speakerid,country,file_missing?,sentence_index,split_filename,relative_audio_path
+19,3.0,"beijing, china",mandarin10,mandarin,male,491,china,False,0,mandarin10_part_0.wav,./sentence_0/mandarin10_part_0.wav
+53,13.0,"kao-hsiung, taiwan",mandarin11,mandarin,female,607,taiwan,False,0,mandarin11_part_0.wav,./sentence_0/mandarin11_part_0.wav
+23,1.0,"singapore, singapore",mandarin12,mandarin,male,623,singapore,False,0,mandarin12_part_0.wav,./sentence_0/mandarin12_part_0.wav
+29,13.0,"nantou, taiwan",mandarin13,mandarin,male,685,taiwan,False,0,mandarin13_part_0.wav,./sentence_0/mandarin13_part_0.wav
+49,20.0,"dalian, liaoning, china",mandarin14,mandarin,male,719,china,False,0,mandarin14_part_0.wav,./sentence_0/mandarin14_part_0.wav
+28,11.0,"tainan, taiwan",mandarin15,mandarin,female,746,taiwan,False,0,mandarin15_part_0.wav,./sentence_0/mandarin15_part_0.wav
+32,10.0,"taipei, taiwan",mandarin16,mandarin,male,750,taiwan,False,0,mandarin16_part_0.wav,./sentence_0/mandarin16_part_0.wav
+27,13.0,"qinzhou, guangxi, china",mandarin19,mandarin,male,916,china,False,0,mandarin19_part_0.wav,./sentence_0/mandarin19_part_0.wav
+26,13.0,"shanxi province, shanxi, china",mandarin1,mandarin,female,256,china,False,0,mandarin1_part_0.wav,./sentence_0/mandarin1_part_0.wav
+40,12.0,"ping tong, taiwan",mandarin20,mandarin,female,931,taiwan,False,0,mandarin20_part_0.wav,./sentence_0/mandarin20_part_0.wav
+38,9.0,"chengdu, sichuan, china",mandarin21,mandarin,female,984,china,False,0,mandarin21_part_0.wav,./sentence_0/mandarin21_part_0.wav
+39,11.0,"haikou, hainan, china",mandarin22,mandarin,female,1019,china,False,0,mandarin22_part_0.wav,./sentence_0/mandarin22_part_0.wav
+46,13.0,"kao-hsiung, taiwan",mandarin23,mandarin,female,1044,taiwan,False,0,mandarin23_part_0.wav,./sentence_0/mandarin23_part_0.wav
+28,13.0,"wuxi, jiangsu, china",mandarin25,mandarin,female,1125,china,False,0,mandarin25_part_0.wav,./sentence_0/mandarin25_part_0.wav
+31,12.0,"emei, sichuan, china",mandarin26,mandarin,female,1141,china,False,0,mandarin26_part_0.wav,./sentence_0/mandarin26_part_0.wav
+18,15.0,"chengdu, sichuan, china",mandarin27,mandarin,male,1154,china,False,0,mandarin27_part_0.wav,./sentence_0/mandarin27_part_0.wav
+45,15.0,"shanghai, china",mandarin28,mandarin,male,1447,china,False,0,mandarin28_part_0.wav,./sentence_0/mandarin28_part_0.wav
+38,14.0,"nanjing, china",mandarin2,mandarin,female,257,china,False,0,mandarin2_part_0.wav,./sentence_0/mandarin2_part_0.wav
+27,13.0,"taipei, taiwan",mandarin30,mandarin,male,1491,taiwan,False,0,mandarin30_part_0.wav,./sentence_0/mandarin30_part_0.wav
+26,13.0,"wenzhou, zhejiang, china",mandarin31,mandarin,female,1519,china,False,0,mandarin31_part_0.wav,./sentence_0/mandarin31_part_0.wav
+23,12.0,"taipei, taiwan",mandarin32,mandarin,female,1527,taiwan,False,0,mandarin32_part_0.wav,./sentence_0/mandarin32_part_0.wav
+25,6.0,"beijing, china",mandarin33,mandarin,male,1541,china,False,0,mandarin33_part_0.wav,./sentence_0/mandarin33_part_0.wav
+31,13.0,"shi jia zhuang, hebei, china",mandarin34,mandarin,female,1578,china,False,0,mandarin34_part_0.wav,./sentence_0/mandarin34_part_0.wav
+27,12.0,"yantai, shandong, china",mandarin35,mandarin,female,1579,china,False,0,mandarin35_part_0.wav,./sentence_0/mandarin35_part_0.wav
+32,10.0,"beijing, china",mandarin36,mandarin,female,1580,china,False,0,mandarin36_part_0.wav,./sentence_0/mandarin36_part_0.wav
+32,12.0,"huhot, nei meng gu, china",mandarin37,mandarin,female,1581,china,False,0,mandarin37_part_0.wav,./sentence_0/mandarin37_part_0.wav
+33,12.0,"changsha, hunan, china",mandarin38,mandarin,female,1582,china,False,0,mandarin38_part_0.wav,./sentence_0/mandarin38_part_0.wav
+24,12.0,"tie ling, liaoning, china",mandarin39,mandarin,female,1583,china,False,0,mandarin39_part_0.wav,./sentence_0/mandarin39_part_0.wav
+43,10.0,"jilin city, jilin, china",mandarin3,mandarin,male,258,china,False,0,mandarin3_part_0.wav,./sentence_0/mandarin3_part_0.wav
+47,16.0,"yanbian, jilin, china",mandarin42,mandarin,female,1616,china,False,0,mandarin42_part_0.wav,./sentence_0/mandarin42_part_0.wav
+21,16.0,"hangzhou, zhejiang, china",mandarin44,mandarin,male,1630,china,False,0,mandarin44_part_0.wav,./sentence_0/mandarin44_part_0.wav
+37,12.0,"pingdingshan, henan, china",mandarin48,mandarin,male,1645,china,False,0,mandarin48_part_0.wav,./sentence_0/mandarin48_part_0.wav
+24,6.0,"shanghai, china",mandarin4,mandarin,female,259,china,False,0,mandarin4_part_0.wav,./sentence_0/mandarin4_part_0.wav
+25,9.0,"hsinchu, taiwan",mandarin50,mandarin,male,1788,taiwan,False,0,mandarin50_part_0.wav,./sentence_0/mandarin50_part_0.wav
+26,6.0,"shaoxing, zhejiang, china",mandarin52,mandarin,female,1793,china,False,0,mandarin52_part_0.wav,./sentence_0/mandarin52_part_0.wav
+38,13.0,"ningbo, zhejiang, china",mandarin53,mandarin,female,1817,china,False,0,mandarin53_part_0.wav,./sentence_0/mandarin53_part_0.wav
+25,13.0,"loudi, hunan, china",mandarin55,mandarin,female,1909,china,False,0,mandarin55_part_0.wav,./sentence_0/mandarin55_part_0.wav
+20,12.0,"shanghai, china",mandarin57,mandarin,male,1990,china,False,0,mandarin57_part_0.wav,./sentence_0/mandarin57_part_0.wav
+23,7.0,"superior, colorado, usa",mandarin58,mandarin,male,2000,usa,False,0,mandarin58_part_0.wav,./sentence_0/mandarin58_part_0.wav
+20,6.0,"kunming, yunnan, china",mandarin59,mandarin,female,2019,china,False,0,mandarin59_part_0.wav,./sentence_0/mandarin59_part_0.wav
+31,12.0,"beijing, china",mandarin5,mandarin,female,260,china,False,0,mandarin5_part_0.wav,./sentence_0/mandarin5_part_0.wav
+41,13.0,"guiyang, guizhou, china",mandarin60,mandarin,female,2109,china,False,0,mandarin60_part_0.wav,./sentence_0/mandarin60_part_0.wav
+33,16.0,"shangrao, jiangxi, china",mandarin61,mandarin,female,2116,china,False,0,mandarin61_part_0.wav,./sentence_0/mandarin61_part_0.wav
+24,7.0,"shanghai, china",mandarin62,mandarin,male,2117,china,False,0,mandarin62_part_0.wav,./sentence_0/mandarin62_part_0.wav
+24,10.0,"fuzhou, fujian, china",mandarin64,mandarin,female,2129,china,False,0,mandarin64_part_0.wav,./sentence_0/mandarin64_part_0.wav
+28,12.0,"le shan, sichuan, china",mandarin6,mandarin,female,261,china,False,0,mandarin6_part_0.wav,./sentence_0/mandarin6_part_0.wav
+22,5.0,"berkeley, california, usa",mandarin7,mandarin,male,262,usa,False,0,mandarin7_part_0.wav,./sentence_0/mandarin7_part_0.wav
+29,12.0,"jingmen, hubei, china",mandarin8,mandarin,male,430,china,False,0,mandarin8_part_0.wav,./sentence_0/mandarin8_part_0.wav
+19,3.0,"beijing, china",mandarin10,mandarin,male,491,china,False,1,mandarin10_part_1.wav,./sentence_1/mandarin10_part_1.wav
+53,13.0,"kao-hsiung, taiwan",mandarin11,mandarin,female,607,taiwan,False,1,mandarin11_part_1.wav,./sentence_1/mandarin11_part_1.wav
+23,1.0,"singapore, singapore",mandarin12,mandarin,male,623,singapore,False,1,mandarin12_part_1.wav,./sentence_1/mandarin12_part_1.wav
+29,13.0,"nantou, taiwan",mandarin13,mandarin,male,685,taiwan,False,1,mandarin13_part_1.wav,./sentence_1/mandarin13_part_1.wav
+49,20.0,"dalian, liaoning, china",mandarin14,mandarin,male,719,china,False,1,mandarin14_part_1.wav,./sentence_1/mandarin14_part_1.wav
+28,11.0,"tainan, taiwan",mandarin15,mandarin,female,746,taiwan,False,1,mandarin15_part_1.wav,./sentence_1/mandarin15_part_1.wav
+32,10.0,"taipei, taiwan",mandarin16,mandarin,male,750,taiwan,False,1,mandarin16_part_1.wav,./sentence_1/mandarin16_part_1.wav
+27,13.0,"qinzhou, guangxi, china",mandarin19,mandarin,male,916,china,False,1,mandarin19_part_1.wav,./sentence_1/mandarin19_part_1.wav
+26,13.0,"shanxi province, shanxi, china",mandarin1,mandarin,female,256,china,False,1,mandarin1_part_1.wav,./sentence_1/mandarin1_part_1.wav
+40,12.0,"ping tong, taiwan",mandarin20,mandarin,female,931,taiwan,False,1,mandarin20_part_1.wav,./sentence_1/mandarin20_part_1.wav
+38,9.0,"chengdu, sichuan, china",mandarin21,mandarin,female,984,china,False,1,mandarin21_part_1.wav,./sentence_1/mandarin21_part_1.wav
+39,11.0,"haikou, hainan, china",mandarin22,mandarin,female,1019,china,False,1,mandarin22_part_1.wav,./sentence_1/mandarin22_part_1.wav
+46,13.0,"kao-hsiung, taiwan",mandarin23,mandarin,female,1044,taiwan,False,1,mandarin23_part_1.wav,./sentence_1/mandarin23_part_1.wav
+28,13.0,"wuxi, jiangsu, china",mandarin25,mandarin,female,1125,china,False,1,mandarin25_part_1.wav,./sentence_1/mandarin25_part_1.wav
+31,12.0,"emei, sichuan, china",mandarin26,mandarin,female,1141,china,False,1,mandarin26_part_1.wav,./sentence_1/mandarin26_part_1.wav
+18,15.0,"chengdu, sichuan, china",mandarin27,mandarin,male,1154,china,False,1,mandarin27_part_1.wav,./sentence_1/mandarin27_part_1.wav
+45,15.0,"shanghai, china",mandarin28,mandarin,male,1447,china,False,1,mandarin28_part_1.wav,./sentence_1/mandarin28_part_1.wav
+38,14.0,"nanjing, china",mandarin2,mandarin,female,257,china,False,1,mandarin2_part_1.wav,./sentence_1/mandarin2_part_1.wav
+27,13.0,"taipei, taiwan",mandarin30,mandarin,male,1491,taiwan,False,1,mandarin30_part_1.wav,./sentence_1/mandarin30_part_1.wav
+26,13.0,"wenzhou, zhejiang, china",mandarin31,mandarin,female,1519,china,False,1,mandarin31_part_1.wav,./sentence_1/mandarin31_part_1.wav
+23,12.0,"taipei, taiwan",mandarin32,mandarin,female,1527,taiwan,False,1,mandarin32_part_1.wav,./sentence_1/mandarin32_part_1.wav
+25,6.0,"beijing, china",mandarin33,mandarin,male,1541,china,False,1,mandarin33_part_1.wav,./sentence_1/mandarin33_part_1.wav
+31,13.0,"shi jia zhuang, hebei, china",mandarin34,mandarin,female,1578,china,False,1,mandarin34_part_1.wav,./sentence_1/mandarin34_part_1.wav
+27,12.0,"yantai, shandong, china",mandarin35,mandarin,female,1579,china,False,1,mandarin35_part_1.wav,./sentence_1/mandarin35_part_1.wav
+32,10.0,"beijing, china",mandarin36,mandarin,female,1580,china,False,1,mandarin36_part_1.wav,./sentence_1/mandarin36_part_1.wav
+32,12.0,"huhot, nei meng gu, china",mandarin37,mandarin,female,1581,china,False,1,mandarin37_part_1.wav,./sentence_1/mandarin37_part_1.wav
+33,12.0,"changsha, hunan, china",mandarin38,mandarin,female,1582,china,False,1,mandarin38_part_1.wav,./sentence_1/mandarin38_part_1.wav
+24,12.0,"tie ling, liaoning, china",mandarin39,mandarin,female,1583,china,False,1,mandarin39_part_1.wav,./sentence_1/mandarin39_part_1.wav
+43,10.0,"jilin city, jilin, china",mandarin3,mandarin,male,258,china,False,1,mandarin3_part_1.wav,./sentence_1/mandarin3_part_1.wav
+47,16.0,"yanbian, jilin, china",mandarin42,mandarin,female,1616,china,False,1,mandarin42_part_1.wav,./sentence_1/mandarin42_part_1.wav
+21,16.0,"hangzhou, zhejiang, china",mandarin44,mandarin,male,1630,china,False,1,mandarin44_part_1.wav,./sentence_1/mandarin44_part_1.wav
+37,12.0,"pingdingshan, henan, china",mandarin48,mandarin,male,1645,china,False,1,mandarin48_part_1.wav,./sentence_1/mandarin48_part_1.wav
+24,6.0,"shanghai, china",mandarin4,mandarin,female,259,china,False,1,mandarin4_part_1.wav,./sentence_1/mandarin4_part_1.wav
+25,9.0,"hsinchu, taiwan",mandarin50,mandarin,male,1788,taiwan,False,1,mandarin50_part_1.wav,./sentence_1/mandarin50_part_1.wav
+26,6.0,"shaoxing, zhejiang, china",mandarin52,mandarin,female,1793,china,False,1,mandarin52_part_1.wav,./sentence_1/mandarin52_part_1.wav
+38,13.0,"ningbo, zhejiang, china",mandarin53,mandarin,female,1817,china,False,1,mandarin53_part_1.wav,./sentence_1/mandarin53_part_1.wav
+25,13.0,"loudi, hunan, china",mandarin55,mandarin,female,1909,china,False,1,mandarin55_part_1.wav,./sentence_1/mandarin55_part_1.wav
+20,12.0,"shanghai, china",mandarin57,mandarin,male,1990,china,False,1,mandarin57_part_1.wav,./sentence_1/mandarin57_part_1.wav
+23,7.0,"superior, colorado, usa",mandarin58,mandarin,male,2000,usa,False,1,mandarin58_part_1.wav,./sentence_1/mandarin58_part_1.wav
+20,6.0,"kunming, yunnan, china",mandarin59,mandarin,female,2019,china,False,1,mandarin59_part_1.wav,./sentence_1/mandarin59_part_1.wav
+31,12.0,"beijing, china",mandarin5,mandarin,female,260,china,False,1,mandarin5_part_1.wav,./sentence_1/mandarin5_part_1.wav
+41,13.0,"guiyang, guizhou, china",mandarin60,mandarin,female,2109,china,False,1,mandarin60_part_1.wav,./sentence_1/mandarin60_part_1.wav
+33,16.0,"shangrao, jiangxi, china",mandarin61,mandarin,female,2116,china,False,1,mandarin61_part_1.wav,./sentence_1/mandarin61_part_1.wav
+24,7.0,"shanghai, china",mandarin62,mandarin,male,2117,china,False,1,mandarin62_part_1.wav,./sentence_1/mandarin62_part_1.wav
+24,10.0,"fuzhou, fujian, china",mandarin64,mandarin,female,2129,china,False,1,mandarin64_part_1.wav,./sentence_1/mandarin64_part_1.wav
+28,12.0,"le shan, sichuan, china",mandarin6,mandarin,female,261,china,False,1,mandarin6_part_1.wav,./sentence_1/mandarin6_part_1.wav
+22,5.0,"berkeley, california, usa",mandarin7,mandarin,male,262,usa,False,1,mandarin7_part_1.wav,./sentence_1/mandarin7_part_1.wav
+29,12.0,"jingmen, hubei, china",mandarin8,mandarin,male,430,china,False,1,mandarin8_part_1.wav,./sentence_1/mandarin8_part_1.wav
+19,3.0,"beijing, china",mandarin10,mandarin,male,491,china,False,2,mandarin10_part_2.wav,./sentence_2/mandarin10_part_2.wav
+53,13.0,"kao-hsiung, taiwan",mandarin11,mandarin,female,607,taiwan,False,2,mandarin11_part_2.wav,./sentence_2/mandarin11_part_2.wav
+23,1.0,"singapore, singapore",mandarin12,mandarin,male,623,singapore,False,2,mandarin12_part_2.wav,./sentence_2/mandarin12_part_2.wav
+29,13.0,"nantou, taiwan",mandarin13,mandarin,male,685,taiwan,False,2,mandarin13_part_2.wav,./sentence_2/mandarin13_part_2.wav
+49,20.0,"dalian, liaoning, china",mandarin14,mandarin,male,719,china,False,2,mandarin14_part_2.wav,./sentence_2/mandarin14_part_2.wav
+28,11.0,"tainan, taiwan",mandarin15,mandarin,female,746,taiwan,False,2,mandarin15_part_2.wav,./sentence_2/mandarin15_part_2.wav
+32,10.0,"taipei, taiwan",mandarin16,mandarin,male,750,taiwan,False,2,mandarin16_part_2.wav,./sentence_2/mandarin16_part_2.wav
+27,13.0,"qinzhou, guangxi, china",mandarin19,mandarin,male,916,china,False,2,mandarin19_part_2.wav,./sentence_2/mandarin19_part_2.wav
+26,13.0,"shanxi province, shanxi, china",mandarin1,mandarin,female,256,china,False,2,mandarin1_part_2.wav,./sentence_2/mandarin1_part_2.wav
+40,12.0,"ping tong, taiwan",mandarin20,mandarin,female,931,taiwan,False,2,mandarin20_part_2.wav,./sentence_2/mandarin20_part_2.wav
+38,9.0,"chengdu, sichuan, china",mandarin21,mandarin,female,984,china,False,2,mandarin21_part_2.wav,./sentence_2/mandarin21_part_2.wav
+39,11.0,"haikou, hainan, china",mandarin22,mandarin,female,1019,china,False,2,mandarin22_part_2.wav,./sentence_2/mandarin22_part_2.wav
+46,13.0,"kao-hsiung, taiwan",mandarin23,mandarin,female,1044,taiwan,False,2,mandarin23_part_2.wav,./sentence_2/mandarin23_part_2.wav
+28,13.0,"wuxi, jiangsu, china",mandarin25,mandarin,female,1125,china,False,2,mandarin25_part_2.wav,./sentence_2/mandarin25_part_2.wav
+31,12.0,"emei, sichuan, china",mandarin26,mandarin,female,1141,china,False,2,mandarin26_part_2.wav,./sentence_2/mandarin26_part_2.wav
+18,15.0,"chengdu, sichuan, china",mandarin27,mandarin,male,1154,china,False,2,mandarin27_part_2.wav,./sentence_2/mandarin27_part_2.wav
+45,15.0,"shanghai, china",mandarin28,mandarin,male,1447,china,False,2,mandarin28_part_2.wav,./sentence_2/mandarin28_part_2.wav
+38,14.0,"nanjing, china",mandarin2,mandarin,female,257,china,False,2,mandarin2_part_2.wav,./sentence_2/mandarin2_part_2.wav
+27,13.0,"taipei, taiwan",mandarin30,mandarin,male,1491,taiwan,False,2,mandarin30_part_2.wav,./sentence_2/mandarin30_part_2.wav
+26,13.0,"wenzhou, zhejiang, china",mandarin31,mandarin,female,1519,china,False,2,mandarin31_part_2.wav,./sentence_2/mandarin31_part_2.wav
+23,12.0,"taipei, taiwan",mandarin32,mandarin,female,1527,taiwan,False,2,mandarin32_part_2.wav,./sentence_2/mandarin32_part_2.wav
+25,6.0,"beijing, china",mandarin33,mandarin,male,1541,china,False,2,mandarin33_part_2.wav,./sentence_2/mandarin33_part_2.wav
+31,13.0,"shi jia zhuang, hebei, china",mandarin34,mandarin,female,1578,china,False,2,mandarin34_part_2.wav,./sentence_2/mandarin34_part_2.wav
+27,12.0,"yantai, shandong, china",mandarin35,mandarin,female,1579,china,False,2,mandarin35_part_2.wav,./sentence_2/mandarin35_part_2.wav
+32,10.0,"beijing, china",mandarin36,mandarin,female,1580,china,False,2,mandarin36_part_2.wav,./sentence_2/mandarin36_part_2.wav
+32,12.0,"huhot, nei meng gu, china",mandarin37,mandarin,female,1581,china,False,2,mandarin37_part_2.wav,./sentence_2/mandarin37_part_2.wav
+33,12.0,"changsha, hunan, china",mandarin38,mandarin,female,1582,china,False,2,mandarin38_part_2.wav,./sentence_2/mandarin38_part_2.wav
+24,12.0,"tie ling, liaoning, china",mandarin39,mandarin,female,1583,china,False,2,mandarin39_part_2.wav,./sentence_2/mandarin39_part_2.wav
+43,10.0,"jilin city, jilin, china",mandarin3,mandarin,male,258,china,False,2,mandarin3_part_2.wav,./sentence_2/mandarin3_part_2.wav
+47,16.0,"yanbian, jilin, china",mandarin42,mandarin,female,1616,china,False,2,mandarin42_part_2.wav,./sentence_2/mandarin42_part_2.wav
+21,16.0,"hangzhou, zhejiang, china",mandarin44,mandarin,male,1630,china,False,2,mandarin44_part_2.wav,./sentence_2/mandarin44_part_2.wav
+37,12.0,"pingdingshan, henan, china",mandarin48,mandarin,male,1645,china,False,2,mandarin48_part_2.wav,./sentence_2/mandarin48_part_2.wav
+24,6.0,"shanghai, china",mandarin4,mandarin,female,259,china,False,2,mandarin4_part_2.wav,./sentence_2/mandarin4_part_2.wav
+25,9.0,"hsinchu, taiwan",mandarin50,mandarin,male,1788,taiwan,False,2,mandarin50_part_2.wav,./sentence_2/mandarin50_part_2.wav
+26,6.0,"shaoxing, zhejiang, china",mandarin52,mandarin,female,1793,china,False,2,mandarin52_part_2.wav,./sentence_2/mandarin52_part_2.wav
+38,13.0,"ningbo, zhejiang, china",mandarin53,mandarin,female,1817,china,False,2,mandarin53_part_2.wav,./sentence_2/mandarin53_part_2.wav
+25,13.0,"loudi, hunan, china",mandarin55,mandarin,female,1909,china,False,2,mandarin55_part_2.wav,./sentence_2/mandarin55_part_2.wav
+20,12.0,"shanghai, china",mandarin57,mandarin,male,1990,china,False,2,mandarin57_part_2.wav,./sentence_2/mandarin57_part_2.wav
+23,7.0,"superior, colorado, usa",mandarin58,mandarin,male,2000,usa,False,2,mandarin58_part_2.wav,./sentence_2/mandarin58_part_2.wav
+20,6.0,"kunming, yunnan, china",mandarin59,mandarin,female,2019,china,False,2,mandarin59_part_2.wav,./sentence_2/mandarin59_part_2.wav
+31,12.0,"beijing, china",mandarin5,mandarin,female,260,china,False,2,mandarin5_part_2.wav,./sentence_2/mandarin5_part_2.wav
+41,13.0,"guiyang, guizhou, china",mandarin60,mandarin,female,2109,china,False,2,mandarin60_part_2.wav,./sentence_2/mandarin60_part_2.wav
+33,16.0,"shangrao, jiangxi, china",mandarin61,mandarin,female,2116,china,False,2,mandarin61_part_2.wav,./sentence_2/mandarin61_part_2.wav
+24,7.0,"shanghai, china",mandarin62,mandarin,male,2117,china,False,2,mandarin62_part_2.wav,./sentence_2/mandarin62_part_2.wav
+24,10.0,"fuzhou, fujian, china",mandarin64,mandarin,female,2129,china,False,2,mandarin64_part_2.wav,./sentence_2/mandarin64_part_2.wav
+28,12.0,"le shan, sichuan, china",mandarin6,mandarin,female,261,china,False,2,mandarin6_part_2.wav,./sentence_2/mandarin6_part_2.wav
+22,5.0,"berkeley, california, usa",mandarin7,mandarin,male,262,usa,False,2,mandarin7_part_2.wav,./sentence_2/mandarin7_part_2.wav
+29,12.0,"jingmen, hubei, china",mandarin8,mandarin,male,430,china,False,2,mandarin8_part_2.wav,./sentence_2/mandarin8_part_2.wav
+19,3.0,"beijing, china",mandarin10,mandarin,male,491,china,False,3,mandarin10_part_3.wav,./sentence_3/mandarin10_part_3.wav
+53,13.0,"kao-hsiung, taiwan",mandarin11,mandarin,female,607,taiwan,False,3,mandarin11_part_3.wav,./sentence_3/mandarin11_part_3.wav
+23,1.0,"singapore, singapore",mandarin12,mandarin,male,623,singapore,False,3,mandarin12_part_3.wav,./sentence_3/mandarin12_part_3.wav
+29,13.0,"nantou, taiwan",mandarin13,mandarin,male,685,taiwan,False,3,mandarin13_part_3.wav,./sentence_3/mandarin13_part_3.wav
+49,20.0,"dalian, liaoning, china",mandarin14,mandarin,male,719,china,False,3,mandarin14_part_3.wav,./sentence_3/mandarin14_part_3.wav
+28,11.0,"tainan, taiwan",mandarin15,mandarin,female,746,taiwan,False,3,mandarin15_part_3.wav,./sentence_3/mandarin15_part_3.wav
+32,10.0,"taipei, taiwan",mandarin16,mandarin,male,750,taiwan,False,3,mandarin16_part_3.wav,./sentence_3/mandarin16_part_3.wav
+27,13.0,"qinzhou, guangxi, china",mandarin19,mandarin,male,916,china,False,3,mandarin19_part_3.wav,./sentence_3/mandarin19_part_3.wav
+26,13.0,"shanxi province, shanxi, china",mandarin1,mandarin,female,256,china,False,3,mandarin1_part_3.wav,./sentence_3/mandarin1_part_3.wav
+40,12.0,"ping tong, taiwan",mandarin20,mandarin,female,931,taiwan,False,3,mandarin20_part_3.wav,./sentence_3/mandarin20_part_3.wav
+38,9.0,"chengdu, sichuan, china",mandarin21,mandarin,female,984,china,False,3,mandarin21_part_3.wav,./sentence_3/mandarin21_part_3.wav
+39,11.0,"haikou, hainan, china",mandarin22,mandarin,female,1019,china,False,3,mandarin22_part_3.wav,./sentence_3/mandarin22_part_3.wav
+46,13.0,"kao-hsiung, taiwan",mandarin23,mandarin,female,1044,taiwan,False,3,mandarin23_part_3.wav,./sentence_3/mandarin23_part_3.wav
+28,13.0,"wuxi, jiangsu, china",mandarin25,mandarin,female,1125,china,False,3,mandarin25_part_3.wav,./sentence_3/mandarin25_part_3.wav
+31,12.0,"emei, sichuan, china",mandarin26,mandarin,female,1141,china,False,3,mandarin26_part_3.wav,./sentence_3/mandarin26_part_3.wav
+18,15.0,"chengdu, sichuan, china",mandarin27,mandarin,male,1154,china,False,3,mandarin27_part_3.wav,./sentence_3/mandarin27_part_3.wav
+45,15.0,"shanghai, china",mandarin28,mandarin,male,1447,china,False,3,mandarin28_part_3.wav,./sentence_3/mandarin28_part_3.wav
+38,14.0,"nanjing, china",mandarin2,mandarin,female,257,china,False,3,mandarin2_part_3.wav,./sentence_3/mandarin2_part_3.wav
+27,13.0,"taipei, taiwan",mandarin30,mandarin,male,1491,taiwan,False,3,mandarin30_part_3.wav,./sentence_3/mandarin30_part_3.wav
+26,13.0,"wenzhou, zhejiang, china",mandarin31,mandarin,female,1519,china,False,3,mandarin31_part_3.wav,./sentence_3/mandarin31_part_3.wav
+23,12.0,"taipei, taiwan",mandarin32,mandarin,female,1527,taiwan,False,3,mandarin32_part_3.wav,./sentence_3/mandarin32_part_3.wav
+25,6.0,"beijing, china",mandarin33,mandarin,male,1541,china,False,3,mandarin33_part_3.wav,./sentence_3/mandarin33_part_3.wav
+31,13.0,"shi jia zhuang, hebei, china",mandarin34,mandarin,female,1578,china,False,3,mandarin34_part_3.wav,./sentence_3/mandarin34_part_3.wav
+27,12.0,"yantai, shandong, china",mandarin35,mandarin,female,1579,china,False,3,mandarin35_part_3.wav,./sentence_3/mandarin35_part_3.wav
+32,10.0,"beijing, china",mandarin36,mandarin,female,1580,china,False,3,mandarin36_part_3.wav,./sentence_3/mandarin36_part_3.wav
+32,12.0,"huhot, nei meng gu, china",mandarin37,mandarin,female,1581,china,False,3,mandarin37_part_3.wav,./sentence_3/mandarin37_part_3.wav
+33,12.0,"changsha, hunan, china",mandarin38,mandarin,female,1582,china,False,3,mandarin38_part_3.wav,./sentence_3/mandarin38_part_3.wav
+24,12.0,"tie ling, liaoning, china",mandarin39,mandarin,female,1583,china,False,3,mandarin39_part_3.wav,./sentence_3/mandarin39_part_3.wav
+43,10.0,"jilin city, jilin, china",mandarin3,mandarin,male,258,china,False,3,mandarin3_part_3.wav,./sentence_3/mandarin3_part_3.wav
+47,16.0,"yanbian, jilin, china",mandarin42,mandarin,female,1616,china,False,3,mandarin42_part_3.wav,./sentence_3/mandarin42_part_3.wav
+21,16.0,"hangzhou, zhejiang, china",mandarin44,mandarin,male,1630,china,False,3,mandarin44_part_3.wav,./sentence_3/mandarin44_part_3.wav
+37,12.0,"pingdingshan, henan, china",mandarin48,mandarin,male,1645,china,False,3,mandarin48_part_3.wav,./sentence_3/mandarin48_part_3.wav
+24,6.0,"shanghai, china",mandarin4,mandarin,female,259,china,False,3,mandarin4_part_3.wav,./sentence_3/mandarin4_part_3.wav
+25,9.0,"hsinchu, taiwan",mandarin50,mandarin,male,1788,taiwan,False,3,mandarin50_part_3.wav,./sentence_3/mandarin50_part_3.wav
+26,6.0,"shaoxing, zhejiang, china",mandarin52,mandarin,female,1793,china,False,3,mandarin52_part_3.wav,./sentence_3/mandarin52_part_3.wav
+38,13.0,"ningbo, zhejiang, china",mandarin53,mandarin,female,1817,china,False,3,mandarin53_part_3.wav,./sentence_3/mandarin53_part_3.wav
+25,13.0,"loudi, hunan, china",mandarin55,mandarin,female,1909,china,False,3,mandarin55_part_3.wav,./sentence_3/mandarin55_part_3.wav
+20,12.0,"shanghai, china",mandarin57,mandarin,male,1990,china,False,3,mandarin57_part_3.wav,./sentence_3/mandarin57_part_3.wav
+23,7.0,"superior, colorado, usa",mandarin58,mandarin,male,2000,usa,False,3,mandarin58_part_3.wav,./sentence_3/mandarin58_part_3.wav
+20,6.0,"kunming, yunnan, china",mandarin59,mandarin,female,2019,china,False,3,mandarin59_part_3.wav,./sentence_3/mandarin59_part_3.wav
+31,12.0,"beijing, china",mandarin5,mandarin,female,260,china,False,3,mandarin5_part_3.wav,./sentence_3/mandarin5_part_3.wav
+41,13.0,"guiyang, guizhou, china",mandarin60,mandarin,female,2109,china,False,3,mandarin60_part_3.wav,./sentence_3/mandarin60_part_3.wav
+33,16.0,"shangrao, jiangxi, china",mandarin61,mandarin,female,2116,china,False,3,mandarin61_part_3.wav,./sentence_3/mandarin61_part_3.wav
+24,7.0,"shanghai, china",mandarin62,mandarin,male,2117,china,False,3,mandarin62_part_3.wav,./sentence_3/mandarin62_part_3.wav
+24,10.0,"fuzhou, fujian, china",mandarin64,mandarin,female,2129,china,False,3,mandarin64_part_3.wav,./sentence_3/mandarin64_part_3.wav
+28,12.0,"le shan, sichuan, china",mandarin6,mandarin,female,261,china,False,3,mandarin6_part_3.wav,./sentence_3/mandarin6_part_3.wav
+22,5.0,"berkeley, california, usa",mandarin7,mandarin,male,262,usa,False,3,mandarin7_part_3.wav,./sentence_3/mandarin7_part_3.wav
+29,12.0,"jingmen, hubei, china",mandarin8,mandarin,male,430,china,False,3,mandarin8_part_3.wav,./sentence_3/mandarin8_part_3.wav
+19,3.0,"beijing, china",mandarin10,mandarin,male,491,china,False,4,mandarin10_part_4.wav,./sentence_4/mandarin10_part_4.wav
+53,13.0,"kao-hsiung, taiwan",mandarin11,mandarin,female,607,taiwan,False,4,mandarin11_part_4.wav,./sentence_4/mandarin11_part_4.wav
+23,1.0,"singapore, singapore",mandarin12,mandarin,male,623,singapore,False,4,mandarin12_part_4.wav,./sentence_4/mandarin12_part_4.wav
+29,13.0,"nantou, taiwan",mandarin13,mandarin,male,685,taiwan,False,4,mandarin13_part_4.wav,./sentence_4/mandarin13_part_4.wav
+49,20.0,"dalian, liaoning, china",mandarin14,mandarin,male,719,china,False,4,mandarin14_part_4.wav,./sentence_4/mandarin14_part_4.wav
+28,11.0,"tainan, taiwan",mandarin15,mandarin,female,746,taiwan,False,4,mandarin15_part_4.wav,./sentence_4/mandarin15_part_4.wav
+32,10.0,"taipei, taiwan",mandarin16,mandarin,male,750,taiwan,False,4,mandarin16_part_4.wav,./sentence_4/mandarin16_part_4.wav
+27,13.0,"qinzhou, guangxi, china",mandarin19,mandarin,male,916,china,False,4,mandarin19_part_4.wav,./sentence_4/mandarin19_part_4.wav
+26,13.0,"shanxi province, shanxi, china",mandarin1,mandarin,female,256,china,False,4,mandarin1_part_4.wav,./sentence_4/mandarin1_part_4.wav
+40,12.0,"ping tong, taiwan",mandarin20,mandarin,female,931,taiwan,False,4,mandarin20_part_4.wav,./sentence_4/mandarin20_part_4.wav
+38,9.0,"chengdu, sichuan, china",mandarin21,mandarin,female,984,china,False,4,mandarin21_part_4.wav,./sentence_4/mandarin21_part_4.wav
+39,11.0,"haikou, hainan, china",mandarin22,mandarin,female,1019,china,False,4,mandarin22_part_4.wav,./sentence_4/mandarin22_part_4.wav
+46,13.0,"kao-hsiung, taiwan",mandarin23,mandarin,female,1044,taiwan,False,4,mandarin23_part_4.wav,./sentence_4/mandarin23_part_4.wav
+28,13.0,"wuxi, jiangsu, china",mandarin25,mandarin,female,1125,china,False,4,mandarin25_part_4.wav,./sentence_4/mandarin25_part_4.wav
+31,12.0,"emei, sichuan, china",mandarin26,mandarin,female,1141,china,False,4,mandarin26_part_4.wav,./sentence_4/mandarin26_part_4.wav
+18,15.0,"chengdu, sichuan, china",mandarin27,mandarin,male,1154,china,False,4,mandarin27_part_4.wav,./sentence_4/mandarin27_part_4.wav
+45,15.0,"shanghai, china",mandarin28,mandarin,male,1447,china,False,4,mandarin28_part_4.wav,./sentence_4/mandarin28_part_4.wav
+38,14.0,"nanjing, china",mandarin2,mandarin,female,257,china,False,4,mandarin2_part_4.wav,./sentence_4/mandarin2_part_4.wav
+27,13.0,"taipei, taiwan",mandarin30,mandarin,male,1491,taiwan,False,4,mandarin30_part_4.wav,./sentence_4/mandarin30_part_4.wav
+26,13.0,"wenzhou, zhejiang, china",mandarin31,mandarin,female,1519,china,False,4,mandarin31_part_4.wav,./sentence_4/mandarin31_part_4.wav
+23,12.0,"taipei, taiwan",mandarin32,mandarin,female,1527,taiwan,False,4,mandarin32_part_4.wav,./sentence_4/mandarin32_part_4.wav
+25,6.0,"beijing, china",mandarin33,mandarin,male,1541,china,False,4,mandarin33_part_4.wav,./sentence_4/mandarin33_part_4.wav
+31,13.0,"shi jia zhuang, hebei, china",mandarin34,mandarin,female,1578,china,False,4,mandarin34_part_4.wav,./sentence_4/mandarin34_part_4.wav
+27,12.0,"yantai, shandong, china",mandarin35,mandarin,female,1579,china,False,4,mandarin35_part_4.wav,./sentence_4/mandarin35_part_4.wav
+32,10.0,"beijing, china",mandarin36,mandarin,female,1580,china,False,4,mandarin36_part_4.wav,./sentence_4/mandarin36_part_4.wav
+32,12.0,"huhot, nei meng gu, china",mandarin37,mandarin,female,1581,china,False,4,mandarin37_part_4.wav,./sentence_4/mandarin37_part_4.wav
+33,12.0,"changsha, hunan, china",mandarin38,mandarin,female,1582,china,False,4,mandarin38_part_4.wav,./sentence_4/mandarin38_part_4.wav
+24,12.0,"tie ling, liaoning, china",mandarin39,mandarin,female,1583,china,False,4,mandarin39_part_4.wav,./sentence_4/mandarin39_part_4.wav
+43,10.0,"jilin city, jilin, china",mandarin3,mandarin,male,258,china,False,4,mandarin3_part_4.wav,./sentence_4/mandarin3_part_4.wav
+47,16.0,"yanbian, jilin, china",mandarin42,mandarin,female,1616,china,False,4,mandarin42_part_4.wav,./sentence_4/mandarin42_part_4.wav
+21,16.0,"hangzhou, zhejiang, china",mandarin44,mandarin,male,1630,china,False,4,mandarin44_part_4.wav,./sentence_4/mandarin44_part_4.wav
+37,12.0,"pingdingshan, henan, china",mandarin48,mandarin,male,1645,china,False,4,mandarin48_part_4.wav,./sentence_4/mandarin48_part_4.wav
+24,6.0,"shanghai, china",mandarin4,mandarin,female,259,china,False,4,mandarin4_part_4.wav,./sentence_4/mandarin4_part_4.wav
+25,9.0,"hsinchu, taiwan",mandarin50,mandarin,male,1788,taiwan,False,4,mandarin50_part_4.wav,./sentence_4/mandarin50_part_4.wav
+26,6.0,"shaoxing, zhejiang, china",mandarin52,mandarin,female,1793,china,False,4,mandarin52_part_4.wav,./sentence_4/mandarin52_part_4.wav
+38,13.0,"ningbo, zhejiang, china",mandarin53,mandarin,female,1817,china,False,4,mandarin53_part_4.wav,./sentence_4/mandarin53_part_4.wav
+25,13.0,"loudi, hunan, china",mandarin55,mandarin,female,1909,china,False,4,mandarin55_part_4.wav,./sentence_4/mandarin55_part_4.wav
+20,12.0,"shanghai, china",mandarin57,mandarin,male,1990,china,False,4,mandarin57_part_4.wav,./sentence_4/mandarin57_part_4.wav
+23,7.0,"superior, colorado, usa",mandarin58,mandarin,male,2000,usa,False,4,mandarin58_part_4.wav,./sentence_4/mandarin58_part_4.wav
+20,6.0,"kunming, yunnan, china",mandarin59,mandarin,female,2019,china,False,4,mandarin59_part_4.wav,./sentence_4/mandarin59_part_4.wav
+31,12.0,"beijing, china",mandarin5,mandarin,female,260,china,False,4,mandarin5_part_4.wav,./sentence_4/mandarin5_part_4.wav
+41,13.0,"guiyang, guizhou, china",mandarin60,mandarin,female,2109,china,False,4,mandarin60_part_4.wav,./sentence_4/mandarin60_part_4.wav
+33,16.0,"shangrao, jiangxi, china",mandarin61,mandarin,female,2116,china,False,4,mandarin61_part_4.wav,./sentence_4/mandarin61_part_4.wav
+24,7.0,"shanghai, china",mandarin62,mandarin,male,2117,china,False,4,mandarin62_part_4.wav,./sentence_4/mandarin62_part_4.wav
+24,10.0,"fuzhou, fujian, china",mandarin64,mandarin,female,2129,china,False,4,mandarin64_part_4.wav,./sentence_4/mandarin64_part_4.wav
+28,12.0,"le shan, sichuan, china",mandarin6,mandarin,female,261,china,False,4,mandarin6_part_4.wav,./sentence_4/mandarin6_part_4.wav
+22,5.0,"berkeley, california, usa",mandarin7,mandarin,male,262,usa,False,4,mandarin7_part_4.wav,./sentence_4/mandarin7_part_4.wav
+29,12.0,"jingmen, hubei, china",mandarin8,mandarin,male,430,china,False,4,mandarin8_part_4.wav,./sentence_4/mandarin8_part_4.wav
+19,3.0,"beijing, china",mandarin10,mandarin,male,491,china,False,5,mandarin10_part_5.wav,./sentence_5/mandarin10_part_5.wav
+53,13.0,"kao-hsiung, taiwan",mandarin11,mandarin,female,607,taiwan,False,5,mandarin11_part_5.wav,./sentence_5/mandarin11_part_5.wav
+23,1.0,"singapore, singapore",mandarin12,mandarin,male,623,singapore,False,5,mandarin12_part_5.wav,./sentence_5/mandarin12_part_5.wav
+29,13.0,"nantou, taiwan",mandarin13,mandarin,male,685,taiwan,False,5,mandarin13_part_5.wav,./sentence_5/mandarin13_part_5.wav
+49,20.0,"dalian, liaoning, china",mandarin14,mandarin,male,719,china,False,5,mandarin14_part_5.wav,./sentence_5/mandarin14_part_5.wav
+28,11.0,"tainan, taiwan",mandarin15,mandarin,female,746,taiwan,False,5,mandarin15_part_5.wav,./sentence_5/mandarin15_part_5.wav
+32,10.0,"taipei, taiwan",mandarin16,mandarin,male,750,taiwan,False,5,mandarin16_part_5.wav,./sentence_5/mandarin16_part_5.wav
+27,13.0,"qinzhou, guangxi, china",mandarin19,mandarin,male,916,china,False,5,mandarin19_part_5.wav,./sentence_5/mandarin19_part_5.wav
+26,13.0,"shanxi province, shanxi, china",mandarin1,mandarin,female,256,china,False,5,mandarin1_part_5.wav,./sentence_5/mandarin1_part_5.wav
+40,12.0,"ping tong, taiwan",mandarin20,mandarin,female,931,taiwan,False,5,mandarin20_part_5.wav,./sentence_5/mandarin20_part_5.wav
+38,9.0,"chengdu, sichuan, china",mandarin21,mandarin,female,984,china,False,5,mandarin21_part_5.wav,./sentence_5/mandarin21_part_5.wav
+39,11.0,"haikou, hainan, china",mandarin22,mandarin,female,1019,china,False,5,mandarin22_part_5.wav,./sentence_5/mandarin22_part_5.wav
+46,13.0,"kao-hsiung, taiwan",mandarin23,mandarin,female,1044,taiwan,False,5,mandarin23_part_5.wav,./sentence_5/mandarin23_part_5.wav
+28,13.0,"wuxi, jiangsu, china",mandarin25,mandarin,female,1125,china,False,5,mandarin25_part_5.wav,./sentence_5/mandarin25_part_5.wav
+31,12.0,"emei, sichuan, china",mandarin26,mandarin,female,1141,china,False,5,mandarin26_part_5.wav,./sentence_5/mandarin26_part_5.wav
+18,15.0,"chengdu, sichuan, china",mandarin27,mandarin,male,1154,china,False,5,mandarin27_part_5.wav,./sentence_5/mandarin27_part_5.wav
+45,15.0,"shanghai, china",mandarin28,mandarin,male,1447,china,False,5,mandarin28_part_5.wav,./sentence_5/mandarin28_part_5.wav
+38,14.0,"nanjing, china",mandarin2,mandarin,female,257,china,False,5,mandarin2_part_5.wav,./sentence_5/mandarin2_part_5.wav
+27,13.0,"taipei, taiwan",mandarin30,mandarin,male,1491,taiwan,False,5,mandarin30_part_5.wav,./sentence_5/mandarin30_part_5.wav
+26,13.0,"wenzhou, zhejiang, china",mandarin31,mandarin,female,1519,china,False,5,mandarin31_part_5.wav,./sentence_5/mandarin31_part_5.wav
+23,12.0,"taipei, taiwan",mandarin32,mandarin,female,1527,taiwan,False,5,mandarin32_part_5.wav,./sentence_5/mandarin32_part_5.wav
+25,6.0,"beijing, china",mandarin33,mandarin,male,1541,china,False,5,mandarin33_part_5.wav,./sentence_5/mandarin33_part_5.wav
+31,13.0,"shi jia zhuang, hebei, china",mandarin34,mandarin,female,1578,china,False,5,mandarin34_part_5.wav,./sentence_5/mandarin34_part_5.wav
+27,12.0,"yantai, shandong, china",mandarin35,mandarin,female,1579,china,False,5,mandarin35_part_5.wav,./sentence_5/mandarin35_part_5.wav
+32,10.0,"beijing, china",mandarin36,mandarin,female,1580,china,False,5,mandarin36_part_5.wav,./sentence_5/mandarin36_part_5.wav
+32,12.0,"huhot, nei meng gu, china",mandarin37,mandarin,female,1581,china,False,5,mandarin37_part_5.wav,./sentence_5/mandarin37_part_5.wav
+33,12.0,"changsha, hunan, china",mandarin38,mandarin,female,1582,china,False,5,mandarin38_part_5.wav,./sentence_5/mandarin38_part_5.wav
+24,12.0,"tie ling, liaoning, china",mandarin39,mandarin,female,1583,china,False,5,mandarin39_part_5.wav,./sentence_5/mandarin39_part_5.wav
+43,10.0,"jilin city, jilin, china",mandarin3,mandarin,male,258,china,False,5,mandarin3_part_5.wav,./sentence_5/mandarin3_part_5.wav
+47,16.0,"yanbian, jilin, china",mandarin42,mandarin,female,1616,china,False,5,mandarin42_part_5.wav,./sentence_5/mandarin42_part_5.wav
+21,16.0,"hangzhou, zhejiang, china",mandarin44,mandarin,male,1630,china,False,5,mandarin44_part_5.wav,./sentence_5/mandarin44_part_5.wav
+37,12.0,"pingdingshan, henan, china",mandarin48,mandarin,male,1645,china,False,5,mandarin48_part_5.wav,./sentence_5/mandarin48_part_5.wav
+24,6.0,"shanghai, china",mandarin4,mandarin,female,259,china,False,5,mandarin4_part_5.wav,./sentence_5/mandarin4_part_5.wav
+25,9.0,"hsinchu, taiwan",mandarin50,mandarin,male,1788,taiwan,False,5,mandarin50_part_5.wav,./sentence_5/mandarin50_part_5.wav
+26,6.0,"shaoxing, zhejiang, china",mandarin52,mandarin,female,1793,china,False,5,mandarin52_part_5.wav,./sentence_5/mandarin52_part_5.wav
+38,13.0,"ningbo, zhejiang, china",mandarin53,mandarin,female,1817,china,False,5,mandarin53_part_5.wav,./sentence_5/mandarin53_part_5.wav
+25,13.0,"loudi, hunan, china",mandarin55,mandarin,female,1909,china,False,5,mandarin55_part_5.wav,./sentence_5/mandarin55_part_5.wav
+20,12.0,"shanghai, china",mandarin57,mandarin,male,1990,china,False,5,mandarin57_part_5.wav,./sentence_5/mandarin57_part_5.wav
+23,7.0,"superior, colorado, usa",mandarin58,mandarin,male,2000,usa,False,5,mandarin58_part_5.wav,./sentence_5/mandarin58_part_5.wav
+20,6.0,"kunming, yunnan, china",mandarin59,mandarin,female,2019,china,False,5,mandarin59_part_5.wav,./sentence_5/mandarin59_part_5.wav
+31,12.0,"beijing, china",mandarin5,mandarin,female,260,china,False,5,mandarin5_part_5.wav,./sentence_5/mandarin5_part_5.wav
+41,13.0,"guiyang, guizhou, china",mandarin60,mandarin,female,2109,china,False,5,mandarin60_part_5.wav,./sentence_5/mandarin60_part_5.wav
+33,16.0,"shangrao, jiangxi, china",mandarin61,mandarin,female,2116,china,False,5,mandarin61_part_5.wav,./sentence_5/mandarin61_part_5.wav
+24,7.0,"shanghai, china",mandarin62,mandarin,male,2117,china,False,5,mandarin62_part_5.wav,./sentence_5/mandarin62_part_5.wav
+24,10.0,"fuzhou, fujian, china",mandarin64,mandarin,female,2129,china,False,5,mandarin64_part_5.wav,./sentence_5/mandarin64_part_5.wav
+28,12.0,"le shan, sichuan, china",mandarin6,mandarin,female,261,china,False,5,mandarin6_part_5.wav,./sentence_5/mandarin6_part_5.wav
+22,5.0,"berkeley, california, usa",mandarin7,mandarin,male,262,usa,False,5,mandarin7_part_5.wav,./sentence_5/mandarin7_part_5.wav
+29,12.0,"jingmen, hubei, china",mandarin8,mandarin,male,430,china,False,5,mandarin8_part_5.wav,./sentence_5/mandarin8_part_5.wav
+29,13.0,"taoyuan, taiwan",mandarin18,mandarin,female,872,taiwan,False,0,mandarin18_part_0.wav,./sentence_0/mandarin18_part_0.wav
+29,13.0,"taoyuan, taiwan",mandarin18,mandarin,female,872,taiwan,False,1,mandarin18_part_1.wav,./sentence_1/mandarin18_part_1.wav
+21,10.0,"shanghai, china",mandarin24,mandarin,female,1089,china,False,0,mandarin24_part_0.wav,./sentence_0/mandarin24_part_0.wav
+21,10.0,"shanghai, china",mandarin24,mandarin,female,1089,china,False,1,mandarin24_part_1.wav,./sentence_1/mandarin24_part_1.wav
+28,12.0,"chengdu, sichuan, china",mandarin40,mandarin,male,1614,china,False,0,mandarin40_part_0.wav,./sentence_0/mandarin40_part_0.wav
+28,12.0,"chengdu, sichuan, china",mandarin40,mandarin,male,1614,china,False,1,mandarin40_part_1.wav,./sentence_1/mandarin40_part_1.wav
+34,13.0,"songyuan, jilin, china",mandarin41,mandarin,female,1615,china,False,0,mandarin41_part_0.wav,./sentence_0/mandarin41_part_0.wav
+34,13.0,"songyuan, jilin, china",mandarin41,mandarin,female,1615,china,False,1,mandarin41_part_1.wav,./sentence_1/mandarin41_part_1.wav
+24,15.0,"datong, shanxi, china",mandarin43,mandarin,female,1617,china,False,0,mandarin43_part_0.wav,./sentence_0/mandarin43_part_0.wav
+42,12.0,"beijing, china",mandarin45,mandarin,female,1631,china,False,0,mandarin45_part_0.wav,./sentence_0/mandarin45_part_0.wav
+42,12.0,"beijing, china",mandarin45,mandarin,female,1631,china,False,1,mandarin45_part_1.wav,./sentence_1/mandarin45_part_1.wav
+42,12.0,"beijing, china",mandarin45,mandarin,female,1631,china,False,2,mandarin45_part_2.wav,./sentence_2/mandarin45_part_2.wav
+42,12.0,"beijing, china",mandarin45,mandarin,female,1631,china,False,3,mandarin45_part_3.wav,./sentence_3/mandarin45_part_3.wav
+43,9.0,"jilin city, jilin, china",mandarin46,mandarin,female,1636,china,False,0,mandarin46_part_0.wav,./sentence_0/mandarin46_part_0.wav
+28,8.0,"beijing, china",mandarin47,mandarin,female,1644,china,False,0,mandarin47_part_0.wav,./sentence_0/mandarin47_part_0.wav
+28,8.0,"beijing, china",mandarin47,mandarin,female,1644,china,False,1,mandarin47_part_1.wav,./sentence_1/mandarin47_part_1.wav
+28,8.0,"beijing, china",mandarin47,mandarin,female,1644,china,False,2,mandarin47_part_2.wav,./sentence_2/mandarin47_part_2.wav
+28,8.0,"beijing, china",mandarin47,mandarin,female,1644,china,False,3,mandarin47_part_3.wav,./sentence_3/mandarin47_part_3.wav
+21,10.0,"shanghai, china",mandarin49,mandarin,male,1736,china,False,0,mandarin49_part_0.wav,./sentence_0/mandarin49_part_0.wav
+21,10.0,"shanghai, china",mandarin49,mandarin,male,1736,china,False,1,mandarin49_part_1.wav,./sentence_1/mandarin49_part_1.wav
+25,10.0,"tianjin, hebei, china",mandarin51,mandarin,male,1792,china,False,0,mandarin51_part_0.wav,./sentence_0/mandarin51_part_0.wav
+25,10.0,"tianjin, hebei, china",mandarin51,mandarin,male,1792,china,False,1,mandarin51_part_1.wav,./sentence_1/mandarin51_part_1.wav
+25,10.0,"chengdu, sichuan, china",mandarin54,mandarin,female,1900,china,False,0,mandarin54_part_0.wav,./sentence_0/mandarin54_part_0.wav
+25,10.0,"chengdu, sichuan, china",mandarin54,mandarin,female,1900,china,False,1,mandarin54_part_1.wav,./sentence_1/mandarin54_part_1.wav
+26,11.0,"baoding, hebei, china",mandarin56,mandarin,female,1910,china,False,0,mandarin56_part_0.wav,./sentence_0/mandarin56_part_0.wav
+26,11.0,"baoding, hebei, china",mandarin56,mandarin,female,1910,china,False,1,mandarin56_part_1.wav,./sentence_1/mandarin56_part_1.wav
+27,12.0,"jiaozuo, henan, china",mandarin63,mandarin,male,2119,china,False,0,mandarin63_part_0.wav,./sentence_0/mandarin63_part_0.wav
+27,12.0,"jiaozuo, henan, china",mandarin63,mandarin,male,2119,china,False,1,mandarin63_part_1.wav,./sentence_1/mandarin63_part_1.wav
+20,5.0,"tianjin, hebei, china",mandarin65,mandarin,female,2173,china,False,0,mandarin65_part_0.wav,./sentence_0/mandarin65_part_0.wav
+20,5.0,"tianjin, hebei, china",mandarin65,mandarin,female,2173,china,False,1,mandarin65_part_1.wav,./sentence_1/mandarin65_part_1.wav
+38,12.0,"shanghai, china",mandarin9,mandarin,male,451,china,False,0,mandarin9_part_0.wav,./sentence_0/mandarin9_part_0.wav
+38,12.0,"shanghai, china",mandarin9,mandarin,male,451,china,False,1,mandarin9_part_1.wav,./sentence_1/mandarin9_part_1.wav
+38,12.0,"shanghai, china",mandarin9,mandarin,male,451,china,False,2,mandarin9_part_2.wav,./sentence_2/mandarin9_part_2.wav
+38,12.0,"shanghai, china",mandarin9,mandarin,male,451,china,False,3,mandarin9_part_3.wav,./sentence_3/mandarin9_part_3.wav
+38,12.0,"shanghai, china",mandarin9,mandarin,male,451,china,False,4,mandarin9_part_4.wav,./sentence_4/mandarin9_part_4.wav
