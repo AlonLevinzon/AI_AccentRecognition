@@ -6,7 +6,7 @@ import soundfile as sf
 from datasets import load_dataset, Audio
 
 # 1. Configuration
-DATASET_NAME = "benjaminogbonna/nigerian_accented_english_dataset"
+DATASET_NAME = "benjaminogbonna/nigerian_accented_english_dataset" #it's mozilla
 OUTPUT_DIR = "nigerian_accent_extracted"
 METADATA_FILE = os.path.join(OUTPUT_DIR, "metadata_huggingface.xlsx")
 AUDIO_DIR = os.path.join(OUTPUT_DIR, "audio_files")

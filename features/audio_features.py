@@ -30,9 +30,33 @@ def extract_mfcc_features(y: np.ndarray, sr: int) -> tuple[np.ndarray, np.ndarra
     capture the dynamic speed and acceleration of frequency changes over time. This reveals the
     rhythm and phoneme transition patterns unique to each accent.
     """
+    # Extract standard Mel-Frequency Cepstral Coefficients (MFCCs) with your original specs
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13, n_fft=2048, hop_length=512)
-    delta_mfcc = librosa.feature.delta(mfcc)
-    delta2_mfcc = librosa.feature.delta(mfcc, order=2)
+
+    # Check the total number of frames available along the time axis
+    num_frames = mfcc.shape[1]
+
+    # Safe boundary handling to prevent librosa delta estimation parameter errors
+    if num_frames >= 9:
+        # Standard configuration: Use default window width of 9 for optimal resolution
+        delta_mfcc = librosa.feature.delta(mfcc, width=9)
+        delta2_mfcc = librosa.feature.delta(mfcc, order=2, width=9)
+
+    elif num_frames >= 3:
+        # Fallback configuration: For short audio samples, adaptively scale down
+        # the window width (ensuring it remains an odd integer >= 3)
+        smallest_width = 3
+        if smallest_width % 2 == 0:
+            smallest_width -= 1
+
+        delta_mfcc = librosa.feature.delta(mfcc, width=smallest_width)
+        delta2_mfcc = librosa.feature.delta(mfcc, order=2, width=smallest_width)
+
+    else:
+        # Extreme edge-case: If audio is too short to estimate any derivatives,
+        # fallback to zero-padding matrices to maintain downstream shape consistency
+        delta_mfcc = np.zeros_like(mfcc)
+        delta2_mfcc = np.zeros_like(mfcc)
 
     # Calculate global averages across the time axis to create a 39-dimensional vector
     mfcc_dynamic = np.concatenate([
@@ -128,24 +152,23 @@ def extract_rms_features(y: np.ndarray) -> tuple[np.ndarray, float, float, float
     return rms, average_volume, volume_variance, volume_max, volume_min
 
 
-def extract_duration_and_phonation(y: np.ndarray, sr: int, f0: np.ndarray) -> tuple[float, float, float]:
+def extract_duration_and_phonation(y: np.ndarray, sr: int, f0: np.ndarray, hop_length: int = 512) -> tuple[float, float, float]:
     """
-    Computes total audio duration, active phonation time (speech frames where vocal cords vibrate),
-    and the overall phonation time ratio.
-
-    These temporal metrics reflect speech rate and fluency. Non-native speakers often experience
-    hesitation and introduce pause intervals to plan articulation, leading to a significantly
-    lower phonation ratio compared to fluent or native speakers.
+    Computes total audio duration, active phonation time, and the overall phonation time ratio.
     """
     total_duration = float(librosa.get_duration(y=y, sr=sr))
 
     # Isolate voiced frames where F0 is valid (not NaN and greater than 0)
     voiced_frames = f0[~np.isnan(f0) & (f0 > 0)]
 
-    # Calculate absolute speech time based on the hop length (512 samples per step)
-    phonation_time = float(len(voiced_frames) * (512 / sr))
+    # Dynamic calculation based on the actual hop_length passed into the function
+    phonation_time = float(len(voiced_frames) * (hop_length / sr))
 
-    # Calculate the ratio (safeguard against division by zero if audio is empty)
+    # Ensure phonation_time never visually exceeds total_duration due to framing round-offs
+    if phonation_time > total_duration:
+        phonation_time = total_duration
+
+    # Calculate the ratio with a safety ceiling of 1.0
     phonation_ratio = float(phonation_time / total_duration) if total_duration > 0 else 0.0
 
     return total_duration, phonation_time, phonation_ratio

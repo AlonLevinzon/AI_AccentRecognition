@@ -38,7 +38,7 @@ def import_vector_to_file(metadata_csv_path, audio_base_dir="../official_audio_m
     base_feature_names = [
         'pitch_mean', 'pitch_std', 'average_volume', 'volume_variance',
         'volume_max', 'volume_min', 'mean_centroid', 'mean_rolloff',
-        'mean_zcr', 'total_duration', 'phonation_time', 'phonation_ratio',
+        'mean_zcr', 'phonation_ratio',
         'syllable_rate', 'vowel_consonant_ratio', 'f1', 'f2'
     ]
 
@@ -150,7 +150,7 @@ def create_features_vector(file_path, ground_truth_text=None):
     base_scalars = np.array([
         pitch_mean, pitch_std, average_volume, volume_variance,
         volume_max, volume_min, mean_centroid, mean_rolloff,
-        mean_zcr, total_duration, phonation_time, phonation_ratio,
+        mean_zcr, phonation_ratio,
         syllable_rate, vowel_consonant_ratio, f1, f2
     ], dtype=float)
 

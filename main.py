@@ -15,19 +15,153 @@ from classifiers.random_forest_classifier import get_random_forest_classifier
 from classifiers.svm_classifier import get_svm_classifier
 from classifiers.XGBoost import get_xgboost_classifier
 
-# Import your core connective engine components
-from K_fold import build_free_text_only_metadata, build_mixed_metadata, run_nested_group_kfold_generator
+# Import your core connective engine components and helper modules from K_fold
+from K_fold import (
+    build_free_text_only_metadata,
+    build_mixed_metadata,
+    run_nested_group_kfold_generator,
+    load_exact_metadata,
+    clean_speaker_id,
+    sanitize_accent_label,
+    clean_filename_path,
+    clean_text_quotes,
+    sample_dataset_safely
+)
 from features.extract_features_to_files import import_vector_to_file
 
 # =====================================================================
 # GLOBAL CONFIGURATION FOR SPEED OPTIMIZATION
 # =====================================================================
-RUN_MODE = "free_text"  # Toggle between "free_text" or "mixed"
+# Toggle between "free_text", "mixed", or "archive_only"
+RUN_MODE = "archive_only"
 
 current_dir = Path(__file__).resolve().parent
 
 # FIXED: Saved directly in your root project directory instead of a cache folder
 EXTRACTED_FEATURES_MASTER_CSV = current_dir / f"master_extracted_features_{RUN_MODE}.csv"
+
+
+def build_archive_only_metadata():
+    """
+    Pipeline for archive_only mode: Mimics the exact extraction logic from K_fold's mixed mode Part 2.
+    Scans sentences_samples (Archive) folder and extracts existing Stella sentences per unique speaker.
+    """
+    print("\n--- Building Archive Only Massive Metadata ---")
+    all_records = []
+    accents = ['chinese', 'indian', 'nigerian', 'usa']
+    sentences_dir = current_dir / "sentences_samples"
+    archive_out_dir = current_dir / "machine_learning_official_archive_only"
+
+    stella_sentences = [
+        "Please call Stella Ask her to bring these things",
+        "with her from the store Six spoons of fresh snow peas",
+        "five thick slabs of blue cheese and maybe a snack for her brother Bob",
+        "We also need a small plastic snake and a big toy frog for the kids",
+        "She can scoop these things into three red bags",
+        "and we will go meet her Wednesday at the train station"
+    ]
+
+    for accent in accents:
+        accent_dir = sentences_dir / accent
+        if not accent_dir.exists():
+            print(f" -> Archive directory missing for accent: {accent}, skipping archive split.")
+            continue
+
+        df_raw = load_exact_metadata(accent_dir, accent)
+        if df_raw is None:
+            continue
+
+        speaker_col_name = None
+        for key in ['speakerid', 'speaker_id', 'client_id', 'id']:
+            if key in df_raw.columns:
+                speaker_col_name = key
+                break
+
+        df_unique_speakers = df_raw.copy()
+        if speaker_col_name:
+            df_unique_speakers['temp_spk'] = df_unique_speakers[speaker_col_name].apply(clean_speaker_id)
+            df_unique_speakers = df_unique_speakers.drop_duplicates(subset=['temp_spk'])
+
+        sentence_records = []
+        for idx, row in df_unique_speakers.iterrows():
+            # Safely query using custom get_column_value replacement syntax
+            raw_filename = ""
+            for key in ['filename', 'file_name', 'audio', 'file', 'wav_path']:
+                if key in df_unique_speakers.columns:
+                    val = df_unique_speakers.at[idx, key]
+                    if pd.notna(val):
+                        raw_filename = val
+                        break
+
+            if not raw_filename:
+                continue
+
+            pure_filename = clean_filename_path(raw_filename)
+
+            # Extract speaker ID
+            speaker_raw = ""
+            for key in ['speakerid', 'speaker_id', 'client_id', 'id']:
+                if key in df_unique_speakers.columns:
+                    val = df_unique_speakers.at[idx, key]
+                    if pd.notna(val):
+                        speaker_raw = val
+                        break
+            speaker_id = clean_speaker_id(speaker_raw)
+
+            # Extract accent
+            accent_raw = df_unique_speakers.at[idx, 'accent'] if 'accent' in df_unique_speakers.columns else ""
+            accent_label = sanitize_accent_label(accent_raw, accent)
+
+            # Extract pure name without extension to build parts format dynamically
+            base_name, _ = os.path.splitext(pure_filename)
+
+            for i in range(6):
+                archive_filename = f"{base_name}_part_{i}.wav"
+                path_with_folder = accent_dir / f"sentence_{i}" / archive_filename
+                path_direct = accent_dir / archive_filename
+
+                valid_path = None
+                if path_with_folder.exists():
+                    valid_path = path_with_folder
+                elif path_direct.exists():
+                    valid_path = path_direct
+
+                # Append records only if a valid physical file path exists on disk
+                if valid_path is not None:
+                    final_text = clean_text_quotes(stella_sentences[i])
+
+                    sentence_records.append({
+                        'filename': archive_filename,
+                        'file_path': str(valid_path),
+                        'speaker_id': speaker_id,
+                        'accent': accent_label,
+                        'text': final_text,
+                        'source_type': 'archive'
+                    })
+
+        df_sentence = pd.DataFrame(sentence_records)
+
+        if df_sentence.empty:
+            print(f" -> Sentences Accent '{accent}': 0 valid physical files found. Skipping archive pool sampling.")
+            continue
+
+        # Keep all available archive speakers or sample them safely
+        df_sentence_capped = sample_dataset_safely(df_sentence, target_limit=60, mode='speakers')
+
+        retained_speakers = len(df_sentence_capped['speaker_id'].unique()) if not df_sentence_capped.empty else 0
+        print(
+            f" -> Sentences Accent '{accent}': Capped/Retained {retained_speakers} unique speakers ({len(df_sentence_capped)} valid existing files extracted).")
+
+        all_records.append(df_sentence_capped)
+
+    if all_records:
+        df_final = pd.concat(all_records, ignore_index=True)
+        os.makedirs(archive_out_dir, exist_ok=True)
+        # Standard pandas serialization instead of save_pure_csv_without_quotes to keep main code lean
+        df_final[['filename', 'file_path', 'speaker_id', 'accent', 'text']].to_csv(
+            archive_out_dir / "massive_metadata_archive_only.csv", index=False)
+        return df_final
+    return pd.DataFrame()
 
 
 def pre_extract_all_features_once(df_master):
@@ -119,14 +253,19 @@ def load_and_scale_fold_matrices(df_master_features, df_train_meta, df_val_meta,
 
 def main():
     print("====================================================")
-    print("HIGH-SPEED Multi-Classifier Nested Group K-Fold Loop")
+    print(f"HIGH-SPEED Multi-Classifier Nested Group K-Fold Loop ({RUN_MODE})")
     print("====================================================")
 
-    # 1. Initialize or load the master layout tables
+    # 1. Initialize or load the master layout tables based on RUN_MODE
     if RUN_MODE == "free_text":
         df_master = build_free_text_only_metadata()
-    else:
+    elif RUN_MODE == "mixed":
         df_master = build_mixed_metadata()
+    elif RUN_MODE == "archive_only":
+        df_master = build_archive_only_metadata()
+    else:
+        print(f"🛑 Unknown RUN_MODE: '{RUN_MODE}'. Stopping execution.")
+        sys.exit(1)
 
     if df_master.empty:
         print("🛑 Master dataframe initialization failed. Stopping execution.")

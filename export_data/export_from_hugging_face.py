@@ -218,7 +218,7 @@ except Exception:
 dataset = dataset.cast_column("audio", Audio(decode=False))
 
 # הגדרת תיקיית היעד המשותפת שלך
-output_dir = "more_accents"
+output_dir = "more_accents_data"
 os.makedirs(output_dir, exist_ok=True)
 
 # קובץ מטא-דאטה ייעודי עבור התוספת מהמאגר הזה

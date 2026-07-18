@@ -1,0 +1,366 @@
+﻿age,age_onset,birthplace,filename,native_language,sex,speakerid,country,file_missing?,sentence_index,split_filename,relative_audio_path
+18,3.0,"dhaka, bangladesh",bengali10,bengali,female,1009,bangladesh,False,0,bengali10_part_0.wav,./sentence_0/bengali10_part_0.wav
+34,3.5,"durgapur, west bengal, india",bengali11,bengali,male,1018,india,False,0,bengali11_part_0.wav,./sentence_0/bengali11_part_0.wav
+25,4.0,"sylhet, bangladesh",bengali12,bengali,female,1682,bangladesh,False,0,bengali12_part_0.wav,./sentence_0/bengali12_part_0.wav
+33,10.0,"dhaka, bangladesh",bengali13,bengali,female,1825,bangladesh,False,0,bengali13_part_0.wav,./sentence_0/bengali13_part_0.wav
+26,4.0,"kolkata, india",bengali14,bengali,male,1973,india,False,0,bengali14_part_0.wav,./sentence_0/bengali14_part_0.wav
+46,8.0,"dhaka, bangladesh",bengali15,bengali,female,2004,bangladesh,False,0,bengali15_part_0.wav,./sentence_0/bengali15_part_0.wav
+19,6.0,"sylhet, bangladesh",bengali17,bengali,female,2139,bangladesh,False,0,bengali17_part_0.wav,./sentence_0/bengali17_part_0.wav
+23,16.0,"dhaka, bangladesh",bengali1,bengali,male,34,bangladesh,False,0,bengali1_part_0.wav,./sentence_0/bengali1_part_0.wav
+25,2.0,"lusaka, zambia",bengali2,bengali,female,35,zambia,False,0,bengali2_part_0.wav,./sentence_0/bengali2_part_0.wav
+29,4.0,"jamshedpur, jharkhand, india",bengali6,bengali,male,624,india,False,0,bengali6_part_0.wav,./sentence_0/bengali6_part_0.wav
+49,6.0,"mymensingh, bangladesh",bengali7,bengali,male,710,bangladesh,False,0,bengali7_part_0.wav,./sentence_0/bengali7_part_0.wav
+19,10.5,"new delhi, india",hindi10,hindi,female,1202,india,False,0,hindi10_part_0.wav,./sentence_0/hindi10_part_0.wav
+20,4.0,"chandigarh, india",hindi11,hindi,male,1437,india,False,0,hindi11_part_0.wav,./sentence_0/hindi11_part_0.wav
+25,4.0,"allahabad, india",hindi12,hindi,female,1440,india,False,0,hindi12_part_0.wav,./sentence_0/hindi12_part_0.wav
+53,12.0,"new delhi, india",hindi14,hindi,male,1697,india,False,0,hindi14_part_0.wav,./sentence_0/hindi14_part_0.wav
+23,1.0,"new delhi, india",hindi15,hindi,female,1794,india,False,0,hindi15_part_0.wav,./sentence_0/hindi15_part_0.wav
+25,5.0,"new delhi, india",hindi16,hindi,male,1966,india,False,0,hindi16_part_0.wav,./sentence_0/hindi16_part_0.wav
+47,3.0,"new delhi, india",hindi17,hindi,female,1988,india,False,0,hindi17_part_0.wav,./sentence_0/hindi17_part_0.wav
+21,5.0,"new delhi, india",hindi18,hindi,female,2125,india,False,0,hindi18_part_0.wav,./sentence_0/hindi18_part_0.wav
+31,3.0,"hyderabad, india",hindi2,hindi,male,587,india,False,0,hindi2_part_0.wav,./sentence_0/hindi2_part_0.wav
+42,5.0,"jalandhar, india",hindi3,hindi,male,593,india,False,0,hindi3_part_0.wav,./sentence_0/hindi3_part_0.wav
+28,14.0,"bhilwara, rajisthan, india",hindi4,hindi,female,765,india,False,0,hindi4_part_0.wav,./sentence_0/hindi4_part_0.wav
+64,10.0,"hubballi, karnataka, india",hindi5,hindi,female,845,india,False,0,hindi5_part_0.wav,./sentence_0/hindi5_part_0.wav
+27,4.0,"new delhi, india",hindi6,hindi,female,866,india,False,0,hindi6_part_0.wav,./sentence_0/hindi6_part_0.wav
+60,5.0,"allahabad, utter pardesh, india",hindi7,hindi,female,867,india,False,0,hindi7_part_0.wav,./sentence_0/hindi7_part_0.wav
+31,4.0,"durgapur, west bengal, india",hindi9,hindi,male,1017,india,False,0,hindi9_part_0.wav,./sentence_0/hindi9_part_0.wav
+21,3.0,"bombay, india",marathi1,marathi,female,264,india,False,0,marathi1_part_0.wav,./sentence_0/marathi1_part_0.wav
+28,10.0,"madras, india",marathi2,marathi,male,265,india,False,0,marathi2_part_0.wav,./sentence_0/marathi2_part_0.wav
+31,2.0,"bombay, india",marathi3,marathi,male,837,india,False,0,marathi3_part_0.wav,./sentence_0/marathi3_part_0.wav
+22,11.0,"ludhiana, india",punjabi10,punjabi,male,2040,india,False,0,punjabi10_part_0.wav,./sentence_0/punjabi10_part_0.wav
+34,10.0,"sargodha, pakistan",punjabi1,punjabi,male,291,pakistan,False,0,punjabi1_part_0.wav,./sentence_0/punjabi1_part_0.wav
+26,10.0,"hoshiarpur, india",punjabi2,punjabi,male,292,india,False,0,punjabi2_part_0.wav,./sentence_0/punjabi2_part_0.wav
+19,6.0,"moga, punjab, india",punjabi3,punjabi,male,751,india,False,0,punjabi3_part_0.wav,./sentence_0/punjabi3_part_0.wav
+33,3.0,"moga, india",punjabi4,punjabi,female,836,india,False,0,punjabi4_part_0.wav,./sentence_0/punjabi4_part_0.wav
+49,5.0,"ropar, punjab, india",punjabi5,punjabi,male,1612,india,False,0,punjabi5_part_0.wav,./sentence_0/punjabi5_part_0.wav
+25,5.0,"lahore, pakistan",punjabi6,punjabi,male,1758,pakistan,False,0,punjabi6_part_0.wav,./sentence_0/punjabi6_part_0.wav
+19,11.0,"kot kapura, india",punjabi9,punjabi,male,2039,india,False,0,punjabi9_part_0.wav,./sentence_0/punjabi9_part_0.wav
+39,7.0,"colombo, sri lanka",tamil1,tamil,male,367,sri lanka,False,0,tamil1_part_0.wav,./sentence_0/tamil1_part_0.wav
+35,4.0,"madras, tamil nadu, india",tamil2,tamil,female,429,india,False,0,tamil2_part_0.wav,./sentence_0/tamil2_part_0.wav
+26,10.0,"chennai, india",tamil3,tamil,male,531,india,False,0,tamil3_part_0.wav,./sentence_0/tamil3_part_0.wav
+36,5.0,"coimbatore, tamil nadu, india",tamil5,tamil,female,1723,india,False,0,tamil5_part_0.wav,./sentence_0/tamil5_part_0.wav
+47,6.0,"bangalore, karnataka, india",tamil6,tamil,female,2076,india,False,0,tamil6_part_0.wav,./sentence_0/tamil6_part_0.wav
+31,6.0,"kadapa, india",telugu1,telugu,male,369,india,False,0,telugu1_part_0.wav,./sentence_0/telugu1_part_0.wav
+18,6.0,"guntur, andhra pradesh, india",telugu2,telugu,male,370,india,False,0,telugu2_part_0.wav,./sentence_0/telugu2_part_0.wav
+20,3.0,"karachi, pakistan",urdu10,urdu,male,1566,pakistan,False,0,urdu10_part_0.wav,./sentence_0/urdu10_part_0.wav
+20,6.0,"karachi, pakistan",urdu11,urdu,male,1576,pakistan,False,0,urdu11_part_0.wav,./sentence_0/urdu11_part_0.wav
+19,4.0,"islamabad, pakistan",urdu12,urdu,female,1628,pakistan,False,0,urdu12_part_0.wav,./sentence_0/urdu12_part_0.wav
+22,4.0,"lahore, pakistan",urdu13,urdu,female,1795,pakistan,False,0,urdu13_part_0.wav,./sentence_0/urdu13_part_0.wav
+22,5.0,"karachi, pakistan",urdu16,urdu,male,2152,pakistan,False,0,urdu16_part_0.wav,./sentence_0/urdu16_part_0.wav
+22,18.0,"karachi, pakistan",urdu1,urdu,male,390,pakistan,False,0,urdu1_part_0.wav,./sentence_0/urdu1_part_0.wav
+48,6.0,"sialkot, pakistan",urdu2,urdu,female,391,pakistan,False,0,urdu2_part_0.wav,./sentence_0/urdu2_part_0.wav
+25,3.0,"karachi, sind, pakistan",urdu3,urdu,male,423,pakistan,False,0,urdu3_part_0.wav,./sentence_0/urdu3_part_0.wav
+23,12.0,"karachi, pakistan",urdu5,urdu,male,953,pakistan,False,0,urdu5_part_0.wav,./sentence_0/urdu5_part_0.wav
+24,3.0,"bangalore, india",urdu6,urdu,female,1014,india,False,0,urdu6_part_0.wav,./sentence_0/urdu6_part_0.wav
+23,5.0,"islamabad, pakistan",urdu7,urdu,male,1061,pakistan,False,0,urdu7_part_0.wav,./sentence_0/urdu7_part_0.wav
+20,5.0,"alexandria, virginia, usa",urdu9,urdu,female,1539,usa,False,0,urdu9_part_0.wav,./sentence_0/urdu9_part_0.wav
+18,3.0,"dhaka, bangladesh",bengali10,bengali,female,1009,bangladesh,False,1,bengali10_part_1.wav,./sentence_1/bengali10_part_1.wav
+34,3.5,"durgapur, west bengal, india",bengali11,bengali,male,1018,india,False,1,bengali11_part_1.wav,./sentence_1/bengali11_part_1.wav
+25,4.0,"sylhet, bangladesh",bengali12,bengali,female,1682,bangladesh,False,1,bengali12_part_1.wav,./sentence_1/bengali12_part_1.wav
+33,10.0,"dhaka, bangladesh",bengali13,bengali,female,1825,bangladesh,False,1,bengali13_part_1.wav,./sentence_1/bengali13_part_1.wav
+26,4.0,"kolkata, india",bengali14,bengali,male,1973,india,False,1,bengali14_part_1.wav,./sentence_1/bengali14_part_1.wav
+46,8.0,"dhaka, bangladesh",bengali15,bengali,female,2004,bangladesh,False,1,bengali15_part_1.wav,./sentence_1/bengali15_part_1.wav
+19,6.0,"sylhet, bangladesh",bengali17,bengali,female,2139,bangladesh,False,1,bengali17_part_1.wav,./sentence_1/bengali17_part_1.wav
+23,16.0,"dhaka, bangladesh",bengali1,bengali,male,34,bangladesh,False,1,bengali1_part_1.wav,./sentence_1/bengali1_part_1.wav
+25,2.0,"lusaka, zambia",bengali2,bengali,female,35,zambia,False,1,bengali2_part_1.wav,./sentence_1/bengali2_part_1.wav
+29,4.0,"jamshedpur, jharkhand, india",bengali6,bengali,male,624,india,False,1,bengali6_part_1.wav,./sentence_1/bengali6_part_1.wav
+49,6.0,"mymensingh, bangladesh",bengali7,bengali,male,710,bangladesh,False,1,bengali7_part_1.wav,./sentence_1/bengali7_part_1.wav
+19,10.5,"new delhi, india",hindi10,hindi,female,1202,india,False,1,hindi10_part_1.wav,./sentence_1/hindi10_part_1.wav
+20,4.0,"chandigarh, india",hindi11,hindi,male,1437,india,False,1,hindi11_part_1.wav,./sentence_1/hindi11_part_1.wav
+25,4.0,"allahabad, india",hindi12,hindi,female,1440,india,False,1,hindi12_part_1.wav,./sentence_1/hindi12_part_1.wav
+53,12.0,"new delhi, india",hindi14,hindi,male,1697,india,False,1,hindi14_part_1.wav,./sentence_1/hindi14_part_1.wav
+23,1.0,"new delhi, india",hindi15,hindi,female,1794,india,False,1,hindi15_part_1.wav,./sentence_1/hindi15_part_1.wav
+25,5.0,"new delhi, india",hindi16,hindi,male,1966,india,False,1,hindi16_part_1.wav,./sentence_1/hindi16_part_1.wav
+47,3.0,"new delhi, india",hindi17,hindi,female,1988,india,False,1,hindi17_part_1.wav,./sentence_1/hindi17_part_1.wav
+21,5.0,"new delhi, india",hindi18,hindi,female,2125,india,False,1,hindi18_part_1.wav,./sentence_1/hindi18_part_1.wav
+31,3.0,"hyderabad, india",hindi2,hindi,male,587,india,False,1,hindi2_part_1.wav,./sentence_1/hindi2_part_1.wav
+42,5.0,"jalandhar, india",hindi3,hindi,male,593,india,False,1,hindi3_part_1.wav,./sentence_1/hindi3_part_1.wav
+28,14.0,"bhilwara, rajisthan, india",hindi4,hindi,female,765,india,False,1,hindi4_part_1.wav,./sentence_1/hindi4_part_1.wav
+64,10.0,"hubballi, karnataka, india",hindi5,hindi,female,845,india,False,1,hindi5_part_1.wav,./sentence_1/hindi5_part_1.wav
+27,4.0,"new delhi, india",hindi6,hindi,female,866,india,False,1,hindi6_part_1.wav,./sentence_1/hindi6_part_1.wav
+60,5.0,"allahabad, utter pardesh, india",hindi7,hindi,female,867,india,False,1,hindi7_part_1.wav,./sentence_1/hindi7_part_1.wav
+31,4.0,"durgapur, west bengal, india",hindi9,hindi,male,1017,india,False,1,hindi9_part_1.wav,./sentence_1/hindi9_part_1.wav
+21,3.0,"bombay, india",marathi1,marathi,female,264,india,False,1,marathi1_part_1.wav,./sentence_1/marathi1_part_1.wav
+28,10.0,"madras, india",marathi2,marathi,male,265,india,False,1,marathi2_part_1.wav,./sentence_1/marathi2_part_1.wav
+31,2.0,"bombay, india",marathi3,marathi,male,837,india,False,1,marathi3_part_1.wav,./sentence_1/marathi3_part_1.wav
+22,11.0,"ludhiana, india",punjabi10,punjabi,male,2040,india,False,1,punjabi10_part_1.wav,./sentence_1/punjabi10_part_1.wav
+34,10.0,"sargodha, pakistan",punjabi1,punjabi,male,291,pakistan,False,1,punjabi1_part_1.wav,./sentence_1/punjabi1_part_1.wav
+26,10.0,"hoshiarpur, india",punjabi2,punjabi,male,292,india,False,1,punjabi2_part_1.wav,./sentence_1/punjabi2_part_1.wav
+19,6.0,"moga, punjab, india",punjabi3,punjabi,male,751,india,False,1,punjabi3_part_1.wav,./sentence_1/punjabi3_part_1.wav
+33,3.0,"moga, india",punjabi4,punjabi,female,836,india,False,1,punjabi4_part_1.wav,./sentence_1/punjabi4_part_1.wav
+49,5.0,"ropar, punjab, india",punjabi5,punjabi,male,1612,india,False,1,punjabi5_part_1.wav,./sentence_1/punjabi5_part_1.wav
+25,5.0,"lahore, pakistan",punjabi6,punjabi,male,1758,pakistan,False,1,punjabi6_part_1.wav,./sentence_1/punjabi6_part_1.wav
+19,11.0,"kot kapura, india",punjabi9,punjabi,male,2039,india,False,1,punjabi9_part_1.wav,./sentence_1/punjabi9_part_1.wav
+39,7.0,"colombo, sri lanka",tamil1,tamil,male,367,sri lanka,False,1,tamil1_part_1.wav,./sentence_1/tamil1_part_1.wav
+35,4.0,"madras, tamil nadu, india",tamil2,tamil,female,429,india,False,1,tamil2_part_1.wav,./sentence_1/tamil2_part_1.wav
+26,10.0,"chennai, india",tamil3,tamil,male,531,india,False,1,tamil3_part_1.wav,./sentence_1/tamil3_part_1.wav
+36,5.0,"coimbatore, tamil nadu, india",tamil5,tamil,female,1723,india,False,1,tamil5_part_1.wav,./sentence_1/tamil5_part_1.wav
+47,6.0,"bangalore, karnataka, india",tamil6,tamil,female,2076,india,False,1,tamil6_part_1.wav,./sentence_1/tamil6_part_1.wav
+31,6.0,"kadapa, india",telugu1,telugu,male,369,india,False,1,telugu1_part_1.wav,./sentence_1/telugu1_part_1.wav
+18,6.0,"guntur, andhra pradesh, india",telugu2,telugu,male,370,india,False,1,telugu2_part_1.wav,./sentence_1/telugu2_part_1.wav
+20,3.0,"karachi, pakistan",urdu10,urdu,male,1566,pakistan,False,1,urdu10_part_1.wav,./sentence_1/urdu10_part_1.wav
+20,6.0,"karachi, pakistan",urdu11,urdu,male,1576,pakistan,False,1,urdu11_part_1.wav,./sentence_1/urdu11_part_1.wav
+19,4.0,"islamabad, pakistan",urdu12,urdu,female,1628,pakistan,False,1,urdu12_part_1.wav,./sentence_1/urdu12_part_1.wav
+22,4.0,"lahore, pakistan",urdu13,urdu,female,1795,pakistan,False,1,urdu13_part_1.wav,./sentence_1/urdu13_part_1.wav
+22,5.0,"karachi, pakistan",urdu16,urdu,male,2152,pakistan,False,1,urdu16_part_1.wav,./sentence_1/urdu16_part_1.wav
+22,18.0,"karachi, pakistan",urdu1,urdu,male,390,pakistan,False,1,urdu1_part_1.wav,./sentence_1/urdu1_part_1.wav
+48,6.0,"sialkot, pakistan",urdu2,urdu,female,391,pakistan,False,1,urdu2_part_1.wav,./sentence_1/urdu2_part_1.wav
+25,3.0,"karachi, sind, pakistan",urdu3,urdu,male,423,pakistan,False,1,urdu3_part_1.wav,./sentence_1/urdu3_part_1.wav
+23,12.0,"karachi, pakistan",urdu5,urdu,male,953,pakistan,False,1,urdu5_part_1.wav,./sentence_1/urdu5_part_1.wav
+24,3.0,"bangalore, india",urdu6,urdu,female,1014,india,False,1,urdu6_part_1.wav,./sentence_1/urdu6_part_1.wav
+23,5.0,"islamabad, pakistan",urdu7,urdu,male,1061,pakistan,False,1,urdu7_part_1.wav,./sentence_1/urdu7_part_1.wav
+20,5.0,"alexandria, virginia, usa",urdu9,urdu,female,1539,usa,False,1,urdu9_part_1.wav,./sentence_1/urdu9_part_1.wav
+18,3.0,"dhaka, bangladesh",bengali10,bengali,female,1009,bangladesh,False,2,bengali10_part_2.wav,./sentence_2/bengali10_part_2.wav
+34,3.5,"durgapur, west bengal, india",bengali11,bengali,male,1018,india,False,2,bengali11_part_2.wav,./sentence_2/bengali11_part_2.wav
+25,4.0,"sylhet, bangladesh",bengali12,bengali,female,1682,bangladesh,False,2,bengali12_part_2.wav,./sentence_2/bengali12_part_2.wav
+33,10.0,"dhaka, bangladesh",bengali13,bengali,female,1825,bangladesh,False,2,bengali13_part_2.wav,./sentence_2/bengali13_part_2.wav
+26,4.0,"kolkata, india",bengali14,bengali,male,1973,india,False,2,bengali14_part_2.wav,./sentence_2/bengali14_part_2.wav
+46,8.0,"dhaka, bangladesh",bengali15,bengali,female,2004,bangladesh,False,2,bengali15_part_2.wav,./sentence_2/bengali15_part_2.wav
+19,6.0,"sylhet, bangladesh",bengali17,bengali,female,2139,bangladesh,False,2,bengali17_part_2.wav,./sentence_2/bengali17_part_2.wav
+23,16.0,"dhaka, bangladesh",bengali1,bengali,male,34,bangladesh,False,2,bengali1_part_2.wav,./sentence_2/bengali1_part_2.wav
+25,2.0,"lusaka, zambia",bengali2,bengali,female,35,zambia,False,2,bengali2_part_2.wav,./sentence_2/bengali2_part_2.wav
+29,4.0,"jamshedpur, jharkhand, india",bengali6,bengali,male,624,india,False,2,bengali6_part_2.wav,./sentence_2/bengali6_part_2.wav
+49,6.0,"mymensingh, bangladesh",bengali7,bengali,male,710,bangladesh,False,2,bengali7_part_2.wav,./sentence_2/bengali7_part_2.wav
+19,10.5,"new delhi, india",hindi10,hindi,female,1202,india,False,2,hindi10_part_2.wav,./sentence_2/hindi10_part_2.wav
+20,4.0,"chandigarh, india",hindi11,hindi,male,1437,india,False,2,hindi11_part_2.wav,./sentence_2/hindi11_part_2.wav
+25,4.0,"allahabad, india",hindi12,hindi,female,1440,india,False,2,hindi12_part_2.wav,./sentence_2/hindi12_part_2.wav
+53,12.0,"new delhi, india",hindi14,hindi,male,1697,india,False,2,hindi14_part_2.wav,./sentence_2/hindi14_part_2.wav
+23,1.0,"new delhi, india",hindi15,hindi,female,1794,india,False,2,hindi15_part_2.wav,./sentence_2/hindi15_part_2.wav
+25,5.0,"new delhi, india",hindi16,hindi,male,1966,india,False,2,hindi16_part_2.wav,./sentence_2/hindi16_part_2.wav
+47,3.0,"new delhi, india",hindi17,hindi,female,1988,india,False,2,hindi17_part_2.wav,./sentence_2/hindi17_part_2.wav
+21,5.0,"new delhi, india",hindi18,hindi,female,2125,india,False,2,hindi18_part_2.wav,./sentence_2/hindi18_part_2.wav
+31,3.0,"hyderabad, india",hindi2,hindi,male,587,india,False,2,hindi2_part_2.wav,./sentence_2/hindi2_part_2.wav
+42,5.0,"jalandhar, india",hindi3,hindi,male,593,india,False,2,hindi3_part_2.wav,./sentence_2/hindi3_part_2.wav
+28,14.0,"bhilwara, rajisthan, india",hindi4,hindi,female,765,india,False,2,hindi4_part_2.wav,./sentence_2/hindi4_part_2.wav
+64,10.0,"hubballi, karnataka, india",hindi5,hindi,female,845,india,False,2,hindi5_part_2.wav,./sentence_2/hindi5_part_2.wav
+27,4.0,"new delhi, india",hindi6,hindi,female,866,india,False,2,hindi6_part_2.wav,./sentence_2/hindi6_part_2.wav
+60,5.0,"allahabad, utter pardesh, india",hindi7,hindi,female,867,india,False,2,hindi7_part_2.wav,./sentence_2/hindi7_part_2.wav
+31,4.0,"durgapur, west bengal, india",hindi9,hindi,male,1017,india,False,2,hindi9_part_2.wav,./sentence_2/hindi9_part_2.wav
+21,3.0,"bombay, india",marathi1,marathi,female,264,india,False,2,marathi1_part_2.wav,./sentence_2/marathi1_part_2.wav
+28,10.0,"madras, india",marathi2,marathi,male,265,india,False,2,marathi2_part_2.wav,./sentence_2/marathi2_part_2.wav
+31,2.0,"bombay, india",marathi3,marathi,male,837,india,False,2,marathi3_part_2.wav,./sentence_2/marathi3_part_2.wav
+22,11.0,"ludhiana, india",punjabi10,punjabi,male,2040,india,False,2,punjabi10_part_2.wav,./sentence_2/punjabi10_part_2.wav
+34,10.0,"sargodha, pakistan",punjabi1,punjabi,male,291,pakistan,False,2,punjabi1_part_2.wav,./sentence_2/punjabi1_part_2.wav
+26,10.0,"hoshiarpur, india",punjabi2,punjabi,male,292,india,False,2,punjabi2_part_2.wav,./sentence_2/punjabi2_part_2.wav
+19,6.0,"moga, punjab, india",punjabi3,punjabi,male,751,india,False,2,punjabi3_part_2.wav,./sentence_2/punjabi3_part_2.wav
+33,3.0,"moga, india",punjabi4,punjabi,female,836,india,False,2,punjabi4_part_2.wav,./sentence_2/punjabi4_part_2.wav
+49,5.0,"ropar, punjab, india",punjabi5,punjabi,male,1612,india,False,2,punjabi5_part_2.wav,./sentence_2/punjabi5_part_2.wav
+25,5.0,"lahore, pakistan",punjabi6,punjabi,male,1758,pakistan,False,2,punjabi6_part_2.wav,./sentence_2/punjabi6_part_2.wav
+19,11.0,"kot kapura, india",punjabi9,punjabi,male,2039,india,False,2,punjabi9_part_2.wav,./sentence_2/punjabi9_part_2.wav
+39,7.0,"colombo, sri lanka",tamil1,tamil,male,367,sri lanka,False,2,tamil1_part_2.wav,./sentence_2/tamil1_part_2.wav
+35,4.0,"madras, tamil nadu, india",tamil2,tamil,female,429,india,False,2,tamil2_part_2.wav,./sentence_2/tamil2_part_2.wav
+26,10.0,"chennai, india",tamil3,tamil,male,531,india,False,2,tamil3_part_2.wav,./sentence_2/tamil3_part_2.wav
+36,5.0,"coimbatore, tamil nadu, india",tamil5,tamil,female,1723,india,False,2,tamil5_part_2.wav,./sentence_2/tamil5_part_2.wav
+47,6.0,"bangalore, karnataka, india",tamil6,tamil,female,2076,india,False,2,tamil6_part_2.wav,./sentence_2/tamil6_part_2.wav
+31,6.0,"kadapa, india",telugu1,telugu,male,369,india,False,2,telugu1_part_2.wav,./sentence_2/telugu1_part_2.wav
+18,6.0,"guntur, andhra pradesh, india",telugu2,telugu,male,370,india,False,2,telugu2_part_2.wav,./sentence_2/telugu2_part_2.wav
+20,3.0,"karachi, pakistan",urdu10,urdu,male,1566,pakistan,False,2,urdu10_part_2.wav,./sentence_2/urdu10_part_2.wav
+20,6.0,"karachi, pakistan",urdu11,urdu,male,1576,pakistan,False,2,urdu11_part_2.wav,./sentence_2/urdu11_part_2.wav
+19,4.0,"islamabad, pakistan",urdu12,urdu,female,1628,pakistan,False,2,urdu12_part_2.wav,./sentence_2/urdu12_part_2.wav
+22,4.0,"lahore, pakistan",urdu13,urdu,female,1795,pakistan,False,2,urdu13_part_2.wav,./sentence_2/urdu13_part_2.wav
+22,5.0,"karachi, pakistan",urdu16,urdu,male,2152,pakistan,False,2,urdu16_part_2.wav,./sentence_2/urdu16_part_2.wav
+22,18.0,"karachi, pakistan",urdu1,urdu,male,390,pakistan,False,2,urdu1_part_2.wav,./sentence_2/urdu1_part_2.wav
+48,6.0,"sialkot, pakistan",urdu2,urdu,female,391,pakistan,False,2,urdu2_part_2.wav,./sentence_2/urdu2_part_2.wav
+25,3.0,"karachi, sind, pakistan",urdu3,urdu,male,423,pakistan,False,2,urdu3_part_2.wav,./sentence_2/urdu3_part_2.wav
+23,12.0,"karachi, pakistan",urdu5,urdu,male,953,pakistan,False,2,urdu5_part_2.wav,./sentence_2/urdu5_part_2.wav
+24,3.0,"bangalore, india",urdu6,urdu,female,1014,india,False,2,urdu6_part_2.wav,./sentence_2/urdu6_part_2.wav
+23,5.0,"islamabad, pakistan",urdu7,urdu,male,1061,pakistan,False,2,urdu7_part_2.wav,./sentence_2/urdu7_part_2.wav
+20,5.0,"alexandria, virginia, usa",urdu9,urdu,female,1539,usa,False,2,urdu9_part_2.wav,./sentence_2/urdu9_part_2.wav
+18,3.0,"dhaka, bangladesh",bengali10,bengali,female,1009,bangladesh,False,3,bengali10_part_3.wav,./sentence_3/bengali10_part_3.wav
+34,3.5,"durgapur, west bengal, india",bengali11,bengali,male,1018,india,False,3,bengali11_part_3.wav,./sentence_3/bengali11_part_3.wav
+25,4.0,"sylhet, bangladesh",bengali12,bengali,female,1682,bangladesh,False,3,bengali12_part_3.wav,./sentence_3/bengali12_part_3.wav
+33,10.0,"dhaka, bangladesh",bengali13,bengali,female,1825,bangladesh,False,3,bengali13_part_3.wav,./sentence_3/bengali13_part_3.wav
+26,4.0,"kolkata, india",bengali14,bengali,male,1973,india,False,3,bengali14_part_3.wav,./sentence_3/bengali14_part_3.wav
+46,8.0,"dhaka, bangladesh",bengali15,bengali,female,2004,bangladesh,False,3,bengali15_part_3.wav,./sentence_3/bengali15_part_3.wav
+19,6.0,"sylhet, bangladesh",bengali17,bengali,female,2139,bangladesh,False,3,bengali17_part_3.wav,./sentence_3/bengali17_part_3.wav
+23,16.0,"dhaka, bangladesh",bengali1,bengali,male,34,bangladesh,False,3,bengali1_part_3.wav,./sentence_3/bengali1_part_3.wav
+25,2.0,"lusaka, zambia",bengali2,bengali,female,35,zambia,False,3,bengali2_part_3.wav,./sentence_3/bengali2_part_3.wav
+29,4.0,"jamshedpur, jharkhand, india",bengali6,bengali,male,624,india,False,3,bengali6_part_3.wav,./sentence_3/bengali6_part_3.wav
+49,6.0,"mymensingh, bangladesh",bengali7,bengali,male,710,bangladesh,False,3,bengali7_part_3.wav,./sentence_3/bengali7_part_3.wav
+19,10.5,"new delhi, india",hindi10,hindi,female,1202,india,False,3,hindi10_part_3.wav,./sentence_3/hindi10_part_3.wav
+20,4.0,"chandigarh, india",hindi11,hindi,male,1437,india,False,3,hindi11_part_3.wav,./sentence_3/hindi11_part_3.wav
+25,4.0,"allahabad, india",hindi12,hindi,female,1440,india,False,3,hindi12_part_3.wav,./sentence_3/hindi12_part_3.wav
+53,12.0,"new delhi, india",hindi14,hindi,male,1697,india,False,3,hindi14_part_3.wav,./sentence_3/hindi14_part_3.wav
+23,1.0,"new delhi, india",hindi15,hindi,female,1794,india,False,3,hindi15_part_3.wav,./sentence_3/hindi15_part_3.wav
+25,5.0,"new delhi, india",hindi16,hindi,male,1966,india,False,3,hindi16_part_3.wav,./sentence_3/hindi16_part_3.wav
+47,3.0,"new delhi, india",hindi17,hindi,female,1988,india,False,3,hindi17_part_3.wav,./sentence_3/hindi17_part_3.wav
+21,5.0,"new delhi, india",hindi18,hindi,female,2125,india,False,3,hindi18_part_3.wav,./sentence_3/hindi18_part_3.wav
+31,3.0,"hyderabad, india",hindi2,hindi,male,587,india,False,3,hindi2_part_3.wav,./sentence_3/hindi2_part_3.wav
+42,5.0,"jalandhar, india",hindi3,hindi,male,593,india,False,3,hindi3_part_3.wav,./sentence_3/hindi3_part_3.wav
+28,14.0,"bhilwara, rajisthan, india",hindi4,hindi,female,765,india,False,3,hindi4_part_3.wav,./sentence_3/hindi4_part_3.wav
+64,10.0,"hubballi, karnataka, india",hindi5,hindi,female,845,india,False,3,hindi5_part_3.wav,./sentence_3/hindi5_part_3.wav
+27,4.0,"new delhi, india",hindi6,hindi,female,866,india,False,3,hindi6_part_3.wav,./sentence_3/hindi6_part_3.wav
+60,5.0,"allahabad, utter pardesh, india",hindi7,hindi,female,867,india,False,3,hindi7_part_3.wav,./sentence_3/hindi7_part_3.wav
+31,4.0,"durgapur, west bengal, india",hindi9,hindi,male,1017,india,False,3,hindi9_part_3.wav,./sentence_3/hindi9_part_3.wav
+21,3.0,"bombay, india",marathi1,marathi,female,264,india,False,3,marathi1_part_3.wav,./sentence_3/marathi1_part_3.wav
+28,10.0,"madras, india",marathi2,marathi,male,265,india,False,3,marathi2_part_3.wav,./sentence_3/marathi2_part_3.wav
+31,2.0,"bombay, india",marathi3,marathi,male,837,india,False,3,marathi3_part_3.wav,./sentence_3/marathi3_part_3.wav
+22,11.0,"ludhiana, india",punjabi10,punjabi,male,2040,india,False,3,punjabi10_part_3.wav,./sentence_3/punjabi10_part_3.wav
+34,10.0,"sargodha, pakistan",punjabi1,punjabi,male,291,pakistan,False,3,punjabi1_part_3.wav,./sentence_3/punjabi1_part_3.wav
+26,10.0,"hoshiarpur, india",punjabi2,punjabi,male,292,india,False,3,punjabi2_part_3.wav,./sentence_3/punjabi2_part_3.wav
+19,6.0,"moga, punjab, india",punjabi3,punjabi,male,751,india,False,3,punjabi3_part_3.wav,./sentence_3/punjabi3_part_3.wav
+33,3.0,"moga, india",punjabi4,punjabi,female,836,india,False,3,punjabi4_part_3.wav,./sentence_3/punjabi4_part_3.wav
+49,5.0,"ropar, punjab, india",punjabi5,punjabi,male,1612,india,False,3,punjabi5_part_3.wav,./sentence_3/punjabi5_part_3.wav
+25,5.0,"lahore, pakistan",punjabi6,punjabi,male,1758,pakistan,False,3,punjabi6_part_3.wav,./sentence_3/punjabi6_part_3.wav
+19,11.0,"kot kapura, india",punjabi9,punjabi,male,2039,india,False,3,punjabi9_part_3.wav,./sentence_3/punjabi9_part_3.wav
+39,7.0,"colombo, sri lanka",tamil1,tamil,male,367,sri lanka,False,3,tamil1_part_3.wav,./sentence_3/tamil1_part_3.wav
+35,4.0,"madras, tamil nadu, india",tamil2,tamil,female,429,india,False,3,tamil2_part_3.wav,./sentence_3/tamil2_part_3.wav
+26,10.0,"chennai, india",tamil3,tamil,male,531,india,False,3,tamil3_part_3.wav,./sentence_3/tamil3_part_3.wav
+36,5.0,"coimbatore, tamil nadu, india",tamil5,tamil,female,1723,india,False,3,tamil5_part_3.wav,./sentence_3/tamil5_part_3.wav
+47,6.0,"bangalore, karnataka, india",tamil6,tamil,female,2076,india,False,3,tamil6_part_3.wav,./sentence_3/tamil6_part_3.wav
+31,6.0,"kadapa, india",telugu1,telugu,male,369,india,False,3,telugu1_part_3.wav,./sentence_3/telugu1_part_3.wav
+18,6.0,"guntur, andhra pradesh, india",telugu2,telugu,male,370,india,False,3,telugu2_part_3.wav,./sentence_3/telugu2_part_3.wav
+20,3.0,"karachi, pakistan",urdu10,urdu,male,1566,pakistan,False,3,urdu10_part_3.wav,./sentence_3/urdu10_part_3.wav
+20,6.0,"karachi, pakistan",urdu11,urdu,male,1576,pakistan,False,3,urdu11_part_3.wav,./sentence_3/urdu11_part_3.wav
+19,4.0,"islamabad, pakistan",urdu12,urdu,female,1628,pakistan,False,3,urdu12_part_3.wav,./sentence_3/urdu12_part_3.wav
+22,4.0,"lahore, pakistan",urdu13,urdu,female,1795,pakistan,False,3,urdu13_part_3.wav,./sentence_3/urdu13_part_3.wav
+22,5.0,"karachi, pakistan",urdu16,urdu,male,2152,pakistan,False,3,urdu16_part_3.wav,./sentence_3/urdu16_part_3.wav
+22,18.0,"karachi, pakistan",urdu1,urdu,male,390,pakistan,False,3,urdu1_part_3.wav,./sentence_3/urdu1_part_3.wav
+48,6.0,"sialkot, pakistan",urdu2,urdu,female,391,pakistan,False,3,urdu2_part_3.wav,./sentence_3/urdu2_part_3.wav
+25,3.0,"karachi, sind, pakistan",urdu3,urdu,male,423,pakistan,False,3,urdu3_part_3.wav,./sentence_3/urdu3_part_3.wav
+23,12.0,"karachi, pakistan",urdu5,urdu,male,953,pakistan,False,3,urdu5_part_3.wav,./sentence_3/urdu5_part_3.wav
+24,3.0,"bangalore, india",urdu6,urdu,female,1014,india,False,3,urdu6_part_3.wav,./sentence_3/urdu6_part_3.wav
+23,5.0,"islamabad, pakistan",urdu7,urdu,male,1061,pakistan,False,3,urdu7_part_3.wav,./sentence_3/urdu7_part_3.wav
+20,5.0,"alexandria, virginia, usa",urdu9,urdu,female,1539,usa,False,3,urdu9_part_3.wav,./sentence_3/urdu9_part_3.wav
+18,3.0,"dhaka, bangladesh",bengali10,bengali,female,1009,bangladesh,False,4,bengali10_part_4.wav,./sentence_4/bengali10_part_4.wav
+34,3.5,"durgapur, west bengal, india",bengali11,bengali,male,1018,india,False,4,bengali11_part_4.wav,./sentence_4/bengali11_part_4.wav
+25,4.0,"sylhet, bangladesh",bengali12,bengali,female,1682,bangladesh,False,4,bengali12_part_4.wav,./sentence_4/bengali12_part_4.wav
+33,10.0,"dhaka, bangladesh",bengali13,bengali,female,1825,bangladesh,False,4,bengali13_part_4.wav,./sentence_4/bengali13_part_4.wav
+26,4.0,"kolkata, india",bengali14,bengali,male,1973,india,False,4,bengali14_part_4.wav,./sentence_4/bengali14_part_4.wav
+46,8.0,"dhaka, bangladesh",bengali15,bengali,female,2004,bangladesh,False,4,bengali15_part_4.wav,./sentence_4/bengali15_part_4.wav
+19,6.0,"sylhet, bangladesh",bengali17,bengali,female,2139,bangladesh,False,4,bengali17_part_4.wav,./sentence_4/bengali17_part_4.wav
+23,16.0,"dhaka, bangladesh",bengali1,bengali,male,34,bangladesh,False,4,bengali1_part_4.wav,./sentence_4/bengali1_part_4.wav
+25,2.0,"lusaka, zambia",bengali2,bengali,female,35,zambia,False,4,bengali2_part_4.wav,./sentence_4/bengali2_part_4.wav
+29,4.0,"jamshedpur, jharkhand, india",bengali6,bengali,male,624,india,False,4,bengali6_part_4.wav,./sentence_4/bengali6_part_4.wav
+49,6.0,"mymensingh, bangladesh",bengali7,bengali,male,710,bangladesh,False,4,bengali7_part_4.wav,./sentence_4/bengali7_part_4.wav
+19,10.5,"new delhi, india",hindi10,hindi,female,1202,india,False,4,hindi10_part_4.wav,./sentence_4/hindi10_part_4.wav
+20,4.0,"chandigarh, india",hindi11,hindi,male,1437,india,False,4,hindi11_part_4.wav,./sentence_4/hindi11_part_4.wav
+25,4.0,"allahabad, india",hindi12,hindi,female,1440,india,False,4,hindi12_part_4.wav,./sentence_4/hindi12_part_4.wav
+53,12.0,"new delhi, india",hindi14,hindi,male,1697,india,False,4,hindi14_part_4.wav,./sentence_4/hindi14_part_4.wav
+23,1.0,"new delhi, india",hindi15,hindi,female,1794,india,False,4,hindi15_part_4.wav,./sentence_4/hindi15_part_4.wav
+25,5.0,"new delhi, india",hindi16,hindi,male,1966,india,False,4,hindi16_part_4.wav,./sentence_4/hindi16_part_4.wav
+47,3.0,"new delhi, india",hindi17,hindi,female,1988,india,False,4,hindi17_part_4.wav,./sentence_4/hindi17_part_4.wav
+21,5.0,"new delhi, india",hindi18,hindi,female,2125,india,False,4,hindi18_part_4.wav,./sentence_4/hindi18_part_4.wav
+31,3.0,"hyderabad, india",hindi2,hindi,male,587,india,False,4,hindi2_part_4.wav,./sentence_4/hindi2_part_4.wav
+42,5.0,"jalandhar, india",hindi3,hindi,male,593,india,False,4,hindi3_part_4.wav,./sentence_4/hindi3_part_4.wav
+28,14.0,"bhilwara, rajisthan, india",hindi4,hindi,female,765,india,False,4,hindi4_part_4.wav,./sentence_4/hindi4_part_4.wav
+64,10.0,"hubballi, karnataka, india",hindi5,hindi,female,845,india,False,4,hindi5_part_4.wav,./sentence_4/hindi5_part_4.wav
+27,4.0,"new delhi, india",hindi6,hindi,female,866,india,False,4,hindi6_part_4.wav,./sentence_4/hindi6_part_4.wav
+60,5.0,"allahabad, utter pardesh, india",hindi7,hindi,female,867,india,False,4,hindi7_part_4.wav,./sentence_4/hindi7_part_4.wav
+31,4.0,"durgapur, west bengal, india",hindi9,hindi,male,1017,india,False,4,hindi9_part_4.wav,./sentence_4/hindi9_part_4.wav
+21,3.0,"bombay, india",marathi1,marathi,female,264,india,False,4,marathi1_part_4.wav,./sentence_4/marathi1_part_4.wav
+28,10.0,"madras, india",marathi2,marathi,male,265,india,False,4,marathi2_part_4.wav,./sentence_4/marathi2_part_4.wav
+31,2.0,"bombay, india",marathi3,marathi,male,837,india,False,4,marathi3_part_4.wav,./sentence_4/marathi3_part_4.wav
+22,11.0,"ludhiana, india",punjabi10,punjabi,male,2040,india,False,4,punjabi10_part_4.wav,./sentence_4/punjabi10_part_4.wav
+34,10.0,"sargodha, pakistan",punjabi1,punjabi,male,291,pakistan,False,4,punjabi1_part_4.wav,./sentence_4/punjabi1_part_4.wav
+26,10.0,"hoshiarpur, india",punjabi2,punjabi,male,292,india,False,4,punjabi2_part_4.wav,./sentence_4/punjabi2_part_4.wav
+19,6.0,"moga, punjab, india",punjabi3,punjabi,male,751,india,False,4,punjabi3_part_4.wav,./sentence_4/punjabi3_part_4.wav
+33,3.0,"moga, india",punjabi4,punjabi,female,836,india,False,4,punjabi4_part_4.wav,./sentence_4/punjabi4_part_4.wav
+49,5.0,"ropar, punjab, india",punjabi5,punjabi,male,1612,india,False,4,punjabi5_part_4.wav,./sentence_4/punjabi5_part_4.wav
+25,5.0,"lahore, pakistan",punjabi6,punjabi,male,1758,pakistan,False,4,punjabi6_part_4.wav,./sentence_4/punjabi6_part_4.wav
+19,11.0,"kot kapura, india",punjabi9,punjabi,male,2039,india,False,4,punjabi9_part_4.wav,./sentence_4/punjabi9_part_4.wav
+39,7.0,"colombo, sri lanka",tamil1,tamil,male,367,sri lanka,False,4,tamil1_part_4.wav,./sentence_4/tamil1_part_4.wav
+35,4.0,"madras, tamil nadu, india",tamil2,tamil,female,429,india,False,4,tamil2_part_4.wav,./sentence_4/tamil2_part_4.wav
+26,10.0,"chennai, india",tamil3,tamil,male,531,india,False,4,tamil3_part_4.wav,./sentence_4/tamil3_part_4.wav
+36,5.0,"coimbatore, tamil nadu, india",tamil5,tamil,female,1723,india,False,4,tamil5_part_4.wav,./sentence_4/tamil5_part_4.wav
+47,6.0,"bangalore, karnataka, india",tamil6,tamil,female,2076,india,False,4,tamil6_part_4.wav,./sentence_4/tamil6_part_4.wav
+31,6.0,"kadapa, india",telugu1,telugu,male,369,india,False,4,telugu1_part_4.wav,./sentence_4/telugu1_part_4.wav
+18,6.0,"guntur, andhra pradesh, india",telugu2,telugu,male,370,india,False,4,telugu2_part_4.wav,./sentence_4/telugu2_part_4.wav
+20,3.0,"karachi, pakistan",urdu10,urdu,male,1566,pakistan,False,4,urdu10_part_4.wav,./sentence_4/urdu10_part_4.wav
+20,6.0,"karachi, pakistan",urdu11,urdu,male,1576,pakistan,False,4,urdu11_part_4.wav,./sentence_4/urdu11_part_4.wav
+19,4.0,"islamabad, pakistan",urdu12,urdu,female,1628,pakistan,False,4,urdu12_part_4.wav,./sentence_4/urdu12_part_4.wav
+22,4.0,"lahore, pakistan",urdu13,urdu,female,1795,pakistan,False,4,urdu13_part_4.wav,./sentence_4/urdu13_part_4.wav
+22,5.0,"karachi, pakistan",urdu16,urdu,male,2152,pakistan,False,4,urdu16_part_4.wav,./sentence_4/urdu16_part_4.wav
+22,18.0,"karachi, pakistan",urdu1,urdu,male,390,pakistan,False,4,urdu1_part_4.wav,./sentence_4/urdu1_part_4.wav
+48,6.0,"sialkot, pakistan",urdu2,urdu,female,391,pakistan,False,4,urdu2_part_4.wav,./sentence_4/urdu2_part_4.wav
+25,3.0,"karachi, sind, pakistan",urdu3,urdu,male,423,pakistan,False,4,urdu3_part_4.wav,./sentence_4/urdu3_part_4.wav
+23,12.0,"karachi, pakistan",urdu5,urdu,male,953,pakistan,False,4,urdu5_part_4.wav,./sentence_4/urdu5_part_4.wav
+24,3.0,"bangalore, india",urdu6,urdu,female,1014,india,False,4,urdu6_part_4.wav,./sentence_4/urdu6_part_4.wav
+23,5.0,"islamabad, pakistan",urdu7,urdu,male,1061,pakistan,False,4,urdu7_part_4.wav,./sentence_4/urdu7_part_4.wav
+20,5.0,"alexandria, virginia, usa",urdu9,urdu,female,1539,usa,False,4,urdu9_part_4.wav,./sentence_4/urdu9_part_4.wav
+18,3.0,"dhaka, bangladesh",bengali10,bengali,female,1009,bangladesh,False,5,bengali10_part_5.wav,./sentence_5/bengali10_part_5.wav
+34,3.5,"durgapur, west bengal, india",bengali11,bengali,male,1018,india,False,5,bengali11_part_5.wav,./sentence_5/bengali11_part_5.wav
+25,4.0,"sylhet, bangladesh",bengali12,bengali,female,1682,bangladesh,False,5,bengali12_part_5.wav,./sentence_5/bengali12_part_5.wav
+33,10.0,"dhaka, bangladesh",bengali13,bengali,female,1825,bangladesh,False,5,bengali13_part_5.wav,./sentence_5/bengali13_part_5.wav
+26,4.0,"kolkata, india",bengali14,bengali,male,1973,india,False,5,bengali14_part_5.wav,./sentence_5/bengali14_part_5.wav
+46,8.0,"dhaka, bangladesh",bengali15,bengali,female,2004,bangladesh,False,5,bengali15_part_5.wav,./sentence_5/bengali15_part_5.wav
+19,6.0,"sylhet, bangladesh",bengali17,bengali,female,2139,bangladesh,False,5,bengali17_part_5.wav,./sentence_5/bengali17_part_5.wav
+23,16.0,"dhaka, bangladesh",bengali1,bengali,male,34,bangladesh,False,5,bengali1_part_5.wav,./sentence_5/bengali1_part_5.wav
+25,2.0,"lusaka, zambia",bengali2,bengali,female,35,zambia,False,5,bengali2_part_5.wav,./sentence_5/bengali2_part_5.wav
+29,4.0,"jamshedpur, jharkhand, india",bengali6,bengali,male,624,india,False,5,bengali6_part_5.wav,./sentence_5/bengali6_part_5.wav
+49,6.0,"mymensingh, bangladesh",bengali7,bengali,male,710,bangladesh,False,5,bengali7_part_5.wav,./sentence_5/bengali7_part_5.wav
+19,10.5,"new delhi, india",hindi10,hindi,female,1202,india,False,5,hindi10_part_5.wav,./sentence_5/hindi10_part_5.wav
+20,4.0,"chandigarh, india",hindi11,hindi,male,1437,india,False,5,hindi11_part_5.wav,./sentence_5/hindi11_part_5.wav
+25,4.0,"allahabad, india",hindi12,hindi,female,1440,india,False,5,hindi12_part_5.wav,./sentence_5/hindi12_part_5.wav
+53,12.0,"new delhi, india",hindi14,hindi,male,1697,india,False,5,hindi14_part_5.wav,./sentence_5/hindi14_part_5.wav
+23,1.0,"new delhi, india",hindi15,hindi,female,1794,india,False,5,hindi15_part_5.wav,./sentence_5/hindi15_part_5.wav
+25,5.0,"new delhi, india",hindi16,hindi,male,1966,india,False,5,hindi16_part_5.wav,./sentence_5/hindi16_part_5.wav
+47,3.0,"new delhi, india",hindi17,hindi,female,1988,india,False,5,hindi17_part_5.wav,./sentence_5/hindi17_part_5.wav
+21,5.0,"new delhi, india",hindi18,hindi,female,2125,india,False,5,hindi18_part_5.wav,./sentence_5/hindi18_part_5.wav
+31,3.0,"hyderabad, india",hindi2,hindi,male,587,india,False,5,hindi2_part_5.wav,./sentence_5/hindi2_part_5.wav
+42,5.0,"jalandhar, india",hindi3,hindi,male,593,india,False,5,hindi3_part_5.wav,./sentence_5/hindi3_part_5.wav
+28,14.0,"bhilwara, rajisthan, india",hindi4,hindi,female,765,india,False,5,hindi4_part_5.wav,./sentence_5/hindi4_part_5.wav
+64,10.0,"hubballi, karnataka, india",hindi5,hindi,female,845,india,False,5,hindi5_part_5.wav,./sentence_5/hindi5_part_5.wav
+27,4.0,"new delhi, india",hindi6,hindi,female,866,india,False,5,hindi6_part_5.wav,./sentence_5/hindi6_part_5.wav
+60,5.0,"allahabad, utter pardesh, india",hindi7,hindi,female,867,india,False,5,hindi7_part_5.wav,./sentence_5/hindi7_part_5.wav
+31,4.0,"durgapur, west bengal, india",hindi9,hindi,male,1017,india,False,5,hindi9_part_5.wav,./sentence_5/hindi9_part_5.wav
+21,3.0,"bombay, india",marathi1,marathi,female,264,india,False,5,marathi1_part_5.wav,./sentence_5/marathi1_part_5.wav
+28,10.0,"madras, india",marathi2,marathi,male,265,india,False,5,marathi2_part_5.wav,./sentence_5/marathi2_part_5.wav
+31,2.0,"bombay, india",marathi3,marathi,male,837,india,False,5,marathi3_part_5.wav,./sentence_5/marathi3_part_5.wav
+22,11.0,"ludhiana, india",punjabi10,punjabi,male,2040,india,False,5,punjabi10_part_5.wav,./sentence_5/punjabi10_part_5.wav
+34,10.0,"sargodha, pakistan",punjabi1,punjabi,male,291,pakistan,False,5,punjabi1_part_5.wav,./sentence_5/punjabi1_part_5.wav
+26,10.0,"hoshiarpur, india",punjabi2,punjabi,male,292,india,False,5,punjabi2_part_5.wav,./sentence_5/punjabi2_part_5.wav
+19,6.0,"moga, punjab, india",punjabi3,punjabi,male,751,india,False,5,punjabi3_part_5.wav,./sentence_5/punjabi3_part_5.wav
+33,3.0,"moga, india",punjabi4,punjabi,female,836,india,False,5,punjabi4_part_5.wav,./sentence_5/punjabi4_part_5.wav
+49,5.0,"ropar, punjab, india",punjabi5,punjabi,male,1612,india,False,5,punjabi5_part_5.wav,./sentence_5/punjabi5_part_5.wav
+25,5.0,"lahore, pakistan",punjabi6,punjabi,male,1758,pakistan,False,5,punjabi6_part_5.wav,./sentence_5/punjabi6_part_5.wav
+19,11.0,"kot kapura, india",punjabi9,punjabi,male,2039,india,False,5,punjabi9_part_5.wav,./sentence_5/punjabi9_part_5.wav
+39,7.0,"colombo, sri lanka",tamil1,tamil,male,367,sri lanka,False,5,tamil1_part_5.wav,./sentence_5/tamil1_part_5.wav
+35,4.0,"madras, tamil nadu, india",tamil2,tamil,female,429,india,False,5,tamil2_part_5.wav,./sentence_5/tamil2_part_5.wav
+26,10.0,"chennai, india",tamil3,tamil,male,531,india,False,5,tamil3_part_5.wav,./sentence_5/tamil3_part_5.wav
+36,5.0,"coimbatore, tamil nadu, india",tamil5,tamil,female,1723,india,False,5,tamil5_part_5.wav,./sentence_5/tamil5_part_5.wav
+47,6.0,"bangalore, karnataka, india",tamil6,tamil,female,2076,india,False,5,tamil6_part_5.wav,./sentence_5/tamil6_part_5.wav
+31,6.0,"kadapa, india",telugu1,telugu,male,369,india,False,5,telugu1_part_5.wav,./sentence_5/telugu1_part_5.wav
+18,6.0,"guntur, andhra pradesh, india",telugu2,telugu,male,370,india,False,5,telugu2_part_5.wav,./sentence_5/telugu2_part_5.wav
+20,3.0,"karachi, pakistan",urdu10,urdu,male,1566,pakistan,False,5,urdu10_part_5.wav,./sentence_5/urdu10_part_5.wav
+20,6.0,"karachi, pakistan",urdu11,urdu,male,1576,pakistan,False,5,urdu11_part_5.wav,./sentence_5/urdu11_part_5.wav
+19,4.0,"islamabad, pakistan",urdu12,urdu,female,1628,pakistan,False,5,urdu12_part_5.wav,./sentence_5/urdu12_part_5.wav
+22,4.0,"lahore, pakistan",urdu13,urdu,female,1795,pakistan,False,5,urdu13_part_5.wav,./sentence_5/urdu13_part_5.wav
+22,5.0,"karachi, pakistan",urdu16,urdu,male,2152,pakistan,False,5,urdu16_part_5.wav,./sentence_5/urdu16_part_5.wav
+22,18.0,"karachi, pakistan",urdu1,urdu,male,390,pakistan,False,5,urdu1_part_5.wav,./sentence_5/urdu1_part_5.wav
+48,6.0,"sialkot, pakistan",urdu2,urdu,female,391,pakistan,False,5,urdu2_part_5.wav,./sentence_5/urdu2_part_5.wav
+25,3.0,"karachi, sind, pakistan",urdu3,urdu,male,423,pakistan,False,5,urdu3_part_5.wav,./sentence_5/urdu3_part_5.wav
+23,12.0,"karachi, pakistan",urdu5,urdu,male,953,pakistan,False,5,urdu5_part_5.wav,./sentence_5/urdu5_part_5.wav
+24,3.0,"bangalore, india",urdu6,urdu,female,1014,india,False,5,urdu6_part_5.wav,./sentence_5/urdu6_part_5.wav
+23,5.0,"islamabad, pakistan",urdu7,urdu,male,1061,pakistan,False,5,urdu7_part_5.wav,./sentence_5/urdu7_part_5.wav
+20,5.0,"alexandria, virginia, usa",urdu9,urdu,female,1539,usa,False,5,urdu9_part_5.wav,./sentence_5/urdu9_part_5.wav
+24,6.0,"dhaka, bangladesh",bengali16,bengali,female,2073,bangladesh,False,0,bengali16_part_0.wav,./sentence_0/bengali16_part_0.wav
+24,6.0,"dhaka, bangladesh",bengali16,bengali,female,2073,bangladesh,False,1,bengali16_part_1.wav,./sentence_1/bengali16_part_1.wav
+19,5.0,"dhaka, bangladesh",bengali3,bengali,female,36,bangladesh,False,0,bengali3_part_0.wav,./sentence_0/bengali3_part_0.wav
+19,5.0,"dhaka, bangladesh",bengali3,bengali,female,36,bangladesh,False,1,bengali3_part_1.wav,./sentence_1/bengali3_part_1.wav
+24,6.0,"chittagong, bangladesh",bengali4,bengali,male,37,bangladesh,False,0,bengali4_part_0.wav,./sentence_0/bengali4_part_0.wav
+24,6.0,"chittagong, bangladesh",bengali4,bengali,male,37,bangladesh,False,1,bengali4_part_1.wav,./sentence_1/bengali4_part_1.wav
+40,5.0,"dhaka, bangladesh",bengali5,bengali,female,622,bangladesh,False,0,bengali5_part_0.wav,./sentence_0/bengali5_part_0.wav
+40,5.0,"dhaka, bangladesh",bengali5,bengali,female,622,bangladesh,False,1,bengali5_part_1.wav,./sentence_1/bengali5_part_1.wav
+61,12.0,"kolkata, india",bengali9,bengali,female,987,india,False,0,bengali9_part_0.wav,./sentence_0/bengali9_part_0.wav
+61,12.0,"kolkata, india",bengali9,bengali,female,987,india,False,1,bengali9_part_1.wav,./sentence_1/bengali9_part_1.wav
+27,2.0,"nagpur, maharashtra, india",hindi1,hindi,male,207,india,False,0,hindi1_part_0.wav,./sentence_0/hindi1_part_0.wav
+27,2.0,"nagpur, maharashtra, india",hindi1,hindi,male,207,india,False,1,hindi1_part_1.wav,./sentence_1/hindi1_part_1.wav
+43,13.0,"jaipur, india",hindi13,hindi,female,1633,india,False,0,hindi13_part_0.wav,./sentence_0/hindi13_part_0.wav
+43,13.0,"jaipur, india",hindi13,hindi,female,1633,india,False,1,hindi13_part_1.wav,./sentence_1/hindi13_part_1.wav
+19,8.0,"imphal, india",hindi8,hindi,male,910,india,False,0,hindi8_part_0.wav,./sentence_0/hindi8_part_0.wav
+19,8.0,"imphal, india",hindi8,hindi,male,910,india,False,1,hindi8_part_1.wav,./sentence_1/hindi8_part_1.wav
+44,13.0,"jilandhar, punjab, india",punjabi8,punjabi,male,1782,india,False,0,punjabi8_part_0.wav,./sentence_0/punjabi8_part_0.wav
+58,3.0,"colombo, sri lanka",tamil4,tamil,female,1647,sri lanka,False,0,tamil4_part_0.wav,./sentence_0/tamil4_part_0.wav
+58,3.0,"colombo, sri lanka",tamil4,tamil,female,1647,sri lanka,False,1,tamil4_part_1.wav,./sentence_1/tamil4_part_1.wav
+21,10.0,"islamabad, pakistan",urdu14,urdu,male,2038,pakistan,False,0,urdu14_part_0.wav,./sentence_0/urdu14_part_0.wav
+21,10.0,"islamabad, pakistan",urdu14,urdu,male,2038,pakistan,False,1,urdu14_part_1.wav,./sentence_1/urdu14_part_1.wav
+28,8.0,"mandi bahauddin, punjab, pakistan",urdu15,urdu,male,2102,pakistan,False,0,urdu15_part_0.wav,./sentence_0/urdu15_part_0.wav
+28,8.0,"mandi bahauddin, punjab, pakistan",urdu15,urdu,male,2102,pakistan,False,1,urdu15_part_1.wav,./sentence_1/urdu15_part_1.wav
+29,4.0,"kuwait city, kuwait",urdu4,urdu,male,854,kuwait,False,0,urdu4_part_0.wav,./sentence_0/urdu4_part_0.wav
+29,4.0,"kuwait city, kuwait",urdu4,urdu,male,854,kuwait,False,1,urdu4_part_1.wav,./sentence_1/urdu4_part_1.wav
+21,5.0,"abu dhabi, united arab emirates",urdu8,urdu,female,1510,united arab emirates,False,0,urdu8_part_0.wav,./sentence_0/urdu8_part_0.wav
+21,5.0,"abu dhabi, united arab emirates",urdu8,urdu,female,1510,united arab emirates,False,1,urdu8_part_1.wav,./sentence_1/urdu8_part_1.wav
+21,5.0,"abu dhabi, united arab emirates",urdu8,urdu,female,1510,united arab emirates,False,2,urdu8_part_2.wav,./sentence_2/urdu8_part_2.wav
+21,5.0,"abu dhabi, united arab emirates",urdu8,urdu,female,1510,united arab emirates,False,3,urdu8_part_3.wav,./sentence_3/urdu8_part_3.wav

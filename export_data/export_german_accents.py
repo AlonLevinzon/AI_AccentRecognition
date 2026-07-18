@@ -16,7 +16,7 @@ dataset = load_dataset("facebook/voxpopuli", "en", split="train")
 dataset = dataset.cast_column("audio", Audio(decode=False))
 
 # Define output directory
-output_dir = "more_accents"
+output_dir = "more_accents_data"
 os.makedirs(output_dir, exist_ok=True)
 
 metadata_file_path = os.path.join(output_dir, "metadata_voxpopuli_german.csv")

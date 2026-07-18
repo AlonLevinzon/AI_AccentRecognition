@@ -77,7 +77,7 @@ def get_column_value(df, alternative_keys, row_idx):
 def clean_filename_path(raw_filename):
     """
     Advanced extraction that parses both 'sampling_rate' and 'path'
-    dictionary-like strings (e.g., USA dataset formats) safely.
+    dictionary-like strings safely, ensuring a valid .wav extension.
     """
     raw_str = str(raw_filename).strip()
 
@@ -97,7 +97,14 @@ def clean_filename_path(raw_filename):
                 raw_str = p.strip().strip("'").strip('"')
                 break
 
-    return os.path.basename(raw_str)
+    # Extract the base file name
+    base_name = os.path.basename(raw_str)
+
+    # ENFORCED EXTENSION CHECK: If the filename doesn't end with .wav, append it lowercased
+    if not base_name.lower().endswith('.wav'):
+        base_name = f"{base_name}.wav"
+
+    return base_name
 
 
 def clean_text_quotes(text_val):
@@ -213,12 +220,12 @@ def save_pure_csv_without_quotes(df, output_path):
 def build_free_text_only_metadata():
     """
     Pipeline for free_text_only: Extracts from audio_by_accent_raw.
-    Targets 1200 samples for Train (80%), making total target = 1500 samples per accent.
+    Targets 80% of  1200 samples for Train , making total target = 1200 samples per accent.
     """
     print("\n--- Building Free Text Only Massive Metadata ---")
     all_accents_data = []
     accents = ['chinese', 'indian', 'nigerian', 'usa']
-    target_total = 1500
+    target_total = 1200
 
     for accent in accents:
         accent_dir = RAW_AUDIO_DIR / accent
