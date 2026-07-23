@@ -1,0 +1,134 @@
+
+SUCCESS: CSV dataset successfully created with 4829 rows!
+Saved as: 'accent_features_dataset.csv'
+──► [SUCCESS]: Cached unified dataset saved successfully at C:\Users\USER\PycharmProjects\AI_AccentRecognition\master_extracted_features_mixed.csv
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 1/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 50.31%
+   [Logistic Regression] Accuracy: 73.91%
+   [SVM (RBF)          ] Accuracy: 77.43%
+   [Random Forest      ] Accuracy: 75.16%
+   [XGBoost            ] Accuracy: 75.98%
+   [Kernel ELM         ] Accuracy: 75.16%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 2/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 49.07%
+   [Logistic Regression] Accuracy: 68.94%
+   [SVM (RBF)          ] Accuracy: 69.15%
+   [Random Forest      ] Accuracy: 66.46%
+   [XGBoost            ] Accuracy: 67.49%
+   [Kernel ELM         ] Accuracy: 70.39%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 3/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 51.35%
+   [Logistic Regression] Accuracy: 68.74%
+   [SVM (RBF)          ] Accuracy: 72.46%
+   [Random Forest      ] Accuracy: 74.53%
+   [XGBoost            ] Accuracy: 72.67%
+   [Kernel ELM         ] Accuracy: 75.16%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 4/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 50.52%
+   [Logistic Regression] Accuracy: 66.05%
+   [SVM (RBF)          ] Accuracy: 68.74%
+   [Random Forest      ] Accuracy: 66.46%
+   [XGBoost            ] Accuracy: 69.15%
+   [Kernel ELM         ] Accuracy: 67.08%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 5/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 47.83%
+   [Logistic Regression] Accuracy: 68.32%
+   [SVM (RBF)          ] Accuracy: 72.26%
+   [Random Forest      ] Accuracy: 73.29%
+   [XGBoost            ] Accuracy: 75.57%
+   [Kernel ELM         ] Accuracy: 73.29%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 6/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 50.52%
+   [Logistic Regression] Accuracy: 68.32%
+   [SVM (RBF)          ] Accuracy: 69.36%
+   [Random Forest      ] Accuracy: 67.29%
+   [XGBoost            ] Accuracy: 70.19%
+   [Kernel ELM         ] Accuracy: 68.53%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 7/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 50.10%
+   [Logistic Regression] Accuracy: 75.57%
+   [SVM (RBF)          ] Accuracy: 78.47%
+   [Random Forest      ] Accuracy: 73.50%
+   [XGBoost            ] Accuracy: 77.85%
+   [Kernel ELM         ] Accuracy: 76.19%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 8/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 47.20%
+   [Logistic Regression] Accuracy: 73.50%
+   [SVM (RBF)          ] Accuracy: 76.60%
+   [Random Forest      ] Accuracy: 76.81%
+   [XGBoost            ] Accuracy: 74.95%
+   [Kernel ELM         ] Accuracy: 75.36%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 9/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3863, 67) | Test Matrix Shape: (483, 67)
+   [Gaussian NB        ] Accuracy: 52.80%
+   [Logistic Regression] Accuracy: 68.74%
+   [SVM (RBF)          ] Accuracy: 73.71%
+   [Random Forest      ] Accuracy: 70.60%
+   [XGBoost            ] Accuracy: 68.94%
+   [Kernel ELM         ] Accuracy: 70.19%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 10/10]
+######################################################################
+ -> Matrix splits resolved instantly in RAM:
+    Train Matrix Shape: (3864, 67) | Test Matrix Shape: (482, 67)
+   [Gaussian NB        ] Accuracy: 49.17%
+   [Logistic Regression] Accuracy: 68.88%
+   [SVM (RBF)          ] Accuracy: 74.48%
+   [Random Forest      ] Accuracy: 67.84%
+   [XGBoost            ] Accuracy: 70.75%
+   [Kernel ELM         ] Accuracy: 70.33%
+
+======================================================================
+FINAL STRATIFIED NESTED CROSS-VALIDATION SUMMARY REPORT
+======================================================================
+ -> Gaussian NB         : 49.89% ± 1.56% (Evaluated over 10 folds)
+ -> Logistic Regression : 70.10% ± 2.92% (Evaluated over 10 folds)
+ -> SVM (RBF)           : 73.27% ± 3.34% (Evaluated over 10 folds)
+ -> Random Forest       : 71.19% ± 3.74% (Evaluated over 10 folds)
+ -> XGBoost             : 72.35% ± 3.37% (Evaluated over 10 folds)
+ -> Kernel ELM          : 72.17% ± 3.08% (Evaluated over 10 folds)
