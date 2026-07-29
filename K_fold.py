@@ -12,8 +12,8 @@ np.random.seed(RANDOM_SEED)
 
 # Define directories paths based on project layout
 CURRENT_DIR = Path(__file__).resolve().parent
-RAW_AUDIO_DIR = CURRENT_DIR / "audio_by_accent_raw"
-SENTENCES_DIR = CURRENT_DIR / "sentences_samples"
+RAW_AUDIO_DIR = CURRENT_DIR / "audio_by_accent_raw_normalized"
+SENTENCES_DIR = CURRENT_DIR / "sentences_samples_normalized"
 
 # Output Directories
 FREE_TEXT_OUT_DIR = CURRENT_DIR / "machine_learning_official_free_text_only"

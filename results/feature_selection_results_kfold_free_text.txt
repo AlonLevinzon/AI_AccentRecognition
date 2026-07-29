@@ -1,0 +1,252 @@
+====================================================
+HIGH-SPEED Multi-Classifier Nested Group K-Fold Loop (free_text)
+Feature Selection: ENABLED (Top 25 ANOVA)
+Hyperparameter Tuning Mode: [RANDOM_SEARCH]
+====================================================
+📂 [LOAD SUCCESS]: Found existing metadata directly at: /kaggle/input/datasets/alonlev001/accents-data/working/machine_learning_official_free_text_only/massive_metadata_free_text.csv
+──► [CACHED DATA DETECTED]: Loading pre-extracted features from /kaggle/input/datasets/alonlev001/accents-data/working/master_extracted_features_free_text.csv
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 1/10]
+######################################################################
+   [Gaussian NB        ] Overall: 66.46% | CHI: 83.1% | IND: 52.3% | NIG: 60.2% | USA: 69.3%
+   [Logistic Regression] Overall: 77.50% | CHI: 90.0% | IND: 60.9% | NIG: 83.3% | USA: 76.3%
+   [SVM (RBF)          ] Overall: 80.62% | CHI: 89.2% | IND: 65.6% | NIG: 92.6% | USA: 76.3%
+   [Random Forest      ] Overall: 77.92% | CHI: 89.2% | IND: 61.7% | NIG: 85.2% | USA: 76.3%
+   [XGBoost            ] Overall: 81.04% | CHI: 90.8% | IND: 66.4% | NIG: 87.0% | USA: 80.7%
+   [Kernel ELM         ] Overall: 81.88% | CHI: 88.5% | IND: 68.8% | NIG: 92.6% | USA: 78.9%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 2/10]
+######################################################################
+   [Gaussian NB        ] Overall: 64.79% | CHI: 73.1% | IND: 46.6% | NIG: 75.4% | USA: 65.3%
+   [Logistic Regression] Overall: 71.67% | CHI: 81.5% | IND: 46.6% | NIG: 89.3% | USA: 70.5%
+   [SVM (RBF)          ] Overall: 79.17% | CHI: 75.4% | IND: 71.4% | NIG: 97.5% | USA: 71.6%
+   [Random Forest      ] Overall: 76.04% | CHI: 78.5% | IND: 61.7% | NIG: 90.2% | USA: 74.7%
+   [XGBoost            ] Overall: 77.50% | CHI: 78.5% | IND: 66.9% | NIG: 92.6% | USA: 71.6%
+   [Kernel ELM         ] Overall: 81.25% | CHI: 77.7% | IND: 71.4% | NIG: 99.2% | USA: 76.8%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 3/10]
+######################################################################
+   [Gaussian NB        ] Overall: 70.21% | CHI: 76.7% | IND: 58.7% | NIG: 78.6% | USA: 66.4%
+   [Logistic Regression] Overall: 81.46% | CHI: 92.5% | IND: 70.2% | NIG: 94.4% | USA: 67.3%
+   [SVM (RBF)          ] Overall: 80.00% | CHI: 83.3% | IND: 69.4% | NIG: 94.4% | USA: 71.7%
+   [Random Forest      ] Overall: 78.96% | CHI: 79.2% | IND: 73.6% | NIG: 88.1% | USA: 74.3%
+   [XGBoost            ] Overall: 83.75% | CHI: 89.2% | IND: 72.7% | NIG: 92.1% | USA: 80.5%
+   [Kernel ELM         ] Overall: 79.79% | CHI: 82.5% | IND: 74.4% | NIG: 93.7% | USA: 67.3%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 4/10]
+######################################################################
+   [Gaussian NB        ] Overall: 59.17% | CHI: 59.0% | IND: 51.6% | NIG: 59.1% | USA: 67.9%
+   [Logistic Regression] Overall: 71.67% | CHI: 80.0% | IND: 54.1% | NIG: 79.9% | USA: 72.5%
+   [SVM (RBF)          ] Overall: 82.08% | CHI: 85.0% | IND: 73.0% | NIG: 89.9% | USA: 78.9%
+   [Random Forest      ] Overall: 78.96% | CHI: 87.0% | IND: 72.1% | NIG: 80.5% | USA: 77.1%
+   [XGBoost            ] Overall: 79.58% | CHI: 88.0% | IND: 68.9% | NIG: 83.9% | USA: 78.0%
+   [Kernel ELM         ] Overall: 82.08% | CHI: 87.0% | IND: 66.4% | NIG: 91.9% | USA: 81.7%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 5/10]
+######################################################################
+   [Gaussian NB        ] Overall: 65.83% | CHI: 80.0% | IND: 55.7% | NIG: 62.5% | USA: 65.6%
+   [Logistic Regression] Overall: 76.46% | CHI: 88.2% | IND: 55.7% | NIG: 89.7% | USA: 69.5%
+   [SVM (RBF)          ] Overall: 83.12% | CHI: 90.0% | IND: 69.8% | NIG: 93.4% | USA: 77.3%
+   [Random Forest      ] Overall: 77.92% | CHI: 80.9% | IND: 67.9% | NIG: 89.7% | USA: 71.1%
+   [XGBoost            ] Overall: 81.88% | CHI: 86.4% | IND: 76.4% | NIG: 91.2% | USA: 72.7%
+   [Kernel ELM         ] Overall: 81.67% | CHI: 87.3% | IND: 66.0% | NIG: 94.9% | USA: 75.8%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 6/10]
+######################################################################
+   [Gaussian NB        ] Overall: 61.46% | CHI: 77.0% | IND: 40.2% | NIG: 79.7% | USA: 54.6%
+   [Logistic Regression] Overall: 69.38% | CHI: 81.0% | IND: 43.2% | NIG: 82.2% | USA: 75.4%
+   [SVM (RBF)          ] Overall: 78.54% | CHI: 92.0% | IND: 54.5% | NIG: 93.2% | USA: 79.2%
+   [Random Forest      ] Overall: 76.04% | CHI: 90.0% | IND: 57.6% | NIG: 89.8% | USA: 71.5%
+   [XGBoost            ] Overall: 80.00% | CHI: 90.0% | IND: 58.3% | NIG: 92.4% | USA: 83.1%
+   [Kernel ELM         ] Overall: 85.00% | CHI: 91.0% | IND: 65.9% | NIG: 98.3% | USA: 87.7%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 7/10]
+######################################################################
+   [Gaussian NB        ] Overall: 66.88% | CHI: 75.0% | IND: 56.9% | NIG: 77.4% | USA: 59.5%
+   [Logistic Regression] Overall: 73.33% | CHI: 77.1% | IND: 45.7% | NIG: 96.8% | USA: 77.1%
+   [SVM (RBF)          ] Overall: 84.79% | CHI: 81.4% | IND: 83.6% | NIG: 98.9% | USA: 79.4%
+   [Random Forest      ] Overall: 79.58% | CHI: 77.1% | IND: 76.7% | NIG: 97.8% | USA: 71.8%
+   [XGBoost            ] Overall: 82.50% | CHI: 75.0% | IND: 83.6% | NIG: 95.7% | USA: 80.2%
+   [Kernel ELM         ] Overall: 83.96% | CHI: 79.3% | IND: 85.3% | NIG: 100.0% | USA: 76.3%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 8/10]
+######################################################################
+   [Gaussian NB        ] Overall: 64.17% | CHI: 45.3% | IND: 58.5% | NIG: 82.6% | USA: 76.1%
+   [Logistic Regression] Overall: 72.50% | CHI: 51.3% | IND: 73.6% | NIG: 93.9% | USA: 78.0%
+   [SVM (RBF)          ] Overall: 73.12% | CHI: 52.0% | IND: 71.7% | NIG: 96.5% | USA: 78.9%
+   [Random Forest      ] Overall: 73.12% | CHI: 55.3% | IND: 71.7% | NIG: 93.0% | USA: 78.0%
+   [XGBoost            ] Overall: 73.54% | CHI: 52.7% | IND: 71.7% | NIG: 94.8% | USA: 81.7%
+   [Kernel ELM         ] Overall: 72.08% | CHI: 50.0% | IND: 67.9% | NIG: 96.5% | USA: 80.7%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 9/10]
+######################################################################
+   [Gaussian NB        ] Overall: 65.42% | CHI: 70.0% | IND: 51.9% | NIG: 69.7% | USA: 71.8%
+   [Logistic Regression] Overall: 72.50% | CHI: 72.5% | IND: 64.9% | NIG: 76.5% | USA: 77.3%
+   [SVM (RBF)          ] Overall: 81.46% | CHI: 80.8% | IND: 80.2% | NIG: 84.9% | USA: 80.0%
+   [Random Forest      ] Overall: 76.88% | CHI: 76.7% | IND: 70.2% | NIG: 84.9% | USA: 76.4%
+   [XGBoost            ] Overall: 81.67% | CHI: 81.7% | IND: 79.4% | NIG: 84.9% | USA: 80.9%
+   [Kernel ELM         ] Overall: 81.67% | CHI: 75.8% | IND: 77.1% | NIG: 92.4% | USA: 81.8%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 10/10]
+######################################################################
+   [Gaussian NB        ] Overall: 65.62% | CHI: 72.0% | IND: 50.5% | NIG: 67.5% | USA: 70.2%
+   [Logistic Regression] Overall: 78.54% | CHI: 82.0% | IND: 63.8% | NIG: 87.7% | USA: 79.5%
+   [SVM (RBF)          ] Overall: 82.08% | CHI: 83.0% | IND: 74.3% | NIG: 96.5% | USA: 76.4%
+   [Random Forest      ] Overall: 77.92% | CHI: 80.0% | IND: 68.6% | NIG: 92.1% | USA: 72.7%
+   [XGBoost            ] Overall: 79.58% | CHI: 79.0% | IND: 70.5% | NIG: 90.4% | USA: 78.3%
+   [Kernel ELM         ] Overall: 79.79% | CHI: 79.0% | IND: 71.4% | NIG: 96.5% | USA: 73.9%
+
+================================================================================
+FINAL ACCENT CLASSIFICATION PERFORMANCE TABLE (NESTED GROUP K-FOLD)
+================================================================================
+
+          Classifier Overall Accuracy Chinese Accuracy Indian Accuracy Nigerian Accuracy Usa Accuracy
+        Gaussian NB   65.00% ± 2.85%           71.12%          52.29%            71.27%       66.68%
+Logistic Regression   74.50% ± 3.60%           79.62%          57.87%            87.38%       74.33%
+          SVM (RBF)   80.50% ± 3.03%           81.22%          71.35%            93.79%       76.97%
+      Random Forest   77.33% ± 1.81%           79.39%          68.18%            89.14%       74.39%
+            XGBoost   80.10% ± 2.75%           81.11%          71.48%            90.49%       78.75%
+         Kernel ELM   80.92% ± 3.32%           79.80%          71.47%            95.60%       78.10%
+================================================================================
+
+================================================================================
+CONFUSION MATRICES PER CLASSIFIER (Aggregated over all folds)
+================================================================================
+
+--- Gaussian NB Confusion Matrix ---
+Classes order: ['chinese' 'indian' 'nigerian' 'usa']
+[[848 215  46  91]
+ [187 624 150 239]
+ [106 115 850 129]
+ [123 133 146 798]]
+
+--- Logistic Regression Confusion Matrix ---
+Classes order: ['chinese' 'indian' 'nigerian' 'usa']
+[[ 946  168   17   69]
+ [ 186  690  102  222]
+ [  16   60 1045   79]
+ [  67  168   70  895]]
+
+--- SVM (RBF) Confusion Matrix ---
+Classes order: ['chinese' 'indian' 'nigerian' 'usa']
+[[ 962  183    5   50]
+ [ 123  854   49  174]
+ [  15   36 1123   26]
+ [  74  174   27  925]]
+
+--- Random Forest Confusion Matrix ---
+Classes order: ['chinese' 'indian' 'nigerian' 'usa']
+[[ 942  191   13   54]
+ [ 130  815   65  190]
+ [  35   54 1065   46]
+ [  97  151   62  890]]
+
+--- XGBoost Confusion Matrix ---
+Classes order: ['chinese' 'indian' 'nigerian' 'usa']
+[[ 961  165   26   48]
+ [ 111  855   58  176]
+ [  24   47 1083   46]
+ [  64  145   45  946]]
+
+--- Kernel ELM Confusion Matrix ---
+Classes order: ['chinese' 'indian' 'nigerian' 'usa']
+[[ 945  151   23   81]
+ [ 107  858   52  183]
+ [   5   25 1145   25]
+ [  56  161   47  936]]
+================================================================================
+
+================================================================================
+🏆 OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL 10 FOLDS)
+================================================================================
+
+📌 Classifier: [Gaussian NB]
+   • Mean Cross-Validation Accuracy: 64.55%
+   • Best Hyperparameters:
+       - priors: (0.4, 0.2, 0.2, 0.2)
+       - var_smoothing: 1e-09
+
+📌 Classifier: [Logistic Regression]
+   • Mean Cross-Validation Accuracy: 73.68%
+   • Best Hyperparameters:
+       - C: 10
+       - penalty: l2
+       - solver: lbfgs
+
+📌 Classifier: [SVM (RBF)]
+   • Mean Cross-Validation Accuracy: 79.10%
+   • Best Hyperparameters:
+       - C: 1
+       - gamma: scale
+
+📌 Classifier: [Random Forest]
+   • Mean Cross-Validation Accuracy: 75.61%
+   • Best Hyperparameters:
+       - max_depth: 20
+       - max_features: log2
+       - min_samples_leaf: 1
+       - min_samples_split: 5
+       - n_estimators: 200
+
+📌 Classifier: [XGBoost]
+   • Mean Cross-Validation Accuracy: 77.45%
+   • Best Hyperparameters:
+       - colsample_bytree: 0.7
+       - learning_rate: 0.05
+       - max_depth: 9
+       - n_estimators: 300
+       - subsample: 0.8
+
+📌 Classifier: [Kernel ELM]
+   • Mean Cross-Validation Accuracy: 36.21%
+   • Best Hyperparameters:
+       - C: 100.0
+       - gamma: 0.01
+
+================================================================================
+💾 Dedicated Hyperparameters Report exported successfully -> /kaggle/working/best_hyperparameters_summary.csv
+================================================================================
+
+================================================================================
+TOP SELECTED ACOUSTIC FEATURES SUMMARY (Across All 10 Folds)
+================================================================================
+
+            Feature  Selection_Frequency_Out_Of_10
+            mfcc_4                             10
+      mean_rolloff                             10
+            mfcc_9                             10
+           mean_F1                             10
+pitch_velocity_std                             10
+     syllable_rate                             10
+     mean_centroid                             10
+       F2_F1_ratio                             10
+            mfcc_1                             10
+            mfcc_5                             10
+           mfcc_13                             10
+            mfcc_7                             10
+            mfcc_2                             10
+           mfcc_10                             10
+         pitch_std                             10
+           mfcc_11                             10
+           mfcc_12                             10
+        pitch_mean                             10
+           shimmer                             10
+          mean_zcr                             10
+            jitter                              9
+     praat_mean_f0                              9
+            mfcc_3                              9
+      praat_std_f0                              8
+            mfcc_6                              8
+           mean_F2                              5
+        volume_min                              1
+                f1                              1

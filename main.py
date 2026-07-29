@@ -33,7 +33,7 @@ from features.extract_features_to_files import import_vector_to_file
 # GLOBAL CONFIGURATION FOR SPEED OPTIMIZATION
 # =====================================================================
 # Toggle between "free_text", "mixed", or "archive_only"
-RUN_MODE = "archive_only"
+RUN_MODE = "free_text"
 
 current_dir = Path(__file__).resolve().parent
 
