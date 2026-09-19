@@ -1,0 +1,254 @@
+﻿age,age_onset,birthplace,filename,native_language,sex,speakerid,country,file_missing?,sentence_index,split_filename,relative_audio_path
+42,1.0,"accra, ghana",ashanti1,ashanti,female,1977,ghana,False,0,ashanti1_part_0.wav,./sentence_0/ashanti1_part_0.wav
+32,6.0,"ajumako, ghana",fanti1,fanti,male,167,ghana,False,0,fanti1_part_0.wav,./sentence_0/fanti1_part_0.wav
+24,7.0,"accra, ghana",fanti2,fanti,female,1511,ghana,False,0,fanti2_part_0.wav,./sentence_0/fanti2_part_0.wav
+46,5.0,"accra, ghana",fanti3,fanti,female,1863,ghana,False,0,fanti3_part_0.wav,./sentence_0/fanti3_part_0.wav
+47,5.0,"accra, ghana",ga1,ga,male,579,ghana,False,0,ga1_part_0.wav,./sentence_0/ga1_part_0.wav
+38,4.0,"accra, ghana",ga2,ga,female,974,ghana,False,0,ga2_part_0.wav,./sentence_0/ga2_part_0.wav
+60,5.0,"accra, ghana",ga3,ga,female,976,ghana,False,0,ga3_part_0.wav,./sentence_0/ga3_part_0.wav
+60,6.0,"accra, ghana",ga4,ga,male,1150,ghana,False,0,ga4_part_0.wav,./sentence_0/ga4_part_0.wav
+36,5.0,"accra, ghana",ga5,ga,male,1796,ghana,False,0,ga5_part_0.wav,./sentence_0/ga5_part_0.wav
+20,8.0,"accra, ghana",ga6,ga,female,2122,ghana,False,0,ga6_part_0.wav,./sentence_0/ga6_part_0.wav
+49,7.0,"kano, nigeria",hausa1,hausa,male,1034,nigeria,False,0,hausa1_part_0.wav,./sentence_0/hausa1_part_0.wav
+46,10.0,"bauchi, nigeria",hausa2,hausa,male,1035,nigeria,False,0,hausa2_part_0.wav,./sentence_0/hausa2_part_0.wav
+47,6.0,"malumfashi, nigeria",hausa3,hausa,female,1036,nigeria,False,0,hausa3_part_0.wav,./sentence_0/hausa3_part_0.wav
+43,12.0,"maine, niger",hausa5,hausa,female,1047,niger,False,0,hausa5_part_0.wav,./sentence_0/hausa5_part_0.wav
+48,6.0,"kano, nigeria",hausa6,hausa,male,1048,nigeria,False,0,hausa6_part_0.wav,./sentence_0/hausa6_part_0.wav
+52,7.0,"sokoto, nigeria",hausa7,hausa,male,1050,nigeria,False,0,hausa7_part_0.wav,./sentence_0/hausa7_part_0.wav
+30,7.0,"katsina, nigeria",hausa8,hausa,male,1136,nigeria,False,0,hausa8_part_0.wav,./sentence_0/hausa8_part_0.wav
+43,5.0,"kaltungo, gombe, nigeria",hausa9,hausa,male,1408,nigeria,False,0,hausa9_part_0.wav,./sentence_0/hausa9_part_0.wav
+52,3.0,"uyo, akwa ibom, nigeria",ibibio1,ibibio,male,1184,nigeria,False,0,ibibio1_part_0.wav,./sentence_0/ibibio1_part_0.wav
+45,4.0,"abak, akwa ibom, nigeria",ibibio2,ibibio,female,1185,nigeria,False,0,ibibio2_part_0.wav,./sentence_0/ibibio2_part_0.wav
+23,12.0,"imo state, imo state, nigeria",igbo1,igbo,female,212,nigeria,False,0,igbo1_part_0.wav,./sentence_0/igbo1_part_0.wav
+65,14.0,"kafanchan, nigeria",igbo2,igbo,male,760,nigeria,False,0,igbo2_part_0.wav,./sentence_0/igbo2_part_0.wav
+35,5.0,"lagos, nigeria",igbo3,igbo,male,1040,nigeria,False,0,igbo3_part_0.wav,./sentence_0/igbo3_part_0.wav
+48,6.0,"kaduna, nigeria",kanuri1,kanuri,female,1049,nigeria,False,0,kanuri1_part_0.wav,./sentence_0/kanuri1_part_0.wav
+46,5.0,"freetown, sierra leone",krio1,krio,female,245,sierra leone,False,0,krio1_part_0.wav,./sentence_0/krio1_part_0.wav
+26,5.0,"freetown, sierra leone",krio2,krio,male,431,sierra leone,False,0,krio2_part_0.wav,./sentence_0/krio2_part_0.wav
+21,5.0,"freetown, sierra leone",krio3,krio,female,1095,sierra leone,False,0,krio3_part_0.wav,./sentence_0/krio3_part_0.wav
+36,6.0,"freetown, sierra leone",krio5,krio,male,1140,sierra leone,False,0,krio5_part_0.wav,./sentence_0/krio5_part_0.wav
+35,5.0,"harbel, liberia",mende1,mende,male,436,liberia,False,0,mende1_part_0.wav,./sentence_0/mende1_part_0.wav
+32,5.0,"freetown, sierra leone",mende3,mende,male,1986,sierra leone,False,0,mende3_part_0.wav,./sentence_0/mende3_part_0.wav
+25,12.0,"kumasi, ghana",twi1,twi,female,388,ghana,False,0,twi1_part_0.wav,./sentence_0/twi1_part_0.wav
+22,6.0,"tema, ghana",twi4,twi,female,1779,ghana,False,0,twi4_part_0.wav,./sentence_0/twi4_part_0.wav
+19,5.0,"woodbridge, virginia, usa",twi5,twi,male,2001,usa,False,0,twi5_part_0.wav,./sentence_0/twi5_part_0.wav
+20,4.0,"kumasi, ghana",twi6,twi,male,2138,ghana,False,0,twi6_part_0.wav,./sentence_0/twi6_part_0.wav
+20,20.0,"cotonou, benin",yoruba1,yoruba,male,414,benin,False,0,yoruba1_part_0.wav,./sentence_0/yoruba1_part_0.wav
+40,2.0,"ibadan, oyo, nigeria",yoruba2,yoruba,female,756,nigeria,False,0,yoruba2_part_0.wav,./sentence_0/yoruba2_part_0.wav
+46,5.0,"lagos, nigeria",yoruba3,yoruba,female,766,nigeria,False,0,yoruba3_part_0.wav,./sentence_0/yoruba3_part_0.wav
+46,12.0,"lagos, nigeria",yoruba4,yoruba,male,851,nigeria,False,0,yoruba4_part_0.wav,./sentence_0/yoruba4_part_0.wav
+47,2.0,"ibadan, nigeria",yoruba5,yoruba,female,2023,nigeria,False,0,yoruba5_part_0.wav,./sentence_0/yoruba5_part_0.wav
+42,1.0,"accra, ghana",ashanti1,ashanti,female,1977,ghana,False,1,ashanti1_part_1.wav,./sentence_1/ashanti1_part_1.wav
+32,6.0,"ajumako, ghana",fanti1,fanti,male,167,ghana,False,1,fanti1_part_1.wav,./sentence_1/fanti1_part_1.wav
+24,7.0,"accra, ghana",fanti2,fanti,female,1511,ghana,False,1,fanti2_part_1.wav,./sentence_1/fanti2_part_1.wav
+46,5.0,"accra, ghana",fanti3,fanti,female,1863,ghana,False,1,fanti3_part_1.wav,./sentence_1/fanti3_part_1.wav
+47,5.0,"accra, ghana",ga1,ga,male,579,ghana,False,1,ga1_part_1.wav,./sentence_1/ga1_part_1.wav
+38,4.0,"accra, ghana",ga2,ga,female,974,ghana,False,1,ga2_part_1.wav,./sentence_1/ga2_part_1.wav
+60,5.0,"accra, ghana",ga3,ga,female,976,ghana,False,1,ga3_part_1.wav,./sentence_1/ga3_part_1.wav
+60,6.0,"accra, ghana",ga4,ga,male,1150,ghana,False,1,ga4_part_1.wav,./sentence_1/ga4_part_1.wav
+36,5.0,"accra, ghana",ga5,ga,male,1796,ghana,False,1,ga5_part_1.wav,./sentence_1/ga5_part_1.wav
+20,8.0,"accra, ghana",ga6,ga,female,2122,ghana,False,1,ga6_part_1.wav,./sentence_1/ga6_part_1.wav
+49,7.0,"kano, nigeria",hausa1,hausa,male,1034,nigeria,False,1,hausa1_part_1.wav,./sentence_1/hausa1_part_1.wav
+46,10.0,"bauchi, nigeria",hausa2,hausa,male,1035,nigeria,False,1,hausa2_part_1.wav,./sentence_1/hausa2_part_1.wav
+47,6.0,"malumfashi, nigeria",hausa3,hausa,female,1036,nigeria,False,1,hausa3_part_1.wav,./sentence_1/hausa3_part_1.wav
+43,12.0,"maine, niger",hausa5,hausa,female,1047,niger,False,1,hausa5_part_1.wav,./sentence_1/hausa5_part_1.wav
+48,6.0,"kano, nigeria",hausa6,hausa,male,1048,nigeria,False,1,hausa6_part_1.wav,./sentence_1/hausa6_part_1.wav
+52,7.0,"sokoto, nigeria",hausa7,hausa,male,1050,nigeria,False,1,hausa7_part_1.wav,./sentence_1/hausa7_part_1.wav
+30,7.0,"katsina, nigeria",hausa8,hausa,male,1136,nigeria,False,1,hausa8_part_1.wav,./sentence_1/hausa8_part_1.wav
+43,5.0,"kaltungo, gombe, nigeria",hausa9,hausa,male,1408,nigeria,False,1,hausa9_part_1.wav,./sentence_1/hausa9_part_1.wav
+52,3.0,"uyo, akwa ibom, nigeria",ibibio1,ibibio,male,1184,nigeria,False,1,ibibio1_part_1.wav,./sentence_1/ibibio1_part_1.wav
+45,4.0,"abak, akwa ibom, nigeria",ibibio2,ibibio,female,1185,nigeria,False,1,ibibio2_part_1.wav,./sentence_1/ibibio2_part_1.wav
+23,12.0,"imo state, imo state, nigeria",igbo1,igbo,female,212,nigeria,False,1,igbo1_part_1.wav,./sentence_1/igbo1_part_1.wav
+65,14.0,"kafanchan, nigeria",igbo2,igbo,male,760,nigeria,False,1,igbo2_part_1.wav,./sentence_1/igbo2_part_1.wav
+35,5.0,"lagos, nigeria",igbo3,igbo,male,1040,nigeria,False,1,igbo3_part_1.wav,./sentence_1/igbo3_part_1.wav
+48,6.0,"kaduna, nigeria",kanuri1,kanuri,female,1049,nigeria,False,1,kanuri1_part_1.wav,./sentence_1/kanuri1_part_1.wav
+46,5.0,"freetown, sierra leone",krio1,krio,female,245,sierra leone,False,1,krio1_part_1.wav,./sentence_1/krio1_part_1.wav
+26,5.0,"freetown, sierra leone",krio2,krio,male,431,sierra leone,False,1,krio2_part_1.wav,./sentence_1/krio2_part_1.wav
+21,5.0,"freetown, sierra leone",krio3,krio,female,1095,sierra leone,False,1,krio3_part_1.wav,./sentence_1/krio3_part_1.wav
+36,6.0,"freetown, sierra leone",krio5,krio,male,1140,sierra leone,False,1,krio5_part_1.wav,./sentence_1/krio5_part_1.wav
+35,5.0,"harbel, liberia",mende1,mende,male,436,liberia,False,1,mende1_part_1.wav,./sentence_1/mende1_part_1.wav
+32,5.0,"freetown, sierra leone",mende3,mende,male,1986,sierra leone,False,1,mende3_part_1.wav,./sentence_1/mende3_part_1.wav
+25,12.0,"kumasi, ghana",twi1,twi,female,388,ghana,False,1,twi1_part_1.wav,./sentence_1/twi1_part_1.wav
+22,6.0,"tema, ghana",twi4,twi,female,1779,ghana,False,1,twi4_part_1.wav,./sentence_1/twi4_part_1.wav
+19,5.0,"woodbridge, virginia, usa",twi5,twi,male,2001,usa,False,1,twi5_part_1.wav,./sentence_1/twi5_part_1.wav
+20,4.0,"kumasi, ghana",twi6,twi,male,2138,ghana,False,1,twi6_part_1.wav,./sentence_1/twi6_part_1.wav
+20,20.0,"cotonou, benin",yoruba1,yoruba,male,414,benin,False,1,yoruba1_part_1.wav,./sentence_1/yoruba1_part_1.wav
+40,2.0,"ibadan, oyo, nigeria",yoruba2,yoruba,female,756,nigeria,False,1,yoruba2_part_1.wav,./sentence_1/yoruba2_part_1.wav
+46,5.0,"lagos, nigeria",yoruba3,yoruba,female,766,nigeria,False,1,yoruba3_part_1.wav,./sentence_1/yoruba3_part_1.wav
+46,12.0,"lagos, nigeria",yoruba4,yoruba,male,851,nigeria,False,1,yoruba4_part_1.wav,./sentence_1/yoruba4_part_1.wav
+47,2.0,"ibadan, nigeria",yoruba5,yoruba,female,2023,nigeria,False,1,yoruba5_part_1.wav,./sentence_1/yoruba5_part_1.wav
+42,1.0,"accra, ghana",ashanti1,ashanti,female,1977,ghana,False,2,ashanti1_part_2.wav,./sentence_2/ashanti1_part_2.wav
+32,6.0,"ajumako, ghana",fanti1,fanti,male,167,ghana,False,2,fanti1_part_2.wav,./sentence_2/fanti1_part_2.wav
+24,7.0,"accra, ghana",fanti2,fanti,female,1511,ghana,False,2,fanti2_part_2.wav,./sentence_2/fanti2_part_2.wav
+46,5.0,"accra, ghana",fanti3,fanti,female,1863,ghana,False,2,fanti3_part_2.wav,./sentence_2/fanti3_part_2.wav
+47,5.0,"accra, ghana",ga1,ga,male,579,ghana,False,2,ga1_part_2.wav,./sentence_2/ga1_part_2.wav
+38,4.0,"accra, ghana",ga2,ga,female,974,ghana,False,2,ga2_part_2.wav,./sentence_2/ga2_part_2.wav
+60,5.0,"accra, ghana",ga3,ga,female,976,ghana,False,2,ga3_part_2.wav,./sentence_2/ga3_part_2.wav
+60,6.0,"accra, ghana",ga4,ga,male,1150,ghana,False,2,ga4_part_2.wav,./sentence_2/ga4_part_2.wav
+36,5.0,"accra, ghana",ga5,ga,male,1796,ghana,False,2,ga5_part_2.wav,./sentence_2/ga5_part_2.wav
+20,8.0,"accra, ghana",ga6,ga,female,2122,ghana,False,2,ga6_part_2.wav,./sentence_2/ga6_part_2.wav
+49,7.0,"kano, nigeria",hausa1,hausa,male,1034,nigeria,False,2,hausa1_part_2.wav,./sentence_2/hausa1_part_2.wav
+46,10.0,"bauchi, nigeria",hausa2,hausa,male,1035,nigeria,False,2,hausa2_part_2.wav,./sentence_2/hausa2_part_2.wav
+47,6.0,"malumfashi, nigeria",hausa3,hausa,female,1036,nigeria,False,2,hausa3_part_2.wav,./sentence_2/hausa3_part_2.wav
+43,12.0,"maine, niger",hausa5,hausa,female,1047,niger,False,2,hausa5_part_2.wav,./sentence_2/hausa5_part_2.wav
+48,6.0,"kano, nigeria",hausa6,hausa,male,1048,nigeria,False,2,hausa6_part_2.wav,./sentence_2/hausa6_part_2.wav
+52,7.0,"sokoto, nigeria",hausa7,hausa,male,1050,nigeria,False,2,hausa7_part_2.wav,./sentence_2/hausa7_part_2.wav
+30,7.0,"katsina, nigeria",hausa8,hausa,male,1136,nigeria,False,2,hausa8_part_2.wav,./sentence_2/hausa8_part_2.wav
+43,5.0,"kaltungo, gombe, nigeria",hausa9,hausa,male,1408,nigeria,False,2,hausa9_part_2.wav,./sentence_2/hausa9_part_2.wav
+52,3.0,"uyo, akwa ibom, nigeria",ibibio1,ibibio,male,1184,nigeria,False,2,ibibio1_part_2.wav,./sentence_2/ibibio1_part_2.wav
+45,4.0,"abak, akwa ibom, nigeria",ibibio2,ibibio,female,1185,nigeria,False,2,ibibio2_part_2.wav,./sentence_2/ibibio2_part_2.wav
+23,12.0,"imo state, imo state, nigeria",igbo1,igbo,female,212,nigeria,False,2,igbo1_part_2.wav,./sentence_2/igbo1_part_2.wav
+65,14.0,"kafanchan, nigeria",igbo2,igbo,male,760,nigeria,False,2,igbo2_part_2.wav,./sentence_2/igbo2_part_2.wav
+35,5.0,"lagos, nigeria",igbo3,igbo,male,1040,nigeria,False,2,igbo3_part_2.wav,./sentence_2/igbo3_part_2.wav
+48,6.0,"kaduna, nigeria",kanuri1,kanuri,female,1049,nigeria,False,2,kanuri1_part_2.wav,./sentence_2/kanuri1_part_2.wav
+46,5.0,"freetown, sierra leone",krio1,krio,female,245,sierra leone,False,2,krio1_part_2.wav,./sentence_2/krio1_part_2.wav
+26,5.0,"freetown, sierra leone",krio2,krio,male,431,sierra leone,False,2,krio2_part_2.wav,./sentence_2/krio2_part_2.wav
+21,5.0,"freetown, sierra leone",krio3,krio,female,1095,sierra leone,False,2,krio3_part_2.wav,./sentence_2/krio3_part_2.wav
+36,6.0,"freetown, sierra leone",krio5,krio,male,1140,sierra leone,False,2,krio5_part_2.wav,./sentence_2/krio5_part_2.wav
+35,5.0,"harbel, liberia",mende1,mende,male,436,liberia,False,2,mende1_part_2.wav,./sentence_2/mende1_part_2.wav
+32,5.0,"freetown, sierra leone",mende3,mende,male,1986,sierra leone,False,2,mende3_part_2.wav,./sentence_2/mende3_part_2.wav
+25,12.0,"kumasi, ghana",twi1,twi,female,388,ghana,False,2,twi1_part_2.wav,./sentence_2/twi1_part_2.wav
+22,6.0,"tema, ghana",twi4,twi,female,1779,ghana,False,2,twi4_part_2.wav,./sentence_2/twi4_part_2.wav
+19,5.0,"woodbridge, virginia, usa",twi5,twi,male,2001,usa,False,2,twi5_part_2.wav,./sentence_2/twi5_part_2.wav
+20,4.0,"kumasi, ghana",twi6,twi,male,2138,ghana,False,2,twi6_part_2.wav,./sentence_2/twi6_part_2.wav
+20,20.0,"cotonou, benin",yoruba1,yoruba,male,414,benin,False,2,yoruba1_part_2.wav,./sentence_2/yoruba1_part_2.wav
+40,2.0,"ibadan, oyo, nigeria",yoruba2,yoruba,female,756,nigeria,False,2,yoruba2_part_2.wav,./sentence_2/yoruba2_part_2.wav
+46,5.0,"lagos, nigeria",yoruba3,yoruba,female,766,nigeria,False,2,yoruba3_part_2.wav,./sentence_2/yoruba3_part_2.wav
+46,12.0,"lagos, nigeria",yoruba4,yoruba,male,851,nigeria,False,2,yoruba4_part_2.wav,./sentence_2/yoruba4_part_2.wav
+47,2.0,"ibadan, nigeria",yoruba5,yoruba,female,2023,nigeria,False,2,yoruba5_part_2.wav,./sentence_2/yoruba5_part_2.wav
+42,1.0,"accra, ghana",ashanti1,ashanti,female,1977,ghana,False,3,ashanti1_part_3.wav,./sentence_3/ashanti1_part_3.wav
+32,6.0,"ajumako, ghana",fanti1,fanti,male,167,ghana,False,3,fanti1_part_3.wav,./sentence_3/fanti1_part_3.wav
+24,7.0,"accra, ghana",fanti2,fanti,female,1511,ghana,False,3,fanti2_part_3.wav,./sentence_3/fanti2_part_3.wav
+46,5.0,"accra, ghana",fanti3,fanti,female,1863,ghana,False,3,fanti3_part_3.wav,./sentence_3/fanti3_part_3.wav
+47,5.0,"accra, ghana",ga1,ga,male,579,ghana,False,3,ga1_part_3.wav,./sentence_3/ga1_part_3.wav
+38,4.0,"accra, ghana",ga2,ga,female,974,ghana,False,3,ga2_part_3.wav,./sentence_3/ga2_part_3.wav
+60,5.0,"accra, ghana",ga3,ga,female,976,ghana,False,3,ga3_part_3.wav,./sentence_3/ga3_part_3.wav
+60,6.0,"accra, ghana",ga4,ga,male,1150,ghana,False,3,ga4_part_3.wav,./sentence_3/ga4_part_3.wav
+36,5.0,"accra, ghana",ga5,ga,male,1796,ghana,False,3,ga5_part_3.wav,./sentence_3/ga5_part_3.wav
+20,8.0,"accra, ghana",ga6,ga,female,2122,ghana,False,3,ga6_part_3.wav,./sentence_3/ga6_part_3.wav
+49,7.0,"kano, nigeria",hausa1,hausa,male,1034,nigeria,False,3,hausa1_part_3.wav,./sentence_3/hausa1_part_3.wav
+46,10.0,"bauchi, nigeria",hausa2,hausa,male,1035,nigeria,False,3,hausa2_part_3.wav,./sentence_3/hausa2_part_3.wav
+47,6.0,"malumfashi, nigeria",hausa3,hausa,female,1036,nigeria,False,3,hausa3_part_3.wav,./sentence_3/hausa3_part_3.wav
+43,12.0,"maine, niger",hausa5,hausa,female,1047,niger,False,3,hausa5_part_3.wav,./sentence_3/hausa5_part_3.wav
+48,6.0,"kano, nigeria",hausa6,hausa,male,1048,nigeria,False,3,hausa6_part_3.wav,./sentence_3/hausa6_part_3.wav
+52,7.0,"sokoto, nigeria",hausa7,hausa,male,1050,nigeria,False,3,hausa7_part_3.wav,./sentence_3/hausa7_part_3.wav
+30,7.0,"katsina, nigeria",hausa8,hausa,male,1136,nigeria,False,3,hausa8_part_3.wav,./sentence_3/hausa8_part_3.wav
+43,5.0,"kaltungo, gombe, nigeria",hausa9,hausa,male,1408,nigeria,False,3,hausa9_part_3.wav,./sentence_3/hausa9_part_3.wav
+52,3.0,"uyo, akwa ibom, nigeria",ibibio1,ibibio,male,1184,nigeria,False,3,ibibio1_part_3.wav,./sentence_3/ibibio1_part_3.wav
+45,4.0,"abak, akwa ibom, nigeria",ibibio2,ibibio,female,1185,nigeria,False,3,ibibio2_part_3.wav,./sentence_3/ibibio2_part_3.wav
+23,12.0,"imo state, imo state, nigeria",igbo1,igbo,female,212,nigeria,False,3,igbo1_part_3.wav,./sentence_3/igbo1_part_3.wav
+65,14.0,"kafanchan, nigeria",igbo2,igbo,male,760,nigeria,False,3,igbo2_part_3.wav,./sentence_3/igbo2_part_3.wav
+35,5.0,"lagos, nigeria",igbo3,igbo,male,1040,nigeria,False,3,igbo3_part_3.wav,./sentence_3/igbo3_part_3.wav
+48,6.0,"kaduna, nigeria",kanuri1,kanuri,female,1049,nigeria,False,3,kanuri1_part_3.wav,./sentence_3/kanuri1_part_3.wav
+46,5.0,"freetown, sierra leone",krio1,krio,female,245,sierra leone,False,3,krio1_part_3.wav,./sentence_3/krio1_part_3.wav
+26,5.0,"freetown, sierra leone",krio2,krio,male,431,sierra leone,False,3,krio2_part_3.wav,./sentence_3/krio2_part_3.wav
+21,5.0,"freetown, sierra leone",krio3,krio,female,1095,sierra leone,False,3,krio3_part_3.wav,./sentence_3/krio3_part_3.wav
+36,6.0,"freetown, sierra leone",krio5,krio,male,1140,sierra leone,False,3,krio5_part_3.wav,./sentence_3/krio5_part_3.wav
+35,5.0,"harbel, liberia",mende1,mende,male,436,liberia,False,3,mende1_part_3.wav,./sentence_3/mende1_part_3.wav
+32,5.0,"freetown, sierra leone",mende3,mende,male,1986,sierra leone,False,3,mende3_part_3.wav,./sentence_3/mende3_part_3.wav
+25,12.0,"kumasi, ghana",twi1,twi,female,388,ghana,False,3,twi1_part_3.wav,./sentence_3/twi1_part_3.wav
+22,6.0,"tema, ghana",twi4,twi,female,1779,ghana,False,3,twi4_part_3.wav,./sentence_3/twi4_part_3.wav
+19,5.0,"woodbridge, virginia, usa",twi5,twi,male,2001,usa,False,3,twi5_part_3.wav,./sentence_3/twi5_part_3.wav
+20,4.0,"kumasi, ghana",twi6,twi,male,2138,ghana,False,3,twi6_part_3.wav,./sentence_3/twi6_part_3.wav
+20,20.0,"cotonou, benin",yoruba1,yoruba,male,414,benin,False,3,yoruba1_part_3.wav,./sentence_3/yoruba1_part_3.wav
+40,2.0,"ibadan, oyo, nigeria",yoruba2,yoruba,female,756,nigeria,False,3,yoruba2_part_3.wav,./sentence_3/yoruba2_part_3.wav
+46,5.0,"lagos, nigeria",yoruba3,yoruba,female,766,nigeria,False,3,yoruba3_part_3.wav,./sentence_3/yoruba3_part_3.wav
+46,12.0,"lagos, nigeria",yoruba4,yoruba,male,851,nigeria,False,3,yoruba4_part_3.wav,./sentence_3/yoruba4_part_3.wav
+47,2.0,"ibadan, nigeria",yoruba5,yoruba,female,2023,nigeria,False,3,yoruba5_part_3.wav,./sentence_3/yoruba5_part_3.wav
+42,1.0,"accra, ghana",ashanti1,ashanti,female,1977,ghana,False,4,ashanti1_part_4.wav,./sentence_4/ashanti1_part_4.wav
+32,6.0,"ajumako, ghana",fanti1,fanti,male,167,ghana,False,4,fanti1_part_4.wav,./sentence_4/fanti1_part_4.wav
+24,7.0,"accra, ghana",fanti2,fanti,female,1511,ghana,False,4,fanti2_part_4.wav,./sentence_4/fanti2_part_4.wav
+46,5.0,"accra, ghana",fanti3,fanti,female,1863,ghana,False,4,fanti3_part_4.wav,./sentence_4/fanti3_part_4.wav
+47,5.0,"accra, ghana",ga1,ga,male,579,ghana,False,4,ga1_part_4.wav,./sentence_4/ga1_part_4.wav
+38,4.0,"accra, ghana",ga2,ga,female,974,ghana,False,4,ga2_part_4.wav,./sentence_4/ga2_part_4.wav
+60,5.0,"accra, ghana",ga3,ga,female,976,ghana,False,4,ga3_part_4.wav,./sentence_4/ga3_part_4.wav
+60,6.0,"accra, ghana",ga4,ga,male,1150,ghana,False,4,ga4_part_4.wav,./sentence_4/ga4_part_4.wav
+36,5.0,"accra, ghana",ga5,ga,male,1796,ghana,False,4,ga5_part_4.wav,./sentence_4/ga5_part_4.wav
+20,8.0,"accra, ghana",ga6,ga,female,2122,ghana,False,4,ga6_part_4.wav,./sentence_4/ga6_part_4.wav
+49,7.0,"kano, nigeria",hausa1,hausa,male,1034,nigeria,False,4,hausa1_part_4.wav,./sentence_4/hausa1_part_4.wav
+46,10.0,"bauchi, nigeria",hausa2,hausa,male,1035,nigeria,False,4,hausa2_part_4.wav,./sentence_4/hausa2_part_4.wav
+47,6.0,"malumfashi, nigeria",hausa3,hausa,female,1036,nigeria,False,4,hausa3_part_4.wav,./sentence_4/hausa3_part_4.wav
+43,12.0,"maine, niger",hausa5,hausa,female,1047,niger,False,4,hausa5_part_4.wav,./sentence_4/hausa5_part_4.wav
+48,6.0,"kano, nigeria",hausa6,hausa,male,1048,nigeria,False,4,hausa6_part_4.wav,./sentence_4/hausa6_part_4.wav
+52,7.0,"sokoto, nigeria",hausa7,hausa,male,1050,nigeria,False,4,hausa7_part_4.wav,./sentence_4/hausa7_part_4.wav
+30,7.0,"katsina, nigeria",hausa8,hausa,male,1136,nigeria,False,4,hausa8_part_4.wav,./sentence_4/hausa8_part_4.wav
+43,5.0,"kaltungo, gombe, nigeria",hausa9,hausa,male,1408,nigeria,False,4,hausa9_part_4.wav,./sentence_4/hausa9_part_4.wav
+52,3.0,"uyo, akwa ibom, nigeria",ibibio1,ibibio,male,1184,nigeria,False,4,ibibio1_part_4.wav,./sentence_4/ibibio1_part_4.wav
+45,4.0,"abak, akwa ibom, nigeria",ibibio2,ibibio,female,1185,nigeria,False,4,ibibio2_part_4.wav,./sentence_4/ibibio2_part_4.wav
+23,12.0,"imo state, imo state, nigeria",igbo1,igbo,female,212,nigeria,False,4,igbo1_part_4.wav,./sentence_4/igbo1_part_4.wav
+65,14.0,"kafanchan, nigeria",igbo2,igbo,male,760,nigeria,False,4,igbo2_part_4.wav,./sentence_4/igbo2_part_4.wav
+35,5.0,"lagos, nigeria",igbo3,igbo,male,1040,nigeria,False,4,igbo3_part_4.wav,./sentence_4/igbo3_part_4.wav
+48,6.0,"kaduna, nigeria",kanuri1,kanuri,female,1049,nigeria,False,4,kanuri1_part_4.wav,./sentence_4/kanuri1_part_4.wav
+46,5.0,"freetown, sierra leone",krio1,krio,female,245,sierra leone,False,4,krio1_part_4.wav,./sentence_4/krio1_part_4.wav
+26,5.0,"freetown, sierra leone",krio2,krio,male,431,sierra leone,False,4,krio2_part_4.wav,./sentence_4/krio2_part_4.wav
+21,5.0,"freetown, sierra leone",krio3,krio,female,1095,sierra leone,False,4,krio3_part_4.wav,./sentence_4/krio3_part_4.wav
+36,6.0,"freetown, sierra leone",krio5,krio,male,1140,sierra leone,False,4,krio5_part_4.wav,./sentence_4/krio5_part_4.wav
+35,5.0,"harbel, liberia",mende1,mende,male,436,liberia,False,4,mende1_part_4.wav,./sentence_4/mende1_part_4.wav
+32,5.0,"freetown, sierra leone",mende3,mende,male,1986,sierra leone,False,4,mende3_part_4.wav,./sentence_4/mende3_part_4.wav
+25,12.0,"kumasi, ghana",twi1,twi,female,388,ghana,False,4,twi1_part_4.wav,./sentence_4/twi1_part_4.wav
+22,6.0,"tema, ghana",twi4,twi,female,1779,ghana,False,4,twi4_part_4.wav,./sentence_4/twi4_part_4.wav
+19,5.0,"woodbridge, virginia, usa",twi5,twi,male,2001,usa,False,4,twi5_part_4.wav,./sentence_4/twi5_part_4.wav
+20,4.0,"kumasi, ghana",twi6,twi,male,2138,ghana,False,4,twi6_part_4.wav,./sentence_4/twi6_part_4.wav
+20,20.0,"cotonou, benin",yoruba1,yoruba,male,414,benin,False,4,yoruba1_part_4.wav,./sentence_4/yoruba1_part_4.wav
+40,2.0,"ibadan, oyo, nigeria",yoruba2,yoruba,female,756,nigeria,False,4,yoruba2_part_4.wav,./sentence_4/yoruba2_part_4.wav
+46,5.0,"lagos, nigeria",yoruba3,yoruba,female,766,nigeria,False,4,yoruba3_part_4.wav,./sentence_4/yoruba3_part_4.wav
+46,12.0,"lagos, nigeria",yoruba4,yoruba,male,851,nigeria,False,4,yoruba4_part_4.wav,./sentence_4/yoruba4_part_4.wav
+47,2.0,"ibadan, nigeria",yoruba5,yoruba,female,2023,nigeria,False,4,yoruba5_part_4.wav,./sentence_4/yoruba5_part_4.wav
+42,1.0,"accra, ghana",ashanti1,ashanti,female,1977,ghana,False,5,ashanti1_part_5.wav,./sentence_5/ashanti1_part_5.wav
+32,6.0,"ajumako, ghana",fanti1,fanti,male,167,ghana,False,5,fanti1_part_5.wav,./sentence_5/fanti1_part_5.wav
+24,7.0,"accra, ghana",fanti2,fanti,female,1511,ghana,False,5,fanti2_part_5.wav,./sentence_5/fanti2_part_5.wav
+46,5.0,"accra, ghana",fanti3,fanti,female,1863,ghana,False,5,fanti3_part_5.wav,./sentence_5/fanti3_part_5.wav
+47,5.0,"accra, ghana",ga1,ga,male,579,ghana,False,5,ga1_part_5.wav,./sentence_5/ga1_part_5.wav
+38,4.0,"accra, ghana",ga2,ga,female,974,ghana,False,5,ga2_part_5.wav,./sentence_5/ga2_part_5.wav
+60,5.0,"accra, ghana",ga3,ga,female,976,ghana,False,5,ga3_part_5.wav,./sentence_5/ga3_part_5.wav
+60,6.0,"accra, ghana",ga4,ga,male,1150,ghana,False,5,ga4_part_5.wav,./sentence_5/ga4_part_5.wav
+36,5.0,"accra, ghana",ga5,ga,male,1796,ghana,False,5,ga5_part_5.wav,./sentence_5/ga5_part_5.wav
+20,8.0,"accra, ghana",ga6,ga,female,2122,ghana,False,5,ga6_part_5.wav,./sentence_5/ga6_part_5.wav
+49,7.0,"kano, nigeria",hausa1,hausa,male,1034,nigeria,False,5,hausa1_part_5.wav,./sentence_5/hausa1_part_5.wav
+46,10.0,"bauchi, nigeria",hausa2,hausa,male,1035,nigeria,False,5,hausa2_part_5.wav,./sentence_5/hausa2_part_5.wav
+47,6.0,"malumfashi, nigeria",hausa3,hausa,female,1036,nigeria,False,5,hausa3_part_5.wav,./sentence_5/hausa3_part_5.wav
+43,12.0,"maine, niger",hausa5,hausa,female,1047,niger,False,5,hausa5_part_5.wav,./sentence_5/hausa5_part_5.wav
+48,6.0,"kano, nigeria",hausa6,hausa,male,1048,nigeria,False,5,hausa6_part_5.wav,./sentence_5/hausa6_part_5.wav
+52,7.0,"sokoto, nigeria",hausa7,hausa,male,1050,nigeria,False,5,hausa7_part_5.wav,./sentence_5/hausa7_part_5.wav
+30,7.0,"katsina, nigeria",hausa8,hausa,male,1136,nigeria,False,5,hausa8_part_5.wav,./sentence_5/hausa8_part_5.wav
+43,5.0,"kaltungo, gombe, nigeria",hausa9,hausa,male,1408,nigeria,False,5,hausa9_part_5.wav,./sentence_5/hausa9_part_5.wav
+52,3.0,"uyo, akwa ibom, nigeria",ibibio1,ibibio,male,1184,nigeria,False,5,ibibio1_part_5.wav,./sentence_5/ibibio1_part_5.wav
+45,4.0,"abak, akwa ibom, nigeria",ibibio2,ibibio,female,1185,nigeria,False,5,ibibio2_part_5.wav,./sentence_5/ibibio2_part_5.wav
+23,12.0,"imo state, imo state, nigeria",igbo1,igbo,female,212,nigeria,False,5,igbo1_part_5.wav,./sentence_5/igbo1_part_5.wav
+65,14.0,"kafanchan, nigeria",igbo2,igbo,male,760,nigeria,False,5,igbo2_part_5.wav,./sentence_5/igbo2_part_5.wav
+35,5.0,"lagos, nigeria",igbo3,igbo,male,1040,nigeria,False,5,igbo3_part_5.wav,./sentence_5/igbo3_part_5.wav
+48,6.0,"kaduna, nigeria",kanuri1,kanuri,female,1049,nigeria,False,5,kanuri1_part_5.wav,./sentence_5/kanuri1_part_5.wav
+46,5.0,"freetown, sierra leone",krio1,krio,female,245,sierra leone,False,5,krio1_part_5.wav,./sentence_5/krio1_part_5.wav
+26,5.0,"freetown, sierra leone",krio2,krio,male,431,sierra leone,False,5,krio2_part_5.wav,./sentence_5/krio2_part_5.wav
+21,5.0,"freetown, sierra leone",krio3,krio,female,1095,sierra leone,False,5,krio3_part_5.wav,./sentence_5/krio3_part_5.wav
+36,6.0,"freetown, sierra leone",krio5,krio,male,1140,sierra leone,False,5,krio5_part_5.wav,./sentence_5/krio5_part_5.wav
+35,5.0,"harbel, liberia",mende1,mende,male,436,liberia,False,5,mende1_part_5.wav,./sentence_5/mende1_part_5.wav
+32,5.0,"freetown, sierra leone",mende3,mende,male,1986,sierra leone,False,5,mende3_part_5.wav,./sentence_5/mende3_part_5.wav
+25,12.0,"kumasi, ghana",twi1,twi,female,388,ghana,False,5,twi1_part_5.wav,./sentence_5/twi1_part_5.wav
+22,6.0,"tema, ghana",twi4,twi,female,1779,ghana,False,5,twi4_part_5.wav,./sentence_5/twi4_part_5.wav
+19,5.0,"woodbridge, virginia, usa",twi5,twi,male,2001,usa,False,5,twi5_part_5.wav,./sentence_5/twi5_part_5.wav
+20,4.0,"kumasi, ghana",twi6,twi,male,2138,ghana,False,5,twi6_part_5.wav,./sentence_5/twi6_part_5.wav
+20,20.0,"cotonou, benin",yoruba1,yoruba,male,414,benin,False,5,yoruba1_part_5.wav,./sentence_5/yoruba1_part_5.wav
+40,2.0,"ibadan, oyo, nigeria",yoruba2,yoruba,female,756,nigeria,False,5,yoruba2_part_5.wav,./sentence_5/yoruba2_part_5.wav
+46,5.0,"lagos, nigeria",yoruba3,yoruba,female,766,nigeria,False,5,yoruba3_part_5.wav,./sentence_5/yoruba3_part_5.wav
+46,12.0,"lagos, nigeria",yoruba4,yoruba,male,851,nigeria,False,5,yoruba4_part_5.wav,./sentence_5/yoruba4_part_5.wav
+47,2.0,"ibadan, nigeria",yoruba5,yoruba,female,2023,nigeria,False,5,yoruba5_part_5.wav,./sentence_5/yoruba5_part_5.wav
+41,5.0,"accra, ghana",akan1,akan,male,979,ghana,False,0,akan1_part_0.wav,./sentence_0/akan1_part_0.wav
+41,5.0,"accra, ghana",akan1,akan,male,979,ghana,False,1,akan1_part_1.wav,./sentence_1/akan1_part_1.wav
+41,5.0,"accra, ghana",akan1,akan,male,979,ghana,False,2,akan1_part_2.wav,./sentence_2/akan1_part_2.wav
+25,6.0,"benin city, nigeria",edo1,edo,male,60,nigeria,False,0,edo1_part_0.wav,./sentence_0/edo1_part_0.wav
+25,6.0,"benin city, nigeria",edo1,edo,male,60,nigeria,False,1,edo1_part_1.wav,./sentence_1/edo1_part_1.wav
+62,10.0,"kano, nigeria",hausa4,hausa,male,1039,nigeria,False,0,hausa4_part_0.wav,./sentence_0/hausa4_part_0.wav
+62,10.0,"kano, nigeria",hausa4,hausa,male,1039,nigeria,False,1,hausa4_part_1.wav,./sentence_1/hausa4_part_1.wav
+62,10.0,"kano, nigeria",hausa4,hausa,male,1039,nigeria,False,2,hausa4_part_2.wav,./sentence_2/hausa4_part_2.wav
+62,10.0,"kano, nigeria",hausa4,hausa,male,1039,nigeria,False,3,hausa4_part_3.wav,./sentence_3/hausa4_part_3.wav
+36,6.0,"lagos, nigeria",ibibio3,ibibio,male,1691,nigeria,False,0,ibibio3_part_0.wav,./sentence_0/ibibio3_part_0.wav
+48,7.0,"freetown, sierra leone",krio4,krio,female,1106,sierra leone,False,0,krio4_part_0.wav,./sentence_0/krio4_part_0.wav
+48,7.0,"freetown, sierra leone",krio4,krio,female,1106,sierra leone,False,1,krio4_part_1.wav,./sentence_1/krio4_part_1.wav
+48,7.0,"freetown, sierra leone",krio4,krio,female,1106,sierra leone,False,2,krio4_part_2.wav,./sentence_2/krio4_part_2.wav
+48,7.0,"freetown, sierra leone",krio4,krio,female,1106,sierra leone,False,3,krio4_part_3.wav,./sentence_3/krio4_part_3.wav
+26,3.0,"freetown, sierra leone",krio6,krio,female,2031,sierra leone,False,0,krio6_part_0.wav,./sentence_0/krio6_part_0.wav
+26,3.0,"freetown, sierra leone",krio6,krio,female,2031,sierra leone,False,1,krio6_part_1.wav,./sentence_1/krio6_part_1.wav
+21,2.0,"freetown, sierra leone",mende2,mende,female,603,sierra leone,False,0,mende2_part_0.wav,./sentence_0/mende2_part_0.wav
+33,6.0,"ajumako, ghana",twi2,twi,male,389,ghana,False,0,twi2_part_0.wav,./sentence_0/twi2_part_0.wav
+33,6.0,"ajumako, ghana",twi2,twi,male,389,ghana,False,1,twi2_part_1.wav,./sentence_1/twi2_part_1.wav
