@@ -209,8 +209,8 @@ def scan_and_benchmark_all(all_accents_data_path: str, accents_audio_path: str, 
 # 4. Main Running Context Block
 # -------------------------------------------------------------------------
 if __name__ == "__main__":
-    ALL_ACCENTS_DATA_DIR = "./all_accents_data"
-    ACCENTS_AUDIO_DIR = "./accents_audio"
+    ALL_ACCENTS_DATA_DIR = "../all_accents_data"
+    ACCENTS_AUDIO_DIR = "../accents_audio"
 
     print("🚀 Starting optimized, highly accelerated non-destructive benchmarking...")
     # Cap limit set to 100 files per group for sub-minute execution
