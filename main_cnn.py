@@ -44,22 +44,23 @@ PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 print(f"📁 Project Root Directory: {PROJECT_DIR}")
 print(f"📊 Graphs Output Directory: {PLOTS_DIR} (Cleared & Ready)")
 
-# Target paths definition based on RUN_MODE
+# Exact Target Filenames and Folder Names based on RUN_MODE
 if RUN_MODE == "free_text":
     TARGET_CSV = "master_extracted_features_free_text.csv"
-    TARGET_SPEC_DIR_KEYWORDS = ["spectrograms_logmel_free_text", "spectrograms_free_text", "free_text"]
+    EXACT_SPEC_DIR_NAME = "spectrograms_logmel_free_text"
 else:
     TARGET_CSV = "master_extracted_features_mixed.csv"
-    TARGET_SPEC_DIR_KEYWORDS = ["spectrograms_logmel_mixed", "spectrograms_mixed", "mixed"]
+    EXACT_SPEC_DIR_NAME = "spectrograms_logmel_mixed"
 
 
-# Dynamically locates the target metadata CSV and spectrogram PyTorch tensor files directory within the project.
-# It ensures the execution pipeline automatically binds to valid local file paths regardless of project structure.
+# Dynamically locates the target metadata CSV and explicit spectrogram directory.
+# Checks exact folder names first to guarantee precise binding in PyCharm projects.
 def find_dataset_paths():
     search_base = str(PROJECT_DIR)
     found_csv = None
     found_spec_dir = None
 
+    # 1. Search for target CSV
     for root, dirs, files in os.walk(search_base):
         for file in files:
             if file.lower() == TARGET_CSV.lower():
@@ -71,22 +72,27 @@ def find_dataset_paths():
     if not found_csv:
         raise FileNotFoundError(f"Could not locate {TARGET_CSV} anywhere under {search_base}")
 
-    parent_search = os.path.dirname(found_csv)
-    for item in os.listdir(parent_search):
-        full_item_path = os.path.join(parent_search, item)
-        if os.path.isdir(full_item_path):
-            if any(kw.lower() in item.lower() for kw in TARGET_SPEC_DIR_KEYWORDS):
-                found_spec_dir = full_item_path
+    # 2. Check exact folder name first
+    exact_path = PROJECT_DIR / EXACT_SPEC_DIR_NAME
+    if exact_path.exists() and exact_path.is_dir():
+        found_spec_dir = str(exact_path)
+    else:
+        # Fallback recursive search for exact folder name or directory containing .pt files
+        for root, dirs, files in os.walk(search_base):
+            if os.path.basename(root).lower() == EXACT_SPEC_DIR_NAME.lower():
+                found_spec_dir = root
                 break
 
     if not found_spec_dir:
+        # Final fallback: search for any directory with .pt files matching part of the target name
         for root, dirs, files in os.walk(search_base):
-            for d in dirs:
-                if any(kw.lower() in d.lower() for kw in TARGET_SPEC_DIR_KEYWORDS):
-                    found_spec_dir = os.path.join(root, d)
-                    break
-            if found_spec_dir:
+            pt_files = [f for f in files if f.endswith('.pt')]
+            if len(pt_files) > 0 and EXACT_SPEC_DIR_NAME.lower() in root.lower():
+                found_spec_dir = root
                 break
+
+    if not found_spec_dir:
+        raise FileNotFoundError(f"Could not locate spectrogram directory '{EXACT_SPEC_DIR_NAME}' under {search_base}")
 
     return found_csv, found_spec_dir
 
@@ -103,13 +109,9 @@ print("=" * 65)
 # DATASET INITIALIZATION & MATCHING REPORT
 # ==============================================================================
 
-if not os.path.exists(CSV_PATH):
-    alt_csv = os.path.join(DATASET_DIR,
-                           "master_extracted_features_free_text.csv" if DATASET_TYPE == "mixed" else "master_extracted_features_mixed.csv")
-    if os.path.exists(alt_csv):
-        CSV_PATH = alt_csv
-
 metadata_df = pd.read_csv(CSV_PATH)
+
+# Clean filenames for robust matching
 metadata_df["clean_id"] = metadata_df["filename"].apply(
     lambda x: os.path.splitext(os.path.basename(str(x)))[0].lower().strip()
 )
@@ -137,11 +139,21 @@ accent_summary["Success_Rate_%"] = (
 
 print(accent_summary)
 print("-" * 65)
-print(f"Total CSV Samples: {len(metadata_df)} | Total Matching PT Files: {accent_summary['PT_Generated'].sum()}")
+total_matched = accent_summary['PT_Generated'].sum()
+print(f"Total CSV Samples: {len(metadata_df)} | Total Matching PT Files: {total_matched}")
 print("=" * 65)
 
 df_filtered = metadata_df[metadata_df["pt_exists"]].reset_index(drop=True)
 df_filtered["file_id"] = df_filtered["clean_id"]
+
+# Safety Guard Check
+if len(df_filtered) == 0:
+    print("\n❌ CRITICAL ERROR: Zero matching .pt files found!")
+    print(f"CSV Path used: {CSV_PATH}")
+    print(f"Spectrogram Directory used: {SPECTROGRAM_SAVE_DIR}")
+    print(f"Sample CSV IDs: {list(metadata_df['clean_id'].head(3))}")
+    print(f"Sample .pt files on disk: {list(existing_pt_files)[:3] if len(existing_pt_files) > 0 else 'Directory is EMPTY'}")
+    sys.exit(1)
 
 
 # ==============================================================================
