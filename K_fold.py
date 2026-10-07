@@ -12,12 +12,13 @@ np.random.seed(RANDOM_SEED)
 
 # Define directories paths based on project layout
 CURRENT_DIR = Path(__file__).resolve().parent
-RAW_AUDIO_DIR = CURRENT_DIR / "audio_by_accent_raw_normalized"
-SENTENCES_DIR = CURRENT_DIR / "sentences_samples_normalized"
+RAW_AUDIO_DIR = CURRENT_DIR / "audio_by_accent_raw"
+SENTENCES_DIR = CURRENT_DIR / "sentences_samples"
 
 # Output Directories
 FREE_TEXT_OUT_DIR = CURRENT_DIR / "machine_learning_official_free_text_only"
 MIXED_OUT_DIR = CURRENT_DIR / "machine_learning_official_mixed"
+ARCHIVE_OUT_DIR = CURRENT_DIR / "machine_learning_official_archive_only"
 
 # Standardized column names for the final metadata
 FINAL_COLUMNS = ['filename', 'file_path', 'speaker_id', 'accent', 'text']
@@ -415,6 +416,95 @@ def build_mixed_metadata():
     return pd.DataFrame()
 
 
+def build_archive_only_metadata():
+    """
+    Pipeline for archive_only mode: Generates massive metadata strictly for archive audio samples.
+    Capped strictly at a maximum of 60 unique speakers per accent.
+    """
+    print("\n--- Building Archive Only Massive Metadata ---")
+    all_records = []
+    accents = ['chinese', 'indian', 'nigerian', 'usa']
+
+    for accent in accents:
+        accent_dir = SENTENCES_DIR / accent
+        if not accent_dir.exists():
+            print(f" -> Archive directory missing for accent: {accent}, skipping archive split.")
+            continue
+
+        df_raw = load_exact_metadata(accent_dir, accent)
+        if df_raw is None:
+            continue
+
+        speaker_col_name = None
+        for key in ['speakerid', 'speaker_id', 'client_id', 'id']:
+            if key in df_raw.columns:
+                speaker_col_name = key
+                break
+
+        df_unique_speakers = df_raw.copy()
+        if speaker_col_name:
+            df_unique_speakers['temp_spk'] = df_unique_speakers[speaker_col_name].apply(clean_speaker_id)
+            df_unique_speakers = df_unique_speakers.drop_duplicates(subset=['temp_spk'])
+
+        sentence_records = []
+        for idx, row in df_unique_speakers.iterrows():
+            raw_filename = get_column_value(df_unique_speakers, ['filename', 'file_name', 'audio', 'file', 'wav_path'], idx)
+            if not raw_filename:
+                continue
+
+            pure_filename = clean_filename_path(raw_filename)
+            speaker_id = clean_speaker_id(get_column_value(df_unique_speakers, ['speakerid', 'speaker_id', 'client_id', 'id'], idx))
+
+            accent_raw = get_column_value(df_unique_speakers, ['accent'], idx)
+            accent_label = sanitize_accent_label(accent_raw, accent)
+
+            base_name, _ = os.path.splitext(pure_filename)
+
+            for i in range(6):
+                archive_filename = f"{base_name}_part_{i}.wav"
+
+                path_with_folder = accent_dir / f"sentence_{i}" / archive_filename
+                path_direct = accent_dir / archive_filename
+
+                valid_path = None
+                if path_with_folder.exists():
+                    valid_path = path_with_folder
+                elif path_direct.exists():
+                    valid_path = path_direct
+
+                if valid_path is not None:
+                    final_text = clean_text_quotes(STELLA_SENTENCES[i])
+
+                    sentence_records.append({
+                        'filename': archive_filename,
+                        'file_path': str(valid_path),
+                        'speaker_id': speaker_id,
+                        'accent': accent_label,
+                        'text': final_text,
+                        'source_type': 'archive'
+                    })
+
+        df_sentence = pd.DataFrame(sentence_records)
+
+        if df_sentence.empty:
+            print(f" -> Sentences Accent '{accent}': 0 valid physical files found. Skipping archive pool sampling.")
+            continue
+
+        df_sentence_capped = sample_dataset_safely(df_sentence, target_limit=60, mode='speakers')
+
+        retained_speakers = len(df_sentence_capped['speaker_id'].unique()) if not df_sentence_capped.empty else 0
+        print(f" -> Sentences Accent '{accent}': Capped/Retained {retained_speakers} unique speakers ({len(df_sentence_capped)} valid existing files extracted).")
+
+        all_records.append(df_sentence_capped)
+
+    if all_records:
+        df_final = pd.concat(all_records, ignore_index=True)
+        os.makedirs(ARCHIVE_OUT_DIR, exist_ok=True)
+        save_pure_csv_without_quotes(df_final, ARCHIVE_OUT_DIR / "massive_metadata_archive_only.csv")
+        return df_final
+    return pd.DataFrame()
+
+
 # =====================================================================
 # SPEAKER LEAKAGE VERIFICATION DETECTOR
 # =====================================================================
@@ -560,6 +650,7 @@ def run_nested_group_kfold_generator(df):
             # Yield indices matrices control chunks directly to the new main script
             yield fold_idx, df_train, df_val, df_test
             break  # Match gridsearch setup sequence
+
 # =====================================================================
 # MAIN RUNNER PROGRAM ENTRYPOINT
 # =====================================================================
@@ -572,7 +663,6 @@ if __name__ == "__main__":
     df_free_text = build_free_text_only_metadata()
     if not df_free_text.empty:
         print("\nMassive Free-Text Master Matrix successfully established.")
-        # All breaks removed; gathers all 90 cross-validation split combinations
         datasets_splits['free_text'] = run_nested_group_kfold(df_free_text)
 
     print("\n" + "=" * 60 + "\n")
@@ -583,8 +673,18 @@ if __name__ == "__main__":
         print("\nMassive Mixed Master Matrix successfully established.")
         datasets_splits['mixed'] = run_nested_group_kfold(df_mixed)
 
+    print("\n" + "=" * 60 + "\n")
+
+    # Task 3: Generate and validate the Archive Only master dataset sheet layout
+    df_archive = build_archive_only_metadata()
+    if not df_archive.empty:
+        print("\nMassive Archive Only Master Matrix successfully established.")
+        datasets_splits['archive_only'] = run_nested_group_kfold(df_archive)
+
     # Sanity check to confirm splits are correctly allocated in memory
     if 'free_text' in datasets_splits and datasets_splits['free_text']:
         print(f"\n[INFO] Generated {len(datasets_splits['free_text'])} total valid splits for Free-Text.")
     if 'mixed' in datasets_splits and datasets_splits['mixed']:
         print(f"[INFO] Generated {len(datasets_splits['mixed'])} total valid splits for Mixed.")
+    if 'archive_only' in datasets_splits and datasets_splits['archive_only']:
+        print(f"[INFO] Generated {len(datasets_splits['archive_only'])} total valid splits for Archive Only.")

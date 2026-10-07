@@ -9,8 +9,8 @@ from pathlib import Path
 # =====================================================================
 # שנה את הנתיבים במידת הצורך למיקום שבו חילצת את ה-ZIP במחשב שלך
 TARGET_DIRS = [
-    Path("sentences_samples_normalized"),
-    Path("audio_by_accent_raw_normalized")
+    Path("../../sentences_samples_normalized"),
+    Path("../../audio_by_accent_raw_normalized")
 ]
 
 # סף כשל מרבי מותר

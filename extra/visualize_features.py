@@ -5,7 +5,7 @@ import librosa
 import librosa.display
 
 # --- 1. טעינת הקובץ והגדרת זמנים (שנה את הפרמטרים כאן לפי הצורך) ---
-audio_path = "audio_by_accent_raw_normalized/chinese/000030012.WAV"
+audio_path = "../audio_by_accent_raw_normalized/chinese/000030012.WAV"
 start_time = 0.0  # תחילת הקיטוע בשניות
 end_time = 3.0    # סוף הקיטוע בשניות
 
