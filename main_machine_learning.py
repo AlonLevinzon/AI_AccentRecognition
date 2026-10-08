@@ -10,11 +10,12 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.spatial import ConvexHull
 
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.feature_selection import f_classif
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import RandomizedSearchCV, learning_curve
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.decomposition import PCA
@@ -42,11 +43,8 @@ except ImportError:
 # CONFIGURATION & SYSTEM SETUP
 # ==============================================================================
 
-# 1. Dataset Subset Execution Mode: "free_text", "mixed", or "archive_only"
-RUN_MODE = "free_text"
-
-# 2. Hyperparameter Tuning Strategy Mode: "random_search", "custom", or "default"
-TUNING_MODE = "random_search"
+RUN_MODE = "free_text"  # Options: "free_text", "mixed", or "archive_only"
+TUNING_MODE = "random_search"  # Options: "random_search", "custom", or "default"
 
 ENABLE_FEATURE_SELECTION = False
 TOP_K_FEATURES = 30
@@ -54,13 +52,11 @@ TOP_K_FEATURES = 30
 CUSTOM_HYPERPARAMETERS = {
     'Logistic Regression': {'C': 1.0, 'penalty': 'l2', 'solver': 'lbfgs'},
     'SVM (RBF)': {'C': 10, 'gamma': 'scale'},
-    'Random Forest': {'n_estimators': 200, 'max_depth': 20, 'min_samples_split': 2, 'min_samples_leaf': 1,
-                      'max_features': 'sqrt'},
+    'Random Forest': {'n_estimators': 200, 'max_depth': 20, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'},
     'XGBoost': {'n_estimators': 200, 'max_depth': 5, 'learning_rate': 0.1, 'subsample': 0.8, 'colsample_bytree': 0.8},
     'Kernel ELM': {'C': 10, 'gamma': 0.01}
 }
 
-# 3. Local Project Directory Configuration
 PROJECT_DIR = Path.cwd().resolve()
 WORKING_DIR = PROJECT_DIR
 PROJECT_DATA_DIR = PROJECT_DIR
@@ -68,7 +64,6 @@ PROJECT_DATA_DIR = PROJECT_DIR
 if str(PROJECT_DIR) not in sys.path:
     sys.path.insert(0, str(PROJECT_DIR))
 
-# 4. Setup Graphs Directory & Clear Previous Artifacts per Run Mode
 GRAPHS_DIR = PROJECT_DIR / "graphs" / RUN_MODE
 if GRAPHS_DIR.exists():
     shutil.rmtree(GRAPHS_DIR)
@@ -82,14 +77,12 @@ print(f"   • PROJECT_ROOT : {PROJECT_DIR}")
 print(f"   • GRAPHS_DIR   : {GRAPHS_DIR} (Cleared & Prepared)")
 print("=" * 80)
 
-# Suppress non-critical execution warnings
 warnings.filterwarnings('ignore', category=UserWarning)
 warnings.filterwarnings('ignore', category=RuntimeWarning)
 warnings.filterwarnings('ignore', category=FutureWarning)
 warnings.filterwarnings('ignore', category=ConvergenceWarning)
 warnings.filterwarnings('ignore', message='.*max_iter.*')
 
-# Import custom project modules
 import K_fold
 from K_fold import (
     build_free_text_only_metadata,
@@ -110,48 +103,38 @@ from classifiers.svm_classifier import get_svm_classifier
 from classifiers.XGBoost import get_xgboost_classifier
 from features.extract_features_to_files import import_vector_to_file
 
-# Set output directories within K_fold module
 K_fold.FREE_TEXT_OUT_DIR = WORKING_DIR / "machine_learning_official_free_text_only"
 K_fold.MIXED_OUT_DIR = WORKING_DIR / "machine_learning_official_mixed"
 K_fold.ARCHIVE_OUT_DIR = WORKING_DIR / "machine_learning_official_archive_only"
 
-# Locate Master Extracted Features CSV
 extracted_filename = f"master_extracted_features_{RUN_MODE}.csv"
 EXTRACTED_FEATURES_MASTER_CSV = PROJECT_DIR / extracted_filename
-
-if EXTRACTED_FEATURES_MASTER_CSV.exists():
-    print(f"🎯 [CACHED FEATURES FOUND]: {EXTRACTED_FEATURES_MASTER_CSV}")
-else:
-    print(f"⚠️ Target path for features: {EXTRACTED_FEATURES_MASTER_CSV}")
 
 
 # ==============================================================================
 # CUSTOM CLASSIFIER DEFINITIONS
 # ==============================================================================
 
-# This class implements a custom Kernel Extreme Learning Machine (KELM) classifier compatible with scikit-learn.
-# It helps the project by providing fast training and high-dimensional kernel learning for accent classification.
 class KernelELMClassifier(BaseEstimator, ClassifierMixin):
     """
-    Implements a Kernel Extreme Learning Machine (KELM) classifier.
+    Custom scikit-learn compatible estimator for Kernel Extreme Learning Machine (KELM).
+    Provides analytical single-step training via RBF kernel mapping for fast high-dimensional learning.
     """
-
-    # Constructor function that initializes the regularization parameter (C), kernel scale (gamma), and kernel type.
     def __init__(self, C=1.0, gamma=0.1, kernel='rbf'):
         self.C = C
         self.gamma = gamma
         self.kernel = kernel
 
-    # Helper function that computes the Radial Basis Function (RBF) kernel matrix between sample feature vectors.
     def rbf_kernel(self, X1, X2):
+        """Computes the Radial Basis Function (RBF) pairwise kernel matrix between feature matrices."""
         X1_sq = np.sum(X1 ** 2, axis=1).reshape(-1, 1)
         X2_sq = np.sum(X2 ** 2, axis=1).reshape(1, -1)
         distances_sq = X1_sq + X2_sq - 2 * np.dot(X1, X2.T)
         distances_sq = np.maximum(distances_sq, 0.0)
         return np.exp(-self.gamma * distances_sq)
 
-    # Main training function that calculates analytical output weights in one step using regularized ridge regression.
     def fit(self, X, y):
+        """Fits the KELM weights analytically using regularized pseudoinverse inversion."""
         self.X_train_ = X.values if hasattr(X, 'values') else np.asarray(X, dtype=np.float64)
         y_arr = y.values if hasattr(y, 'values') else np.asarray(y)
         y_arr = y_arr.flatten()
@@ -174,16 +157,16 @@ class KernelELMClassifier(BaseEstimator, ClassifierMixin):
 
         return self
 
-    # Prediction function that outputs the predicted accent class label for unseen test samples.
     def predict(self, X):
+        """Predicts class labels for unseen input sample feature vectors."""
         X_data = X.values if hasattr(X, 'values') else np.asarray(X, dtype=np.float64)
         K_test = self.rbf_kernel(X_data, self.X_train_)
         raw_output = np.dot(K_test, self.beta_)
         class_indices = np.argmax(raw_output, axis=1)
         return self.classes_[class_indices]
 
-    # Probability estimation function that converts output decision scores into class probabilities using Softmax.
     def predict_proba(self, X):
+        """Calculates multi-class prediction probabilities using softmax output normalization."""
         X_data = X.values if hasattr(X, 'values') else np.asarray(X, dtype=np.float64)
         K_test = self.rbf_kernel(X_data, self.X_train_)
         raw_output = np.dot(K_test, self.beta_)
@@ -195,9 +178,11 @@ class KernelELMClassifier(BaseEstimator, ClassifierMixin):
 # PIPELINE HELPER FUNCTIONS
 # ==============================================================================
 
-# Extracts all acoustic features from audio files once and caches them to a local CSV file.
-# It saves execution time by preventing re-extraction of features during cross-validation loops.
 def pre_extract_all_features_once(df_master):
+    """
+    Extracts acoustic features for all audio samples in the metadata once and caches them to disk.
+    Prevents redundant feature extraction during outer cross-validation loops.
+    """
     if EXTRACTED_FEATURES_MASTER_CSV.exists():
         print(f"──► [CACHED DATA DETECTED]: Loading features from {EXTRACTED_FEATURES_MASTER_CSV}")
         return pd.read_csv(EXTRACTED_FEATURES_MASTER_CSV)
@@ -211,7 +196,6 @@ def pre_extract_all_features_once(df_master):
     missing_normalized_count = 0
     total_files = len(df_master_ml)
 
-    # Internal helper function that locates and returns the corresponding normalized audio file path.
     def resolve_normalized_path(row):
         nonlocal missing_normalized_count
         accent_label = str(row['accent'])
@@ -255,9 +239,10 @@ def pre_extract_all_features_once(df_master):
     return pd.read_csv(EXTRACTED_FEATURES_MASTER_CSV)
 
 
-# Merges master extracted features with current fold split metadata.
-# It ensures exact alignment between acoustic features and target labels for train, validation, and test sets.
 def filter_features_by_metadata_split(df_master_features, df_split_meta):
+    """
+    Filters and aligns cached feature vectors with a specific fold split metadata dataframe.
+    """
     return pd.merge(
         df_split_meta[['filename', 'file_path', 'speaker_id', 'text', 'accent']],
         df_master_features.drop(columns=['speaker_id', 'text', 'accent'], errors='ignore'),
@@ -265,9 +250,11 @@ def filter_features_by_metadata_split(df_master_features, df_split_meta):
     )
 
 
-# Ranks and selects the top K most informative acoustic features using ANOVA F-tests on the training set.
-# It prevents data leakage by selecting features strictly based on training fold data.
 def apply_anova_feature_selection(df_train, available_features, top_k=30):
+    """
+    Ranks acoustic features using ANOVA F-tests on the training fold and returns top K features.
+    Guarantees strict leakage-free feature selection based solely on training split data.
+    """
     X_tr = df_train[available_features].fillna(0)
     non_constant_features = [col for col in available_features if X_tr[col].nunique() > 1]
     if not non_constant_features:
@@ -282,9 +269,11 @@ def apply_anova_feature_selection(df_train, available_features, top_k=30):
     return anova_df.sort_values(by='F_Score', ascending=False)['Feature'].head(top_k).tolist()
 
 
-# Prepares, scales (StandardScaler), and encodes accent target labels for each cross-validation fold.
-# It ensures models receive properly scaled and leakage-free feature matrices for training and evaluation.
 def load_and_scale_fold_matrices(df_master_features, df_train_meta, df_val_meta, df_test_meta):
+    """
+    Prepares, scales (StandardScaler), and encodes target labels for train, validation, and test splits.
+    Ensures zero data leakage across outer cross-validation folds.
+    """
     df_train = filter_features_by_metadata_split(df_master_features, df_train_meta)
     df_val = filter_features_by_metadata_split(df_master_features, df_val_meta)
     df_test = filter_features_by_metadata_split(df_master_features, df_test_meta)
@@ -315,9 +304,10 @@ def load_and_scale_fold_matrices(df_master_features, df_train_meta, df_val_meta,
 # HYPERPARAMETER TUNING ENGINE
 # ==============================================================================
 
-# Executes hyperparameter tuning or loads pre-defined custom parameters for classifiers inside inner CV folds.
-# It helps find optimal model settings to achieve peak classification accuracy for each algorithm.
 def tune_model_hyperparameters(model_name, X_train, y_train, fold_tuning_history, n_iter=20, cv_folds=3):
+    """
+    Performs RandomizedSearchCV hyperparameter tuning on training fold data and tracks history.
+    """
     if TUNING_MODE == "default":
         return None, {}
 
@@ -383,42 +373,66 @@ def tune_model_hyperparameters(model_name, X_train, y_train, fold_tuning_history
 # PLOTTING & REPORTING FUNCTIONS
 # ==============================================================================
 
-# Averages hyperparameter search accuracy across all folds and exports a summary CSV report.
-# It documents the best-performing parameter configuration found for each classifier.
 def export_and_print_best_hyperparameters(fold_tuning_history):
+    """
+    Averages hyperparameter validation accuracy scores across outer folds for ALL 6 classifiers and exports CSV.
+    """
     if TUNING_MODE != "random_search" or not fold_tuning_history:
+        print("⚠️ Hyperparameter report skipped.")
         return
 
+    print("\n" + "=" * 80)
+    print("🏆 OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL FOLDS)")
+    print("=" * 80)
+
     report_rows = []
-    for model_name, history in fold_tuning_history.items():
+    for model_name in ['Gaussian NB', 'Logistic Regression', 'SVM (RBF)', 'Random Forest', 'XGBoost', 'Kernel ELM']:
+        history = fold_tuning_history.get(model_name, {})
         if not history:
+            print(f"\n📌 Classifier: [{model_name}] -> No tuning history recorded.")
             continue
 
         best_param_dict = None
         best_avg_accuracy = -1.0
 
         for param_tuple, scores in history.items():
+            if not scores:
+                continue
             avg_score = np.mean(scores) * 100
             if avg_score > best_avg_accuracy:
                 best_avg_accuracy = avg_score
                 best_param_dict = dict(param_tuple)
 
-        report_rows.append({
-            'Classifier': model_name,
-            'Best_Averaged_Accuracy_%': round(best_avg_accuracy, 2),
-            'Optimal_Hyperparameters': str(best_param_dict)
-        })
+        if best_param_dict is not None:
+            print(f"\n📌 Classifier: [{model_name}]")
+            print(f"   • Mean Cross-Validation Accuracy: {best_avg_accuracy:.2f}%")
+            print(f"   • Best Hyperparameters:")
+            for k, v in best_param_dict.items():
+                print(f"       - {k}: {v}")
 
-    df_best_report = pd.DataFrame(report_rows)
-    report_csv_path = WORKING_DIR / f"best_hyperparameters_summary_{RUN_MODE}.csv"
-    df_best_report.to_csv(report_csv_path, index=False)
+            report_rows.append({
+                'Classifier': model_name,
+                'Best_Averaged_Accuracy_%': round(best_avg_accuracy, 2),
+                'Optimal_Hyperparameters': str(best_param_dict)
+            })
+
+    if report_rows:
+        df_best_report = pd.DataFrame(report_rows)
+        report_csv_path = WORKING_DIR / f"best_hyperparameters_summary_{RUN_MODE}.csv"
+        df_best_report.to_csv(report_csv_path, index=False)
+        print(f"\n💾 Summary report saved -> {report_csv_path}")
 
 
-# Generates side-by-side dashboard figures illustrating accuracy curves across parameter combinations.
-# It provides a visual evaluation of hyperparameter sensitivity for each model.
 def generate_hyperparameter_averaged_plots(fold_tuning_history):
+    """
+    Generates combined (Table on left, Continuous sensitivity curve on right) dashboard figures for ALL 6 models.
+    """
     if TUNING_MODE != "random_search" or not fold_tuning_history:
         return
+
+    print("==================================================")
+    print("📊 GENERATING COMBINED (TABLE + CHART) FIGURES FOR ALL 6 CLASSIFIERS")
+    print("==================================================")
 
     for model_name, history in fold_tuning_history.items():
         if not history:
@@ -427,102 +441,93 @@ def generate_hyperparameter_averaged_plots(fold_tuning_history):
         flat_records = []
         for param_tuple, scores in history.items():
             param_dict = dict(param_tuple)
-            param_dict['mean_accuracy'] = np.mean(scores) * 100
+            mean_acc = np.mean(scores) * 100
+            param_dict['Accuracy'] = mean_acc
             flat_records.append(param_dict)
 
-        df_params = pd.DataFrame(flat_records)
-        if df_params.empty:
+        df_model = pd.DataFrame(flat_records)
+        if df_model.empty:
             continue
 
-        best_row = df_params.loc[df_params['mean_accuracy'].idxmax()]
+        x_param = None
+        series_param = None
 
-        if model_name == 'XGBoost':
-            p_row, p_col = 'learning_rate', 'max_depth'
-        elif model_name == 'Random Forest':
-            p_row, p_col = 'n_estimators', 'max_depth'
-        elif model_name in ['SVM (RBF)', 'Kernel ELM']:
-            p_row, p_col = 'C', 'gamma'
+        if model_name in ['Kernel ELM', 'SVM (RBF)']:
+            x_param = 'C'
+            series_param = 'gamma'
         elif model_name == 'Logistic Regression':
-            p_row, p_col = 'C', 'solver'
+            x_param = 'C'
+            series_param = 'solver'
+        elif model_name == 'Random Forest':
+            x_param = 'n_estimators'
+            series_param = 'max_depth'
+        elif model_name == 'XGBoost':
+            x_param = 'learning_rate'
+            series_param = 'max_depth'
         elif model_name == 'Gaussian NB':
-            p_row, p_col = 'var_smoothing', 'priors'
+            x_param = 'var_smoothing'
+            series_param = 'priors' if 'priors' in df_model.columns else None
+
+        if not x_param or x_param not in df_model.columns:
+            param_cols = [c for c in df_model.columns if c != 'Accuracy']
+            if param_cols:
+                x_param = param_cols[0]
+                series_param = param_cols[1] if len(param_cols) > 1 else None
+
+        df_model[x_param] = pd.to_numeric(df_model[x_param], errors='coerce')
+        df_model = df_model.dropna(subset=[x_param]).sort_values(by=x_param)
+
+        if series_param and series_param in df_model.columns:
+            df_model[series_param] = df_model[series_param].apply(lambda x: str(x) if x is not None else 'Default/None')
+            pivot_df = df_model.pivot_table(index=x_param, columns=series_param, values='Accuracy', aggfunc='mean')
         else:
-            p_row, p_col = df_params.columns[0], df_params.columns[1]
-
-        df_params[p_row] = pd.to_numeric(df_params[p_row], errors='ignore')
-        pivot_table = df_params.pivot_table(index=p_row, columns=p_col, values='mean_accuracy', aggfunc='mean')
-
-        fig = plt.figure(figsize=(15, 7.5), dpi=300)
-        gs = fig.add_gridspec(3, 2, width_ratios=[1.1, 1], height_ratios=[0.12, 1, 0.18], hspace=0.35, wspace=0.25)
-
-        ax_title = fig.add_subplot(gs[0, :])
-        ax_title.axis('off')
-        banner_rect = plt.Rectangle((0, 0), 1, 1, facecolor='#1f4e78', edgecolor='none', transform=ax_title.transAxes)
-        ax_title.add_patch(banner_rect)
-        ax_title.text(0.5, 0.5, f"{model_name} Performance vs Hyperparameters ({RUN_MODE})",
-                      color='white', weight='bold', fontsize=14, ha='center', va='center', transform=ax_title.transAxes)
-
-        ax_table = fig.add_subplot(gs[1, 0])
-        ax_table.axis('off')
-
-        table_data = []
-        col_headers = [f"{p_col}={col}" for col in pivot_table.columns]
-
-        for idx_val, row_data in pivot_table.iterrows():
-            formatted_row = [str(idx_val)]
-            for val in row_data:
-                formatted_row.append(f"{val:.2f}" if pd.notna(val) else "-")
-            table_data.append(formatted_row)
-
-        table = ax_table.table(
-            cellText=table_data, colLabels=[p_row] + col_headers,
-            cellLoc='center', loc='center', bbox=[0.0, 0.05, 1.0, 0.9]
-        )
-        table.auto_set_font_size(False)
-        table.set_fontsize(9)
-
-        for (r, c), cell in table.get_celld().items():
-            cell.set_linewidth(0.8)
-            if r == 0:
-                cell.set_facecolor('#d9e1f2')
-                cell.set_text_props(weight='bold', color='#1f4e78')
-            else:
-                cell.set_facecolor('#f2f2f2' if r % 2 == 0 else '#ffffff')
-
-        ax_line = fig.add_subplot(gs[1, 1])
-        for col in pivot_table.columns:
-            series = pivot_table[col].dropna()
-            ax_line.plot(series.index.astype(str), series.values, marker='o', linewidth=1.8, markersize=5,
-                         label=f"{p_col}={col}")
-
-        ax_line.set_ylabel("Mean Accuracy (%)", fontweight='bold', fontsize=11)
-        ax_line.set_xlabel(p_row, fontweight='bold', fontsize=11)
-        ax_line.grid(True, linestyle='--', alpha=0.4)
-        ax_line.legend(title=p_col, loc='lower right', frameon=True, framealpha=0.9, fontsize=9)
-
-        ax_box = fig.add_subplot(gs[2, :])
-        ax_box.axis('off')
-        box_rect = plt.Rectangle((0, 0), 1, 1, facecolor='#e2efda', edgecolor='#a9d08e', linewidth=1.2,
-                                 transform=ax_box.transAxes)
-        ax_box.add_patch(box_rect)
-
-        display_params = [f"{p_row} = {best_row[p_row]}", f"{p_col} = {best_row[p_col]}"]
-        best_str = ", ".join(display_params)
-        ax_box.text(0.5, 0.62, "Best Hyperparameters:", fontsize=12, weight='bold', color='#375623', ha='center',
-                    transform=ax_box.transAxes)
-        ax_box.text(0.5, 0.25, best_str, fontsize=12, weight='bold', color='#1e3910', ha='center',
-                    transform=ax_box.transAxes)
+            pivot_df = df_model.groupby(x_param)[['Accuracy']].mean()
 
         clean_name = model_name.replace(' ', '_').replace('(', '').replace(')', '')
-        chart_path = GRAPHS_DIR / f"hyperparameter_impact_{clean_name}.png"
-        plt.savefig(chart_path, bbox_inches='tight', dpi=300)
+
+        fig, (ax_table, ax_plot) = plt.subplots(1, 2, figsize=(16, 6), gridspec_kw={'width_ratios': [1, 1.2]}, dpi=300)
+
+        ax_table.axis('off')
+        table_data = pivot_df.round(2).fillna("-").astype(str).values
+        col_labels = [f"{series_param}={c}" if series_param else str(c) for c in pivot_df.columns]
+        row_labels = [f"{x_param}={r}" for r in pivot_df.index]
+
+        table_obj = ax_table.table(
+            cellText=table_data, rowLabels=row_labels, colLabels=col_labels, cellLoc='center', loc='center'
+        )
+        table_obj.auto_set_font_size(False)
+        table_obj.set_fontsize(10)
+        table_obj.scale(1.1, 1.8)
+        ax_table.set_title(f"{model_name} - Hyperparameter Grid (%)", fontsize=12, fontweight='bold', pad=10)
+
+        for col in pivot_df.columns:
+            series_data = pivot_df[col].dropna()
+            if not series_data.empty:
+                label_name = f"{series_param}={col}" if series_param else col
+                ax_plot.plot(series_data.index, series_data.values, marker='o', linewidth=2, markersize=6, label=label_name)
+
+        if x_param in ['C', 'var_smoothing']:
+            ax_plot.set_xscale('log')
+
+        ax_plot.set_title(f"{model_name} - Performance Curve", fontsize=12, fontweight='bold', pad=10)
+        ax_plot.set_xlabel(f"{x_param} Parameter", fontsize=11)
+        ax_plot.set_ylabel("Mean Accuracy (%)", fontsize=11)
+        ax_plot.grid(True, which="both", linestyle="--", alpha=0.5)
+        ax_plot.legend(title=series_param if series_param else "", fontsize=9, loc='best')
+
+        plt.tight_layout()
+
+        combined_image_path = GRAPHS_DIR / f"hyperparameter_impact_{clean_name}.png"
+        plt.savefig(combined_image_path, dpi=300, bbox_inches='tight')
         plt.close()
 
+        print(f"✅ Generated combined figure for [{model_name}] -> {combined_image_path.name}")
 
-# Creates bar charts comparing overall classifier accuracies and ANOVA feature selection frequencies.
-# Updated to plot ALL Top 30 selected features instead of limiting to 15.
+
 def generate_overall_plots(df_summary, df_feat_summary):
-    # 1. Classifier Overall Accuracy Comparison
+    """
+    Renders overall accuracy comparison bar chart and Top 30 ANOVA selected feature frequency chart.
+    """
     plt.figure(figsize=(10, 5), dpi=300)
     models = df_summary['Classifier']
     acc_col = 'Overall Accuracy' if 'Overall Accuracy' in df_summary.columns else 'Mean Test Accuracy (%)'
@@ -544,7 +549,6 @@ def generate_overall_plots(df_summary, df_feat_summary):
     plt.savefig(chart_path, bbox_inches='tight', dpi=300)
     plt.close()
 
-    # 2. Top 30 Selected Features Frequency Plot
     plt.figure(figsize=(10, 10), dpi=300)
     feat_col = df_feat_summary.columns[0]
     freq_col = df_feat_summary.columns[1]
@@ -563,9 +567,10 @@ def generate_overall_plots(df_summary, df_feat_summary):
     plt.close()
 
 
-# Generates confusion matrix heatmaps showing true versus predicted accent classifications.
-# It helps diagnose which specific accent classes are correctly predicted or commonly confused.
 def generate_confusion_matrix_heatmaps(performance_tracker, class_labels):
+    """
+    Renders and exports Seaborn confusion matrix heatmaps for all tested machine learning models.
+    """
     for model_name, tracker in performance_tracker.items():
         if not tracker['y_true_all']:
             continue
@@ -582,28 +587,10 @@ def generate_confusion_matrix_heatmaps(performance_tracker, class_labels):
         plt.close()
 
 
-# Creates violin plots showing feature value distributions across target accents for top ANOVA features.
-# It illustrates how acoustic feature values differ between different accent categories.
-def generate_feature_distribution_plots(df_master_features, top_features_list):
-    top_5 = top_features_list[:5]
-    for feat in top_5:
-        if feat not in df_master_features.columns:
-            continue
-
-        plt.figure(figsize=(8, 4), dpi=300)
-        sns.violinplot(x='accent', y=feat, data=df_master_features, palette='Set2', inner='quartile')
-        plt.title(f"Feature Distribution across Accents: {feat}", fontsize=11, fontweight='bold')
-        plt.xlabel("Accent Label", fontsize=10)
-        plt.ylabel("Feature Value", fontsize=10)
-
-        feat_dist_path = GRAPHS_DIR / f"feature_distribution_{feat}.png"
-        plt.savefig(feat_dist_path, bbox_inches='tight', dpi=300)
-        plt.close()
-
-
-# Renders a 2D UMAP non-linear projection scatter plot of high-dimensional acoustic speech features.
-# Fixed file saving mechanics to ensure reliable export directly into GRAPHS_DIR.
 def generate_umap_plot(df_master_features):
+    """
+    Computes 2D UMAP non-linear manifold projection of acoustic speech feature space across target accents.
+    """
     if umap is None:
         print("⚠️ Skipping UMAP plot (umap-learn module not installed).")
         return
@@ -637,9 +624,10 @@ def generate_umap_plot(df_master_features):
     print(f"✅ Generated UMAP plot -> {umap_save_path.name}")
 
 
-# Computes and plots SHAP (Explainable AI) summary beeswarm figures for tree-based classifiers.
-# Fixed figure context handling so individual accent SHAP beeswarms save cleanly to GRAPHS_DIR.
 def generate_shap_plots(df_master_features):
+    """
+    Generates SHAP (Explainable AI) summary beeswarm plots for tree-based ensemble classifiers per accent.
+    """
     if shap is None:
         print("⚠️ Skipping SHAP plots (shap module not installed).")
         return
@@ -652,8 +640,7 @@ def generate_shap_plots(df_master_features):
     le = LabelEncoder()
     y_enc = le.fit_transform(df_master_features['accent'])
 
-    xgb_shap_model = XGBClassifier(n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42,
-                                   eval_metric='mlogloss', n_jobs=-1)
+    xgb_shap_model = XGBClassifier(n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42, eval_metric='mlogloss', n_jobs=-1)
     xgb_shap_model.fit(X_df, y_enc)
 
     explainer = shap.TreeExplainer(xgb_shap_model)
@@ -669,8 +656,7 @@ def generate_shap_plots(df_master_features):
             vals_to_plot = shap_values[class_idx].values if isinstance(shap_values, list) else shap_values.values
 
         shap.summary_plot(vals_to_plot, X_df, max_display=12, show=False)
-        plt.title(f"SHAP Feature Impact Profile: {class_name.capitalize()} Accent ({RUN_MODE})", fontsize=13,
-                  fontweight='bold', pad=15)
+        plt.title(f"SHAP Feature Impact Profile: {class_name.capitalize()} Accent ({RUN_MODE})", fontsize=13, fontweight='bold', pad=15)
         plt.xlabel("SHAP Value", fontsize=11)
         plt.tight_layout()
 
@@ -680,14 +666,134 @@ def generate_shap_plots(df_master_features):
         print(f"✅ Generated SHAP Beeswarm plot -> {shap_save_path.name}")
 
 
+def generate_vsa_plot(df_master_features):
+    """
+    Computes Vowel Space Area (VSA) Convex Hull polygons in inverted F1/F2 formant space across all accent groups.
+    """
+    f1_col = [c for c in df_master_features.columns if 'F1' in c or 'f1' in c]
+    f2_col = [c for c in df_master_features.columns if 'F2' in c or 'f2' in c]
+
+    if not (f1_col and f2_col):
+        print("⚠️ Could not locate Formant columns (F1/F2) for VSA plot.")
+        return
+
+    f1_name, f2_name = f1_col[0], f2_col[0]
+    color_palette = {'chinese': '#ff7f0e', 'indian': '#e41a1c', 'nigerian': '#2ca02c', 'usa': '#377eb8'}
+
+    plt.figure(figsize=(10, 8), dpi=300)
+    vsa_summary = {}
+
+    for acc in df_master_features['accent'].unique():
+        acc_clean = str(acc).lower()
+        sub_df = df_master_features[df_master_features['accent'] == acc][[f2_name, f1_name]].dropna()
+        points = sub_df.values
+
+        if len(points) >= 3:
+            hull = ConvexHull(points)
+            vsa_area = hull.volume
+            vsa_summary[acc_clean] = vsa_area
+            c_color = color_palette.get(acc_clean, '#333333')
+
+            hull_pts = np.append(hull.vertices, hull.vertices[0])
+            plt.plot(points[hull_pts, 0], points[hull_pts, 1], linestyle='--', linewidth=2, color=c_color, label=f"{acc_clean.capitalize()} (VSA = {vsa_area:,.0f} Hz²)")
+            plt.fill(points[hull.vertices, 0], points[hull.vertices, 1], color=c_color, alpha=0.12)
+            plt.scatter(points[:, 0], points[:, 1], color=c_color, alpha=0.35, s=30)
+
+    plt.gca().invert_xaxis()
+    plt.gca().invert_yaxis()
+    plt.title("Unified Vowel Space Area (VSA) Comparison Across All Accents\n(Convex Hull Geometry in F1/F2 Space)", fontsize=13, fontweight='bold', pad=15)
+    plt.xlabel("F2 Frequency (Hz) [Inverted - Tongue Back/Front]", fontsize=11)
+    plt.ylabel("F1 Frequency (Hz) [Inverted - Tongue Height]", fontsize=11)
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.legend(title="Accent Group & VSA Hull Area", fontsize=10, loc='best')
+    plt.tight_layout()
+
+    vsa_path = GRAPHS_DIR / "unified_vowel_space_area_all_accents.png"
+    plt.savefig(vsa_path, dpi=300, bbox_inches='tight')
+    plt.close()
+
+    print("\n📐 Vowel Space Area (VSA) Summary for All Accents:")
+    for acc_name, area_val in sorted(vsa_summary.items()):
+        print(f"   ├─ {acc_name.capitalize():<10}: {area_val:,.2f} Hz²")
+    print(f"✅ Generated VSA plot -> {vsa_path.name}")
+
+
+def generate_learning_curves_and_gap_report(performance_tracker, df_master_features):
+    """
+    Outputs Train vs Test diagnostic accuracy gap table and renders learning curves to diagnose overfitting.
+    """
+    print("\n" + "=" * 75)
+    print("🏆 CLASSIFIER TRAIN VS. TEST ACCURACY & OVERFITTING GAP TABLE")
+    print("=" * 75)
+
+    gap_summary_rows = []
+    for model_name, tracker in performance_tracker.items():
+        if tracker['train_acc'] and tracker['overall']:
+            mean_train_acc = np.mean(tracker['train_acc']) * 100
+            mean_test_acc = np.mean(tracker['overall']) * 100
+            gap = mean_train_acc - mean_test_acc
+
+            gap_summary_rows.append({
+                'Classifier': model_name,
+                'Mean Train Accuracy (%)': f"{mean_train_acc:.2f}%",
+                'Mean Test Accuracy (%)': f"{mean_test_acc:.2f}%",
+                'Overfitting / Generalization Gap (%)': f"{gap:.2f}%"
+            })
+
+    df_gap_summary = pd.DataFrame(gap_summary_rows)
+    print(df_gap_summary.to_string(index=False))
+    print("=" * 75 + "\n")
+
+    def plot_model_learning_curve(estimator, title, X, y, cv=5, train_sizes=np.linspace(0.1, 1.0, 8)):
+        plt.figure(figsize=(9, 5), dpi=300)
+        plt.title(f"Learning Curve ({title}) - Overfitting Diagnosis", fontsize=12, fontweight='bold')
+        plt.xlabel("Training Examples Count", fontsize=11)
+        plt.ylabel("Accuracy Score (%)", fontsize=11)
+
+        train_sizes, train_scores, test_scores = learning_curve(estimator, X, y, cv=cv, n_jobs=-1, train_sizes=train_sizes, scoring='accuracy')
+
+        train_scores_mean = np.mean(train_scores, axis=1) * 100
+        train_scores_std = np.std(train_scores, axis=1) * 100
+        test_scores_mean = np.mean(test_scores, axis=1) * 100
+        test_scores_std = np.std(test_scores, axis=1) * 100
+
+        plt.grid(True, linestyle='--', alpha=0.5)
+        plt.fill_between(train_sizes, train_scores_mean - train_scores_std, train_scores_mean + train_scores_std, alpha=0.1, color="r")
+        plt.fill_between(train_sizes, test_scores_mean - test_scores_std, test_scores_mean + test_scores_std, alpha=0.1, color="g")
+
+        plt.plot(train_sizes, train_scores_mean, 'o-', color="r", label="Training Score (Train Acc)")
+        plt.plot(train_sizes, test_scores_mean, 'o-', color="g", label="Cross-Validation Score (Test Acc)")
+
+        plt.legend(loc="best", fontsize=10)
+        plt.tight_layout()
+
+        clean_title = title.replace(' ', '_').replace('(', '').replace(')', '')
+        save_path = GRAPHS_DIR / f"learning_curve_{clean_title}.png"
+        plt.savefig(save_path, dpi=300)
+        plt.close()
+        print(f"✅ Saved Learning Curve diagnostic plot -> {save_path.name}")
+
+    exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_ratio', 'volume_max', 'volume_variance', 'volume_min', 'average_volume']
+    feature_cols = [c for c in df_master_features.columns if c not in exclude_cols]
+
+    X_diag = df_master_features[feature_cols].fillna(0).values
+    le_diag = LabelEncoder()
+    y_diag = le_diag.fit_transform(df_master_features['accent'])
+
+    xgb_diag = XGBClassifier(n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42, eval_metric='mlogloss')
+    plot_model_learning_curve(xgb_diag, "XGBoost", X_diag, y_diag)
+
+    rf_diag = RandomForestClassifier(n_estimators=100, max_depth=15, random_state=42)
+    plot_model_learning_curve(rf_diag, "Random Forest", X_diag, y_diag)
+
+
 # ==============================================================================
-# MAIN PIPELINE EXECUTION
+# MAIN PIPELINE EXECUTION & SINGLE-FILE INFERENCE
 # ==============================================================================
 
 if __name__ == "__main__":
     print(f"\n🚀 Starting Execution Pipeline...")
 
-    # Load Dataset Metadata
     metadata_file_name = f"massive_metadata_{RUN_MODE}.csv"
     possible_paths = [
         PROJECT_DATA_DIR / f"machine_learning_official_{RUN_MODE}_only" / metadata_file_name,
@@ -714,20 +820,16 @@ if __name__ == "__main__":
     if df_master is None or df_master.empty:
         raise ValueError("❌ Error: Master metadata dataframe is empty.")
 
-    # Extract or load cached features
     df_master_features = pre_extract_all_features_once(df_master)
 
-    # Verify zero speaker leakage across splits
     print("\n🔍 Running strict speaker leakage verification...")
     temp_fold_gen = run_nested_group_kfold_generator(df_master)
     for fold_i, train_m, val_m, test_m in temp_fold_gen:
-        train_spks, val_spks, test_spks = set(train_m['speaker_id'].unique()), set(val_m['speaker_id'].unique()), set(
-            test_m['speaker_id'].unique())
+        train_spks, val_spks, test_spks = set(train_m['speaker_id'].unique()), set(val_m['speaker_id'].unique()), set(test_m['speaker_id'].unique())
         if train_spks.intersection(val_spks) or train_spks.intersection(test_spks) or val_spks.intersection(test_spks):
             raise RuntimeError(f"❌ Speaker leakage detected in Fold {fold_i}!")
     print("✅ Zero speaker leakage verified!")
 
-    # Model training and nested cross-validation
     model_names = ['Gaussian NB', 'Logistic Regression', 'SVM (RBF)', 'Random Forest', 'XGBoost', 'Kernel ELM']
     accents = ['chinese', 'indian', 'nigerian', 'usa']
 
@@ -742,7 +844,9 @@ if __name__ == "__main__":
     fold_generator = run_nested_group_kfold_generator(df_master)
 
     for fold_idx, df_train_meta, df_val_meta, df_test_meta in fold_generator:
-        print(f"\n--- Nested Cross-Validation Fold [{fold_idx}/10] ---")
+        print(f"\n######################################################################")
+        print(f" PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD {fold_idx}/10]")
+        print(f"######################################################################")
         try:
             X_train, y_train, X_val, y_val, X_test, y_test, le, selected_feats = load_and_scale_fold_matrices(
                 df_master_features, df_train_meta, df_val_meta, df_test_meta
@@ -778,34 +882,29 @@ if __name__ == "__main__":
                 performance_tracker[model_name]['y_true_all'].extend(y_test)
                 performance_tracker[model_name]['y_pred_all'].extend(y_pred)
 
-                report = classification_report(y_test, y_pred, target_names=le.classes_, output_dict=True,
-                                               zero_division=0)
+                report = classification_report(y_test, y_pred, target_names=le.classes_, output_dict=True, zero_division=0)
                 for acc_label in accents:
                     if acc_label in report:
                         performance_tracker[model_name]['per_accent'][acc_label].append(report[acc_label]['recall'])
 
-                print(f"  [{model_name:<19}] Train Acc: {train_acc * 100:.2f}% | Test Acc: {overall_acc * 100:.2f}%")
+                print(f"    [{model_name:<19}] Test Acc: {overall_acc * 100:.2f}%")
 
         except Exception as e:
             print(f"Error in Fold {fold_idx}: {e}")
             traceback.print_exc()
 
-    # Generate Aggregate Performance Summary
     summary_rows = []
     for model_name in model_names:
         tracker = performance_tracker[model_name]
         if not tracker['overall']:
             continue
 
-        mean_train = np.mean(tracker['train_acc']) * 100
         mean_overall = np.mean(tracker['overall']) * 100
         std_overall = np.std(tracker['overall']) * 100
 
         row = {
             'Classifier': model_name,
-            'Best/Mean Train Acc': f"{mean_train:.2f}%",
-            'Overall Accuracy': f"{mean_overall:.2f}% ± {std_overall:.2f}%",
-            'Generalization Gap (%)': f"{(mean_train - mean_overall):.2f}%"
+            'Overall Accuracy': f"{mean_overall:.2f}% ± {std_overall:.2f}%"
         }
         for acc_label in accents:
             scores = tracker['per_accent'][acc_label]
@@ -814,25 +913,21 @@ if __name__ == "__main__":
 
     df_summary = pd.DataFrame(summary_rows)
     print("\n================================================================================")
-    print(f"FINAL CLASSIFICATION PERFORMANCE TABLE ({RUN_MODE.upper()} | {TUNING_MODE.upper()})")
+    print("FINAL ACCENT CLASSIFICATION PERFORMANCE TABLE (TEST ACCURACY & PER-ACCENT SCORES)")
     print("================================================================================")
     print(df_summary.to_string(index=False))
 
-    # Feature Frequencies Summary Export
-    exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_ratio',
-                    'volume_max', 'volume_variance', 'volume_min', 'average_volume']
+    exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_ratio', 'volume_max', 'volume_variance', 'volume_min', 'average_volume']
     all_possible_features = [col for col in df_master_features.columns if col not in exclude_cols]
     feat_counts = Counter(all_selected_features_history)
     full_feat_counts = {feat: feat_counts.get(feat, 0) for feat in all_possible_features}
 
     df_feat_summary = pd.DataFrame(list(full_feat_counts.items()), columns=['Feature', 'Selection_Frequency_Out_Of_10'])
-    df_feat_summary = df_feat_summary.sort_values(by=['Selection_Frequency_Out_Of_10', 'Feature'],
-                                                  ascending=[False, True])
+    df_feat_summary = df_feat_summary.sort_values(by=['Selection_Frequency_Out_Of_10', 'Feature'], ascending=[False, True])
 
     out_csv_path = WORKING_DIR / f"top_selected_features_summary_{RUN_MODE}.csv"
     df_feat_summary.to_csv(out_csv_path, index=False)
 
-    # 2D PCA Projection Plot Generation
     top_30_features = df_feat_summary.head(30)['Feature'].tolist()
     if len(top_30_features) > 0:
         X_top30 = df_master_features[top_30_features].fillna(0)
@@ -850,8 +945,7 @@ if __name__ == "__main__":
 
         plt.figure(figsize=(11, 8), dpi=300)
         sns.scatterplot(x=X_pca_30[:, 0], y=X_pca_30[:, 1], hue=y_labels, palette="Set1", alpha=0.65, s=50)
-        plt.title(f"2D PCA Projection of Top 30 Features ({RUN_MODE})\nVariance Explained: {total_exp_var:.2f}%",
-                  fontsize=13, fontweight='bold', pad=15)
+        plt.title(f"2D PCA Projection of Top 30 Features ({RUN_MODE})\nVariance Explained: {total_exp_var:.2f}%", fontsize=13, fontweight='bold', pad=15)
         plt.xlabel(f"PC1 ({exp_var_1:.2f}%)", fontsize=11, fontweight='bold')
         plt.ylabel(f"PC2 ({exp_var_2:.2f}%)", fontsize=11, fontweight='bold')
         plt.grid(True, linestyle='--', alpha=0.5)
@@ -862,17 +956,184 @@ if __name__ == "__main__":
         plt.savefig(pca_top30_save_path, dpi=300, bbox_inches='tight')
         plt.close()
 
-    # Generate and save all output figures directly into GRAPHS_DIR
-    print("\n📊 Saving output graph figures to disk...")
+    print("\n📊 Generating and saving all output graph figures...")
     generate_overall_plots(df_summary, df_feat_summary)
     generate_hyperparameter_averaged_plots(fold_tuning_history)
     generate_confusion_matrix_heatmaps(performance_tracker, le.classes_)
-    generate_feature_distribution_plots(df_master_features, df_feat_summary['Feature'].tolist())
     generate_umap_plot(df_master_features)
     generate_shap_plots(df_master_features)
+    generate_vsa_plot(df_master_features)
     export_and_print_best_hyperparameters(fold_tuning_history)
+    generate_learning_curves_and_gap_report(performance_tracker, df_master_features)
 
     print("\n" + "=" * 80)
-    print(f"✅ PIPELINE COMPLETED SUCCESSFULLY!")
+    print("✅ PIPELINE COMPLETED SUCCESSFULLY!")
     print(f"   📂 Output Directory : {GRAPHS_DIR}")
     print("=" * 80 + "\n")
+
+    # ==============================================================================
+    # DYNAMIC BEST MODEL TRAINING & SINGLE-FILE INFERENCE (PYCHARM TKINTER DIALOG)
+    # ==============================================================================
+
+    # 1. Dynamically Select Absolute Best Performing Classifier from Outer Folds
+    model_means = {}
+    for m in performance_tracker:
+        if performance_tracker[m]['overall']:
+            model_means[m] = np.mean(performance_tracker[m]['overall']) * 100
+
+    if not model_means:
+        raise RuntimeError("❌ Error: No classification results found in performance_tracker!")
+
+    best_model_name = max(model_means, key=model_means.get)
+    highest_accuracy = model_means[best_model_name]
+
+    print("=" * 80)
+    print("🏆 CROSS-VALIDATION WINNING MODEL SELECTION SUMMARY:")
+    for m, acc in sorted(model_means.items(), key=lambda item: item[1], reverse=True):
+        marker = "👈 [SELECTED FOR INFERENCE]" if m == best_model_name else ""
+        print(f"   ├─ {m:<19}: {acc:.2f}% {marker}")
+    print("=" * 80)
+    print(f"🎯 Dynamic Best Classifier Selected: [{best_model_name}] ({highest_accuracy:.2f}% Mean Test Acc)")
+    print("=" * 80)
+
+    # 2. Prepare Features & Labels for Full Dataset Training
+    top_selected_features = [f for f in df_feat_summary.head(30)['Feature'].tolist() if f not in exclude_cols]
+    X_full = df_master_features[top_selected_features].fillna(0).values
+
+    le_final = LabelEncoder()
+    y_full = le_final.fit_transform(df_master_features['accent'])
+
+    final_scaler = StandardScaler()
+    X_full_scaled = final_scaler.fit_transform(X_full)
+
+    # 3. Instantiate and Fit Winning Classifier Object
+    def get_winning_classifier_instance(model_name):
+        """Returns fresh estimator instance of winning classifier model."""
+        if model_name == 'Gaussian NB':
+            return GaussianNB(priors=[0.25, 0.25, 0.25, 0.25])
+        elif model_name == 'Logistic Regression':
+            return LogisticRegression(max_iter=3000, random_state=42, class_weight='balanced')
+        elif model_name == 'SVM (RBF)':
+            return SVC(probability=True, random_state=42, class_weight='balanced')
+        elif model_name == 'Random Forest':
+            return RandomForestClassifier(n_estimators=200, max_depth=15, class_weight='balanced', random_state=42)
+        elif model_name == 'XGBoost':
+            return XGBClassifier(eval_metric='mlogloss', random_state=42, n_jobs=-1)
+        elif model_name == 'Kernel ELM':
+            return KernelELMClassifier()
+        else:
+            raise ValueError(f"Unknown classifier model name: {model_name}")
+
+    best_model_obj = get_winning_classifier_instance(best_model_name)
+
+    if fold_tuning_history.get(best_model_name):
+        best_param_dict = dict(max(fold_tuning_history[best_model_name].items(), key=lambda item: np.mean(item[1]))[0])
+        if hasattr(best_model_obj, 'set_params'):
+            if hasattr(best_model_obj, 'get_params') and 'class_weight' in best_model_obj.get_params():
+                best_param_dict['class_weight'] = 'balanced'
+            best_model_obj.set_params(**best_param_dict)
+
+    best_model_obj.fit(X_full_scaled, y_full)
+    print(f"✅ Dynamic Winner [{best_model_name}] Trained Successfully on Full Dataset Features!\n")
+
+    # 4. Process and Classify Uploaded Audio File Pipeline
+    def process_and_classify_audio_pipeline_exact(file_path):
+        """
+        Executes exact dataset preprocessing (load, trim, RMS normalize), extracts features,
+        and predicts accent label with confidence probabilities for an individual audio sample file.
+        """
+        uploaded_path = Path(file_path)
+        print(f"\n🎙️ Processing audio via Exact Dataset Pipeline: {uploaded_path.name}...")
+
+        try:
+            y, sr = librosa.load(uploaded_path, sr=16000, mono=True)
+            if len(y) / sr < 0.1:
+                print("❌ File too short.")
+                return
+
+            y_trimmed, _ = librosa.effects.trim(y, top_db=40)
+            if len(y_trimmed) / sr < 0.1:
+                print("❌ File too short after trimming.")
+                return
+
+            rms = np.sqrt(np.mean(y_trimmed ** 2))
+            if rms > 0:
+                target_rms = 0.05
+                y_normalized = y_trimmed * (target_rms / rms)
+                y_normalized = np.clip(y_normalized, -0.99, 0.99)
+            else:
+                print("❌ Invalid RMS Energy.")
+                return
+
+            norm_path = WORKING_DIR / f"norm_{uploaded_path.name}"
+            sf.write(norm_path, y_normalized, 16000)
+
+            temp_single_meta = WORKING_DIR / "temp_single_file_metadata.csv"
+            df_single = pd.DataFrame([{'filename': norm_path.name, 'file_path': str(norm_path.resolve()), 'speaker_id': 'user', 'accent': 'unknown', 'text': 'sample'}])
+            df_single.to_csv(temp_single_meta, index=False)
+
+            import_vector_to_file(str(temp_single_meta), str(norm_path.parent))
+            extracted_csv = WORKING_DIR / "accent_features_dataset.csv"
+
+            if not extracted_csv.exists():
+                print("❌ Feature extraction failed.")
+                return
+
+            df_single_feat = pd.read_csv(extracted_csv)
+
+            if temp_single_meta.exists(): os.remove(temp_single_meta)
+            if extracted_csv.exists(): os.remove(extracted_csv)
+            if norm_path.exists(): os.remove(norm_path)
+
+            for col in top_selected_features:
+                if col not in df_single_feat.columns:
+                    df_single_feat[col] = 0.0
+
+            X_single = df_single_feat[top_selected_features].fillna(0).values
+            X_single_scaled = final_scaler.transform(X_single)
+
+            if hasattr(best_model_obj, "predict_proba"):
+                probs = best_model_obj.predict_proba(X_single_scaled)[0]
+                top_class_idx = np.argmax(probs)
+                top_accent_label = le_final.inverse_transform([top_class_idx])[0]
+
+                print("\nResults breakdown:")
+                for cls_name, prob in zip(le_final.classes_, probs):
+                    print(f"    ├─ {cls_name.capitalize():<10}: {prob * 100:.2f}%")
+            else:
+                top_class_idx = best_model_obj.predict(X_single_scaled)[0]
+                top_accent_label = le_final.inverse_transform([top_class_idx])[0]
+
+            print("=" * 60)
+            print(f"YOUR ACCENT IS : {top_accent_label.upper()}")
+            print("=" * 60)
+
+        except Exception as e:
+            print(f"❌ Error during single-file inference: {e}")
+            traceback.print_exc()
+
+    # 5. Open System File Dialog for User Selection (Way 3 via Tkinter)
+    print("\n📂 Opening file browser dialog to select audio WAV file for inference...")
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+
+        root = tk.Tk()
+        root.withdraw()
+        root.attributes('-topmost', True)
+
+        selected_audio_path = filedialog.askopenfilename(
+            title="Select Audio WAV File for Accent Inference",
+            filetypes=[("Audio Files", "*.wav")]
+        )
+        root.destroy()
+
+        if selected_audio_path:
+            process_and_classify_audio_pipeline_exact(selected_audio_path)
+        else:
+            print("⚠️ File selection cancelled by user.")
+    except Exception as dialog_err:
+        print(f"⚠️ Could not open file dialog window ({dialog_err}).")
+        user_file = input("Please manually enter the full path to your audio WAV file: ")
+        if user_file and os.path.exists(user_file):
+            process_and_classify_audio_pipeline_exact(user_file)

@@ -1,244 +1,136 @@
 # AI Accent Recognition
 
-פרויקט לסיווג מבטאים באנגלית לארבע קבוצות.
+This project classifies English speech accents into four groups: **Chinese, Indian, Nigerian, and American (USA)**.
+
+The project includes classical Machine Learning classifiers based on extracted audio features, an acoustic CNN based on Log-Mel spectrograms, and a Multimodal CNN that combines spectrograms with phonetic features.
+
+## Project Structure
 
 ```text
-chinese
-indian / hindi
-nigerian
-usa
+AI_AccentRecognition/
+|
+|-- accents_audio/                              # Audio datasets organized by source
+|   `-- accent_archive/                         # Speech Accent Archive
+|       |-- chinese/                            # Audio files from Chinese-accented speakers
+|       |-- hindi/                              # Audio files from Indian-accented speakers
+|       |-- nigerian/                           # Audio files from Nigerian-accented speakers
+|       `-- usa/                                # Audio files from American-accented speakers
+|
+|-- all_accents_data/                           # Original free-text datasets from different sources
+|
+|-- audio_by_accent_raw/                        # Free-text audio after merging sources by accent
+|   |-- chinese/
+|   |-- indian/
+|   |-- nigerian/
+|   `-- usa/
+|
+|-- archive_cnn_dataset/                        # dataset for uploading into archive_cnn notebook in kaggle
+|-- audio_by_accent_raw_normalized/             # Normalized version of the free-text audio
+|-- sentences_samples/                          # Speech Accent Archive recordings split into six sentences
+|-- sentences_samples_normalized/               # Normalized version of the split sentences
+|
+|-- classifiers/                                # Machine Learning classifier implementations
+|   |-- GNB.py                                  # Gaussian Naive Bayes
+|   |-- KELM.py                                 # Kernel Extreme Learning Machine
+|   |-- logistic_regression_classifier.py       # Logistic Regression
+|   |-- random_forest_classifier.py             # Random Forest
+|   |-- svm_classifier.py                       # Support Vector Machine
+|   `-- XGBoost.py                              # XGBoost
+|
+|-- cut_and_normalize/                          # Audio splitting and normalization
+|   |-- audio_time_split.py                     # Handles audio split timestamps
+|   |-- cut_archive_to_sentences.py             # Splits Accent Archive recordings into sentences
+|   |-- normalize_all_data_for_2_folders.py     # Normalizes the two main audio folders
+|   `-- sentences_extractor.py                  # Locates/extracts sentences using transcription
+|
+|-- features/                                   # Feature extraction implementations
+|   |-- audio_features.py                       # Acoustic features such as MFCC, ZCR, and formants
+|   |-- Dynamic_features.py                     # Dynamic features such as Jitter and Shimmer
+|   |-- extract_features_to_files.py            # Combines extracted features into each sample record
+|   `-- phonetic_features.py                    # Creates phonetic/IPA-based features
+|
+|-- export_data/                                # Scripts for importing data from Hugging Face and other sources
+|
+|-- extra/                                      # Utility files, QA checks, and report-related material
+|   |-- QA_FILES/                               # Validation checks, including Train/Validation/Test checks
+|   |-- change_csv_archive_files.py             # Utility for modifying Archive CSV files
+|   |-- visualize_features.py                   # Feature visualization utility
+|   `-- voice_analysis_report.png               # Analysis output used during the project/report
+|
+|-- documentation/                              # Project documentation
+|   |-- EXPERIMENT_REPRODUCTION_GUIDE.docx
+|   |-- EXPERIMENT_REPRODUCTION_GUIDE.md
+|   |-- PROGRAMMER_DOCUMENTATION.docx
+|   |-- PROGRAMMER_DOCUMENTATION.md
+|   |-- USER_GUIDE.docx
+|   `-- USER_GUIDE.md
+|
+|-- machine_learning_official_archive_only/     # Metadata and inputs for archive_only mode
+|-- machine_learning_official_free_text_only/   # Metadata and inputs for free_text mode
+|-- machine_learning_official_mixed/            # Metadata and inputs for mixed mode
+|
+|-- spectrograms_logmel_archive_only/           # Log-Mel spectrograms for archive_only mode
+|-- spectrograms_logmel_free_text/              # Log-Mel spectrograms for free_text mode
+|-- spectrograms_logmel_mixed/                  # Log-Mel spectrograms for mixed mode
+|
+|-- graphs/                                     # Graphs saved during local runs
+|-- results/                                    # Experiment results
+|-- for final report/                           # Files used while preparing the final report
+|
+|-- archive_cnn.py                              # Compares Linear and Log-Mel spectrograms on archive dataset 
+|-- metadata_generator.py                       # Creates metadata for the three dataset modes
+|-- group_sources_to_one_by_accent.py           # Merges free-text sources by accent
+|-- extract_features.py                         # Runs feature extraction and creates the master feature files
+|-- create_spectogram.py                        # Creates Log-Mel spectrograms and saves them as .pt files
+|-- K_fold.py                                   # Speaker-based Group K-Fold splitting and leakage prevention
+|-- main_machine_learning.py                    # Runs the Machine Learning experiments
+|-- main_cnn.py                                 # Runs the acoustic CNN
+|-- main_multimodal_cnn.py                      # Runs the Multimodal CNN
+|
+|-- master_extracted_features_archive_only.csv  # Extracted features for archive_only mode
+|-- master_extracted_features_free_text.csv     # Extracted features for free_text mode
+|-- master_extracted_features_mixed.csv         # Extracted features for mixed mode
+|
+|-- README.md                                   # Project overview and file structure
+|-- libs.txt                                    # Required Python packages
+`-- EXPERIMENT_REPRODUCTION_GUIDE.docx          # Guide for reproducing the experiments
 ```
 
-בפרויקט נבדקו שלושה מסלולי ניסוי עיקריים: מסווגי למידת מכונה על פיצ'רים שחולצו מהאודיו, מודל CNN אקוסטי המבוסס על ספקטרוגרמות, ומודל Multimodal CNN המשלב ספקטרוגרמה עם פיצ'רים פונטיים.
+Development-environment files such as `.idea` and `__pycache__`, as well as the model-weight files `best_acoustic_cnn_fold_1.pth` through `best_acoustic_cnn_fold_5.pth`, are intentionally omitted from the tree because they are not required for understanding the source-code structure.
 
-## מבנה הנתונים
+## Workflow
 
-נתוני הדיבור החופשי מרוכזים בתיקייה:
+The data comes from two main types of sources. Speech Accent Archive recordings are stored under `accents_audio/accent_archive/`, while the original free-text datasets are stored under `all_accents_data/`.
+
+`group_sources_to_one_by_accent.py` combines the free-text sources according to the selected dataset composition and organizes the resulting audio files by accent under `audio_by_accent_raw/`.
+
+Speech Accent Archive recordings are split into six sentences using the scripts under `cut_and_normalize/`. The resulting samples are stored under `sentences_samples/`. `metadata_generator.py` then creates the metadata required for the three experiment modes: `archive_only`, `free_text`, and `mixed`.
+
+Before the experiment paths diverge, `extract_features.py` runs the feature-extraction code implemented under `features/` and creates the three `master_extracted_features_*.csv` files.
+
+For the **Machine Learning** path, `main_machine_learning.py` runs the classifiers implemented under `classifiers/`.
+
+For the **Deep Learning** path, `create_spectogram.py` creates the Log-Mel spectrogram files. The acoustic model is then run with `main_cnn.py`, while the multimodal model is run with `main_multimodal_cnn.py`.
+
+## Kaggle Notebooks
+
+The three main experiment notebooks can also be run on Kaggle. Before running a notebook, make sure that its corresponding dataset is attached to the notebook.
 
 ```text
-audio_by_accent_raw/
-├── chinese/
-├── indian/
-├── nigerian/
-└── usa/
+Machine Learning notebook: [ADD LINK]
+CNN notebook:              [ADD LINK]
+Multimodal CNN notebook:   [ADD LINK]
+archive CNN notebook (for spectrogram compare):   [ADD LINK]
 ```
 
-כל תיקייה מכילה את קובצי האודיו של המבטא המתאים לאחר איחוד המקורות.
+## Results and Graphs
 
-נתוני Speech Accent Archive נמצאים בתיקייה:
+When the experiments are run on Kaggle, some graphs are displayed directly in the notebook output. When the project is run locally in PyCharm, the generated graphs are also saved under `graphs/`.
 
-```text
-accents_audio/
-└── accent_archive/
-    ├── chinese/
-    ├── hindi/
-    ├── nigerian/
-    └── usa/
-```
+Additional experiment outputs are stored under `results/`.
 
-גם כאן קובצי האודיו מסודרים לפי מבטא.
+## Submission Documentation
 
-נתוני Speech Accent Archive נחתכים בהמשך לששת המשפטים בעזרת הקבצים שבתיקיית:
+`README.md`, `libs.txt`, and `EXPERIMENT_REPRODUCTION_GUIDE.docx` are located in the project root directory.
 
-```text
-cut_and_normalize/
-```
-
-הפלט נשמר במבנה:
-
-```text
-sentences_samples/
-├── chinese/
-│   ├── sentence_0/
-│   ├── sentence_1/
-│   └── ...
-├── indian/
-├── nigerian/
-└── usa/
-```
-
-## הכנת מאגרי הדיבור החופשי
-
-הנתונים המקוריים נמצאים תחת:
-
-```text
-all_accents_data/
-```
-
-חלקם הורדו ישירות ממאגרים חיצוניים וחלקם נוצרו בעזרת הקבצים שבתיקיית:
-
-```text
-export_data/
-```
-
-הקובץ הבא מאחד את המקורות לפי מבטא ובהתאם לכמויות שנבחרו:
-
-```text
-group_sources_to_one_by_accent.py
-```
-
-הפלט שלו הוא:
-
-```text
-audio_by_accent_raw/
-```
-
-## יצירת Metadata
-
-הקובץ:
-
-```text
-metadata_generator.py
-```
-
-יוצר קובצי metadata לשלושת מצבי העבודה:
-
-```text
-archive_only
-free_text
-mixed
-```
-
-הקבצים נשמרים בתיקיות:
-
-```text
-machine_learning_official_archive_only/
-machine_learning_official_free_text_only/
-machine_learning_official_mixed/
-```
-
-## יצירת פיצ'רים - שלב משותף
-
-לאחר הכנת הנתונים, שני ענפי הלמידה עוברים דרך:
-
-```text
-create_features.py
-```
-
-הקוד משתמש במימושים שבתיקיית:
-
-```text
-features/
-```
-
-ויוצר את הקבצים:
-
-```text
-master_extracted_features_archive_only.csv
-master_extracted_features_free_text.csv
-master_extracted_features_mixed.csv
-```
-
-לאחר שלב זה התהליך מתפצל למסלול Machine Learning ולמסלולי CNN.
-
-## מסלול Machine Learning
-
-קובצי האודיו המשמשים לחילוץ הפיצ'רים עוברים נרמול באמצעות:
-
-```text
-cut_and_normalize/normalize_all_for_2_folders.py
-```
-
-הגרסאות המנורמלות נשמרות תחת:
-
-```text
-audio_by_accent_raw_normalized/
-sentences_samples_normalized/
-```
-
-הניסויים מורצים באמצעות:
-
-```text
-main_for_machine_learning.py
-```
-
-והמסווגים נמצאים בתיקיית:
-
-```text
-classifiers/
-```
-
-הגדרות מרכזיות:
-
-```python
-RUN_MODE = "free_text"
-ENABLE_FEATURE_SELECTION = False
-TOP_K_FEATURES = 30
-TUNING_MODE = "random_search"
-```
-
-## מסלול CNN
-
-לאחר יצירת הפיצ'רים, הספקטרוגרמות נוצרות באמצעות:
-
-```text
-cut_and_normalize/spectogram_creation.py
-```
-
-הן נשמרות כקובצי PyTorch בתיקייה המתאימה למצב ההרצה:
-
-```text
-spectogram_logmel_<mode>/
-```
-
-מודל ה-CNN האקוסטי מורץ באמצעות:
-
-```text
-CNN.py
-```
-
-המודל המולטי-מודאלי מורץ באמצעות:
-
-```text
-Multimodal_CNN.py
-```
-
-המודל המולטי-מודאלי משתמש גם בספקטרוגרמות וגם בפיצ'רים שנוצרו קודם לכן.
-
-## Kaggle
-
-מומלץ להריץ את שלוש מחברות הניסוי ב-Kaggle בגלל זמני הריצה ומשאבי החישוב.
-
-```text
-Machine Learning notebook: [להוסיף קישור]
-CNN notebook:              [להוסיף קישור]
-Multimodal CNN notebook:   [להוסיף קישור]
-```
-
-לכל מחברת יש לצרף את ה-Dataset המתאים לפני ההרצה.
-
-## תוצאות וגרפים
-
-חלק מהגרפים נוצרים במהלך ההרצה. ב-Kaggle הם מוצגים בפלט של תאי המחברת. בהרצה מקומית ב-PyCharm הם נשמרים גם בתיקייה:
-
-```text
-graphs/
-```
-
-תוצאות נוספות נשמרות תחת:
-
-```text
-results/
-```
-
-## מסמכי ההגשה
-
-בתיקייה הראשית נמצאים:
-
-```text
-README.md
-libs.txt
-EXPERIMENT_REPRODUCTION_GUIDE.docx
-```
-
-שאר מסמכי התיעוד נמצאים תחת:
-
-```text
-documentation/
-```
-
-ובתוכה מדריך למשתמש ותיעוד חיצוני למתכנת, בגרסאות Word ו-Markdown.
-
-## מקורות הנתונים
-
-מאגרי הנתונים נלקחו ממקורות חיצוניים, ובהם Speech Accent Archive, Kaggle, Hugging Face, OpenSLR ו-Mozilla Common Voice. פירוט מלא של המקורות והקישורים מופיע בביבליוגרפיה של דו"ח הפרויקט.
+The user guide, programmer documentation, and Markdown copies of the documentation files are located under `documentation/`.

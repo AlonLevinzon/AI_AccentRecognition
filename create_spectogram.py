@@ -17,7 +17,7 @@ except Exception:
 # GLOBAL CONFIGURATION SETTINGS
 # Select RUN_MODE: "free_text", "mixed", or "archive_only"
 # =====================================================================
-RUN_MODE = "mixed"  # Options: "free_text", "mixed", "archive_only"
+RUN_MODE = "archive_only"  # Options: "free_text", "mixed", "archive_only"
 
 CURRENT_DIR = Path(__file__).resolve().parent
 

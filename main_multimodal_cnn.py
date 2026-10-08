@@ -37,47 +37,32 @@ import torchaudio
 import torchaudio.transforms as T
 
 # ==============================================================================
-# CONFIGURATION & SYSTEM SETUP
+# CONFIGURATION & GLOBAL DEFINITIONS
 # ==============================================================================
 
-# Choose dataset mode: 'free_text' or 'mixed'
 RUN_MODE = "free_text"
 DATASET_TYPE = RUN_MODE
 
-# Set device for training
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(f"Using device: {device}")
-if device.type == 'cuda':
-    print(f"GPU Model: {torch.cuda.get_device_name(0)}")
-
-# Local Project Directory Configuration
 PROJECT_DIR = Path.cwd().resolve()
 DATASET_DIR = PROJECT_DIR
-
-# Setup Graphs Directory under graphs/Multimodal_CNN_{RUN_MODE} and overwrite previous contents
 PLOTS_DIR = PROJECT_DIR / "graphs" / f"Multimodal_CNN_{RUN_MODE}"
-if PLOTS_DIR.exists():
-    shutil.rmtree(PLOTS_DIR)  # Clear old plots for this run mode
-PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
-print(f"📁 Project Root Directory: {PROJECT_DIR}")
-print(f"📊 Graphs Output Directory: {PLOTS_DIR} (Cleared & Ready)")
-
-# Target filenames based on chosen mode
 if RUN_MODE == "free_text":
     TARGET_CSV = "master_extracted_features_free_text.csv"
-    TARGET_SPEC_DIR_KEYWORDS = ["spectrograms_logmel_free_text", "spectrograms_free_text", "free_text"]
+    EXACT_SPEC_DIR_NAME = "spectrograms_logmel_free_text"
 else:
     TARGET_CSV = "master_extracted_features_mixed.csv"
-    TARGET_SPEC_DIR_KEYWORDS = ["spectrograms_logmel_mixed", "spectrograms_mixed", "mixed"]
+    EXACT_SPEC_DIR_NAME = "spectrograms_logmel_mixed"
 
 
-# Dynamically locates the target metadata CSV and spectrogram PyTorch tensor files directory within the local project root.
-# It guarantees automatic path binding regardless of directory nesting in PyCharm.
+# ==============================================================================
+# CLASSES & FUNCTIONS DEFINITIONS (SAFE FOR MULTIPROCESSING)
+# ==============================================================================
+
+# Dynamically locates the target metadata CSV and explicit spectrogram directory.
 def find_dataset_paths():
     search_base = str(PROJECT_DIR)
-    found_csv = None
-    found_spec_dir = None
+    found_csv, found_spec_dir = None, None
 
     for root, dirs, files in os.walk(search_base):
         for file in files:
@@ -90,92 +75,35 @@ def find_dataset_paths():
     if not found_csv:
         raise FileNotFoundError(f"Could not locate {TARGET_CSV} anywhere under {search_base}")
 
-    parent_search = os.path.dirname(found_csv)
-    for item in os.listdir(parent_search):
-        full_item_path = os.path.join(parent_search, item)
-        if os.path.isdir(full_item_path):
-            if any(kw.lower() in item.lower() for kw in TARGET_SPEC_DIR_KEYWORDS):
-                found_spec_dir = full_item_path
+    exact_path = PROJECT_DIR / EXACT_SPEC_DIR_NAME
+    if exact_path.exists() and exact_path.is_dir():
+        found_spec_dir = str(exact_path)
+    else:
+        for root, dirs, files in os.walk(search_base):
+            if os.path.basename(root).lower() == EXACT_SPEC_DIR_NAME.lower():
+                found_spec_dir = root
                 break
 
     if not found_spec_dir:
         for root, dirs, files in os.walk(search_base):
-            for d in dirs:
-                if any(kw.lower() in d.lower() for kw in TARGET_SPEC_DIR_KEYWORDS):
-                    found_spec_dir = os.path.join(root, d)
-                    break
-            if found_spec_dir:
+            pt_files = [f for f in files if f.endswith('.pt')]
+            if len(pt_files) > 0 and EXACT_SPEC_DIR_NAME.lower() in root.lower():
+                found_spec_dir = root
                 break
+
+    if not found_spec_dir:
+        raise FileNotFoundError(f"Could not locate spectrogram directory '{EXACT_SPEC_DIR_NAME}' under {search_base}")
 
     return found_csv, found_spec_dir
 
 
-CSV_PATH, SPECTROGRAM_SAVE_DIR = find_dataset_paths()
-
-print("\n" + "=" * 65)
-print("Dynamic Path Finder Success!")
-print(f"CSV Path: {CSV_PATH}")
-print(f"Spectrograms Directory: {SPECTROGRAM_SAVE_DIR}")
-print("=" * 65)
-
-# ==============================================================================
-# DATASET INITIALIZATION & MATCHING REPORT
-# ==============================================================================
-
-if not os.path.exists(CSV_PATH):
-    alt_csv = os.path.join(DATASET_DIR,
-                           "master_extracted_features_free_text.csv" if DATASET_TYPE == "mixed" else "master_extracted_features_mixed.csv")
-    if os.path.exists(alt_csv):
-        CSV_PATH = alt_csv
-
-metadata_df = pd.read_csv(CSV_PATH)
-metadata_df["clean_id"] = metadata_df["filename"].apply(
-    lambda x: os.path.splitext(os.path.basename(str(x)))[0].lower().strip()
-)
-
-existing_pt_files = {
-    os.path.splitext(f)[0].lower().strip()
-    for f in os.listdir(SPECTROGRAM_SAVE_DIR)
-    if f.endswith(".pt")
-}
-metadata_df["pt_exists"] = metadata_df["clean_id"].isin(existing_pt_files)
-
-print("\n" + "=" * 65)
-print("Accent File and Spectrogram Summary Report")
-print("=" * 65)
-
-accent_summary = metadata_df.groupby("accent").agg(
-    CSV_Total=("clean_id", "count"),
-    PT_Generated=("pt_exists", "sum"),
-)
-accent_summary["Missing"] = accent_summary["CSV_Total"] - accent_summary["PT_Generated"]
-accent_summary["Success_Rate_%"] = (
-        (accent_summary["PT_Generated"] / accent_summary["CSV_Total"]) * 100
-).round(2)
-
-print(accent_summary)
-print("-" * 65)
-print(f"Total CSV Samples: {len(metadata_df)} | Total Matching PT Files: {accent_summary['PT_Generated'].sum()}")
-print("=" * 65)
-
-df_filtered = metadata_df[metadata_df["pt_exists"]].reset_index(drop=True)
-df_filtered["file_id"] = df_filtered["clean_id"]
-
-
-# ==============================================================================
-# MODEL & DATASET DEFINITIONS
-# ==============================================================================
-
 # Applies random frequency and time zero-masking on input spectrogram tensors during training.
-# It acts as an acoustic data augmentation mechanism to improve CNN generalization and reduce overfitting.
 class SpecAugment(nn.Module):
-    # Initializes masking range bounds for frequency bins and time frame dimensions.
     def __init__(self, freq_mask_param=12, time_mask_param=20):
         super().__init__()
         self.freq_mask_param = freq_mask_param
         self.time_mask_param = time_mask_param
 
-    # Executes random zero-masking across frequency and time channels when in training mode.
     def forward(self, spec):
         if not self.training:
             return spec
@@ -191,9 +119,7 @@ class SpecAugment(nn.Module):
 
 
 # Custom PyTorch Dataset that loads both 2D log-Mel spectrogram tensors and 1D IPA phonetic feature vectors.
-# It provides multimodal data pairs required by the dual-branch neural architecture.
 class DualBranchDataset(Dataset):
-    # Initializes dataset metadata, spectrogram directory, phonetic column list, and label encodings.
     def __init__(self, metadata_df, spec_dir, label2idx=None):
         self.df = metadata_df.reset_index(drop=True)
         self.spec_dir = spec_dir
@@ -207,11 +133,9 @@ class DualBranchDataset(Dataset):
         else:
             self.label2idx = label2idx
 
-    # Returns the total count of multimodal samples in the dataset split.
     def __len__(self):
         return len(self.df)
 
-    # Loads and formats the 2D spectrogram tensor along with its corresponding 1D phonetic vector and class label.
     def __getitem__(self, idx):
         row = self.df.iloc[idx]
         file_id = row['file_id']
@@ -235,9 +159,7 @@ class DualBranchDataset(Dataset):
 
 
 # Implements a Multimodal Dual-Branch Convolutional Neural Network with gated residual feature fusion.
-# It processes 2D acoustic spectrograms and 1D phonetic vectors in parallel to enhance accent classification.
 class DualBranchAccentCNN(nn.Module):
-    # Builds the acoustic CNN branch, phonetic MLP branch, dynamic sigmoid gating module, and final classifier.
     def __init__(self, num_classes: int, phonetic_dim: int = 5):
         super().__init__()
 
@@ -290,7 +212,6 @@ class DualBranchAccentCNN(nn.Module):
             nn.Linear(40, num_classes)
         )
 
-    # Computes forward feature extraction, applies dynamic gating, performs residual feature addition, and predicts class logits.
     def forward(self, spec, phonetic_vec):
         x_ac = self.augmentation(spec)
         x_ac = self.acoustic_branch(x_ac)
@@ -309,12 +230,7 @@ class DualBranchAccentCNN(nn.Module):
         return out
 
 
-# ==============================================================================
-# TRAINING & EVALUATION UTILITIES
-# ==============================================================================
-
-# Trains the multimodal model for one epoch using Automatic Mixed Precision (AMP) acceleration.
-# It processes acoustic spectrograms and phonetic vectors simultaneously to calculate loss and update weights.
+# Trains the multimodal model for one epoch (CPU & GPU safe).
 def train_epoch_fast(model, dataloader, criterion, optimizer, scaler, device):
     model.train()
     running_loss, correct, total = 0.0, 0, 0
@@ -326,13 +242,18 @@ def train_epoch_fast(model, dataloader, criterion, optimizer, scaler, device):
 
         optimizer.zero_grad()
 
-        with torch.amp.autocast('cuda' if device.type == 'cuda' else 'cpu'):
+        if device.type == 'cuda' and scaler is not None:
+            with torch.amp.autocast('cuda'):
+                outputs = model(specs, phonetics)
+                loss = criterion(outputs, labels)
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+        else:
             outputs = model(specs, phonetics)
             loss = criterion(outputs, labels)
-
-        scaler.scale(loss).backward()
-        scaler.step(optimizer)
-        scaler.update()
+            loss.backward()
+            optimizer.step()
 
         running_loss += loss.item() * specs.size(0)
         _, preds = torch.max(outputs, 1)
@@ -342,8 +263,7 @@ def train_epoch_fast(model, dataloader, criterion, optimizer, scaler, device):
     return running_loss / total, correct / total
 
 
-# Evaluates the multimodal model on validation or test sets without computing backpropagation gradients.
-# It returns the average classification loss and overall accuracy.
+# Evaluates the multimodal model on validation or test sets.
 def evaluate(model, dataloader, criterion, device):
     model.eval()
     running_loss, correct, total = 0.0, 0, 0
@@ -365,12 +285,7 @@ def evaluate(model, dataloader, criterion, device):
     return running_loss / total, correct / total
 
 
-# ==============================================================================
-# ANALYSIS & VISUALIZATION FUNCTIONS
-# ==============================================================================
-
 # Computes spectral rolloff frequencies tracking the 85% energy cutoff across time frames.
-# It helps analyze high-frequency energy cutoff variations between different accents.
 def compute_rolloff_contour(spec_tensor, percentile=0.85):
     if spec_tensor.dim() == 3:
         spec_tensor = spec_tensor.squeeze(0)
@@ -395,12 +310,11 @@ def compute_rolloff_contour(spec_tensor, percentile=0.85):
 
 
 # Searches metadata for a valid spectrogram file matching an accent string pattern.
-# It provides tensor samples for comparative acoustic contour plotting.
-def find_valid_sample(search_pattern):
+def find_valid_sample(df_filtered, spec_dir, search_pattern):
     filtered_df = df_filtered[df_filtered['accent'].str.lower().str.contains(search_pattern, regex=True)]
     for _, row in filtered_df.iterrows():
         file_id = row['clean_id']
-        spec_path = os.path.join(SPECTROGRAM_SAVE_DIR, f"{file_id}.pt")
+        spec_path = os.path.join(spec_dir, f"{file_id}.pt")
         if os.path.exists(spec_path):
             spec = torch.load(spec_path)
             if isinstance(spec, tuple): spec = spec[0]
@@ -411,9 +325,7 @@ def find_valid_sample(search_pattern):
 
 
 # Computes Grad-CAM attention heatmaps specifically for the acoustic branch of the dual-branch CNN.
-# It visualizes which time-frequency regions drive the multimodal classifier decisions.
 class DualBranchGradCAM:
-    # Registers forward and backward hooks on the target acoustic convolutional layer.
     def __init__(self, model, target_layer):
         self.model = model
         self.target_layer = target_layer
@@ -423,15 +335,12 @@ class DualBranchGradCAM:
         self.target_layer.register_forward_hook(self.save_activation)
         self.target_layer.register_full_backward_hook(self.save_gradient)
 
-    # Hook callback that captures forward activations from the target convolutional layer.
     def save_activation(self, module, input, output):
         self.activations = output
 
-    # Hook callback that captures backward gradients from the target convolutional layer.
     def save_gradient(self, module, grad_input, grad_output):
         self.gradients = grad_output[0]
 
-    # Generates a normalized 2D Grad-CAM heatmap using both spectrogram and phonetic inputs.
     def generate_heatmap(self, spec_tensor, phonetic_tensor, target_class=None):
         self.model.eval()
         self.model.zero_grad()
@@ -461,7 +370,6 @@ class DualBranchGradCAM:
 
 
 # Maps transcribed English text into normalized International Phonetic Alphabet (IPA) feature vectors.
-# It computes voiced, fricative, plosive, nasal, and long vowel ratios to build phonetic inputs during inference.
 def extract_official_ipa_phonetic_vector(transcribed_text: str) -> torch.Tensor:
     IPA_FEATURES_TABLE = {
         'p': {'voiced': 0, 'fricative': 0, 'plosive': 1, 'nasal': 0, 'long_vowel': 0},
@@ -512,7 +420,6 @@ def extract_official_ipa_phonetic_vector(transcribed_text: str) -> torch.Tensor:
 
 
 # Loads a .wav audio file and extracts a standardized, normalized 128-bin log-Mel spectrogram tensor.
-# It ensures input audio matches the exact input sampling rate and shape requirements of the CNN.
 def process_and_extract_mel_spectrogram(audio_path: str, target_sr: int = 16000,
                                         target_duration_sec: float = 4.0) -> torch.Tensor:
     waveform, sr = torchaudio.load(audio_path)
@@ -551,8 +458,7 @@ def process_and_extract_mel_spectrogram(audio_path: str, target_sr: int = 16000,
 
 
 # Runs the complete end-to-end multimodal inference pipeline on a target audio file.
-# It uses Whisper STT for text transcription, extracts IPA vectors and Mel spectrograms, and outputs predicted accent probabilities.
-def process_and_classify_uploaded_audio(file_path: str, inference_model, whisper_model, label2idx_mapping):
+def process_and_classify_uploaded_audio(file_path: str, inference_model, whisper_model, label2idx_mapping, device):
     print(f"\nProcessing Audio File for Inference: {os.path.basename(file_path)}")
 
     try:
@@ -588,48 +494,76 @@ def process_and_classify_uploaded_audio(file_path: str, inference_model, whisper
 
 
 # ==============================================================================
-# MAIN CROSS-VALIDATION PIPELINE
+# MAIN EXECUTION ROUTINE
 # ==============================================================================
 
 if __name__ == "__main__":
-    print("\n" + "=" * 80)
-    print(f"Detailed Accent Breakdown across 5 Folds - Multimodal Dual-Branch CNN ({RUN_MODE})")
-    print("=" * 80)
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"Using device: {device}")
+    if device.type == 'cuda':
+        print(f"GPU Model: {torch.cuda.get_device_name(0)}")
+
+    if PLOTS_DIR.exists():
+        shutil.rmtree(PLOTS_DIR)
+    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
+
+    print(f"📁 Project Root Directory: {PROJECT_DIR}")
+    print(f"📊 Graphs Output Directory: {PLOTS_DIR} (Cleared & Ready)")
+
+    CSV_PATH, SPECTROGRAM_SAVE_DIR = find_dataset_paths()
+
+    print("\n" + "=" * 65)
+    print("Dynamic Path Finder Success!")
+    print(f"CSV Path: {CSV_PATH}")
+    print(f"Spectrograms Directory: {SPECTROGRAM_SAVE_DIR}")
+    print("=" * 65)
+
+    metadata_df = pd.read_csv(CSV_PATH)
+    metadata_df["clean_id"] = metadata_df["filename"].apply(
+        lambda x: os.path.splitext(os.path.basename(str(x)))[0].lower().strip()
+    )
+
+    existing_pt_files = {
+        os.path.splitext(f)[0].lower().strip()
+        for f in os.listdir(SPECTROGRAM_SAVE_DIR)
+        if f.endswith(".pt")
+    }
+    metadata_df["pt_exists"] = metadata_df["clean_id"].isin(existing_pt_files)
+
+    print("\n" + "=" * 65)
+    print("Accent File and Spectrogram Summary Report")
+    print("=" * 65)
+
+    accent_summary = metadata_df.groupby("accent").agg(
+        CSV_Total=("clean_id", "count"),
+        PT_Generated=("pt_exists", "sum"),
+    )
+    accent_summary["Missing"] = accent_summary["CSV_Total"] - accent_summary["PT_Generated"]
+    accent_summary["Success_Rate_%"] = (
+            (accent_summary["PT_Generated"] / accent_summary["CSV_Total"]) * 100
+    ).round(2)
+
+    print(accent_summary)
+    print("-" * 65)
+    total_matched = accent_summary['PT_Generated'].sum()
+    print(f"Total CSV Samples: {len(metadata_df)} | Total Matching PT Files: {total_matched}")
+    print("=" * 65)
+
+    df_filtered = metadata_df[metadata_df["pt_exists"]].reset_index(drop=True)
+    df_filtered["file_id"] = df_filtered["clean_id"]
+
+    if len(df_filtered) == 0:
+        print("\n❌ CRITICAL ERROR: Zero matching .pt files found!")
+        sys.exit(1)
 
     gkf_outer = GroupKFold(n_splits=5)
     groups = df_filtered["speaker_id"]
 
-    for fold, (train_val_idx, test_idx) in enumerate(gkf_outer.split(df_filtered, groups=groups), 1):
-        train_val_df = df_filtered.iloc[train_val_idx].reset_index(drop=True)
-        test_df = df_filtered.iloc[test_idx].reset_index(drop=True)
-
-        gkf_inner = GroupKFold(n_splits=10)
-        train_idx_inner, val_idx_inner = next(gkf_inner.split(train_val_df, groups=train_val_df["speaker_id"]))
-
-        train_df = train_val_df.iloc[train_idx_inner].reset_index(drop=True)
-        val_df = train_val_df.iloc[val_idx_inner].reset_index(drop=True)
-
-        print(f"\n--- FOLD {fold} DISTRIBUTION ---")
-        train_counts = train_df['accent'].value_counts()
-        val_counts = val_df['accent'].value_counts()
-        test_counts = test_df['accent'].value_counts()
-
-        fold_dist = pd.DataFrame({
-            'Train_Count': train_counts,
-            'Train_%': (train_counts / len(train_df) * 100).round(2),
-            'Val_Count': val_counts,
-            'Val_%': (val_counts / len(val_df) * 100).round(2),
-            'Test_Count': test_counts,
-            'Test_%': (test_counts / len(test_df) * 100).round(2)
-        }).fillna(0)
-
-        print(fold_dist)
-        print(f"Total Samples in Fold {fold}: Train={len(train_df)} | Val={len(val_df)} | Test={len(test_df)}")
-
-    # Execute 5-Fold Group Cross-Validation
     fold_results = []
     all_overall_preds = []
     all_overall_labels = []
+
+    num_workers_cfg = 0 if sys.platform.startswith('win') else 2
 
     print("\n" + "=" * 70)
     print("Starting 5-Fold Group Cross-Validation (Multimodal Dual-Branch CNN)...")
@@ -647,6 +581,8 @@ if __name__ == "__main__":
         train_df = train_val_df.iloc[train_idx_inner].reset_index(drop=True)
         val_df = train_val_df.iloc[val_idx_inner].reset_index(drop=True)
 
+        print(f"Fold {fold} Distribution -> Train={len(train_df)} | Val={len(val_df)} | Test={len(test_df)}")
+
         MODEL_SAVE_PATH = PROJECT_DIR / f'best_dual_branch_fold_{fold}.pth'
 
         train_dataset = DualBranchDataset(train_df, SPECTROGRAM_SAVE_DIR)
@@ -654,17 +590,18 @@ if __name__ == "__main__":
         val_dataset = DualBranchDataset(val_df, SPECTROGRAM_SAVE_DIR, label2idx=label2idx)
         test_dataset = DualBranchDataset(test_df, SPECTROGRAM_SAVE_DIR, label2idx=label2idx)
 
-        train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=2,
+        train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=num_workers_cfg,
                                   pin_memory=True if device.type == 'cuda' else False)
-        val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False, num_workers=2,
+        val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False, num_workers=num_workers_cfg,
                                 pin_memory=True if device.type == 'cuda' else False)
-        test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False)
+        test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False, num_workers=0)
 
         model = DualBranchAccentCNN(num_classes=len(label2idx)).to(device)
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-2)
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', patience=3, factor=0.5)
-        scaler = torch.amp.GradScaler('cuda' if device.type == 'cuda' else 'cpu')
+
+        scaler = torch.amp.GradScaler('cuda') if device.type == 'cuda' else None
 
         best_val_loss = float('inf')
         best_epoch = -1
@@ -705,11 +642,9 @@ if __name__ == "__main__":
         print(
             f"Fold {fold} Complete -> Best Epoch: #{best_epoch} | Test Acc: {test_acc * 100:.2f}% | Macro F1: {fold_f1:.4f}")
 
-    # Save primary best model checkpoint
     best_overall_checkpoint = PROJECT_DIR / 'best_dual_branch_cnn.pth'
     shutil.copy(PROJECT_DIR / 'best_dual_branch_fold_1.pth', best_overall_checkpoint)
 
-    # Verification: Speaker Isolation
     print("\nChecking Speaker-ID Isolation across all 5 Folds...")
     total_leaks = 0
     for fold, (train_val_idx, test_idx) in enumerate(gkf_outer.split(df_filtered, groups=groups), 1):
@@ -723,7 +658,6 @@ if __name__ == "__main__":
     if total_leaks == 0:
         print("Methodological Verification Passed: Zero speaker leakage across all 5 Folds!")
 
-    # Summary Statistics & Classification Report
     accuracies = [r['test_acc'] for r in fold_results]
     f1_scores_list = [r['test_f1'] for r in fold_results]
 
@@ -748,7 +682,7 @@ if __name__ == "__main__":
     print("\nAggregated 5-Fold Classification Report - Dual-Branch CNN:\n")
     print(classification_report(all_overall_labels, all_overall_preds, target_names=target_names, digits=4))
 
-    # 1. Save Normalized Confusion Matrix
+    # Confusion Matrices
     cm_normalized = confusion_matrix(all_overall_labels, all_overall_preds, normalize='true')
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm_normalized, annot=True, fmt='.2%', cmap='Blues', xticklabels=target_names, yticklabels=target_names)
@@ -761,7 +695,6 @@ if __name__ == "__main__":
     plt.savefig(PLOTS_DIR / "confusion_matrix_normalized.png")
     plt.close()
 
-    # 2. Save Absolute Counts Confusion Matrix
     cm_absolute = confusion_matrix(all_overall_labels, all_overall_preds)
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm_absolute, annot=True, fmt='d', cmap='Blues', xticklabels=target_names, yticklabels=target_names)
@@ -774,7 +707,7 @@ if __name__ == "__main__":
     plt.savefig(PLOTS_DIR / "confusion_matrix_absolute.png")
     plt.close()
 
-    # 3. Generate Grad-CAM Attention Maps for Dual-Branch CNN
+    # Grad-CAM Attention Maps
     print("\nGenerating Grad-CAM Attention Maps for Dual-Branch CNN...")
     best_model = DualBranchAccentCNN(num_classes=len(label2idx)).to(device)
     best_model.load_state_dict(torch.load(best_overall_checkpoint))
@@ -822,7 +755,7 @@ if __name__ == "__main__":
     plt.savefig(PLOTS_DIR / "grad_cam_attention_maps.png")
     plt.close()
 
-    # 4. Generate Averaged Accent Spectrogram Templates
+    # Averaged Accent Spectrogram Templates
     print("\nGenerating Averaged Accent Spectrogram Templates...")
     unique_accents = sorted(df_filtered['accent'].unique())
     num_accents = len(unique_accents)
@@ -869,7 +802,7 @@ if __name__ == "__main__":
     plt.savefig(PLOTS_DIR / "averaged_accent_templates.png")
     plt.close()
 
-    # 5. Residual Learning Visualization
+    # Residual Learning Visualization
     phonetic_cols = ['phn_voiced', 'phn_fricative', 'phn_plosive', 'phn_nasal', 'phn_long_vowel']
     chinese_df = df_filtered[df_filtered['accent'].str.lower().str.contains('chinese|cn', regex=True)]
     american_df = df_filtered[df_filtered['accent'].str.lower().str.contains('american|us', regex=True)]
@@ -920,14 +853,14 @@ if __name__ == "__main__":
         plt.savefig(PLOTS_DIR / "residual_learning_visualization.png")
         plt.close()
 
-    # 6. Spectral Rolloff Contour Comparison
-    chinese_spec, cn_id, cn_accent_name = find_valid_sample('chinese|cn')
-    american_spec, us_id, us_accent_name = find_valid_sample('american|us')
+    # Spectral Rolloff Contour Comparison
+    chinese_spec, cn_id, cn_accent_name = find_valid_sample(df_filtered, SPECTROGRAM_SAVE_DIR, 'chinese|cn')
+    american_spec, us_id, us_accent_name = find_valid_sample(df_filtered, SPECTROGRAM_SAVE_DIR, 'american|us')
 
     if chinese_spec is None or american_spec is None:
         available_accents = df_filtered['accent'].unique()
-        chinese_spec, cn_id, cn_accent_name = find_valid_sample(available_accents[0])
-        american_spec, us_id, us_accent_name = find_valid_sample(available_accents[1])
+        chinese_spec, cn_id, cn_accent_name = find_valid_sample(df_filtered, SPECTROGRAM_SAVE_DIR, available_accents[0])
+        american_spec, us_id, us_accent_name = find_valid_sample(df_filtered, SPECTROGRAM_SAVE_DIR, available_accents[1])
 
     if chinese_spec is not None and american_spec is not None:
         cn_rolloff = compute_rolloff_contour(chinese_spec)

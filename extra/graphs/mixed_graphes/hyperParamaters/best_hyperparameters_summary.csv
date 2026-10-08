@@ -1,7 +1,0 @@
-Classifier,Best_Averaged_Accuracy_%,Optimal_Hyperparameters
-Logistic Regression,64.05,"{'C': 10, 'penalty': 'l2', 'solver': 'newton-cg'}"
-SVM (RBF),65.19,"{'C': 1, 'gamma': 0.01}"
-Random Forest,66.59,"{'max_depth': 30, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}"
-XGBoost,67.58,"{'colsample_bytree': 0.7, 'learning_rate': 0.05, 'max_depth': 9, 'n_estimators': 300, 'subsample': 0.8}"
-Gaussian NB,49.63,"{'priors': (0.4, 0.2, 0.2, 0.2), 'var_smoothing': 1e-09}"
-Kernel ELM,33.07,"{'C': 100.0, 'gamma': 0.001}"
