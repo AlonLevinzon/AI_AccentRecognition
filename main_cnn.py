@@ -17,6 +17,9 @@ from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import GroupKFold
 from sklearn.metrics import classification_report, confusion_matrix, f1_score
 
+import torchaudio
+import torchaudio.transforms as T
+
 # ==============================================================================
 # CONFIGURATION & GLOBAL DEFINITIONS
 # ==============================================================================
@@ -310,6 +313,74 @@ class AccentCNNGradCAM:
             cam = cam / np.max(cam)
 
         return cam, target_class
+
+
+# Loads a .wav audio file and extracts a standardized, normalized 128-bin log-Mel spectrogram tensor.
+def process_and_extract_mel_spectrogram(audio_path: str, target_sr: int = 16000,
+                                        target_duration_sec: float = 4.0) -> torch.Tensor:
+    waveform, sr = torchaudio.load(audio_path)
+
+    if waveform.shape[0] > 1:
+        waveform = torch.mean(waveform, dim=0, keepdim=True)
+
+    if sr != target_sr:
+        resampler = T.Resample(orig_freq=sr, new_freq=target_sr)
+        waveform = resampler(waveform)
+
+    target_length = int(target_sr * target_duration_sec)
+    num_samples = waveform.shape[1]
+
+    if num_samples < target_length:
+        pad_amount = target_length - num_samples
+        waveform = torch.nn.functional.pad(waveform, (0, pad_amount))
+    elif num_samples > target_length:
+        waveform = waveform[:, :target_length]
+
+    mel_transform = T.MelSpectrogram(
+        sample_rate=target_sr,
+        n_fft=1024,
+        hop_length=512,
+        n_mels=128,
+        power=2.0
+    )
+    mel_spec = mel_transform(waveform)
+    mel_spec = T.AmplitudeToDB(top_db=80)(mel_spec)
+
+    mean = mel_spec.mean()
+    std = mel_spec.std() + 1e-6
+    mel_spec = (mel_spec - mean) / std
+
+    return mel_spec
+
+
+# Runs inference on a target audio file using the standard Acoustic CNN model.
+def process_and_classify_uploaded_audio(file_path: str, inference_model, label2idx_mapping, device):
+    print(f"\nProcessing Audio File for Inference: {os.path.basename(file_path)}")
+
+    try:
+        spec_tensor = process_and_extract_mel_spectrogram(str(file_path))
+        spec_input = spec_tensor.unsqueeze(0).to(device)
+
+        inference_model.eval()
+        with torch.no_grad():
+            outputs = inference_model(spec_input)
+            probabilities = torch.softmax(outputs, dim=1)[0].cpu().numpy()
+
+        idx2label = {v: k for k, v in label2idx_mapping.items()}
+        predicted_idx = np.argmax(probabilities)
+        predicted_accent = idx2label[predicted_idx]
+
+        print("\nAccent Class Probability Breakdown:")
+        for idx, prob in enumerate(probabilities):
+            accent_name = idx2label[idx]
+            print(f"  * {accent_name.upper():<12}: {prob * 100:.2f}%")
+
+        print("=" * 60)
+        print(f"Predicted Accent: {predicted_accent.upper()}")
+        print("=" * 60)
+
+    except Exception as e:
+        print(f"Error during audio inference execution: {e}")
 
 
 # ==============================================================================
@@ -710,3 +781,60 @@ if __name__ == "__main__":
     print("✅ ALL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:")
     print(f"   📂 {PLOTS_DIR}")
     print("=" * 80 + "\n")
+
+    # ==============================================================================
+    # SINGLE-FILE INFERENCE VIA TKINTER FILE DIALOG
+    # ==============================================================================
+    print("\n" + "=" * 70)
+    print("🎙️ PREPARING INFERENCE PIPELINE FOR SINGLE AUDIO FILE...")
+    print("=" * 70)
+
+    # 1. Load best checkpoint saved during Cross-Validation
+    best_model_checkpoint = PROJECT_DIR / 'best_accent_cnn.pth'
+    if not best_model_checkpoint.exists():
+        best_model_checkpoint = PROJECT_DIR / 'best_acoustic_cnn_fold_1.pth'
+
+    print(f"Loading trained Acoustic CNN weights from: {best_model_checkpoint.name}")
+    inference_model = AccentCNN(num_classes=len(label2idx)).to(device)
+    inference_model.load_state_dict(torch.load(best_model_checkpoint, map_location=device))
+    inference_model.eval()
+
+    # 2. Open Tkinter native file dialog to select input WAV file
+    print("\n📂 Opening file browser dialog to select audio WAV file for inference...")
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+
+        root = tk.Tk()
+        root.withdraw()  # Hide main Tkinter window
+        root.attributes('-topmost', True)  # Ensure dialog appears on top
+
+        selected_audio_path = filedialog.askopenfilename(
+            title="Select Audio WAV File for Accent Inference",
+            filetypes=[("Audio Files", "*.wav"), ("All Files", "*.*")]
+        )
+        root.destroy()
+
+        if selected_audio_path:
+            # Execute audio inference pipeline on selected file
+            process_and_classify_uploaded_audio(
+                file_path=selected_audio_path,
+                inference_model=inference_model,
+                label2idx_mapping=label2idx,
+                device=device
+            )
+        else:
+            print("⚠️ File selection cancelled by user.")
+
+    except Exception as dialog_err:
+        print(f"⚠️ Could not open file dialog window ({dialog_err}).")
+        user_file = input("Please manually enter the full path to your audio WAV file: ")
+        if user_file and os.path.exists(user_file):
+            process_and_classify_uploaded_audio(
+                file_path=user_file,
+                inference_model=inference_model,
+                label2idx_mapping=label2idx,
+                device=device
+            )
+        else:
+            print("⚠️ Invalid path or no file provided.")

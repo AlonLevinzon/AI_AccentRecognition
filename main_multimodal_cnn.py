@@ -891,3 +891,69 @@ if __name__ == "__main__":
     print("✅ ALL MULTIMODAL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:")
     print(f"   📂 {PLOTS_DIR}")
     print("=" * 80 + "\n")
+    # ==============================================================================
+    # SINGLE-FILE INFERENCE VIA TKINTER FILE DIALOG
+    # ==============================================================================
+    print("\n" + "=" * 70)
+    print("🎙️ PREPARING INFERENCE PIPELINE FOR SINGLE AUDIO FILE...")
+    print("=" * 70)
+
+    # 1. Load Whisper Speech-To-Text Model
+    print("Loading Whisper STT Model for text transcription...")
+    try:
+        whisper_model = whisper.load_model("base", device=device)
+    except Exception as e:
+        print(f"⚠️ Could not load Whisper model directly on {device}, falling back to CPU: {e}")
+        whisper_model = whisper.load_model("base", device="cpu")
+
+    # 2. Load best checkpoint saved during Cross-Validation
+    best_model_checkpoint = PROJECT_DIR / 'best_dual_branch_cnn.pth'
+    if not best_model_checkpoint.exists():
+        best_model_checkpoint = PROJECT_DIR / 'best_dual_branch_fold_1.pth'
+
+    print(f"Loading trained Dual-Branch CNN weights from: {best_model_checkpoint.name}")
+    inference_model = DualBranchAccentCNN(num_classes=len(label2idx)).to(device)
+    inference_model.load_state_dict(torch.load(best_model_checkpoint, map_location=device))
+    inference_model.eval()
+
+    # 3. Open Tkinter native file dialog to select input WAV file
+    print("\n📂 Opening file browser dialog to select audio WAV file for inference...")
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+
+        root = tk.Tk()
+        root.withdraw()  # Hide main Tkinter window
+        root.attributes('-topmost', True)  # Ensure dialog appears on top
+
+        selected_audio_path = filedialog.askopenfilename(
+            title="Select Audio WAV File for Accent Inference",
+            filetypes=[("Audio Files", "*.wav"), ("All Files", "*.*")]
+        )
+        root.destroy()
+
+        if selected_audio_path:
+            # Execute full inference pipeline on selected file
+            process_and_classify_uploaded_audio(
+                file_path=selected_audio_path,
+                inference_model=inference_model,
+                whisper_model=whisper_model,
+                label2idx_mapping=label2idx,
+                device=device
+            )
+        else:
+            print("⚠️ File selection cancelled by user.")
+
+    except Exception as dialog_err:
+        print(f"⚠️ Could not open file dialog window ({dialog_err}).")
+        user_file = input("Please manually enter the full path to your audio WAV file: ")
+        if user_file and os.path.exists(user_file):
+            process_and_classify_uploaded_audio(
+                file_path=user_file,
+                inference_model=inference_model,
+                whisper_model=whisper_model,
+                label2idx_mapping=label2idx,
+                device=device
+            )
+        else:
+            print("⚠️ Invalid path or no file provided.")

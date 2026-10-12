@@ -1,0 +1,114 @@
+C:\Users\Alon\AppData\Local\Programs\Python\Python313\python.exe C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\main_cnn.py
+Using device: cpu
+📁 Project Root Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated
+📊 Graphs Output Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\CNN_free_text (Cleared & Ready)
+
+=================================================================
+Dynamic Path Finder Success!
+CSV Path: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\master_extracted_features_free_text.csv
+Spectrograms Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\spectrograms_logmel_free_text
+=================================================================
+
+=================================================================
+Accent Summary Report (CSV vs Spectrogram PT Files)
+=================================================================
+          CSV_Total  PT_Generated  Missing  Success_Rate_%
+accent
+chinese        1200          1200        0           100.0
+indian         1200          1200        0           100.0
+nigerian       1200          1200        0           100.0
+usa            1200          1200        0           100.0
+-----------------------------------------------------------------
+Total CSV Samples: 4800 | Total Matching PT Files: 4800
+=================================================================
+
+======================================================================
+Starting 5-Fold Group Cross-Validation (Acoustic CNN)...
+======================================================================
+
+--- STARTING FOLD 1/5 ---
+Fold 1 Distribution -> Train=3456 | Val=384 | Test=960
+Fold 1 Complete -> Best Epoch: #25 | Test Acc: 73.23% | Macro F1: 0.7261
+
+--- STARTING FOLD 2/5 ---
+Fold 2 Distribution -> Train=3456 | Val=384 | Test=960
+Fold 2 Complete -> Best Epoch: #8 | Test Acc: 71.25% | Macro F1: 0.7157
+
+--- STARTING FOLD 3/5 ---
+Fold 3 Distribution -> Train=3456 | Val=384 | Test=960
+Fold 3 Complete -> Best Epoch: #26 | Test Acc: 73.96% | Macro F1: 0.7458
+
+--- STARTING FOLD 4/5 ---
+Fold 4 Distribution -> Train=3456 | Val=384 | Test=960
+Fold 4 Complete -> Best Epoch: #3 | Test Acc: 71.46% | Macro F1: 0.7014
+
+--- STARTING FOLD 5/5 ---
+Fold 5 Distribution -> Train=3456 | Val=384 | Test=960
+Fold 5 Complete -> Best Epoch: #8 | Test Acc: 63.33% | Macro F1: 0.6237
+
+Checking Speaker-ID Isolation across all 5 Folds...
+  * Fold 1: 1538 Train Speakers | 384 Test Speakers | Overlap = 0
+  * Fold 2: 1538 Train Speakers | 384 Test Speakers | Overlap = 0
+  * Fold 3: 1538 Train Speakers | 384 Test Speakers | Overlap = 0
+  * Fold 4: 1537 Train Speakers | 385 Test Speakers | Overlap = 0
+  * Fold 5: 1537 Train Speakers | 385 Test Speakers | Overlap = 0
+Methodological Verification Passed: Zero speaker leakage across all 5 Folds!
+
+======================================================================
+SUMMARY COMPARISON: 5-FOLD CROSS-VALIDATION RESULTS (ACOUSTIC CNN)
+======================================================================
+Fold 1: Test Acc = 73.23% | Macro F1 = 0.7261 (Best Epoch #25)
+Fold 2: Test Acc = 71.25% | Macro F1 = 0.7157 (Best Epoch #8)
+Fold 3: Test Acc = 73.96% | Macro F1 = 0.7458 (Best Epoch #26)
+Fold 4: Test Acc = 71.46% | Macro F1 = 0.7014 (Best Epoch #3)
+Fold 5: Test Acc = 63.33% | Macro F1 = 0.6237 (Best Epoch #8)
+----------------------------------------------------------------------
+Overall Mean Accuracy: 70.65% +/- 3.80%
+Overall Mean Macro F1: 0.7025 +/- 0.0420
+======================================================================
+
+Aggregated 5-Fold Classification Report - Acoustic CNN:
+
+              precision    recall  f1-score   support
+
+     chinese     0.6278    0.8700    0.7293      1200
+      indian     0.5337    0.4425    0.4838      1200
+    nigerian     0.9861    0.8250    0.8984      1200
+         usa     0.7258    0.6883    0.7066      1200
+
+    accuracy                         0.7065      4800
+   macro avg     0.7183    0.7065    0.7045      4800
+weighted avg     0.7183    0.7065    0.7045      4800
+
+
+Generating Grad-CAM Attention Maps for Acoustic CNN...
+
+Generating Averaged Accent Spectrogram Templates...
+
+================================================================================
+✅ ALL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:
+   📂 C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\CNN_free_text
+================================================================================
+
+
+======================================================================
+🎙️ PREPARING INFERENCE PIPELINE FOR SINGLE AUDIO FILE...
+======================================================================
+Loading trained Acoustic CNN weights from: best_accent_cnn.pth
+
+📂 Opening file browser dialog to select audio WAV file for inference...
+
+Processing Audio File for Inference:
+C:\Users\Alon\AppData\Local\Programs\Python\Python313\Lib\site-packages\torchaudio\_backend\utils.py:213: UserWarning: In 2.9, this function's implementation will be changed to use torchaudio.load_with_torchcodec` under the hood. Some parameters like ``normalize``, ``format``, ``buffer_size``, and ``backend`` will be ignored. We recommend that you port your code to rely directly on TorchCodec's decoder instead: https://docs.pytorch.org/torchcodec/stable/generated/torchcodec.decoders.AudioDecoder.html#torchcodec.decoders.AudioDecoder.
+  warnings.warn(
+
+Accent Class Probability Breakdown:
+  * CHINESE     : 69.74%
+  * INDIAN      : 28.99%
+  * NIGERIAN    : 0.05%
+  * USA         : 1.22%
+============================================================
+Predicted Accent: CHINESE
+============================================================
+
+Process finished with exit code 0
