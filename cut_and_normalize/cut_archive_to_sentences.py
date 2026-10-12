@@ -6,28 +6,36 @@ from sentences_extractor import cut_audio_to_sentences
 
 
 def generate_accent_metadata():
-    # 1. Dynamically find the directory where pipeline_manager.py is stored
+    # 1. Dynamically find the directory where the script is stored
     current_script_dir = Path(__file__).resolve().parent
 
-    # 2. Go one folder up from cut_and_normalize (to the root directory) to find the CSV
-    metadata_csv_path = current_script_dir.parent / "metadata_archive.xlsx"
+    # 2. Target the metadata file directly inside ./accents_audio/accent_archive/
+    accent_archive_dir = current_script_dir.parent / "accents_audio" / "accent_archive"
+    metadata_path = accent_archive_dir / "stats_our_lang.xlsx"
+
+    # Fallback options in case the file name or format slightly varies
+    if not metadata_path.exists():
+        metadata_path = accent_archive_dir / "metadata_archive.xlsx"
 
     # 3. Target the output folder inside the root directory
     base_output_path = current_script_dir.parent / "sentences_samples"
 
-    # Check if the file exists using the calculated absolute path
-    if not metadata_csv_path.exists():
-        print(f"Error: Master metadata file not found at {metadata_csv_path.resolve()}")
+    # Check if the metadata file exists
+    if not metadata_path.exists():
+        print(f"Error: Master metadata file not found at {metadata_path.resolve()}")
         return
 
-    print("Loading master metadata...")
-    df_master = pd.read_excel(metadata_csv_path)
+    print(f"Loading master metadata from: {metadata_path.resolve()}...")
+    if metadata_path.suffix.lower() == '.csv':
+        df_master = pd.read_csv(metadata_path)
+    else:
+        df_master = pd.read_excel(metadata_path)
 
     # Clean up filename column to ensure safe comparison matching
     df_master['filename_stem'] = df_master['filename'].apply(lambda x: Path(str(x)).stem.lower())
 
     print("Running audio sentence extraction...")
-    # Trigger your original splitting logic
+    # Trigger original splitting logic from sentences_extractor.py
     cut_audio_to_sentences()
 
     print("Generating per-accent metadata files...")
@@ -50,7 +58,7 @@ def generate_accent_metadata():
             if not sentence_dir_path.is_dir() or not sentence_folder.startswith("sentence_"):
                 continue
 
-            sentence_index = sentence_folder.split("_")[1]
+            sentence_index = int(sentence_folder.split("_")[1])
 
             # Find all sliced wav files within this specific sentence directory
             for wav_file in sentence_dir_path.glob("*.wav"):
@@ -63,6 +71,9 @@ def generate_accent_metadata():
                 if not matched_row.empty:
                     # Clone the original metadata record
                     new_row = matched_row.iloc[0].copy()
+
+                    # Set the accent column explicitly based on the source folder name
+                    new_row['accent'] = accent_folder
 
                     # Inject runtime features for future feature extraction pipelines
                     new_row['sentence_index'] = sentence_index
@@ -80,6 +91,9 @@ def generate_accent_metadata():
             # Drop the temporary lookup column before saving
             if 'filename_stem' in df_accent.columns:
                 df_accent = df_accent.drop(columns=['filename_stem'])
+
+            # Sort rows logically by filename and sentence_index for clean order
+            df_accent = df_accent.sort_values(by=['filename', 'sentence_index'])
 
             output_csv_name = accent_dir_path / f"{accent_folder}_metadata.csv"
             df_accent.to_csv(output_csv_name, index=False, encoding='utf-8-sig')
