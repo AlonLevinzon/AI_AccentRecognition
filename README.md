@@ -58,12 +58,9 @@ AI_AccentRecognition/
 |   `-- voice_analysis_report.png               # Analysis output used during the project/report
 |
 |-- documentation/                              # Project documentation
-|   |-- EXPERIMENT_REPRODUCTION_GUIDE.docx
-|   |-- EXPERIMENT_REPRODUCTION_GUIDE.md
-|   |-- PROGRAMMER_DOCUMENTATION.docx
-|   |-- PROGRAMMER_DOCUMENTATION.md
-|   |-- USER_GUIDE.docx
-|   `-- USER_GUIDE.md
+|   |-- EXPERIMENT_REPRODUCTION_GUIDE.pdf
+|   |-- PROGRAMMER_DOCUMENTATION.pdf
+|   |-- USER_GUIDE.pdf
 |
 |-- machine_learning_official_archive_only/     # Metadata and inputs for archive_only mode
 |-- machine_learning_official_free_text_only/   # Metadata and inputs for free_text mode
@@ -93,7 +90,7 @@ AI_AccentRecognition/
 |
 |-- README.md                                   # Project overview and file structure
 |-- libs.txt                                    # Required Python packages
-`-- EXPERIMENT_REPRODUCTION_GUIDE.docx          # Guide for reproducing the experiments
+`-- EXPERIMENT_REPRODUCTION_GUIDE.pdf          # Guide for reproducing the experiments
 ```
 
 Development-environment files such as `.idea` and `__pycache__`, as well as the model-weight files `best_acoustic_cnn_fold_1.pth` through `best_acoustic_cnn_fold_5.pth`, are intentionally omitted from the tree because they are not required for understanding the source-code structure.
