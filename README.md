@@ -98,15 +98,57 @@ AI_AccentRecognition/
 
 Development-environment files such as `.idea` and `__pycache__`, as well as the model-weight files `best_acoustic_cnn_fold_1.pth` through `best_acoustic_cnn_fold_5.pth`, are intentionally omitted from the tree because they are not required for understanding the source-code structure.
 
+## 📁 Datasets & Accent Sources
+
+Below are the datasets used to train and evaluate our models for accent classification in this project, categorized by target accent :
+
+### 1. Indian Accent (`indian`)
+- **Primary Source (`indian_fleurs_accent`):**
+  - FLEURS / Common Voice Accent Subsets: [CommonVoice Indian Accent Dataset (Hugging Face)](https://huggingface.co/datasets/ishands/commonvoice-indian_accent) | [Indian English Voice (Hugging Face)](https://huggingface.co/datasets/Gbssreejith/indian-english-voice)
+- **Secondary Source (`indian_mozzila_accent`):**
+  - Mozilla Common Voice (Indian accent subset): [Mozilla Common Voice Corpus](https://mozilladatacollective.com/organization/cmfh0j9o10006ns07jq45h7xk)
+
+---
+
+### 2. Chinese Accent (`chinese`)
+- **Primary Source (`chinese_speechOcean_accent`):**
+  - OpenSLR SLR101 — Chinese Speech Corpus (speechOcean): [OpenSLR SLR101](https://www.openslr.org/101/)
+- **Secondary Source (`chinese_ascend_accent`):**
+  - CAiRE ASCEND Dataset: [CAiRE ASCEND (Hugging Face)](https://huggingface.co/datasets/CAiRE/ASCEND)
+
+---
+
+### 3. Nigerian Accent (`nigerian`)
+- **Primary Source (`nigerian_mozzila_accent`):**
+  - Mozilla Common Voice / Nigerian Accented English Dataset: [Nigerian Accented English Dataset (Hugging Face)](https://huggingface.co/datasets/benjaminogbonna/nigerian_accented_english_dataset) | [Mozilla Common Voice](https://mozilladatacollective.com/organization/cmfh0j9o10006ns07jq45h7xk)
+- **Secondary Source (`nigerian_slr_70_accent`):**
+  - OpenSLR SLR70 — High-quality African English Speech: [OpenSLR SLR70](https://www.openslr.org/70/)
+
+---
+
+### 4. US Accent (`usa`)
+- **Primary Source (`usa_libriSpeech_accent`):**
+  - OpenSLR SLR12 — American English Accents / LibriSpeech: [OpenSLR SLR12 (American English Accents)](https://www.openslr.org/12)
+- **Secondary Source (`usa_mozzila_accent`):**
+  - Mozilla Common Voice (US accent subset): [Mozilla Common Voice Corpus](https://mozilladatacollective.com/organization/cmfh0j9o10006ns07jq45h7xk)
+
+---
+
+### 🌐 General & Multi-Accent Archives
+- Speech Accent Archive: [GMU Speech Accent Archive](http://accent.gmu.edu) | [Kaggle Speech Accent Archive](https://www.kaggle.com/datasets/rtatman/speech-accent-archive)
+
+
 ## Workflow
 
 The data comes from two main types of sources. Speech Accent Archive recordings are stored under `accents_audio/accent_archive/`, while the original free-text datasets are stored under `all_accents_data/`.
 
 `group_sources_to_one_by_accent.py` combines the free-text sources according to the selected dataset composition and organizes the resulting audio files by accent under `audio_by_accent_raw/`.
 
-Speech Accent Archive recordings are split into six sentences using the scripts under `cut_and_normalize/`. The resulting samples are stored under `sentences_samples/`. `metadata_generator.py` then creates the metadata required for the three experiment modes: `archive_only`, `free_text`, and `mixed`.
+Speech Accent Archive recordings are split into six sentences using the scripts under `cut_and_normalize/cut_archive_to_sentences`. The resulting samples are stored under `sentences_samples/`. `metadata_generator.py` then creates the metadata required for the three experiment modes: `archive_only`, `free_text`, and `mixed`.
 
-Before the experiment paths diverge, `extract_features.py` runs the feature-extraction code implemented under `features/` and creates the three `master_extracted_features_*.csv` files.
+The script cut_and_normalize/normalize_all_data_for_2_folders.py performs unified preprocessing and normalization on both the sentences_samples and audio_by_accent_raw directories. It generates standardized output directories appended with the _normalized suffix.
+
+Before the experiment paths diverge, `extract_features.py` runs the feature-extraction code implemented under `features/` and creates `master_extracted_features_*.csv` file for each mode.
 
 For the **Machine Learning** path, `main_machine_learning.py` runs the classifiers implemented under `classifiers/`.
 
