@@ -154,16 +154,22 @@ For the **Machine Learning** path, `main_machine_learning.py` runs the classifie
 
 For the **Deep Learning** path, `create_spectogram.py` creates the Log-Mel spectrogram files. The acoustic model is then run with `main_cnn.py`, while the multimodal model is run with `main_multimodal_cnn.py`.
 
-## Kaggle Notebooks
+##  Runtime Environment (Kaggle Notebooks or PyCharm)
 
-The three main experiment notebooks can also be run on Kaggle. Before running a notebook, make sure that its corresponding dataset is attached to the notebook.
+It is highly recommended to run the four main experiment notebooks on Kaggle. Before running a notebook, make sure that its corresponding dataset is attached to the notebook.
 
-```text
-Machine Learning notebook: [ADD LINK]
-CNN notebook:              [ADD LINK]
-Multimodal CNN notebook:   [ADD LINK]
-archive CNN notebook (for spectrogram compare):   [ADD LINK]
-```
+
+[Machine Learning notebook]( https://www.kaggle.com/code/alonlev001/main-for-machine-learning)
+
+[CNN notebook](https://www.kaggle.com/code/alonlev001/ai-accent-classifier-cnn)
+
+[Multimodal CNN notebook](https://www.kaggle.com/code/alonlev001/ai-accent-classifier-multimodal-cnn)
+
+[archive CNN notebook (for spectrogram compare)](https://www.kaggle.com/code/alonlev001/archive-cnn)
+
+**For users running this project via PyCharm**: Please review the libs.txt file prior to setup. Note that the package installation process and library compatibility may vary depending on your PyCharm version, Python interpreter configuration, and operating system.
+
+For additional information please review the files in the documentation folder.
 
 ## Results and Graphs
 

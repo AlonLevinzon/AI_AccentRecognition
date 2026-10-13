@@ -1,3 +1,5 @@
+# Python Version (in my computer) : 3.13.3
+# Note: Package installation and library compatibility may vary depending on your PyCharm version and environment setup.
 # External Python packages used by the project
 #Python standard-library modules are not listed
 
@@ -23,7 +25,8 @@ seaborn
 umap-learn
 shap
 openai-whisper
+audioop-lts
 
 #To Install all external packages at once:
-python -m pip install numpy pandas scikit-learn xgboost librosa noisereduce soundfile pydub whisperx openpyxl datasets scipy matplotlib praat-parselmouth eng-to-ipa torch torchaudio tqdm seaborn umap-learn shap openai-whisper
+python -m pip install numpy pandas scikit-learn xgboost librosa noisereduce soundfile pydub whisperx openpyxl datasets scipy matplotlib praat-parselmouth eng-to-ipa torch torchaudio tqdm seaborn umap-learn shap openai-whisper audioop-lts
 
