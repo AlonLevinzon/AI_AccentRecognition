@@ -26,7 +26,27 @@ umap-learn
 shap
 openai-whisper
 audioop-lts
+FFmpeg
 
-#To Install all external packages at once:
+#To Install the external packages at once (FFmpeg should be installed separately):
 python -m pip install numpy pandas scikit-learn xgboost librosa noisereduce soundfile pydub whisperx openpyxl datasets scipy matplotlib praat-parselmouth eng-to-ipa torch torchaudio tqdm seaborn umap-learn shap openai-whisper audioop-lts
 
+====================================================================
+FFmpeg installation Setup
+====================================================================
+Some scripts in this project (e.g., `sentences_extractor.py`, `pydub` slicing,
+and WhisperX alignment) require FFmpeg binaries (`ffmpeg` and `ffprobe`)
+for audio decoding, slicing, and exporting.
+
+To ensure FFmpeg is available without manually configuring Windows system
+environment variables (PATH), install `imageio-ffmpeg` inside your Python
+virtual environment:
+
+    pip install imageio-ffmpeg
+
+Option 2 (if the installation above does not work): winget install --id Gyan.FFmpeg -e
+
+Note: After installing `ffmpeg`, make sure to restart your IDE
+(e.g., PyCharm) so the executable path
+is properly picked up by `pydub` and `torchaudio`.
+====================================================================
