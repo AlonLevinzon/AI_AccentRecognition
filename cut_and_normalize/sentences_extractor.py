@@ -29,6 +29,9 @@ def cut_audio_to_sentences():
         if not os.path.isdir(input_folder_path):
             continue
 
+        # Map folder name: rename 'hindi' to 'indian' for output path
+        target_folder_name = "indian" if folder_name.lower() == "hindi" else folder_name
+
         for file_name in os.listdir(input_folder_path):
             if not file_name.lower().endswith(('.wav', '.mp3', '.m4a', '.flac')):
                 continue
@@ -61,7 +64,7 @@ def cut_audio_to_sentences():
 
                     # CRITICAL FIX: Use 'sentence_{index}' instead of the raw text
                     # to avoid illegal character errors (like ':' or '.') in folder/file names.
-                    audio_folder = os.path.join(base_output_path, folder_name, f"sentence_{sentence_index}")
+                    audio_folder = os.path.join(base_output_path, target_folder_name, f"sentence_{sentence_index}")
                     if not os.path.exists(audio_folder):
                         os.makedirs(audio_folder)
 
@@ -72,8 +75,8 @@ def cut_audio_to_sentences():
                 print(f"Finished splitting {file_name}")
             except Exception as e:
                 print(f"Error processing {file_name}: {e}")
+
 if __name__ == "__main__":
     # If you are testing audio_time_split.py directly:
     print("Starting process...")
     cut_audio_to_sentences()
-    # print(result)
