@@ -20,10 +20,10 @@ FREE_TEXT_OUT_DIR = CURRENT_DIR / "machine_learning_official_free_text_only"
 MIXED_OUT_DIR = CURRENT_DIR / "machine_learning_official_mixed"
 ARCHIVE_OUT_DIR = CURRENT_DIR / "machine_learning_official_archive_only"
 
-# Standardized column names for the final metadata
+# The column names of metadata that will be used in the features file
 FINAL_COLUMNS = ['filename', 'file_path', 'speaker_id', 'accent', 'text']
 
-# Hardcoded Stella sentences mapped by segment index (0 to 5)
+# The Stella paragraph sentences mapped by segment index (0 to 5)
 STELLA_SENTENCES = [
     "Please call Stella Ask her to bring these things",
     "with her from the store Six spoons of fresh snow peas",
@@ -65,8 +65,7 @@ def load_exact_metadata(folder_path, accent_name):
 
 def get_column_value(df, alternative_keys, row_idx):
     """
-    Uses df.at[row_idx, key] to safely query using the actual index label,
-    preventing IndexError out-of-bounds crashes after drop_duplicates rows shifts.
+    Safely fetches a value from a row using possible column names without crashing (e.g. 'speakerid' or 'speaker_id')
     """
     for key in alternative_keys:
         if key in df.columns:
@@ -77,8 +76,7 @@ def get_column_value(df, alternative_keys, row_idx):
 
 def clean_filename_path(raw_filename):
     """
-    Advanced extraction that parses both 'sampling_rate' and 'path'
-    dictionary-like strings safely, ensuring a valid .wav extension.
+    Cleans extra formatting from file paths and makes sure it ends with '.wav'.
     """
     raw_str = str(raw_filename).strip()
 
@@ -90,6 +88,7 @@ def clean_filename_path(raw_filename):
                 raw_str = p.split(":")[-1].strip().strip("'").strip('"')
                 break
 
+    #sampling rate can be sometimes added to the name in hugging_face datasets
     if "sampling_rate" in raw_str:
         raw_str = raw_str.replace("{", "").replace("}", "")
         parts = raw_str.split(",")
@@ -101,7 +100,7 @@ def clean_filename_path(raw_filename):
     # Extract the base file name
     base_name = os.path.basename(raw_str)
 
-    # ENFORCED EXTENSION CHECK: If the filename doesn't end with .wav, append it lowercased
+    # If the filename doesn't end with .wav, append it lowercased
     if not base_name.lower().endswith('.wav'):
         base_name = f"{base_name}.wav"
 
@@ -110,10 +109,11 @@ def clean_filename_path(raw_filename):
 
 def clean_text_quotes(text_val):
     """
-    Completely sanitizes text strings for phonetic processing.
+    Sanitizes text strings for phonetic processing.
     Removes quotes, commas, colons, question/exclamation marks, and periods.
-    Converts to lowercase to avoid vocabulary splitting mismatches.
+    Converts to lowercase to avoid vocabulary mismatches.
     """
+    # if the text is invalid or missing
     if pd.isna(text_val) or not text_val:
         return ""
 
@@ -136,6 +136,7 @@ def clean_speaker_id(speaker_val):
     if pd.isna(speaker_val) or speaker_val == "":
         return "unknown_speaker"
 
+    # Making sure the speaker id will be an int number or string
     if isinstance(speaker_val, float) or (isinstance(speaker_val, str) and '.' in speaker_val):
         try:
             return str(int(float(speaker_val)))
@@ -146,7 +147,7 @@ def clean_speaker_id(speaker_val):
 
 def sanitize_accent_label(accent_val, folder_accent):
     """
-    Enforces centralized accent label constraints (e.g., maps 'hindi' to 'indian').
+    Standardizes accent names so the same accent always uses one official label (e.g., maps 'hindi' to 'indian').
     """
     if not accent_val or pd.isna(accent_val):
         return folder_accent.lower()
@@ -159,12 +160,12 @@ def sanitize_accent_label(accent_val, folder_accent):
 
 def sample_dataset_safely(df, target_limit, mode='files'):
     """
-    Flexible grouping sampler that limits dataset sizes based on row/file targets
-    or absolute distinct unique speaker caps. Includes empty DataFrame safety guards.
+    Selects whole speakers randomly until reaching the requested file/speaker limit (also keeps speaker recordings together).
     """
     if df.empty:
         return df
 
+    # Making sure no duplication
     unique_speakers = df['speaker_id'].unique()
     np.random.shuffle(unique_speakers)
 
@@ -179,6 +180,7 @@ def sample_dataset_safely(df, target_limit, mode='files'):
                 selected_rows.append(speaker_data)
             else:
                 break
+        # Making sure we do not add more audio than needed due to balancing accents numbers for each label
         else:
             if current_count + len(speaker_data) <= target_limit:
                 selected_rows.append(speaker_data)
@@ -196,13 +198,14 @@ def sample_dataset_safely(df, target_limit, mode='files'):
 
 def save_pure_csv_without_quotes(df, output_path):
     """
-    Writes final metadata lists into plain text files manually.
-    Guarantees absolute exclusion of wrapping quotation marks and escape slashes.
+    Writes final metadata lists into plain text files.
+    Guarantees exclusion of wrapping quotation marks and escape slashes.
     """
     with open(output_path, "w", encoding="utf-8-sig") as f:
         f.write(",".join(FINAL_COLUMNS) + "\n")
         if df.empty:
             return
+        # Convert each row into a single comma-separated text line and write it directly to the file
         for _, row in df.iterrows():
             line_parts = [
                 str(row['filename']),
@@ -281,7 +284,7 @@ def build_free_text_only_metadata():
 def build_mixed_metadata():
     """
     Pipeline for mixed mode: Merges audio_by_accent_raw (capped at 900 files)
-    and sentences_samples (capped strictly at a maximum of 60 unique speakers per accent).
+    and sentences_samples (capped strictly at a maximum of 60 unique speakers per accent for equal amounts for each label).
     """
     print("\n--- Building Mixed Massive Metadata ---")
     all_records = []
@@ -330,6 +333,7 @@ def build_mixed_metadata():
         print(f" -> Raw Accent '{accent}': Sampled {len(df_accent_capped)} files for Mixed Master List.")
 
     # Part 2: Process Sentences Samples (Archive) Folder (Capped at 60 UNIQUE SPEAKERS per accent)
+    # In this part we will need more complex method because every audio has 6 sentences
     for accent in accents:
         accent_dir = SENTENCES_DIR / accent
         if not accent_dir.exists():
@@ -346,6 +350,7 @@ def build_mixed_metadata():
                 speaker_col_name = key
                 break
 
+        # Keep only unique speakers so we process each person once without duplicate files
         df_unique_speakers = df_raw.copy()
         if speaker_col_name:
             df_unique_speakers['temp_spk'] = df_unique_speakers[speaker_col_name].apply(clean_speaker_id)
@@ -365,7 +370,7 @@ def build_mixed_metadata():
             accent_raw = get_column_value(df_unique_speakers, ['accent'], idx)
             accent_label = sanitize_accent_label(accent_raw, accent)
 
-            # Extract pure name without extension to build 'mandarin9_part_X.wav' format dynamically
+            # Extract pure name without extension (to build 'mandarin9_part_X.wav' format dynamically)
             base_name, _ = os.path.splitext(pure_filename)
 
             for i in range(6):
@@ -382,6 +387,7 @@ def build_mixed_metadata():
                     valid_path = path_direct
 
                 # Append records only if a valid physical file path exists on disk
+                # Scan disk to find existing sentence files (part_0 to part_5) for each speaker and keeps their metadata together
                 if valid_path is not None:
                     final_text = clean_text_quotes(STELLA_SENTENCES[i])
 
@@ -394,14 +400,17 @@ def build_mixed_metadata():
                         'source_type': 'archive'
                     })
 
+        # Skip further processing for this accent if no valid files were found on disk
         df_sentence = pd.DataFrame(sentence_records)
 
         if df_sentence.empty:
             print(f" -> Sentences Accent '{accent}': 0 valid physical files found. Skipping archive pool sampling.")
             continue
 
+        # Cap the dataset to a maximum of 60 unique speakers without splitting any speaker's files
         df_sentence_capped = sample_dataset_safely(df_sentence, target_limit=60, mode='speakers')
 
+        # Count the actual number of unique speakers remaining after sampling
         retained_speakers = len(df_sentence_capped['speaker_id'].unique()) if not df_sentence_capped.empty else 0
         print(
             f" -> Sentences Accent '{accent}': Capped/Retained {retained_speakers} unique speakers ({len(df_sentence_capped)} valid existing files extracted).")
@@ -441,6 +450,7 @@ def build_archive_only_metadata():
                 speaker_col_name = key
                 break
 
+        # Normalize speaker IDs in a temporary column and drop duplicate rows so each speaker appears only once
         df_unique_speakers = df_raw.copy()
         if speaker_col_name:
             df_unique_speakers['temp_spk'] = df_unique_speakers[speaker_col_name].apply(clean_speaker_id)
@@ -574,22 +584,27 @@ def run_nested_group_kfold(df):
     print(f"Executing Unified Nested Group K-Fold (80% / 10% / 10%)")
     print(f"========================================================")
 
+    # Loop through outer folds to separate 10% Test set from 90% Train+Val data
     for fold_idx, (train_val_idx, test_idx) in enumerate(outer_gkf.split(X, groups=groups), 1):
         df_test = df.iloc[test_idx].copy()
         df_train_val = df.iloc[train_val_idx]
 
+        # Prepare inner dataset features and speaker groups for validation split
         X_inner = df_train_val[FINAL_COLUMNS].values
         groups_inner = df_train_val['speaker_id'].values
 
         inner_gkf = GroupKFold(n_splits=inner_k)
 
+        # Map inner relative indices back to main DataFrame indices
         for inner_fold_idx, (train_rel_idx, val_rel_idx) in enumerate(inner_gkf.split(X_inner, groups=groups_inner), 1):
             train_idx = train_val_idx[train_rel_idx]
             val_idx = train_val_idx[val_rel_idx]
 
+            # Extract final Train (80%) and Validation (10%) DataFrames
             df_train = df.iloc[train_idx].copy()
             df_val = df.iloc[val_idx].copy()
 
+            # Count sample types (raw vs archive) across Train, Val, and Test sets
             r_train = len(df_train[df_train['source_type'] == 'raw'])
             r_val = len(df_val[df_val['source_type'] == 'raw'])
             r_test = len(df_test[df_test['source_type'] == 'raw'])
@@ -598,6 +613,7 @@ def run_nested_group_kfold(df):
             a_val = len(df_val[df_val['source_type'] == 'archive'])
             a_test = len(df_test[df_test['source_type'] == 'archive'])
 
+            # Print fold status report showing sample counts and split percentages
             print(f"\n>>> [OUTER FOLD {fold_idx}/{outer_k}] -> [INNER GRIDSEARCH FOLD {inner_fold_idx}/{inner_k}]")
             print(f"  Raw Samples     -> Train: {r_train} | Val: {r_val} | Test: {r_test}")
             print(f"  Archive Samples -> Train: {a_train} | Val: {a_val} | Test: {a_test}")
@@ -605,7 +621,7 @@ def run_nested_group_kfold(df):
                   f"Val: {len(df_val)} ({len(df_val) / len(df) * 100:.1f}%) | "
                   f"Test: {len(df_test)} ({len(df_test) / len(df) * 100:.1f}%)")
 
-            # Validate structural speaker isolation across sets
+            # Verify zero speaker leakage across sets and store valid fold DataFrames
             is_valid = verify_zero_speaker_leakage(df_train['speaker_id'], df_val['speaker_id'], df_test['speaker_id'])
 
             if is_valid:
@@ -617,7 +633,7 @@ def run_nested_group_kfold(df):
                     'val_df': df_val,
                     'test_df': df_test
                 })
-
+    # Return complete list of validated fold splits for training
     return all_folds_data
 
 
@@ -625,6 +641,7 @@ def run_nested_group_kfold_generator(df):
     """
     Generator version of the GroupKFold engine.
     Yields tuple splits sequentially for the main execution loop.
+    Created to save memory during training
     """
     X = df[['filename', 'file_path', 'speaker_id', 'accent', 'text']].values
     groups = df['speaker_id'].values

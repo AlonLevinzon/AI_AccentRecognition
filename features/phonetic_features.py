@@ -1,7 +1,7 @@
 import eng_to_ipa as ipa
 
 
-# 1. Define a hardcoded, deterministic dictionary mapping individual IPA phonemes to their phonological binary features.
+# 1. Define a deterministic dictionary mapping individual IPA phonemes to their phonological binary features.
 # This serves as our linguistic knowledge base.
 IPA_FEATURES_TABLE = {
     # =========================================================================
@@ -36,12 +36,12 @@ IPA_FEATURES_TABLE = {
     'n': {'voiced': 1, 'fricative': 0, 'plosive': 0, 'nasal': 1, 'long_vowel': 0},  # e.g., "no"
     'ŋ': {'voiced': 1, 'fricative': 0, 'plosive': 0, 'nasal': 1, 'long_vowel': 0},  # e.g., "sing" (NG sound)
 
-    # Approximants & Liquids: Glides and fluid sounds where articulators approach but do not touch (All inherently voiced)
+    # Approximants & Liquids : Smooth, gliding sounds where the mouth stays open enough for air to flow. (Always voiced).
     'l': {'voiced': 1, 'fricative': 0, 'plosive': 0, 'nasal': 0, 'long_vowel': 0},  # e.g., "leg" (Lateral liquid)
     'r': {'voiced': 1, 'fricative': 0, 'plosive': 0, 'nasal': 0, 'long_vowel': 0},  # e.g., "red" (Rhotic liquid)
     'j': {'voiced': 1, 'fricative': 0, 'plosive': 0, 'nasal': 0, 'long_vowel': 0},  # e.g., "yes" (Palatal approximant)
     'w': {'voiced': 1, 'fricative': 0, 'plosive': 0, 'nasal': 0, 'long_vowel': 0},
-    # e.g., "wet" (Labio-velar approximant)
+    # e.g., "wet"
 
     # =========================================================================
     # B. VOWELS - ~20 Phonemes (All vowels are inherently voiced, non-consonantal)
@@ -101,12 +101,12 @@ def extract_phonetic_vector(word_phonemes):
             # If a feature is present (equal to 1) in the current phoneme, increment its count
             for key in features_appearance_count.keys():
                 if features[key] == 1:
-                    features_appearance_count[key] += 1  # FIXED: Correctly incrementing the dictionary value
+                    features_appearance_count[key] += 1  #  Correctly incrementing the dictionary value
 
     # normalize the weight of each feature
     normalized_features_weight = {'voiced': 0.0, 'fricative': 0.0, 'plosive': 0.0, 'nasal': 0.0, 'long_vowel': 0.0}
     for key in features_appearance_count.keys():
-        #Dividing the counts by the total number of phonemes
+        # Dividing the counts by the total number of phonemes
         normalized_features_weight[key] = features_appearance_count[key] / len(word_phonemes)
 
     # Return the final normalized features as a flat numerical list (vector) suitable for ML models.
@@ -140,9 +140,10 @@ def get_phonetic_features(audio_path, ground_truth_text=None, allow_asr=True):
     # -----------------------------------------------------------------------------------
     # SCENARIO 2: The text is unknown, but automated transcription (ASR) is permitted.
     # -----------------------------------------------------------------------------------
+    # This scenario is only for checking the code without any real application in our code
+    # because all of our audio files has text in metadata so ground_truth_text always has value
     elif allow_asr:
-        # In a real environment, you would invoke a fast, lightweight local model here.
-        # Example: text_from_whisper = whisper_tiny_model.transcribe(audio_path)
+        # If ASR is enabled, use transcribed text from Whisper
         text_from_whisper = "stella"  # Simulated lightweight Whisper-tiny transcript output.
 
         # Convert the transcribed text into its theoretical IPA representation.

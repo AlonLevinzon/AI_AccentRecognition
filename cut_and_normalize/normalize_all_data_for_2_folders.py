@@ -24,7 +24,8 @@ def process_raw_audio_pipeline(file_path, target_sr=16000):
         if len(y_trimmed) / sr < 0.1:
             return None
 
-        # RMS Normalization to 0.05
+        # RMS Normalization to 0.05 -so the audio isn't too loud or too quiet.
+        # This keeps speech volume consistent and prevents sound distortion.
         rms = np.sqrt(np.mean(y_trimmed ** 2))
         if rms > 0:
             target_rms = 0.05
@@ -67,11 +68,11 @@ def run_mass_normalization(base_input_dir, output_dir):
     if audio_by_accent_raw_src:
         mapped_targets[audio_by_accent_raw_src] = output_path / "audio_by_accent_raw_normalized"
 
-    print("🎛️ Starting Audio Normalization...")
+    print(" Starting Audio Normalization...")
 
     # Iterate through each source directory, normalize, and save output
     for src_dir, target_dir in mapped_targets.items():
-        print(f"\n📁 Processing directory: {src_dir.name} -> {target_dir.name}")
+        print(f"\n Processing directory: {src_dir.name} -> {target_dir.name}")
 
         for root, dirs, files in os.walk(src_dir):
             rel_path = Path(root).relative_to(src_dir)
@@ -107,7 +108,7 @@ def verify_normalization_results(target_dirs, max_allowed_failures=5):
             continue
 
         wav_files = [f for f in check_path.rglob("*") if f.name.lower().endswith(".wav")]
-        print(f"📁 Checking {len(wav_files)} files in: {check_path.name}...")
+        print(f" Checking {len(wav_files)} files in: {check_path.name}...")
 
         for file_path in wav_files:
             total_checked += 1
@@ -131,12 +132,12 @@ def verify_normalization_results(target_dirs, max_allowed_failures=5):
                 failed_files.append((str(file_path), f"Load error: {str(e)}"))
 
     failed_count = len(failed_files)
-    print(f"📊 Total files verified: {total_checked} | Total failures: {failed_count}")
+    print(f" Total files verified: {total_checked} | Total failures: {failed_count}")
 
     if failed_count > max_allowed_failures:
-        raise ValueError(f"❌ [VALIDATION FAILED]: Found {failed_count} unnormalized files!")
+        raise ValueError(f" [VALIDATION FAILED]: Found {failed_count} unnormalized files!")
 
-    print(f"🎉 [VALIDATION PASSED]: Verified successfully.")
+    print(f" [VALIDATION PASSED]: Verified successfully.")
 
 
 if __name__ == "__main__":

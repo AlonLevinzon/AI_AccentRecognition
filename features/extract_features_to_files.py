@@ -80,7 +80,7 @@ def import_vector_to_file(metadata_csv_path, audio_base_dir="../official_audio_m
         ground_truth_text = row['text']
 
         # Locate the audio file path within the base directory (including subdirectories)
-        # FIXED: Supports both absolute file_path column and traditional dynamic directory search fallbacks
+        # Supports both absolute file_path column and traditional dynamic directory search fallbacks
         if 'file_path' in row and pd.notna(row['file_path']) and os.path.exists(str(row['file_path'])):
             audio_file_path = str(row['file_path'])
         else:
@@ -100,7 +100,7 @@ def import_vector_to_file(metadata_csv_path, audio_base_dir="../official_audio_m
             dataset_rows.append(row_data)
 
         except Exception as e:
-            # Cleaned exception handling printing detailed stack trace without emojis
+            # Cleaned exception handling printing detailed stack trace
             print(f"\nCRITICAL ERROR on file {filename}!")
             print(f"Error Message: {e}")
             print("--- Full Stack Trace ---")
@@ -119,7 +119,7 @@ def import_vector_to_file(metadata_csv_path, audio_base_dir="../official_audio_m
 
 def create_features_vector(file_path, ground_truth_text=None):
     """
-    Extracts 16 base scalars, 39 MFCC dynamic components, 9 advanced physiological features,
+    Extracts 16 base scalars, 39 MFCC dynamic components, 9 advanced Dynamic features,
     and 5 normalized phonetic attributes, returning a unified flat vector.
     """
     # Load audio with standardized sampling rate (16kHz)

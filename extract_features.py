@@ -21,7 +21,7 @@ from features.extract_features_to_files import import_vector_to_file
 # =====================================================================
 # GLOBAL CONFIGURATION
 # =====================================================================
-# Choose dataset subset mode: "free_text", "mixed", or "archive_only"
+# Choose dataset mode: "free_text", "mixed", or "archive_only" to extract features from
 RUN_MODE = "free_text"
 
 EXTRACTED_FILENAME = f"master_extracted_features_{RUN_MODE}.csv"
@@ -30,12 +30,12 @@ EXTRACTED_FEATURES_MASTER_CSV = WORKING_DIR / EXTRACTED_FILENAME
 
 def extract_features_for_selected_dataset(run_mode: str):
     """
-    Standalone subroutine to extract and cache acoustic features for a specified dataset mode.
-    Resolves normalized audio file paths dynamically, handles missing files gracefully,
-    and saves the extracted feature set into a master CSV file.
+    This function extract acoustic features for a specified dataset mode.
+    Resolves normalized audio file paths dynamically, handles missing files error if needed,
+     saves the extracted feature set into a CSV file.
     """
     print(f"====================================================")
-    print(f"🚀 STARTING STANDALONE FEATURE EXTRACTION ({run_mode.upper()})")
+    print(f" STARTING STANDALONE FEATURE EXTRACTION ({run_mode.upper()})")
     print(f"====================================================")
 
     # Step 1: Locate or build metadata for the selected mode
@@ -49,12 +49,12 @@ def extract_features_for_selected_dataset(run_mode: str):
     df_master = None
     for meta_path in possible_paths:
         if meta_path.exists():
-            print(f"📂 [LOAD SUCCESS]: Found existing metadata directly at: {meta_path}")
+            print(f" [LOAD SUCCESS]: Found existing metadata directly at: {meta_path}")
             df_master = pd.read_csv(meta_path)
             break
 
     if df_master is None:
-        print("⚠️ Metadata CSV not found, triggering builder function...")
+        print(" Metadata CSV not found, triggering builder function...")
         if run_mode == "free_text":
             df_master = build_free_text_only_metadata()
         elif run_mode == "mixed":
@@ -63,7 +63,7 @@ def extract_features_for_selected_dataset(run_mode: str):
             df_master = build_archive_only_metadata()
 
     if df_master is None or df_master.empty:
-        sys.exit(f"❌ Error: Could not obtain master metadata for mode '{run_mode}'. Extraction aborted.")
+        sys.exit(f" Error: Could not obtain master metadata for mode '{run_mode}'. Extraction aborted.")
 
     print(f"\n⚡⚡⚡ Extracting acoustic features for ALL {len(df_master)} files in '{run_mode}' dataset...")
 
@@ -76,6 +76,7 @@ def extract_features_for_selected_dataset(run_mode: str):
     total_files = len(df_master_ml)
 
     def resolve_normalized_path(row):
+        # This function changes the path in the meta-data files to the normalized dir so the extraction will happen from there
         nonlocal missing_normalized_count
 
         accent_label = str(row['accent'])
@@ -95,17 +96,17 @@ def extract_features_for_selected_dataset(run_mode: str):
             return str(normalized_path)
         else:
             missing_normalized_count += 1
-            print(f"⚠️ [NORMALIZATION MISSING]: Normalized file not found for '{file_name}', falling back to original path: {original_path}")
+            print(f" [NORMALIZATION MISSING]: Normalized file not found for '{file_name}', falling back to original path: {original_path}")
             return original_path
 
     df_master_ml['file_path'] = df_master_ml.apply(resolve_normalized_path, axis=1)
 
-    print(f"\n🔍 [PATH RESOLUTION SUMMARY]:")
+    print(f"\n [PATH RESOLUTION SUMMARY]:")
     print(f"   • Total Audio Files Checked: {total_files}")
     print(f"   • Successfully Resolved Normalized Paths: {total_files - missing_normalized_count}")
     print(f"   • Fallback to Original Paths (Missing Normalized): {missing_normalized_count}\n")
 
-    # Step 3: Write temporary pipeline CSV and invoke extraction routine
+    # Step 3: Write temporary pipeline CSV on cache (so damaged csv file will not be saved) and invoke extraction routine
     temp_master_meta = WORKING_DIR / "temp_master_metadata_pipeline.csv"
     df_master_ml.to_csv(temp_master_meta, index=False, encoding='utf-8-sig')
 

@@ -7,6 +7,7 @@ import torchaudio
 import torchaudio.transforms as T
 from tqdm import tqdm
 
+# MEL SPECTROGRAM EXPLANATION AT THE END OF THE FILE
 # Force PyCharm to use soundfile backend matching Colab standards
 try:
     torchaudio.set_audio_backend("soundfile")
@@ -39,7 +40,7 @@ METADATA_CSV_PATH = OUTPUT_BASE_DIR / METADATA_CSV_FILENAME
 
 
 # =====================================================================
-# 1. MEL-SPECTROGRAM EXTRACTION PIPELINE (100% COLAB COMPATIBLE)
+# 1. MEL-SPECTROGRAM EXTRACTION PIPELINE
 # =====================================================================
 def process_and_extract_mel_spectrogram(
     audio_path: str, target_sr: int = 16000, target_duration_sec: float = 4.0
@@ -47,7 +48,6 @@ def process_and_extract_mel_spectrogram(
     """
     Loads audio, converts to mono, resamples to 16kHz, pads/trims to 4.0s,
     extracts Log-Mel Spectrogram (dB), and applies Z-score normalization.
-    Matches Colab execution 1:1.
     """
     waveform, sr = torchaudio.load(audio_path)
 
@@ -60,7 +60,7 @@ def process_and_extract_mel_spectrogram(
         resampler = T.Resample(orig_freq=sr, new_freq=target_sr)
         waveform = resampler(waveform)
 
-    # Enforce fixed target length (4.0 seconds) via padding or trimming
+    # Enforce target length (4.0 seconds) via padding or trimming
     target_length = int(target_sr * target_duration_sec)
     num_samples = waveform.shape[1]
 
@@ -96,13 +96,13 @@ def process_and_extract_mel_spectrogram(
 # =====================================================================
 def main():
     print("=" * 70)
-    print(f"🚀 PYCHARM SPECTROGRAM GENERATOR INITIALIZED | MODE: [{RUN_MODE.upper()}]")
+    print(f" PYCHARM SPECTROGRAM GENERATOR INITIALIZED | MODE: [{RUN_MODE.upper()}]")
     print("=" * 70)
 
     # Verify metadata CSV exists
     if not METADATA_CSV_PATH.exists():
         raise FileNotFoundError(
-            f"❌ Required metadata file not found at: {METADATA_CSV_PATH}\n"
+            f" Required metadata file not found at: {METADATA_CSV_PATH}\n"
             f"Please verify dataset path or run previous preprocessing script."
         )
 
@@ -110,7 +110,7 @@ def main():
     os.makedirs(SPECTROGRAM_SAVE_DIR, exist_ok=True)
 
     # Load metadata CSV
-    print(f"📂 [LOADING METADATA]: Reading directly from {METADATA_CSV_PATH}")
+    print(f" [LOADING METADATA]: Reading directly from {METADATA_CSV_PATH}")
     metadata_df = pd.read_csv(METADATA_CSV_PATH)
 
     # Standardize clean file ID for accurate mapping
@@ -118,8 +118,8 @@ def main():
         lambda x: os.path.splitext(os.path.basename(str(x)))[0].lower().strip()
     )
 
-    print(f"📋 Loaded {len(metadata_df)} records.")
-    print(f"📁 Target Spectrogram Save Path: {SPECTROGRAM_SAVE_DIR}\n")
+    print(f" Loaded {len(metadata_df)} records.")
+    print(f" Target Spectrogram Save Path: {SPECTROGRAM_SAVE_DIR}\n")
 
     generated_count = 0
     skipped_count = 0
@@ -137,7 +137,7 @@ def main():
             continue
 
         if not os.path.exists(audio_path):
-            print(f"\n⚠️ Audio file missing at: {audio_path}")
+            print(f"\n Audio file missing at: {audio_path}")
             error_count += 1
             continue
 
@@ -146,7 +146,7 @@ def main():
             torch.save(spec_tensor, save_path)
             generated_count += 1
         except Exception as e:
-            print(f"\n❌ Error processing {file_id}: {e}")
+            print(f"\n Error processing {file_id}: {e}")
             error_count += 1
 
     # =====================================================================
@@ -181,3 +181,37 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+================================================================================
+MEL SPECTROGRAM EXTRACTION & PREPROCESSING PARAMETERS EXPLANATION
+================================================================================
+
+1. T.MelSpectrogram:
+   Converts raw 1D time-domain audio waveform into a 2D time-frequency Mel-Spectrogram.
+
+   - sample_rate (16000): 
+     Target sampling rate (16kHz), capturing audio frequencies up to 8kHz (Nyquist theorem).
+   - n_fft (1024): 
+     FFT window size in samples (~64ms). Balances frequency and time resolution.
+   - hop_length (512): 
+     Number of samples between successive FFT windows (~32ms shift, 50% overlap).
+   - n_mels (128): 
+     Number of Mel frequency bins (Y-axis resolution), mimicking human pitch perception.
+   - power (2.0): 
+     Calculates Power Spectrogram by squaring the magnitude (|X(f)|^2).
+
+2. T.AmplitudeToDB:
+   Converts Power Spectrogram amplitudes to logarithmic Decibel (dB) scale.
+
+   - top_db (80): 
+     Sets a dynamic range threshold at 80dB below maximum peak, cutting low-level background noise.
+
+3. Z-Score Standardization:
+   Normalizes feature distribution across the spectrogram.
+
+   - (mel_spec - mean) / (std + 1e-6):
+     Centers features to mean=0 and std=1 for stable and faster neural network training.
+     The 1e-6 epsilon prevents division by zero.
+================================================================================
+"""
