@@ -98,7 +98,7 @@ def verify_normalization_results(target_dirs, max_allowed_failures=5):
     """
     Verifies WAV files in output directories to ensure valid audio quality and RMS parameters.
     """
-    print("\n🔍 Running automatic post-normalization verification check...")
+    print("\n Running automatic post-normalization verification check...")
     failed_files = []
     total_checked = 0
 

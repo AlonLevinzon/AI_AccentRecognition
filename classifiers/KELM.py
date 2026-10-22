@@ -22,25 +22,25 @@ class KernelELMClassifier(BaseEstimator, ClassifierMixin):
 
     def fit(self, X, y):
         """ Trains the Kernel ELM model using analytical linear system solving """
-        # המרה ל-Numpy Array במקרה של Pandas DataFrame
+        # Convert to Numpy Array in case of Pandas DataFrame
         self.X_train_ = X.values if hasattr(X, 'values') else np.asarray(X, dtype=np.float64)
         y_arr = y.values if hasattr(y, 'values') else np.asarray(y)
         y_arr = y_arr.flatten()
 
-        # שמירת המחלקות הייחודיות (חובה ב-sklearn)
+        # Store unique classes
         self.classes_ = np.unique(y_arr)
         num_samples = self.X_train_.shape[0]
         num_classes = len(self.classes_)
 
-        # יצירת מטריצת One-Hot binary עמידה לכל סוגי הלייבלים
+        # Create robust One-Hot binary matrix for all label types
         y_label_matrix = np.zeros((num_samples, num_classes), dtype=np.float64)
         for idx, cls_val in enumerate(self.classes_):
             y_label_matrix[y_arr == cls_val, idx] = 1.0
 
-        # חישוב מטריצת ה-Kernel (N x N)
+        # Compute Kernel matrix (N x N)
         K = self.rbf_kernel(self.X_train_, self.X_train_)
 
-        # פתרון אנליטי יציב נומרית עם תוספת Jitter רגולריזציונית
+        # Numerically stable analytical solution with added regularization jitter
         reg_matrix = K + (1.0 / self.C) * np.eye(num_samples) + 1e-7 * np.eye(num_samples)
 
         try:

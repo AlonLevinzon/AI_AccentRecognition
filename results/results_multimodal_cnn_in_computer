@@ -1,7 +1,7 @@
 C:\Users\Alon\AppData\Local\Programs\Python\Python313\python.exe C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\main_multimodal_cnn.py
 Using device: cpu
-📁 Project Root Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated
-📊 Graphs Output Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\Multimodal_CNN_free_text (Cleared & Ready)
+ Project Root Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated
+ Graphs Output Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\Multimodal_CNN_free_text (Cleared & Ready)
 
 =================================================================
 Dynamic Path Finder Success!
@@ -86,8 +86,8 @@ Generating Grad-CAM Attention Maps for Dual-Branch CNN...
 Generating Averaged Accent Spectrogram Templates...
 
 ================================================================================
-✅ ALL MULTIMODAL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:
-   📂 C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\Multimodal_CNN_free_text
+ ALL MULTIMODAL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:
+    C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\Multimodal_CNN_free_text
 ================================================================================
 
 
@@ -98,7 +98,7 @@ Loading Whisper STT Model for text transcription...
 100%|███████████████████████████████████████| 139M/139M [00:02<00:00, 59.4MiB/s]
 Loading trained Dual-Branch CNN weights from: best_dual_branch_cnn.pth
 
-📂 Opening file browser dialog to select audio WAV file for inference...
+ Opening file browser dialog to select audio WAV file for inference...
 
 Processing Audio File for Inference:
 C:\Users\Alon\AppData\Local\Programs\Python\Python313\Lib\site-packages\whisper\transcribe.py:132: UserWarning: FP16 is not supported on CPU; using FP32 instead

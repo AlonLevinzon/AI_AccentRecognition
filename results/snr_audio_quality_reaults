@@ -1,19 +1,18 @@
---- ממוצעי SNR עבור all_accents_data (חישוב נפרד לכל תיקייה) ---
-תיקייה: chinese_ascend_accent | ממוצע SNR: 18.40 dB (מתוך 230 קבצים)
-תיקייה: chinese_L2_ARCTIC_accent | ממוצע SNR: 15.30 dB (מתוך 40 קבצים)
-תיקייה: chinese_speechOcean_accent | ממוצע SNR: 21.42 dB (מתוך 2501 קבצים)
-תיקייה: indian_fleurs_accent | ממוצע SNR: 16.49 dB (מתוך 1500 קבצים)
-תיקייה: indian_L2_ARCTIC_accent | ממוצע SNR: 16.83 dB (מתוך 40 קבצים)
-תיקייה: indian_mozzila_accent | ממוצע SNR: 22.94 dB (מתוך 2000 קבצים)
-תיקייה: nigerian_mozzila_accent | ממוצע SNR: 23.82 dB (מתוך 2721 קבצים)
-תיקייה: nigerian_slr_70_accent | ממוצע SNR: 23.69 dB (מתוך 310 קבצים)
-תיקייה: usa_fleurs_accent | ממוצע SNR: 19.13 dB (מתוך 1000 קבצים)
-תיקייה: usa_libriSpeech_accent | ממוצע SNR: 17.69 dB (מתוך 1976 קבצים)
-תיקייה: usa_mozzila_accent | ממוצע SNR: 21.72 dB (מתוך 1000 קבצים)
-------------------------------------------------------------
+--- Average SNR for all_accents_data (Separately calculated per directory) ---
+Directory: chinese_ascend_accent | Average SNR: 18.40 dB (out of 230 files)
+Directory: chinese_L2_ARCTIC_accent | Average SNR: 15.30 dB (out of 40 files)
+Directory: chinese_speechOcean_accent | Average SNR: 21.42 dB (out of 2501 files)
+Directory: indian_fleurs_accent | Average SNR: 16.49 dB (out of 1500 files)
+Directory: indian_L2_ARCTIC_accent | Average SNR: 16.83 dB (out of 40 files)
+Directory: indian_mozzila_accent | Average SNR: 22.94 dB (out of 2000 files)
+Directory: nigerian_mozzila_accent | Average SNR: 23.82 dB (out of 2721 files)
+Directory: nigerian_slr_70_accent | Average SNR: 23.69 dB (out of 310 files)
+Directory: usa_fleurs_accent | Average SNR: 19.13 dB (out of 1000 files)
+Directory: usa_libriSpeech_accent | Average SNR: 17.69 dB (out of 1976 files)
+Directory: usa_mozzila_accent | Average SNR: 21.72 dB (out of 1000 files)
 
---- ממוצעי SNR עבור sentences_samples (ממוצע מאוחד לפי מבטא) ---
-מבטא: chinese | ממוצע SNR מאוחד: 16.67 dB (חושב מתוך 323 קבצים סך הכל)
-מבטא: indian | ממוצע SNR מאוחד: 16.97 dB (חושב מתוך 365 קבצים סך הכל)
-מבטא: nigerian | ממוצע SNR מאוחד: 17.35 dB (חושב מתוך 253 קבצים סך הכל)
-מבטא: usa | ממוצע SNR מאוחד: 14.97 dB (חושב מתוך 594 קבצים סך הכל)
+--- Average SNR for sentences_samples (Combined average per accent) ---
+Accent: chinese | Combined Average SNR: 16.67 dB (calculated out of 323 total files)
+Accent: indian | Combined Average SNR: 15.97 dB (calculated out of 365 total files)
+Accent: nigerian | Combined Average SNR: 17.35 dB (calculated out of 253 total files)
+Accent: usa | Combined Average SNR: 14.97 dB (calculated out of 594 total files)

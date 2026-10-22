@@ -45,7 +45,7 @@ def cut_audio_to_sentences():
                 # Load audio using pydub
                 audio = AudioSegment.from_file(file_path)
 
-                # CRITICAL FIX: Passed the target segments into the alignment function
+                #  Passed the target segments into the alignment function
                 sentences_list = get_sentences_time(file_path, stella_target_segments)
 
                 for sentence_index, sentence, start_time, end_time in sentences_list:
@@ -62,13 +62,13 @@ def cut_audio_to_sentences():
                     # Slice the audio chunk
                     chunk = audio[start_ms:end_ms]
 
-                    # CRITICAL FIX: Use 'sentence_{index}' instead of the raw text
+                    #  Use 'sentence_{index}' instead of the raw text
                     # to avoid illegal character errors (like ':' or '.') in folder/file names.
                     audio_folder = os.path.join(base_output_path, target_folder_name, f"sentence_{sentence_index}")
                     if not os.path.exists(audio_folder):
                         os.makedirs(audio_folder)
 
-                    # Save the chunk using a clean, safe naming convention
+                    # Save the chunk using a clean and safe naming convention
                     chunk_name = os.path.join(audio_folder, f"{file_stem}_part_{sentence_index}.wav")
                     chunk.export(chunk_name, format="wav")
 

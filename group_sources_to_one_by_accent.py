@@ -23,7 +23,7 @@ FILE_COLUMNS = ['filename', 'file_name', 'audio_file', 'file', 'wav_path', 'wave
 SPEAKER_COLUMNS = ['speaker_id', 'client_id', 'speaker', 'user_id']
 TEXT_COLUMNS = ['text', 'transcription', 'sentence', 'transcript']
 
-# Detailed mapping - FIXED folder names to exactly match your folder directory image!
+# Detailed mapping folder names to  match  folder directory
 CONFIG = {
     "indian": {
         "primary": {

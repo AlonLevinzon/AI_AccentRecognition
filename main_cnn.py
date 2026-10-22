@@ -397,8 +397,8 @@ if __name__ == "__main__":
         shutil.rmtree(PLOTS_DIR)
     PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    print(f"📁 Project Root Directory: {PROJECT_DIR}")
-    print(f"📊 Graphs Output Directory: {PLOTS_DIR} (Cleared & Ready)")
+    print(f" Project Root Directory: {PROJECT_DIR}")
+    print(f" Graphs Output Directory: {PLOTS_DIR} (Cleared & Ready)")
 
     CSV_PATH, SPECTROGRAM_SAVE_DIR = find_dataset_paths()
 
@@ -444,7 +444,7 @@ if __name__ == "__main__":
     df_filtered["file_id"] = df_filtered["clean_id"]
 
     if len(df_filtered) == 0:
-        print("\n❌ CRITICAL ERROR: Zero matching .pt files found!")
+        print("\n CRITICAL ERROR: Zero matching .pt files found!")
         sys.exit(1)
 
     gkf_outer = GroupKFold(n_splits=5)
@@ -778,8 +778,8 @@ if __name__ == "__main__":
         plt.close()
 
     print("\n" + "=" * 80)
-    print("✅ ALL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:")
-    print(f"   📂 {PLOTS_DIR}")
+    print(" ALL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:")
+    print(f"    {PLOTS_DIR}")
     print("=" * 80 + "\n")
 
     # ==============================================================================
@@ -800,7 +800,7 @@ if __name__ == "__main__":
     inference_model.eval()
 
     # 2. Open Tkinter native file dialog to select input WAV file
-    print("\n📂 Opening file browser dialog to select audio WAV file for inference...")
+    print("\n Opening file browser dialog to select audio WAV file for inference...")
     try:
         import tkinter as tk
         from tkinter import filedialog
@@ -824,10 +824,10 @@ if __name__ == "__main__":
                 device=device
             )
         else:
-            print("⚠️ File selection cancelled by user.")
+            print("WARNING: File selection cancelled by user.")
 
     except Exception as dialog_err:
-        print(f"⚠️ Could not open file dialog window ({dialog_err}).")
+        print(f" WARNING: Could not open file dialog window ({dialog_err}).")
         user_file = input("Please manually enter the full path to your audio WAV file: ")
         if user_file and os.path.exists(user_file):
             process_and_classify_uploaded_audio(
@@ -837,4 +837,4 @@ if __name__ == "__main__":
                 device=device
             )
         else:
-            print("⚠️ Invalid path or no file provided.")
+            print("WARNING: Invalid path or no file provided.")

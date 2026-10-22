@@ -70,7 +70,7 @@ if GRAPHS_DIR.exists():
 GRAPHS_DIR.mkdir(parents=True, exist_ok=True)
 
 print("=" * 80)
-print(f"⚙️ PIPELINE EXECUTION CONFIGURATION:")
+print(f" PIPELINE EXECUTION CONFIGURATION:")
 print(f"   • RUN_MODE     : '{RUN_MODE}'")
 print(f"   • TUNING_MODE  : '{TUNING_MODE}'")
 print(f"   • PROJECT_ROOT : {PROJECT_DIR}")
@@ -187,7 +187,7 @@ def pre_extract_all_features_once(df_master):
         print(f"──► [CACHED DATA DETECTED]: Loading features from {EXTRACTED_FEATURES_MASTER_CSV}")
         return pd.read_csv(EXTRACTED_FEATURES_MASTER_CSV)
 
-    print(f"\n⚡⚡⚡ [FIRST RUN INITIALIZATION]: Extracting acoustic features for {len(df_master)} files...")
+    print(f"\n [FIRST RUN INITIALIZATION]: Extracting acoustic features for {len(df_master)} files...")
     df_master_ml = df_master.copy()
 
     raw_normalized_dir = PROJECT_DATA_DIR / "audio_by_accent_raw_normalized"
@@ -219,7 +219,7 @@ def pre_extract_all_features_once(df_master):
 
     df_master_ml['file_path'] = df_master_ml.apply(resolve_normalized_path, axis=1)
 
-    print(f"🔍 Normalized paths resolved: {total_files - missing_normalized_count}/{total_files}")
+    print(f" Normalized paths resolved: {total_files - missing_normalized_count}/{total_files}")
     temp_master_meta = WORKING_DIR / "temp_master_metadata_pipeline.csv"
     df_master_ml.to_csv(temp_master_meta, index=False, encoding='utf-8-sig')
 
@@ -378,18 +378,18 @@ def export_and_print_best_hyperparameters(fold_tuning_history):
     Averages hyperparameter validation accuracy scores across outer folds for ALL 6 classifiers and exports CSV.
     """
     if TUNING_MODE != "random_search" or not fold_tuning_history:
-        print("⚠️ Hyperparameter report skipped.")
+        print(" Hyperparameter report skipped.")
         return
 
     print("\n" + "=" * 80)
-    print("🏆 OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL FOLDS)")
+    print(" OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL FOLDS)")
     print("=" * 80)
 
     report_rows = []
     for model_name in ['Gaussian NB', 'Logistic Regression', 'SVM (RBF)', 'Random Forest', 'XGBoost', 'Kernel ELM']:
         history = fold_tuning_history.get(model_name, {})
         if not history:
-            print(f"\n📌 Classifier: [{model_name}] -> No tuning history recorded.")
+            print(f"\n Classifier: [{model_name}] -> No tuning history recorded.")
             continue
 
         best_param_dict = None
@@ -404,7 +404,7 @@ def export_and_print_best_hyperparameters(fold_tuning_history):
                 best_param_dict = dict(param_tuple)
 
         if best_param_dict is not None:
-            print(f"\n📌 Classifier: [{model_name}]")
+            print(f"\n Classifier: [{model_name}]")
             print(f"   • Mean Cross-Validation Accuracy: {best_avg_accuracy:.2f}%")
             print(f"   • Best Hyperparameters:")
             for k, v in best_param_dict.items():
@@ -420,7 +420,7 @@ def export_and_print_best_hyperparameters(fold_tuning_history):
         df_best_report = pd.DataFrame(report_rows)
         report_csv_path = WORKING_DIR / f"best_hyperparameters_summary_{RUN_MODE}.csv"
         df_best_report.to_csv(report_csv_path, index=False)
-        print(f"\n💾 Summary report saved -> {report_csv_path}")
+        print(f"\n Summary report saved -> {report_csv_path}")
 
 
 def generate_hyperparameter_averaged_plots(fold_tuning_history):
@@ -431,7 +431,7 @@ def generate_hyperparameter_averaged_plots(fold_tuning_history):
         return
 
     print("==================================================")
-    print("📊 GENERATING COMBINED (TABLE + CHART) FIGURES FOR ALL 6 CLASSIFIERS")
+    print(" GENERATING COMBINED (TABLE + CHART) FIGURES FOR ALL 6 CLASSIFIERS")
     print("==================================================")
 
     for model_name, history in fold_tuning_history.items():
@@ -521,7 +521,7 @@ def generate_hyperparameter_averaged_plots(fold_tuning_history):
         plt.savefig(combined_image_path, dpi=300, bbox_inches='tight')
         plt.close()
 
-        print(f"✅ Generated combined figure for [{model_name}] -> {combined_image_path.name}")
+        print(f" Generated combined figure for [{model_name}] -> {combined_image_path.name}")
 
 
 def generate_overall_plots(df_summary, df_feat_summary):
@@ -592,7 +592,7 @@ def generate_umap_plot(df_master_features):
     Computes 2D UMAP non-linear manifold projection of acoustic speech feature space across target accents.
     """
     if umap is None:
-        print("⚠️ Skipping UMAP plot (umap-learn module not installed).")
+        print(" Skipping UMAP plot (umap-learn module not installed).")
         return
 
     exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_time',
@@ -621,7 +621,7 @@ def generate_umap_plot(df_master_features):
     umap_save_path = GRAPHS_DIR / "umap_accent_separability.png"
     fig.savefig(umap_save_path, dpi=300, bbox_inches='tight')
     plt.close(fig)
-    print(f"✅ Generated UMAP plot -> {umap_save_path.name}")
+    print(f" Generated UMAP plot -> {umap_save_path.name}")
 
 
 def generate_shap_plots(df_master_features):
@@ -629,7 +629,7 @@ def generate_shap_plots(df_master_features):
     Generates SHAP (Explainable AI) summary beeswarm plots for tree-based ensemble classifiers per accent.
     """
     if shap is None:
-        print("⚠️ Skipping SHAP plots (shap module not installed).")
+        print(" Skipping SHAP plots (shap module not installed).")
         return
 
     exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_ratio',
@@ -663,7 +663,7 @@ def generate_shap_plots(df_master_features):
         shap_save_path = GRAPHS_DIR / f"shap_beeswarm_{class_name}.png"
         plt.savefig(shap_save_path, dpi=300, bbox_inches='tight')
         plt.close('all')
-        print(f"✅ Generated SHAP Beeswarm plot -> {shap_save_path.name}")
+        print(f" Generated SHAP Beeswarm plot -> {shap_save_path.name}")
 
 
 def generate_vsa_plot(df_master_features):
@@ -674,7 +674,7 @@ def generate_vsa_plot(df_master_features):
     f2_col = [c for c in df_master_features.columns if 'F2' in c or 'f2' in c]
 
     if not (f1_col and f2_col):
-        print("⚠️ Could not locate Formant columns (F1/F2) for VSA plot.")
+        print(" Could not locate Formant columns (F1/F2) for VSA plot.")
         return
 
     f1_name, f2_name = f1_col[0], f2_col[0]
@@ -712,10 +712,10 @@ def generate_vsa_plot(df_master_features):
     plt.savefig(vsa_path, dpi=300, bbox_inches='tight')
     plt.close()
 
-    print("\n📐 Vowel Space Area (VSA) Summary for All Accents:")
+    print("\n Vowel Space Area (VSA) Summary for All Accents:")
     for acc_name, area_val in sorted(vsa_summary.items()):
         print(f"   ├─ {acc_name.capitalize():<10}: {area_val:,.2f} Hz²")
-    print(f"✅ Generated VSA plot -> {vsa_path.name}")
+    print(f" Generated VSA plot -> {vsa_path.name}")
 
 
 def generate_learning_curves_and_gap_report(performance_tracker, df_master_features):
@@ -723,7 +723,7 @@ def generate_learning_curves_and_gap_report(performance_tracker, df_master_featu
     Outputs Train vs Test diagnostic accuracy gap table and renders learning curves to diagnose overfitting.
     """
     print("\n" + "=" * 75)
-    print("🏆 CLASSIFIER TRAIN VS. TEST ACCURACY & OVERFITTING GAP TABLE")
+    print(" CLASSIFIER TRAIN VS. TEST ACCURACY & OVERFITTING GAP TABLE")
     print("=" * 75)
 
     gap_summary_rows = []
@@ -771,7 +771,7 @@ def generate_learning_curves_and_gap_report(performance_tracker, df_master_featu
         save_path = GRAPHS_DIR / f"learning_curve_{clean_title}.png"
         plt.savefig(save_path, dpi=300)
         plt.close()
-        print(f"✅ Saved Learning Curve diagnostic plot -> {save_path.name}")
+        print(f" Saved Learning Curve diagnostic plot -> {save_path.name}")
 
     exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_ratio', 'volume_max', 'volume_variance', 'volume_min', 'average_volume']
     feature_cols = [c for c in df_master_features.columns if c not in exclude_cols]
@@ -792,7 +792,7 @@ def generate_learning_curves_and_gap_report(performance_tracker, df_master_featu
 # ==============================================================================
 
 if __name__ == "__main__":
-    print(f"\n🚀 Starting Execution Pipeline...")
+    print(f"\n Starting Execution Pipeline...")
 
     metadata_file_name = f"massive_metadata_{RUN_MODE}.csv"
     possible_paths = [
@@ -804,12 +804,12 @@ if __name__ == "__main__":
     df_master = None
     for meta_path in possible_paths:
         if meta_path.exists():
-            print(f"📂 [LOAD SUCCESS]: Found metadata at {meta_path}")
+            print(f" [LOAD SUCCESS]: Found metadata at {meta_path}")
             df_master = pd.read_csv(meta_path)
             break
 
     if df_master is None:
-        print("⚠️ Metadata CSV not found, building metadata dynamically...")
+        print(" Metadata CSV not found, building metadata dynamically...")
         if RUN_MODE == "free_text":
             df_master = build_free_text_only_metadata()
         elif RUN_MODE == "mixed":
@@ -818,17 +818,17 @@ if __name__ == "__main__":
             df_master = build_archive_only_metadata()
 
     if df_master is None or df_master.empty:
-        raise ValueError("❌ Error: Master metadata dataframe is empty.")
+        raise ValueError(" Error: Master metadata dataframe is empty.")
 
     df_master_features = pre_extract_all_features_once(df_master)
 
-    print("\n🔍 Running strict speaker leakage verification...")
+    print("\n Running strict speaker leakage verification...")
     temp_fold_gen = run_nested_group_kfold_generator(df_master)
     for fold_i, train_m, val_m, test_m in temp_fold_gen:
         train_spks, val_spks, test_spks = set(train_m['speaker_id'].unique()), set(val_m['speaker_id'].unique()), set(test_m['speaker_id'].unique())
         if train_spks.intersection(val_spks) or train_spks.intersection(test_spks) or val_spks.intersection(test_spks):
-            raise RuntimeError(f"❌ Speaker leakage detected in Fold {fold_i}!")
-    print("✅ Zero speaker leakage verified!")
+            raise RuntimeError(f" Speaker leakage detected in Fold {fold_i}!")
+    print(" Zero speaker leakage verified!")
 
     model_names = ['Gaussian NB', 'Logistic Regression', 'SVM (RBF)', 'Random Forest', 'XGBoost', 'Kernel ELM']
     accents = ['chinese', 'indian', 'nigerian', 'usa']
@@ -956,7 +956,7 @@ if __name__ == "__main__":
         plt.savefig(pca_top30_save_path, dpi=300, bbox_inches='tight')
         plt.close()
 
-    print("\n📊 Generating and saving all output graph figures...")
+    print("\n Generating and saving all output graph figures...")
     generate_overall_plots(df_summary, df_feat_summary)
     generate_hyperparameter_averaged_plots(fold_tuning_history)
     generate_confusion_matrix_heatmaps(performance_tracker, le.classes_)
@@ -967,8 +967,8 @@ if __name__ == "__main__":
     generate_learning_curves_and_gap_report(performance_tracker, df_master_features)
 
     print("\n" + "=" * 80)
-    print("✅ PIPELINE COMPLETED SUCCESSFULLY!")
-    print(f"   📂 Output Directory : {GRAPHS_DIR}")
+    print(" PIPELINE COMPLETED SUCCESSFULLY!")
+    print(f"    Output Directory : {GRAPHS_DIR}")
     print("=" * 80 + "\n")
 
     # ==============================================================================
@@ -982,22 +982,34 @@ if __name__ == "__main__":
             model_means[m] = np.mean(performance_tracker[m]['overall']) * 100
 
     if not model_means:
-        raise RuntimeError("❌ Error: No classification results found in performance_tracker!")
+        raise RuntimeError(" Error: No classification results found in performance_tracker!")
 
     best_model_name = max(model_means, key=model_means.get)
     highest_accuracy = model_means[best_model_name]
 
     print("=" * 80)
-    print("🏆 CROSS-VALIDATION WINNING MODEL SELECTION SUMMARY:")
+    print(" CROSS-VALIDATION WINNING MODEL SELECTION SUMMARY:")
     for m, acc in sorted(model_means.items(), key=lambda item: item[1], reverse=True):
-        marker = "👈 [SELECTED FOR INFERENCE]" if m == best_model_name else ""
+        marker = " [SELECTED FOR INFERENCE]" if m == best_model_name else ""
         print(f"   ├─ {m:<19}: {acc:.2f}% {marker}")
     print("=" * 80)
-    print(f"🎯 Dynamic Best Classifier Selected: [{best_model_name}] ({highest_accuracy:.2f}% Mean Test Acc)")
+    print(f" Dynamic Best Classifier Selected: [{best_model_name}] ({highest_accuracy:.2f}% Mean Test Acc)")
     print("=" * 80)
 
-    # 2. Prepare Features & Labels for Full Dataset Training
-    top_selected_features = [f for f in df_feat_summary.head(30)['Feature'].tolist() if f not in exclude_cols]
+    # 2. Select Features (Dynamically based on ENABLE_FEATURE_SELECTION)
+    # Checks whether ANOVA feature selection was enabled or disabled in configuration.
+    exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_ratio', 'volume_max', 'volume_variance', 'volume_min', 'average_volume']
+
+    if 'ENABLE_FEATURE_SELECTION' in globals() and ENABLE_FEATURE_SELECTION and 'df_feat_summary' in globals():
+        # Feature selection enabled: use top selected features from ANOVA
+        k_features = TOP_K_FEATURES if 'TOP_K_FEATURES' in globals() else 30
+        top_selected_features = [f for f in df_feat_summary.head(k_features)['Feature'].tolist() if f not in exclude_cols]
+        print(f" Feature Selection: ENABLED (Using Top {len(top_selected_features)} ANOVA Features)")
+    else:
+        # Feature selection disabled: use all available acoustic features
+        top_selected_features = [col for col in df_master_features.columns if col not in exclude_cols]
+        print(f" Feature Selection: DISABLED (Using ALL {len(top_selected_features)} Acoustic Features)")
+
     X_full = df_master_features[top_selected_features].fillna(0).values
 
     le_final = LabelEncoder()
@@ -1034,7 +1046,7 @@ if __name__ == "__main__":
             best_model_obj.set_params(**best_param_dict)
 
     best_model_obj.fit(X_full_scaled, y_full)
-    print(f"✅ Dynamic Winner [{best_model_name}] Trained Successfully on Full Dataset Features!\n")
+    print(f" Dynamic Winner [{best_model_name}] Trained Successfully on Full Dataset Features!\n")
 
     # 4. Process and Classify Uploaded Audio File Pipeline
     def process_and_classify_audio_pipeline_exact(file_path):
@@ -1043,17 +1055,17 @@ if __name__ == "__main__":
         and predicts accent label with confidence probabilities for an individual audio sample file.
         """
         uploaded_path = Path(file_path)
-        print(f"\n🎙️ Processing audio via Exact Dataset Pipeline: {uploaded_path.name}...")
+        print(f"\n Processing audio via Exact Dataset Pipeline: {uploaded_path.name}...")
 
         try:
             y, sr = librosa.load(uploaded_path, sr=16000, mono=True)
             if len(y) / sr < 0.1:
-                print("❌ File too short.")
+                print(" Error: File too short.")
                 return
 
             y_trimmed, _ = librosa.effects.trim(y, top_db=40)
             if len(y_trimmed) / sr < 0.1:
-                print("❌ File too short after trimming.")
+                print(" Error: File too short after trimming.")
                 return
 
             rms = np.sqrt(np.mean(y_trimmed ** 2))
@@ -1062,7 +1074,7 @@ if __name__ == "__main__":
                 y_normalized = y_trimmed * (target_rms / rms)
                 y_normalized = np.clip(y_normalized, -0.99, 0.99)
             else:
-                print("❌ Invalid RMS Energy.")
+                print(" Error: Invalid RMS Energy.")
                 return
 
             norm_path = WORKING_DIR / f"norm_{uploaded_path.name}"
@@ -1076,7 +1088,7 @@ if __name__ == "__main__":
             extracted_csv = WORKING_DIR / "accent_features_dataset.csv"
 
             if not extracted_csv.exists():
-                print("❌ Feature extraction failed.")
+                print(" Error: Feature extraction failed.")
                 return
 
             df_single_feat = pd.read_csv(extracted_csv)
@@ -1109,11 +1121,11 @@ if __name__ == "__main__":
             print("=" * 60)
 
         except Exception as e:
-            print(f"❌ Error during single-file inference: {e}")
+            print(f"Error during single-file inference: {e}")
             traceback.print_exc()
 
     # 5. Open System File Dialog for User Selection (Way 3 via Tkinter)
-    print("\n📂 Opening file browser dialog to select audio WAV file for inference...")
+    print("\n Opening file browser dialog to select audio WAV file for inference...")
     try:
         import tkinter as tk
         from tkinter import filedialog
@@ -1131,9 +1143,9 @@ if __name__ == "__main__":
         if selected_audio_path:
             process_and_classify_audio_pipeline_exact(selected_audio_path)
         else:
-            print("⚠️ File selection cancelled by user.")
+            print(" File selection cancelled by user.")
     except Exception as dialog_err:
-        print(f"⚠️ Could not open file dialog window ({dialog_err}).")
+        print(f"warning: Could not open file dialog window ({dialog_err}).")
         user_file = input("Please manually enter the full path to your audio WAV file: ")
         if user_file and os.path.exists(user_file):
             process_and_classify_audio_pipeline_exact(user_file)

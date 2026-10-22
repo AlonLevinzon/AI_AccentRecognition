@@ -1,7 +1,7 @@
 C:\Users\Alon\AppData\Local\Programs\Python\Python313\python.exe C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\main_cnn.py
 Using device: cpu
-📁 Project Root Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated
-📊 Graphs Output Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\CNN_free_text (Cleared & Ready)
+ Project Root Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated
+ Graphs Output Directory: C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\CNN_free_text (Cleared & Ready)
 
 =================================================================
 Dynamic Path Finder Success!
@@ -86,8 +86,8 @@ Generating Grad-CAM Attention Maps for Acoustic CNN...
 Generating Averaged Accent Spectrogram Templates...
 
 ================================================================================
-✅ ALL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:
-   📂 C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\CNN_free_text
+ ALL CNN PIPELINE OUTPUTS AND GRAPHS SAVED DIRECTLY TO:
+    C:\Users\Alon\PycharmProjects\AI_AccentRecognition_updated\graphs\CNN_free_text
 ================================================================================
 
 
@@ -96,7 +96,7 @@ Generating Averaged Accent Spectrogram Templates...
 ======================================================================
 Loading trained Acoustic CNN weights from: best_accent_cnn.pth
 
-📂 Opening file browser dialog to select audio WAV file for inference...
+ Opening file browser dialog to select audio WAV file for inference...
 
 Processing Audio File for Inference:
 C:\Users\Alon\AppData\Local\Programs\Python\Python313\Lib\site-packages\torchaudio\_backend\utils.py:213: UserWarning: In 2.9, this function's implementation will be changed to use torchaudio.load_with_torchcodec` under the hood. Some parameters like ``normalize``, ``format``, ``buffer_size``, and ``backend`` will be ignored. We recommend that you port your code to rely directly on TorchCodec's decoder instead: https://docs.pytorch.org/torchcodec/stable/generated/torchcodec.decoders.AudioDecoder.html#torchcodec.decoders.AudioDecoder.

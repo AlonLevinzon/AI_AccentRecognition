@@ -3,7 +3,7 @@ HIGH-SPEED Multi-Classifier Nested Group K-Fold Loop (free_text)
 Feature Selection: ENABLED (Top 25 ANOVA)
 Hyperparameter Tuning Mode: [RANDOM_SEARCH]
 ====================================================
-📂 [LOAD SUCCESS]: Found existing metadata directly at: /kaggle/input/datasets/alonlev001/accents-data/working/machine_learning_official_free_text_only/massive_metadata_free_text.csv
+ [LOAD SUCCESS]: Found existing metadata directly at: /kaggle/input/datasets/alonlev001/accents-data/working/machine_learning_official_free_text_only/massive_metadata_free_text.csv
 ──► [CACHED DATA DETECTED]: Loading pre-extracted features from /kaggle/input/datasets/alonlev001/accents-data/working/master_extracted_features_free_text.csv
 
 ######################################################################
@@ -167,29 +167,29 @@ Classes order: ['chinese' 'indian' 'nigerian' 'usa']
 ================================================================================
 
 ================================================================================
-🏆 OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL 10 FOLDS)
+ OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL 10 FOLDS)
 ================================================================================
 
-📌 Classifier: [Gaussian NB]
+ Classifier: [Gaussian NB]
    • Mean Cross-Validation Accuracy: 64.55%
    • Best Hyperparameters:
        - priors: (0.4, 0.2, 0.2, 0.2)
        - var_smoothing: 1e-09
 
-📌 Classifier: [Logistic Regression]
+ Classifier: [Logistic Regression]
    • Mean Cross-Validation Accuracy: 73.68%
    • Best Hyperparameters:
        - C: 10
        - penalty: l2
        - solver: lbfgs
 
-📌 Classifier: [SVM (RBF)]
+ Classifier: [SVM (RBF)]
    • Mean Cross-Validation Accuracy: 79.10%
    • Best Hyperparameters:
        - C: 1
        - gamma: scale
 
-📌 Classifier: [Random Forest]
+ Classifier: [Random Forest]
    • Mean Cross-Validation Accuracy: 75.61%
    • Best Hyperparameters:
        - max_depth: 20
@@ -198,7 +198,7 @@ Classes order: ['chinese' 'indian' 'nigerian' 'usa']
        - min_samples_split: 5
        - n_estimators: 200
 
-📌 Classifier: [XGBoost]
+ Classifier: [XGBoost]
    • Mean Cross-Validation Accuracy: 77.45%
    • Best Hyperparameters:
        - colsample_bytree: 0.7
@@ -207,14 +207,14 @@ Classes order: ['chinese' 'indian' 'nigerian' 'usa']
        - n_estimators: 300
        - subsample: 0.8
 
-📌 Classifier: [Kernel ELM]
+ Classifier: [Kernel ELM]
    • Mean Cross-Validation Accuracy: 36.21%
    • Best Hyperparameters:
        - C: 100.0
        - gamma: 0.01
 
 ================================================================================
-💾 Dedicated Hyperparameters Report exported successfully -> /kaggle/working/best_hyperparameters_summary.csv
+ Dedicated Hyperparameters Report exported successfully -> /kaggle/working/best_hyperparameters_summary.csv
 ================================================================================
 
 ================================================================================

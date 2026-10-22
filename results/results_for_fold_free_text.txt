@@ -3,11 +3,11 @@ HIGH-SPEED Multi-Classifier Nested Group K-Fold Loop (free_text)
 Feature Selection: DISABLED = no HYPER PARAMTERS
 Hyperparameter Tuning Mode: [DEFAULT]
 ====================================================
-📂 [LOAD SUCCESS]: Found existing metadata directly at: /kaggle/input/datasets/alonlev001/accents-data/working/machine_learning_official_free_text_only/massive_metadata_free_text.csv
+ [LOAD SUCCESS]: Found existing metadata directly at: /kaggle/input/datasets/alonlev001/accents-data/working/machine_learning_official_free_text_only/massive_metadata_free_text.csv
 ──► [CACHED DATA DETECTED]: Loading pre-extracted features from /kaggle/input/datasets/alonlev001/accents-data/working/master_extracted_features_free_text.csv
 
-🔍 מריץ בדיקת זליגת דוברים קפדנית (Strict Speaker Leakage Audit)...
-✅ [VERIFICATION PASSED]: אפס זליגת דוברים! כל הדוברים מופרדים לחלוטין בין Train, Val ו-Test.
+ (Strict Speaker Leakage Audit)...
+ [VERIFICATION PASSED]:  Train, Val ו-Test.
 
 
 ######################################################################

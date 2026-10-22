@@ -7,7 +7,7 @@ from datasets import load_dataset, Audio
 # 1. Configuration
 DATASET_NAME = "openslr/librispeech_asr"
 CONFIG_NAME = "clean"
-SPLIT_NAME = "train.100"  # FIXED: Changed from 'train.clean.100' to 'train.100'
+SPLIT_NAME = "train.100"  # Changed from 'train.clean.100' to 'train.100'
 
 OUTPUT_DIR = "librispeech_extracted"
 METADATA_FILE = os.path.join(OUTPUT_DIR, "usa_metadata.xlsx")
