@@ -105,13 +105,16 @@ class SpecAugment(nn.Module):
         self.time_mask_param = time_mask_param
 
     def forward(self, spec):
+        # Skip augmentation during evaluation or test mode
         if not self.training:
             return spec
         cloned_spec = spec.clone()
         _, _, num_mels, time_steps = cloned_spec.shape
+        # Zero out a random contiguous block of frequency channels
         f = int(np.random.uniform(0, self.freq_mask_param))
         f0 = np.random.randint(0, max(1, num_mels - f))
         cloned_spec[:, :, f0:f0 + f, :] = 0
+        # Zero out a random contiguous block of time steps
         t = int(np.random.uniform(0, self.time_mask_param))
         t0 = np.random.randint(0, max(1, time_steps - t))
         cloned_spec[:, :, :, t0:t0 + t] = 0
@@ -144,10 +147,12 @@ class DualBranchDataset(Dataset):
         spec_path = os.path.join(self.spec_dir, f"{file_id}.pt")
         spec = torch.load(spec_path)
 
+        # Unpack tuple if saved with additional metadata
         if isinstance(spec, tuple):
             spec = spec[0]
         if not isinstance(spec, torch.Tensor):
             spec = torch.tensor(spec, dtype=torch.float32)
+        # Ensure 3D tensor format [Channels, Mels, Time] for Conv2d
         if spec.dim() == 2:
             spec = spec.unsqueeze(0)
 
@@ -184,6 +189,7 @@ class DualBranchAccentCNN(nn.Module):
             nn.MaxPool2d(2, 2),
             nn.Dropout(0.3),
 
+            # Collapse spatial dimensions to [Batch, 80, 1, 1]
             nn.AdaptiveAvgPool2d((1, 1))
         )
 
@@ -242,6 +248,7 @@ def train_epoch_fast(model, dataloader, criterion, optimizer, scaler, device):
 
         optimizer.zero_grad()
 
+        # Mixed precision training on GPU via AMP
         if device.type == 'cuda' and scaler is not None:
             with torch.amp.autocast('cuda'):
                 outputs = model(specs, phonetics)
@@ -300,6 +307,7 @@ def compute_rolloff_contour(spec_tensor, percentile=0.85):
         if total_energy_per_frame[t] == 0:
             rolloff_bins.append(0)
         else:
+            # Find first Mel frequency bin exceeding 85% cumulative energy
             bin_idx = np.where(cumulative_energy[:, t] >= threshold[t])[0]
             if len(bin_idx) > 0:
                 rolloff_bins.append(bin_idx[0])
@@ -332,6 +340,7 @@ class DualBranchGradCAM:
         self.gradients = None
         self.activations = None
 
+        # Register PyTorch hooks to capture forward activations and backward gradients
         self.target_layer.register_forward_hook(self.save_activation)
         self.target_layer.register_full_backward_hook(self.save_gradient)
 
@@ -356,12 +365,14 @@ class DualBranchGradCAM:
         gradients = self.gradients[0].cpu().data.numpy()
         activations = self.activations[0].cpu().data.numpy()
 
+        # Compute global average pooling over spatial dimensions to get channel importance weights
         weights = np.mean(gradients, axis=(1, 2))
 
         cam = np.zeros(activations.shape[1:], dtype=np.float32)
         for i, w in enumerate(weights):
             cam += w * activations[i, :, :]
 
+        # Apply ReLU to keep features with positive influence
         cam = np.maximum(cam, 0)
         if np.max(cam) != 0:
             cam = cam / np.max(cam)
@@ -408,6 +419,7 @@ def extract_official_ipa_phonetic_vector(transcribed_text: str) -> torch.Tensor:
                     counts[k] += 1
 
     total_phns = len(phonemes)
+    # Normalize counts by total number of recognized phonemes
     normalized_vec = [
         counts['voiced'] / total_phns,
         counts['fricative'] / total_phns,
@@ -424,6 +436,7 @@ def process_and_extract_mel_spectrogram(audio_path: str, target_sr: int = 16000,
                                         target_duration_sec: float = 4.0) -> torch.Tensor:
     waveform, sr = torchaudio.load(audio_path)
 
+    # Convert stereo audio to mono by averaging channels
     if waveform.shape[0] > 1:
         waveform = torch.mean(waveform, dim=0, keepdim=True)
 
@@ -434,6 +447,7 @@ def process_and_extract_mel_spectrogram(audio_path: str, target_sr: int = 16000,
     target_length = int(target_sr * target_duration_sec)
     num_samples = waveform.shape[1]
 
+    # Zero-pad short audio or truncate long audio to exactly 4 seconds
     if num_samples < target_length:
         pad_amount = target_length - num_samples
         waveform = torch.nn.functional.pad(waveform, (0, pad_amount))
@@ -450,6 +464,7 @@ def process_and_extract_mel_spectrogram(audio_path: str, target_sr: int = 16000,
     mel_spec = mel_transform(waveform)
     mel_spec = T.AmplitudeToDB(top_db=80)(mel_spec)
 
+    # Apply Z-score normalization across spectrogram values
     mean = mel_spec.mean()
     std = mel_spec.std() + 1e-6
     mel_spec = (mel_spec - mean) / std
@@ -556,6 +571,7 @@ if __name__ == "__main__":
         print("\n CRITICAL ERROR: Zero matching .pt files found!")
         sys.exit(1)
 
+    # Use GroupKFold to ensure speaker-independent cross-validation splits
     gkf_outer = GroupKFold(n_splits=5)
     groups = df_filtered["speaker_id"]
 
@@ -563,6 +579,7 @@ if __name__ == "__main__":
     all_overall_preds = []
     all_overall_labels = []
 
+    # Disable multiprocessing workers on Windows to prevent runtime issues
     num_workers_cfg = 0 if sys.platform.startswith('win') else 2
 
     print("\n" + "=" * 70)
@@ -575,6 +592,7 @@ if __name__ == "__main__":
         train_val_df = df_filtered.iloc[train_val_idx].reset_index(drop=True)
         test_df = df_filtered.iloc[test_idx].reset_index(drop=True)
 
+        # Inner GroupKFold split to derive a speaker-isolated validation set
         gkf_inner = GroupKFold(n_splits=10)
         train_idx_inner, val_idx_inner = next(gkf_inner.split(train_val_df, groups=train_val_df["speaker_id"]))
 
@@ -599,6 +617,7 @@ if __name__ == "__main__":
         model = DualBranchAccentCNN(num_classes=len(label2idx)).to(device)
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-2)
+        # Decay learning rate when validation loss plateaus for 3 epochs
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', patience=3, factor=0.5)
 
         scaler = torch.amp.GradScaler('cuda') if device.type == 'cuda' else None
@@ -611,11 +630,13 @@ if __name__ == "__main__":
             val_loss, val_acc = evaluate(model, val_loader, criterion, device)
             scheduler.step(val_loss)
 
+            # Checkpoint model weights when achieving lowest validation loss
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 best_epoch = epoch + 1
                 torch.save(model.state_dict(), MODEL_SAVE_PATH)
 
+        # Reload best weights for test evaluation
         model.load_state_dict(torch.load(MODEL_SAVE_PATH))
         test_loss, test_acc = evaluate(model, test_loader, criterion, device)
 
@@ -645,6 +666,7 @@ if __name__ == "__main__":
     best_overall_checkpoint = PROJECT_DIR / 'best_dual_branch_cnn.pth'
     shutil.copy(PROJECT_DIR / 'best_dual_branch_fold_1.pth', best_overall_checkpoint)
 
+    # Verify that no speaker IDs overlap between train and test splits
     print("\nChecking Speaker-ID Isolation across all 5 Folds...")
     total_leaks = 0
     for fold, (train_val_idx, test_idx) in enumerate(gkf_outer.split(df_filtered, groups=groups), 1):
@@ -712,6 +734,7 @@ if __name__ == "__main__":
     best_model = DualBranchAccentCNN(num_classes=len(label2idx)).to(device)
     best_model.load_state_dict(torch.load(best_overall_checkpoint))
 
+    # Target the final convolutional block of the acoustic branch
     target_layer = best_model.acoustic_branch[8]
     grad_cam = DualBranchGradCAM(best_model, target_layer)
 
@@ -720,6 +743,7 @@ if __name__ == "__main__":
     fig, axes = plt.subplots(grid_size, grid_size, figsize=(14, 10))
     axes = axes.flatten()
 
+    # Find one representative sample per accent class from the test dataset
     samples_found = {}
     for spec, phonetic, label in test_dataset:
         l_idx = label.item()
@@ -737,6 +761,7 @@ if __name__ == "__main__":
         spec_img = spec_tensor.squeeze().cpu().numpy()
 
         ax = axes[i]
+        # Plot grayscale spectrogram with translucent Grad-CAM heatmap overlay
         ax.imshow(spec_img, aspect='auto', origin='lower', cmap='gray', alpha=0.6)
         ax.imshow(heatmap, aspect='auto', origin='lower', cmap='jet', alpha=0.5,
                   extent=[0, spec_img.shape[1], 0, spec_img.shape[0]])
@@ -747,6 +772,7 @@ if __name__ == "__main__":
         ax.set_xlabel("Time Frames")
         ax.set_ylabel("Mel Frequency Bins")
 
+    # Remove empty subplot axes in the grid
     for j in range(i + 1, len(axes)):
         fig.delaxes(axes[j])
 
@@ -783,6 +809,7 @@ if __name__ == "__main__":
                     break
 
         if len(specs_list) > 0:
+            # Crop all spectrograms to the minimum time duration among sampled files
             min_time = min(s.shape[1] for s in specs_list)
             cropped_specs = [s[:, :min_time] for s in specs_list]
             avg_spec = np.mean(cropped_specs, axis=0)
@@ -828,6 +855,7 @@ if __name__ == "__main__":
                 if isinstance(spec, tuple): spec = spec[0]
                 if spec.dim() == 3: spec = spec.squeeze(0)
 
+                # Compute RMS energy contour across time frames
                 energy_contour = torch.sqrt(torch.mean(spec ** 2, dim=0)).numpy()
 
                 valid_phonetic_cols = [c for c in phonetic_cols if c in row]
@@ -877,6 +905,7 @@ if __name__ == "__main__":
         plt.legend(fontsize=11)
         plt.grid(True, alpha=0.3)
 
+        # Annotate notable spectral energy drop in Chinese accent sample
         plt.annotate('Energy Drop\n(Clipping of Final Plosives)',
                      xy=(int(len(cn_rolloff) * 0.75), cn_rolloff[int(len(cn_rolloff) * 0.75)]),
                      xytext=(int(len(cn_rolloff) * 0.55), max(cn_rolloff) * 0.85),
@@ -895,7 +924,7 @@ if __name__ == "__main__":
     # SINGLE-FILE INFERENCE VIA TKINTER FILE DIALOG
     # ==============================================================================
     print("\n" + "=" * 70)
-    print("🎙️ PREPARING INFERENCE PIPELINE FOR SINGLE AUDIO FILE...")
+    print(" PREPARING INFERENCE PIPELINE FOR SINGLE AUDIO FILE...")
     print("=" * 70)
 
     # 1. Load Whisper Speech-To-Text Model

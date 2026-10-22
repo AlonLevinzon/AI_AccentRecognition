@@ -28,7 +28,7 @@ from xgboost import XGBClassifier
 import librosa
 import soundfile as sf
 
-# Safe module checks for optional graph generation
+# Check if optional modules for graphing are installed
 try:
     import umap
 except ImportError:
@@ -46,8 +46,8 @@ except ImportError:
 RUN_MODE = "free_text"  # Options: "free_text", "mixed", or "archive_only"
 TUNING_MODE = "random_search"  # Options: "random_search", "custom", or "default"
 
-ENABLE_FEATURE_SELECTION = False
-TOP_K_FEATURES = 30
+ENABLE_FEATURE_SELECTION = False  # Set to True to use ANOVA feature selection
+TOP_K_FEATURES = 30  # How many top features to keep if feature selection is on
 
 CUSTOM_HYPERPARAMETERS = {
     'Logistic Regression': {'C': 1.0, 'penalty': 'l2', 'solver': 'lbfgs'},
@@ -64,6 +64,7 @@ PROJECT_DATA_DIR = PROJECT_DIR
 if str(PROJECT_DIR) not in sys.path:
     sys.path.insert(0, str(PROJECT_DIR))
 
+# Create a clean directory for saving generated graphs
 GRAPHS_DIR = PROJECT_DIR / "graphs" / RUN_MODE
 if GRAPHS_DIR.exists():
     shutil.rmtree(GRAPHS_DIR)
@@ -77,6 +78,7 @@ print(f"   • PROJECT_ROOT : {PROJECT_DIR}")
 print(f"   • GRAPHS_DIR   : {GRAPHS_DIR} (Cleared & Prepared)")
 print("=" * 80)
 
+# Ignore unnecessary warnings to keep console output clean
 warnings.filterwarnings('ignore', category=UserWarning)
 warnings.filterwarnings('ignore', category=RuntimeWarning)
 warnings.filterwarnings('ignore', category=FutureWarning)
@@ -129,6 +131,7 @@ class KernelELMClassifier(BaseEstimator, ClassifierMixin):
         """Computes the Radial Basis Function (RBF) pairwise kernel matrix between feature matrices."""
         X1_sq = np.sum(X1 ** 2, axis=1).reshape(-1, 1)
         X2_sq = np.sum(X2 ** 2, axis=1).reshape(1, -1)
+        # Calculate distance between samples using standard math
         distances_sq = X1_sq + X2_sq - 2 * np.dot(X1, X2.T)
         distances_sq = np.maximum(distances_sq, 0.0)
         return np.exp(-self.gamma * distances_sq)
@@ -143,13 +146,16 @@ class KernelELMClassifier(BaseEstimator, ClassifierMixin):
         num_samples = self.X_train_.shape[0]
         num_classes = len(self.classes_)
 
+        # Convert numeric labels to one-hot format for learning
         y_label_matrix = np.zeros((num_samples, num_classes), dtype=np.float64)
         for idx, cls_val in enumerate(self.classes_):
             y_label_matrix[y_arr == cls_val, idx] = 1.0
 
+        # Create matrix for fast direct math solution
         K = self.rbf_kernel(self.X_train_, self.X_train_)
         reg_matrix = K + (1.0 / self.C) * np.eye(num_samples) + 1e-7 * np.eye(num_samples)
 
+        # Calculate final weights directly without loops
         try:
             self.beta_ = np.linalg.solve(reg_matrix, y_label_matrix)
         except np.linalg.LinAlgError:
@@ -170,6 +176,7 @@ class KernelELMClassifier(BaseEstimator, ClassifierMixin):
         X_data = X.values if hasattr(X, 'values') else np.asarray(X, dtype=np.float64)
         K_test = self.rbf_kernel(X_data, self.X_train_)
         raw_output = np.dot(K_test, self.beta_)
+        # Turn raw output scores into probabilities
         exp_scores = np.exp(raw_output - np.max(raw_output, axis=1, keepdims=True))
         return exp_scores / np.sum(exp_scores, axis=1, keepdims=True)
 
@@ -183,6 +190,7 @@ def pre_extract_all_features_once(df_master):
     Extracts acoustic features for all audio samples in the metadata once and caches them to disk.
     Prevents redundant feature extraction during outer cross-validation loops.
     """
+    # Load feature file if it was already created before
     if EXTRACTED_FEATURES_MASTER_CSV.exists():
         print(f"──► [CACHED DATA DETECTED]: Loading features from {EXTRACTED_FEATURES_MASTER_CSV}")
         return pd.read_csv(EXTRACTED_FEATURES_MASTER_CSV)
@@ -202,6 +210,7 @@ def pre_extract_all_features_once(df_master):
         file_name = str(row['filename'])
         original_path = str(row['file_path'])
 
+        # Find correct audio file folder path
         if row.get('source_type') == 'archive' or 'sentence_' in original_path or 'sentences_samples' in original_path:
             part_match = [p for p in Path(original_path).parts if 'sentence_' in p]
             if part_match:
@@ -223,6 +232,7 @@ def pre_extract_all_features_once(df_master):
     temp_master_meta = WORKING_DIR / "temp_master_metadata_pipeline.csv"
     df_master_ml.to_csv(temp_master_meta, index=False, encoding='utf-8-sig')
 
+    # Run feature extraction on audio files
     import_vector_to_file(str(temp_master_meta), str(raw_normalized_dir))
 
     default_output = WORKING_DIR / "accent_features_dataset.csv"
@@ -243,6 +253,7 @@ def filter_features_by_metadata_split(df_master_features, df_split_meta):
     """
     Filters and aligns cached feature vectors with a specific fold split metadata dataframe.
     """
+    # Join features with metadata for current split
     return pd.merge(
         df_split_meta[['filename', 'file_path', 'speaker_id', 'text', 'accent']],
         df_master_features.drop(columns=['speaker_id', 'text', 'accent'], errors='ignore'),
@@ -256,6 +267,7 @@ def apply_anova_feature_selection(df_train, available_features, top_k=30):
     Guarantees strict leakage-free feature selection based solely on training split data.
     """
     X_tr = df_train[available_features].fillna(0)
+    # Ignore columns where all values are the same
     non_constant_features = [col for col in available_features if X_tr[col].nunique() > 1]
     if not non_constant_features:
         return available_features[:top_k]
@@ -263,6 +275,7 @@ def apply_anova_feature_selection(df_train, available_features, top_k=30):
     X_filtered = X_tr[non_constant_features]
     y_tr = df_train['accent']
 
+    # Score features using ANOVA test
     f_scores, _ = f_classif(X_filtered, y_tr)
     anova_df = pd.DataFrame({'Feature': non_constant_features, 'F_Score': f_scores})
     anova_df['F_Score'] = anova_df['F_Score'].fillna(0)
@@ -278,15 +291,18 @@ def load_and_scale_fold_matrices(df_master_features, df_train_meta, df_val_meta,
     df_val = filter_features_by_metadata_split(df_master_features, df_val_meta)
     df_test = filter_features_by_metadata_split(df_master_features, df_test_meta)
 
+    # List columns that are not training features
     exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_ratio',
                     'volume_max', 'volume_variance', 'volume_min', 'average_volume']
     raw_feature_candidates = [col for col in df_train.columns if col not in exclude_cols]
 
+    # Select features if option is enabled
     if ENABLE_FEATURE_SELECTION and len(raw_feature_candidates) > TOP_K_FEATURES:
         selected_features = apply_anova_feature_selection(df_train, raw_feature_candidates, top_k=TOP_K_FEATURES)
     else:
         selected_features = raw_feature_candidates
 
+    # Fit scaler on training data only
     scaler = StandardScaler()
     X_train = scaler.fit_transform(df_train[selected_features]).astype(float)
     X_val = scaler.transform(df_val[selected_features]).astype(float)
@@ -312,6 +328,7 @@ def tune_model_hyperparameters(model_name, X_train, y_train, fold_tuning_history
         return None, {}
 
     if TUNING_MODE == "custom":
+        # Apply pre-defined hyperparameter settings
         custom_params = CUSTOM_HYPERPARAMETERS.get(model_name, {})
         if model_name == 'Logistic Regression':
             return LogisticRegression(max_iter=3000, random_state=42, **custom_params), custom_params
@@ -328,6 +345,7 @@ def tune_model_hyperparameters(model_name, X_train, y_train, fold_tuning_history
         return None, {}
 
     if TUNING_MODE == "random_search":
+        # Search options for each classifier model
         if model_name == 'Logistic Regression':
             base_model = LogisticRegression(max_iter=3000, random_state=42)
             param_grid = {'C': [0.01, 0.1, 1, 10, 100], 'penalty': ['l2'], 'solver': ['lbfgs', 'newton-cg']}
@@ -360,6 +378,7 @@ def tune_model_hyperparameters(model_name, X_train, y_train, fold_tuning_history
         )
         search.fit(X_train, y_train)
 
+        # Save scores to history tracker
         for params, mean_score in zip(search.cv_results_['params'], search.cv_results_['mean_test_score']):
             param_key = tuple(sorted(params.items()))
             fold_tuning_history[model_name][param_key].append(mean_score)
@@ -395,6 +414,7 @@ def export_and_print_best_hyperparameters(fold_tuning_history):
         best_param_dict = None
         best_avg_accuracy = -1.0
 
+        # Find parameter set with best average score
         for param_tuple, scores in history.items():
             if not scores:
                 continue
@@ -452,6 +472,7 @@ def generate_hyperparameter_averaged_plots(fold_tuning_history):
         x_param = None
         series_param = None
 
+        # Choose parameters to display on plot axes
         if model_name in ['Kernel ELM', 'SVM (RBF)']:
             x_param = 'C'
             series_param = 'gamma'
@@ -477,6 +498,7 @@ def generate_hyperparameter_averaged_plots(fold_tuning_history):
         df_model[x_param] = pd.to_numeric(df_model[x_param], errors='coerce')
         df_model = df_model.dropna(subset=[x_param]).sort_values(by=x_param)
 
+        # Arrange results into a clean grid table
         if series_param and series_param in df_model.columns:
             df_model[series_param] = df_model[series_param].apply(lambda x: str(x) if x is not None else 'Default/None')
             pivot_df = df_model.pivot_table(index=x_param, columns=series_param, values='Accuracy', aggfunc='mean')
@@ -487,6 +509,7 @@ def generate_hyperparameter_averaged_plots(fold_tuning_history):
 
         fig, (ax_table, ax_plot) = plt.subplots(1, 2, figsize=(16, 6), gridspec_kw={'width_ratios': [1, 1.2]}, dpi=300)
 
+        # Draw left panel table
         ax_table.axis('off')
         table_data = pivot_df.round(2).fillna("-").astype(str).values
         col_labels = [f"{series_param}={c}" if series_param else str(c) for c in pivot_df.columns]
@@ -500,6 +523,7 @@ def generate_hyperparameter_averaged_plots(fold_tuning_history):
         table_obj.scale(1.1, 1.8)
         ax_table.set_title(f"{model_name} - Hyperparameter Grid (%)", fontsize=12, fontweight='bold', pad=10)
 
+        # Draw right panel line plot
         for col in pivot_df.columns:
             series_data = pivot_df[col].dropna()
             if not series_data.empty:
@@ -533,6 +557,7 @@ def generate_overall_plots(df_summary, df_feat_summary):
     acc_col = 'Overall Accuracy' if 'Overall Accuracy' in df_summary.columns else 'Mean Test Accuracy (%)'
     accuracies = [float(str(val).split('%')[0]) for val in df_summary[acc_col]]
 
+    # Plot model comparison bar chart
     plt.bar(models, accuracies, color='#4c72b0', edgecolor='black', alpha=0.85)
     plt.title(f"Classifier Accuracy Comparison ({RUN_MODE})", fontsize=13, fontweight='bold')
     plt.xlabel("Classifier Model", fontsize=11, labelpad=10)
@@ -549,6 +574,7 @@ def generate_overall_plots(df_summary, df_feat_summary):
     plt.savefig(chart_path, bbox_inches='tight', dpi=300)
     plt.close()
 
+    # Plot top features bar chart
     plt.figure(figsize=(10, 10), dpi=300)
     feat_col = df_feat_summary.columns[0]
     freq_col = df_feat_summary.columns[1]
@@ -575,6 +601,7 @@ def generate_confusion_matrix_heatmaps(performance_tracker, class_labels):
         if not tracker['y_true_all']:
             continue
 
+        # Create confusion matrix heatmap for each model
         cm = confusion_matrix(tracker['y_true_all'], tracker['y_pred_all'])
         plt.figure(figsize=(7, 5), dpi=300)
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=class_labels, yticklabels=class_labels)
@@ -606,6 +633,7 @@ def generate_umap_plot(df_master_features):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X_raw)
 
+    # Reduce features to 2D coordinates using UMAP
     reducer = umap.UMAP(n_neighbors=15, min_dist=0.1, n_components=2, random_state=42)
     embedding = reducer.fit_transform(X_scaled)
 
@@ -640,12 +668,14 @@ def generate_shap_plots(df_master_features):
     le = LabelEncoder()
     y_enc = le.fit_transform(df_master_features['accent'])
 
+    # Train XGBoost model to inspect feature importance
     xgb_shap_model = XGBClassifier(n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42, eval_metric='mlogloss', n_jobs=-1)
     xgb_shap_model.fit(X_df, y_enc)
 
     explainer = shap.TreeExplainer(xgb_shap_model)
     shap_values = explainer(X_df)
 
+    # Save feature explanation plot for each accent
     for class_idx, class_name in enumerate(le.classes_):
         plt.close('all')
         fig = plt.figure(figsize=(10, 6), dpi=300)
@@ -688,6 +718,7 @@ def generate_vsa_plot(df_master_features):
         sub_df = df_master_features[df_master_features['accent'] == acc][[f2_name, f1_name]].dropna()
         points = sub_df.values
 
+        # Draw outer boundary shape around vowel points
         if len(points) >= 3:
             hull = ConvexHull(points)
             vsa_area = hull.volume
@@ -699,6 +730,7 @@ def generate_vsa_plot(df_master_features):
             plt.fill(points[hull.vertices, 0], points[hull.vertices, 1], color=c_color, alpha=0.12)
             plt.scatter(points[:, 0], points[:, 1], color=c_color, alpha=0.35, s=30)
 
+    # Reverse axes to match standard phonetics charts
     plt.gca().invert_xaxis()
     plt.gca().invert_yaxis()
     plt.title("Unified Vowel Space Area (VSA) Comparison Across All Accents\n(Convex Hull Geometry in F1/F2 Space)", fontsize=13, fontweight='bold', pad=15)
@@ -750,6 +782,7 @@ def generate_learning_curves_and_gap_report(performance_tracker, df_master_featu
         plt.xlabel("Training Examples Count", fontsize=11)
         plt.ylabel("Accuracy Score (%)", fontsize=11)
 
+        # Calculate accuracy across growing dataset sizes
         train_sizes, train_scores, test_scores = learning_curve(estimator, X, y, cv=cv, n_jobs=-1, train_sizes=train_sizes, scoring='accuracy')
 
         train_scores_mean = np.mean(train_scores, axis=1) * 100
@@ -780,6 +813,7 @@ def generate_learning_curves_and_gap_report(performance_tracker, df_master_featu
     le_diag = LabelEncoder()
     y_diag = le_diag.fit_transform(df_master_features['accent'])
 
+    # Draw learning curves for main models
     xgb_diag = XGBClassifier(n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42, eval_metric='mlogloss')
     plot_model_learning_curve(xgb_diag, "XGBoost", X_diag, y_diag)
 
@@ -794,6 +828,7 @@ def generate_learning_curves_and_gap_report(performance_tracker, df_master_featu
 if __name__ == "__main__":
     print(f"\n Starting Execution Pipeline...")
 
+    # Set up metadata file paths based on mode
     metadata_file_name = f"massive_metadata_{RUN_MODE}.csv"
     possible_paths = [
         PROJECT_DATA_DIR / f"machine_learning_official_{RUN_MODE}_only" / metadata_file_name,
@@ -808,6 +843,7 @@ if __name__ == "__main__":
             df_master = pd.read_csv(meta_path)
             break
 
+    # Build metadata if no existing file is found
     if df_master is None:
         print(" Metadata CSV not found, building metadata dynamically...")
         if RUN_MODE == "free_text":
@@ -820,8 +856,10 @@ if __name__ == "__main__":
     if df_master is None or df_master.empty:
         raise ValueError(" Error: Master metadata dataframe is empty.")
 
+    # Load pre-extracted features
     df_master_features = pre_extract_all_features_once(df_master)
 
+    # Check that no speakers overlap between train and test splits
     print("\n Running strict speaker leakage verification...")
     temp_fold_gen = run_nested_group_kfold_generator(df_master)
     for fold_i, train_m, val_m, test_m in temp_fold_gen:
@@ -843,6 +881,7 @@ if __name__ == "__main__":
 
     fold_generator = run_nested_group_kfold_generator(df_master)
 
+    # Run cross-validation loop over 10 folds
     for fold_idx, df_train_meta, df_val_meta, df_test_meta in fold_generator:
         print(f"\n######################################################################")
         print(f" PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD {fold_idx}/10]")
@@ -869,11 +908,14 @@ if __name__ == "__main__":
                 if tuned_estimator is not None:
                     model_obj = tuned_estimator
 
+                # Train classifier on current fold
                 model_obj.fit(X_train, y_train)
 
+                # Get train accuracy
                 y_train_pred = model_obj.predict(X_train)
                 train_acc = accuracy_score(y_train, y_train_pred)
 
+                # Get test accuracy
                 y_pred = model_obj.predict(X_test)
                 overall_acc = accuracy_score(y_test, y_pred)
 
@@ -893,6 +935,7 @@ if __name__ == "__main__":
             print(f"Error in Fold {fold_idx}: {e}")
             traceback.print_exc()
 
+    # Create summary table for results
     summary_rows = []
     for model_name in model_names:
         tracker = performance_tracker[model_name]
@@ -917,6 +960,7 @@ if __name__ == "__main__":
     print("================================================================================")
     print(df_summary.to_string(index=False))
 
+    # Count how many times each feature was selected
     exclude_cols = ['filename', 'file_path', 'speaker_id', 'text', 'accent', 'total_duration', 'phonation_ratio', 'volume_max', 'volume_variance', 'volume_min', 'average_volume']
     all_possible_features = [col for col in df_master_features.columns if col not in exclude_cols]
     feat_counts = Counter(all_selected_features_history)
@@ -928,6 +972,7 @@ if __name__ == "__main__":
     out_csv_path = WORKING_DIR / f"top_selected_features_summary_{RUN_MODE}.csv"
     df_feat_summary.to_csv(out_csv_path, index=False)
 
+    # Plot PCA visualization of top 30 features
     top_30_features = df_feat_summary.head(30)['Feature'].tolist()
     if len(top_30_features) > 0:
         X_top30 = df_master_features[top_30_features].fillna(0)
@@ -1038,6 +1083,7 @@ if __name__ == "__main__":
 
     best_model_obj = get_winning_classifier_instance(best_model_name)
 
+    # Set parameters found during tuning onto model
     if fold_tuning_history.get(best_model_name):
         best_param_dict = dict(max(fold_tuning_history[best_model_name].items(), key=lambda item: np.mean(item[1]))[0])
         if hasattr(best_model_obj, 'set_params'):
@@ -1045,6 +1091,7 @@ if __name__ == "__main__":
                 best_param_dict['class_weight'] = 'balanced'
             best_model_obj.set_params(**best_param_dict)
 
+    # Train best model on full dataset
     best_model_obj.fit(X_full_scaled, y_full)
     print(f" Dynamic Winner [{best_model_name}] Trained Successfully on Full Dataset Features!\n")
 
@@ -1058,16 +1105,19 @@ if __name__ == "__main__":
         print(f"\n Processing audio via Exact Dataset Pipeline: {uploaded_path.name}...")
 
         try:
+            # Load audio file as 16kHz mono sound
             y, sr = librosa.load(uploaded_path, sr=16000, mono=True)
             if len(y) / sr < 0.1:
                 print(" Error: File too short.")
                 return
 
+            # Cut quiet parts at start and end
             y_trimmed, _ = librosa.effects.trim(y, top_db=40)
             if len(y_trimmed) / sr < 0.1:
                 print(" Error: File too short after trimming.")
                 return
 
+            # Adjust audio volume to standard target
             rms = np.sqrt(np.mean(y_trimmed ** 2))
             if rms > 0:
                 target_rms = 0.05
@@ -1077,13 +1127,16 @@ if __name__ == "__main__":
                 print(" Error: Invalid RMS Energy.")
                 return
 
+            # Save temporary normalized audio file
             norm_path = WORKING_DIR / f"norm_{uploaded_path.name}"
             sf.write(norm_path, y_normalized, 16000)
 
+            # Create temporary metadata table for single file
             temp_single_meta = WORKING_DIR / "temp_single_file_metadata.csv"
             df_single = pd.DataFrame([{'filename': norm_path.name, 'file_path': str(norm_path.resolve()), 'speaker_id': 'user', 'accent': 'unknown', 'text': 'sample'}])
             df_single.to_csv(temp_single_meta, index=False)
 
+            # Extract audio features for single file
             import_vector_to_file(str(temp_single_meta), str(norm_path.parent))
             extracted_csv = WORKING_DIR / "accent_features_dataset.csv"
 
@@ -1093,17 +1146,21 @@ if __name__ == "__main__":
 
             df_single_feat = pd.read_csv(extracted_csv)
 
+            # Delete temporary files from disk
             if temp_single_meta.exists(): os.remove(temp_single_meta)
             if extracted_csv.exists(): os.remove(extracted_csv)
             if norm_path.exists(): os.remove(norm_path)
 
+            # Fill in 0.0 for any missing feature columns
             for col in top_selected_features:
                 if col not in df_single_feat.columns:
                     df_single_feat[col] = 0.0
 
+            # Scale feature values using fitted scaler
             X_single = df_single_feat[top_selected_features].fillna(0).values
             X_single_scaled = final_scaler.transform(X_single)
 
+            # Run prediction and print results
             if hasattr(best_model_obj, "predict_proba"):
                 probs = best_model_obj.predict_proba(X_single_scaled)[0]
                 top_class_idx = np.argmax(probs)
@@ -1134,6 +1191,7 @@ if __name__ == "__main__":
         root.withdraw()
         root.attributes('-topmost', True)
 
+        # Open file selection pop-up window
         selected_audio_path = filedialog.askopenfilename(
             title="Select Audio WAV File for Accent Inference",
             filetypes=[("Audio Files", "*.wav")]
