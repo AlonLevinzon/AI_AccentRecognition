@@ -64,7 +64,7 @@ def run_dataset_sanity_checks():
 
     if duplicate_rows_count > 0:
         print(
-            f"🚨 ANOMALY DETECTED: Found {duplicate_rows_count} identical feature rows out of {total_rows} total rows across the dataset!")
+            f" ANOMALY DETECTED: Found {duplicate_rows_count} identical feature rows out of {total_rows} total rows across the dataset!")
         has_leakage = True
     else:
         print("✅ SUCCESS: No identical row duplications found across feature matrices.")

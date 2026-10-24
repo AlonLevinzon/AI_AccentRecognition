@@ -61,6 +61,7 @@ AI_AccentRecognition/
 |   |-- EXPERIMENT_REPRODUCTION_GUIDE.pdf
 |   |-- PROGRAMMER_DOCUMENTATION.pdf
 |   |-- USER_GUIDE.pdf
+|   |-- appendix.pdf                            # Explanations of additional graphs generated during the experiments.
 |
 |-- machine_learning_official_archive_only/     # Metadata and inputs for archive_only mode
 |-- machine_learning_official_free_text_only/   # Metadata and inputs for free_text mode
@@ -101,9 +102,11 @@ Below are the datasets used to train and evaluate our models for accent classifi
 
 ### 1. Indian Accent (`indian`)
 - **Primary Source (`indian_fleurs_accent`):**
-  - FLEURS / Common Voice Accent Subsets: [CommonVoice Indian Accent Dataset (Hugging Face)](https://huggingface.co/datasets/ishands/commonvoice-indian_accent) | [Indian English Voice (Hugging Face)](https://huggingface.co/datasets/Gbssreejith/indian-english-voice)
+  - Google FLEURS  [Indian English Voice (Hugging Face)](https://huggingface.co/datasets/Gbssreejith/indian-english-voice)
 - **Secondary Source (`indian_mozzila_accent`):**
-  - Mozilla Common Voice (Indian accent subset): [Mozilla Common Voice Corpus](https://mozilladatacollective.com/organization/cmfh0j9o10006ns07jq45h7xk)
+  - Mozilla Common Voice (Indian accent subset) / Common Voice Accent Subsets: [CommonVoice Indian Accent Dataset (Hugging Face)](https://huggingface.co/datasets/ishands/commonvoice-indian_accent) | [Mozilla Common Voice Corpus](https://mozilladatacollective.com/organization/cmfh0j9o10006ns07jq45h7xk)
+
+The first dataset is identified as a subset of Google's FLEURS (English-India) based on its matching transcript content, recording metadata, and unique phrase patterns
 
 ---
 
@@ -111,7 +114,7 @@ Below are the datasets used to train and evaluate our models for accent classifi
 - **Primary Source (`chinese_speechOcean_accent`):**
   - OpenSLR SLR101 — Chinese Speech Corpus (speechOcean): [OpenSLR SLR101](https://www.openslr.org/101/)
 - **Secondary Source (`chinese_ascend_accent`):**
-  - CAiRE ASCEND Dataset: [CAiRE ASCEND (Hugging Face)](https://huggingface.co/datasets/CAiRE/ASCEND)
+  - CAiRE ASCEND Dataset (English transcript-only subset): [CAiRE ASCEND (Hugging Face)](https://huggingface.co/datasets/CAiRE/ASCEND)
 
 ---
 
@@ -127,7 +130,7 @@ Below are the datasets used to train and evaluate our models for accent classifi
 - **Primary Source (`usa_libriSpeech_accent`):**
   - OpenSLR SLR12 — American English Accents / LibriSpeech: [OpenSLR SLR12 (American English Accents)](https://www.openslr.org/12)
 - **Secondary Source (`usa_mozzila_accent`):**
-  - Mozilla Common Voice (US accent subset): [Mozilla Common Voice Corpus](https://mozilladatacollective.com/organization/cmfh0j9o10006ns07jq45h7xk)
+  - Mozilla Common Voice (US accent subset):[CommonVoice US Accent Dataset (Hugging Face)](https://huggingface.co/datasets/fixie-ai/common_voice_17_0)| [Mozilla Common Voice Corpus](https://mozilladatacollective.com/organization/cmfh0j9o10006ns07jq45h7xk)
 
 ---
 
@@ -174,8 +177,10 @@ When the experiments are run on Kaggle, some graphs are displayed directly in th
 
 Additional experiment outputs are stored under `results/`.
 
+The `appendix.pdf` document, located in the `documentation` folder, provides explanations of additional graphs generated during the experiments that were not included in the main project report. These graphs are available in the saved experiment outputs.
+
 ## Submission Documentation
 
 `README.md`, `libs.txt`, and `EXPERIMENT_REPRODUCTION_GUIDE.docx` are located in the project root directory.
 
-The user guide, programmer documentation, and Markdown copies of the documentation files are located under `documentation/`.
+The user guide and programmer documentation are located under `documentation/`.

@@ -1,0 +1,254 @@
+C:\Users\USER\AppData\Local\Programs\Python\Python313\python.exe C:\Users\USER\PycharmProjects\AI_AccentRecognition_testing3\main_machine_learning.py
+================================================================================
+ PIPELINE EXECUTION CONFIGURATION:
+   • RUN_MODE     : 'mixed'
+   • TUNING_MODE  : 'random_search'
+   • PROJECT_ROOT : C:\Users\USER\PycharmProjects\AI_AccentRecognition_testing3
+   • GRAPHS_DIR   : C:\Users\USER\PycharmProjects\AI_AccentRecognition_testing3\graphs\mixed (Cleared & Prepared)
+================================================================================
+
+ Starting Execution Pipeline...
+ [LOAD SUCCESS]: Found metadata at C:\Users\USER\PycharmProjects\AI_AccentRecognition_testing3\machine_learning_official_mixed\massive_metadata_mixed.csv
+──► [CACHED DATA DETECTED]: Loading features from C:\Users\USER\PycharmProjects\AI_AccentRecognition_testing3\master_extracted_features_mixed.csv
+
+ Running strict speaker leakage verification...
+ Zero speaker leakage verified!
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 1/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 47.41%
+    [Logistic Regression] Test Acc: 69.98%
+    [SVM (RBF)          ] Test Acc: 70.60%
+    [Random Forest      ] Test Acc: 70.60%
+    [XGBoost            ] Test Acc: 73.29%
+    [Kernel ELM         ] Test Acc: 71.01%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 2/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 47.62%
+    [Logistic Regression] Test Acc: 63.35%
+    [SVM (RBF)          ] Test Acc: 69.57%
+    [Random Forest      ] Test Acc: 66.46%
+    [XGBoost            ] Test Acc: 71.43%
+    [Kernel ELM         ] Test Acc: 70.60%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 3/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 50.10%
+    [Logistic Regression] Test Acc: 67.29%
+    [SVM (RBF)          ] Test Acc: 70.81%
+    [Random Forest      ] Test Acc: 70.60%
+    [XGBoost            ] Test Acc: 70.60%
+    [Kernel ELM         ] Test Acc: 72.26%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 4/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 55.90%
+    [Logistic Regression] Test Acc: 68.94%
+    [SVM (RBF)          ] Test Acc: 71.84%
+    [Random Forest      ] Test Acc: 74.12%
+    [XGBoost            ] Test Acc: 74.95%
+    [Kernel ELM         ] Test Acc: 72.67%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 5/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 47.62%
+    [Logistic Regression] Test Acc: 65.42%
+    [SVM (RBF)          ] Test Acc: 69.77%
+    [Random Forest      ] Test Acc: 69.36%
+    [XGBoost            ] Test Acc: 71.43%
+    [Kernel ELM         ] Test Acc: 71.01%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 6/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 46.17%
+    [Logistic Regression] Test Acc: 67.91%
+    [SVM (RBF)          ] Test Acc: 69.77%
+    [Random Forest      ] Test Acc: 65.63%
+    [XGBoost            ] Test Acc: 70.81%
+    [Kernel ELM         ] Test Acc: 70.19%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 7/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 39.34%
+    [Logistic Regression] Test Acc: 60.46%
+    [SVM (RBF)          ] Test Acc: 66.87%
+    [Random Forest      ] Test Acc: 61.28%
+    [XGBoost            ] Test Acc: 65.84%
+    [Kernel ELM         ] Test Acc: 67.49%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 8/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 50.83%
+    [Logistic Regression] Test Acc: 66.80%
+    [SVM (RBF)          ] Test Acc: 69.50%
+    [Random Forest      ] Test Acc: 71.16%
+    [XGBoost            ] Test Acc: 72.61%
+    [Kernel ELM         ] Test Acc: 71.58%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 9/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 50.41%
+    [Logistic Regression] Test Acc: 66.80%
+    [SVM (RBF)          ] Test Acc: 74.27%
+    [Random Forest      ] Test Acc: 71.58%
+    [XGBoost            ] Test Acc: 74.69%
+    [Kernel ELM         ] Test Acc: 63.07%
+
+######################################################################
+ PROCESSING NESTED CROSS-VALIDATION FOLD SYSTEM: [FOLD 10/10]
+######################################################################
+    [Gaussian NB        ] Test Acc: 48.34%
+    [Logistic Regression] Test Acc: 65.35%
+    [SVM (RBF)          ] Test Acc: 71.78%
+    [Random Forest      ] Test Acc: 71.37%
+    [XGBoost            ] Test Acc: 73.24%
+    [Kernel ELM         ] Test Acc: 70.54%
+
+================================================================================
+FINAL ACCENT CLASSIFICATION PERFORMANCE TABLE (TEST ACCURACY & PER-ACCENT SCORES)
+================================================================================
+         Classifier Overall Accuracy Chinese Accuracy Indian Accuracy Nigerian Accuracy Usa Accuracy
+        Gaussian NB   48.37% ± 3.98%           42.77%          22.73%            46.74%       80.67%
+Logistic Regression   66.23% ± 2.63%           67.89%          53.76%            73.84%       71.31%
+          SVM (RBF)   70.48% ± 1.84%           71.24%          60.63%            76.76%       75.08%
+      Random Forest   69.22% ± 3.54%           68.76%          59.87%            75.75%       74.45%
+            XGBoost   71.89% ± 2.48%           70.20%          62.02%            79.68%       77.29%
+         Kernel ELM   70.04% ± 2.68%           66.45%          57.15%            81.83%       76.66%
+
+ Generating and saving all output graph figures...
+==================================================
+ GENERATING COMBINED (TABLE + CHART) FIGURES FOR ALL 6 CLASSIFIERS
+==================================================
+ Generated combined figure for [Gaussian NB] -> hyperparameter_impact_Gaussian_NB.png
+ Generated combined figure for [Logistic Regression] -> hyperparameter_impact_Logistic_Regression.png
+ Generated combined figure for [SVM (RBF)] -> hyperparameter_impact_SVM_RBF.png
+ Generated combined figure for [Random Forest] -> hyperparameter_impact_Random_Forest.png
+ Generated combined figure for [XGBoost] -> hyperparameter_impact_XGBoost.png
+ Generated combined figure for [Kernel ELM] -> hyperparameter_impact_Kernel_ELM.png
+ Generated UMAP plot -> umap_accent_separability.png
+ Generated SHAP Beeswarm plot -> shap_beeswarm_chinese.png
+ Generated SHAP Beeswarm plot -> shap_beeswarm_indian.png
+ Generated SHAP Beeswarm plot -> shap_beeswarm_nigerian.png
+ Generated SHAP Beeswarm plot -> shap_beeswarm_usa.png
+
+ Vowel Space Area (VSA) Summary for All Accents:
+   ├─ Chinese   : 1,262,721.70 Hz²
+   ├─ Indian    : 1,161,992.30 Hz²
+   ├─ Nigerian  : 960,347.73 Hz²
+   ├─ Usa       : 1,378,107.17 Hz²
+ Generated VSA plot -> unified_vowel_space_area_all_accents.png
+
+================================================================================
+ OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL FOLDS)
+================================================================================
+
+ Classifier: [Gaussian NB]
+   • Mean Cross-Validation Accuracy: 48.53%
+   • Best Hyperparameters:
+       - priors: (0.4, 0.2, 0.2, 0.2)
+       - var_smoothing: 1e-09
+
+ Classifier: [Logistic Regression]
+   • Mean Cross-Validation Accuracy: 64.28%
+   • Best Hyperparameters:
+       - C: 1
+       - penalty: l2
+       - solver: newton-cg
+
+ Classifier: [SVM (RBF)]
+   • Mean Cross-Validation Accuracy: 65.90%
+   • Best Hyperparameters:
+       - C: 1
+       - gamma: scale
+
+ Classifier: [Random Forest]
+   • Mean Cross-Validation Accuracy: 66.09%
+   • Best Hyperparameters:
+       - max_depth: 20
+       - max_features: log2
+       - min_samples_leaf: 1
+       - min_samples_split: 5
+       - n_estimators: 200
+
+ Classifier: [XGBoost]
+   • Mean Cross-Validation Accuracy: 67.85%
+   • Best Hyperparameters:
+       - colsample_bytree: 1.0
+       - learning_rate: 0.1
+       - max_depth: 7
+       - n_estimators: 200
+       - subsample: 0.8
+
+ Classifier: [Kernel ELM]
+   • Mean Cross-Validation Accuracy: 33.27%
+   • Best Hyperparameters:
+       - C: 100.0
+       - gamma: 0.001
+
+ Summary report saved -> C:\Users\USER\PycharmProjects\AI_AccentRecognition_testing3\best_hyperparameters_summary_mixed.csv
+
+===========================================================================
+ CLASSIFIER TRAIN VS. TEST ACCURACY & OVERFITTING GAP TABLE
+===========================================================================
+         Classifier Mean Train Accuracy (%) Mean Test Accuracy (%) Overfitting / Generalization Gap (%)
+        Gaussian NB                  49.43%                 48.37%                                1.05%
+Logistic Regression                  70.24%                 66.23%                                4.00%
+          SVM (RBF)                  86.80%                 70.48%                               16.32%
+      Random Forest                  99.89%                 69.22%                               30.67%
+            XGBoost                  99.99%                 71.89%                               28.10%
+         Kernel ELM                  89.25%                 70.04%                               19.21%
+===========================================================================
+
+ Saved Learning Curve diagnostic plot -> learning_curve_XGBoost.png
+ Saved Learning Curve diagnostic plot -> learning_curve_Random_Forest.png
+
+================================================================================
+ PIPELINE COMPLETED SUCCESSFULLY!
+    Output Directory : C:\Users\USER\PycharmProjects\AI_AccentRecognition_testing3\graphs\mixed
+================================================================================
+
+================================================================================
+ CROSS-VALIDATION WINNING MODEL SELECTION SUMMARY:
+   ├─ XGBoost            : 71.89%  [SELECTED FOR INFERENCE]
+   ├─ SVM (RBF)          : 70.48%
+   ├─ Kernel ELM         : 70.04%
+   ├─ Random Forest      : 69.22%
+   ├─ Logistic Regression: 66.23%
+   ├─ Gaussian NB        : 48.37%
+================================================================================
+ Dynamic Best Classifier Selected: [XGBoost] (71.89% Mean Test Acc)
+================================================================================
+ Feature Selection: DISABLED (Using ALL 62 Acoustic Features)
+ Dynamic Winner [XGBoost] Trained Successfully on Full Dataset Features!
+
+
+ Opening file browser dialog to select audio WAV file for inference...
+
+ Processing audio via Exact Dataset Pipeline: spk_100_00.wav...
+Loading metadata from C:\Users\USER\PycharmProjects\AI_AccentRecognition_testing3\temp_single_file_metadata.csv...
+Starting feature extraction for 1 files...
+[1/1] Processing: norm_spk_100_00.wav (unknown)
+
+SUCCESS: CSV dataset successfully created with 1 rows!
+Saved as: 'accent_features_dataset.csv'
+
+Results breakdown:
+    ├─ Chinese   : 1.15%
+    ├─ Indian    : 0.16%
+    ├─ Nigerian  : 0.02%
+    ├─ Usa       : 98.66%
+============================================================
+YOUR ACCENT IS : USA
+============================================================
+
+Process finished with exit code 0

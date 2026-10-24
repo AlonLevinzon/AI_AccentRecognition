@@ -18,12 +18,12 @@ MODEL_PATH = "sig_bak_ovr.onnx"
 def download_model_if_needed():
     """Downloads the DNSMOS weights if they do not exist locally."""
     if not os.path.exists(MODEL_PATH):
-        print("📥 Downloading official DNSMOS model weights (First time only)...")
+        print(" Downloading official DNSMOS model weights (First time only)...")
         response = requests.get(DNSMOS_MODEL_URL, stream=True)
         with open(MODEL_PATH, "wb") as f:
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
-        print("✅ Model downloaded and saved locally.")
+        print(" Model downloaded and saved locally.")
 
 
 # -------------------------------------------------------------------------
@@ -80,7 +80,7 @@ def evaluate_audio_quality_only(file_path: str, session, dataset_name: str, sub_
             "overall_quality_ovrl": round(ovr_score, 2)
         }
     except Exception as e:
-        print(f"❌ Error processing file {os.path.basename(file_path)}: {str(e)}")
+        print(f" Error processing file {os.path.basename(file_path)}: {str(e)}")
         return {
             "dataset_source": dataset_name,
             "sub_accent": sub_accent,
@@ -104,11 +104,11 @@ def scan_and_benchmark_all(all_accents_data_path: str, accents_audio_path: str, 
 
     # Enable hardware acceleration (CUDA/GPU) if available, fallback to CPU safely
     available_providers = ort.get_available_providers()
-    print(f"🤖 Available Execution Providers: {available_providers}")
+    print(f" Available Execution Providers: {available_providers}")
 
     providers = ['CUDAExecutionProvider',
                  'CPUExecutionProvider'] if 'CUDAExecutionProvider' in available_providers else ['CPUExecutionProvider']
-    print(f"🚀 Using provider: {providers[0]}")
+    print(f" Using provider: {providers[0]}")
 
     opts = ort.SessionOptions()
     session = ort.InferenceSession(MODEL_PATH, sess_options=opts, providers=providers)
@@ -140,16 +140,16 @@ def scan_and_benchmark_all(all_accents_data_path: str, accents_audio_path: str, 
                 if total_found > sample_limit:
                     audio_files = random.sample(audio_files, sample_limit)
                     print(
-                        f"🔍 Found {total_found} files in '{source_name}' -> Sampling {len(audio_files)} files for rapid baseline.")
+                        f" Found {total_found} files in '{source_name}' -> Sampling {len(audio_files)} files for rapid baseline.")
                 else:
-                    print(f"🔍 Found {total_found} files in '{source_name}' -> Processing all.")
+                    print(f" Found {total_found} files in '{source_name}' -> Processing all.")
 
                 for file_path in audio_files:
                     tasks.append(
                         executor.submit(evaluate_audio_quality_only, file_path, session, source_name, "N/A")
                     )
         else:
-            print(f"⚠️ Path not found: {all_accents_data_path}")
+            print(f" Path not found: {all_accents_data_path}")
 
         # ─── PART 2: SCAN ACCENT_ARCHIVE UNDER ACCENTS_AUDIO (ACCENT STRUCTURED) ──────
         accent_archive_base = os.path.join(accents_audio_path, "accent_archive")
@@ -170,9 +170,9 @@ def scan_and_benchmark_all(all_accents_data_path: str, accents_audio_path: str, 
                 if total_found > sample_limit:
                     audio_files = random.sample(audio_files, sample_limit)
                     print(
-                        f"🔍 Found {total_found} files under accent_archive -> '{sub_accent_name}' -> Sampling {len(audio_files)} files.")
+                        f" Found {total_found} files under accent_archive -> '{sub_accent_name}' -> Sampling {len(audio_files)} files.")
                 else:
-                    print(f"🔍 Found {total_found} files under accent_archive -> '{sub_accent_name}' -> Processing all.")
+                    print(f" Found {total_found} files under accent_archive -> '{sub_accent_name}' -> Processing all.")
 
                 for file_path in audio_files:
                     tasks.append(
@@ -180,7 +180,7 @@ def scan_and_benchmark_all(all_accents_data_path: str, accents_audio_path: str, 
                                         sub_accent_name)
                     )
         else:
-            print(f"⚠️ Accent Archive root path not found: {accent_archive_base}")
+            print(f" Accent Archive root path not found: {accent_archive_base}")
 
         # ─── COLLECT ALL CONCURRENT SCORES AS THEY COMPLETE ───────────────────────────
         for future in tasks:
@@ -200,7 +200,7 @@ def scan_and_benchmark_all(all_accents_data_path: str, accents_audio_path: str, 
             ["speech_quality_sig", "background_noise_bak", "overall_quality_ovrl"]].mean()
         print(summary)
     else:
-        print("❌ No valid results collected.")
+        print(" No valid results collected.")
 
     return df_results
 
@@ -212,9 +212,9 @@ if __name__ == "__main__":
     ALL_ACCENTS_DATA_DIR = "../../all_accents_data"
     ACCENTS_AUDIO_DIR = "../../accents_audio"
 
-    print("🚀 Starting optimized, highly accelerated non-destructive benchmarking...")
+    print(" Starting optimized, highly accelerated non-destructive benchmarking...")
     # Cap limit set to 100 files per group for sub-minute execution
     df_final_report = scan_and_benchmark_all(ALL_ACCENTS_DATA_DIR, ACCENTS_AUDIO_DIR, max_workers=8, sample_limit=100)
 
     df_final_report.to_csv("all_raw_datasets_quality_report.csv", index=False)
-    print("\n💾 Complete read-only evaluation report written out to: all_raw_datasets_quality_report.csv")
+    print("\n Complete read-only evaluation report written out to: all_raw_datasets_quality_report.csv")

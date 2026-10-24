@@ -1,6 +1,6 @@
 import os
 
-# 1. Force PyTorch to disable MKL & OpenMP threading optimizations causing Windows 0xC0000005 crash
+# Fix potential Windows crash by limiting threading overhead
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
@@ -24,11 +24,11 @@ from tqdm import tqdm
 
 import torch
 
-# Disable internal CPU threading and force deterministic CPU operations
+# Force single-threaded execution for stability
 torch.set_num_threads(1)
 torch.set_num_interop_threads(1)
 
-# Disable MKL primitives if available on Windows CPU build
+# Disable MKL primitives if available
 if hasattr(torch.backends, 'mkl'):
     torch.backends.mkl.is_available = lambda: False
 
@@ -42,19 +42,19 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 warnings.filterwarnings("ignore")
 
-# Global configuration and project directory definitions
+# Define project directories
 PROJECT_DIR = Path.cwd().resolve()
 INPUT_DIR = PROJECT_DIR / "archive_cnn_dataset"
 PLOTS_DIR = PROJECT_DIR / "graphs" / "archive_cnn"
 
-# Local temporary folders for spectrograms
+# Directories for temporary spectrogram storage
 DIR_LOGMEL = PROJECT_DIR / "temp_spectrograms_logmel"
 DIR_LINEAR = PROJECT_DIR / "temp_spectrograms_linear"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-# Locates dataset CSV or Excel files dynamically within the input folder
+# Find the first metadata file in the folder
 def find_metadata_file(search_dir: Path) -> Path:
     found_files = []
     for root, _, files in os.walk(search_dir):
@@ -68,7 +68,7 @@ def find_metadata_file(search_dir: Path) -> Path:
     return found_files[0]
 
 
-# Applies dynamic frequency and time zero-masking on input spectrogram tensors during training
+# Apply random time and frequency masking during training
 class SpecAugment(nn.Module):
     def __init__(self, freq_mask_param=16, time_mask_param=80):
         super().__init__()
@@ -89,7 +89,7 @@ class SpecAugment(nn.Module):
         return cloned_spec
 
 
-# In-Memory PyTorch Dataset that loads all tensors into RAM to prevent disk lock crashes
+# Load dataset into memory to avoid I/O overhead
 class InMemoryAccentDataset(Dataset):
     def __init__(self, metadata_df, spec_dir, label2idx=None):
         self.df = metadata_df.reset_index(drop=True)
@@ -125,7 +125,7 @@ class InMemoryAccentDataset(Dataset):
         return self.samples[idx]
 
 
-# Implements a 3-Block 2D Convolutional Neural Network (20 -> 40 -> 80 filters) with adaptive pooling
+# Standard 2D CNN model for audio classification
 class AccentCNN(nn.Module):
     def __init__(self, num_classes: int):
         super().__init__()
@@ -159,17 +159,20 @@ class AccentCNN(nn.Module):
         return self.classifier(x)
 
 
-# Loads audio files and extracts standardized 45-second Log-Mel (dB) and Linear Mel spectrograms
+# Preprocess audio and generate normalized spectrograms
 def process_and_extract_spectrograms(audio_path: str, target_sr: int = 16000, target_duration_sec: float = 45.0):
     waveform, sr = torchaudio.load(audio_path)
 
+    # Convert stereo to mono
     if waveform.shape[0] > 1:
         waveform = torch.mean(waveform, dim=0, keepdim=True)
 
+    # Resample if needed
     if sr != target_sr:
         resampler = T.Resample(orig_freq=sr, new_freq=target_sr)
         waveform = resampler(waveform)
 
+    # Pad or crop waveform to target length
     target_length = int(target_sr * target_duration_sec)
     num_samples = waveform.shape[1]
 
@@ -179,21 +182,24 @@ def process_and_extract_spectrograms(audio_path: str, target_sr: int = 16000, ta
     elif num_samples > target_length:
         waveform = waveform[:, :target_length]
 
+    # Compute Mel spectrogram
     mel_transform = T.MelSpectrogram(
         sample_rate=target_sr, n_fft=1024, hop_length=512, n_mels=128, power=2.0
     )
     raw_mel = mel_transform(waveform)
 
+    # Standardize linear spectrogram
     linear_spec = raw_mel.clone()
     linear_spec = (linear_spec - linear_spec.mean()) / (linear_spec.std() + 1e-6)
 
+    # Convert to log scale and standardize
     logmel_spec = T.AmplitudeToDB(top_db=80)(raw_mel)
     logmel_spec = (logmel_spec - logmel_spec.mean()) / (logmel_spec.std() + 1e-6)
 
     return logmel_spec, linear_spec
 
 
-# Reads CSV and Excel files robustly across multiple encoding formats
+# Read CSV or Excel files with fallback encoding handling
 def smart_read_file(file_path):
     ext = os.path.splitext(file_path)[1].lower()
     if ext in ['.xlsx', '.xls']:
@@ -206,7 +212,7 @@ def smart_read_file(file_path):
     return pd.read_csv(file_path, encoding='latin1', on_bad_lines='skip')
 
 
-# Maps extracted filename prefixes to four main target accent categories
+# Group detailed language labels into main accent categories (because there are different places for each accent in archive)
 def map_to_main_accent(filename_str):
     ACCENT_MAP = {
         "english": "usa",
@@ -225,7 +231,7 @@ def map_to_main_accent(filename_str):
     return "other"
 
 
-# Trains the AccentCNN model on training split using pre-loaded RAM dataset
+# Train model and track performance across epochs
 def train_and_track(spec_dir, train_df, val_df, name="Model", save_filename="best_model.pth", num_epochs=30, batch_size=32):
     train_dataset = InMemoryAccentDataset(train_df, spec_dir)
     val_dataset = InMemoryAccentDataset(val_df, spec_dir, label2idx=train_dataset.label2idx)
@@ -245,6 +251,7 @@ def train_and_track(spec_dir, train_df, val_df, name="Model", save_filename="bes
     print("-" * 50)
 
     for epoch in range(num_epochs):
+        # Training phase
         model.train()
         t_loss, t_correct, t_total = 0.0, 0, 0
         for specs, labels in train_loader:
@@ -260,6 +267,7 @@ def train_and_track(spec_dir, train_df, val_df, name="Model", save_filename="bes
             t_correct += (preds == labels).sum().item()
             t_total += labels.size(0)
 
+        # Validation phase
         model.eval()
         v_loss, v_correct, v_total = 0.0, 0, 0
         with torch.no_grad():
@@ -281,6 +289,7 @@ def train_and_track(spec_dir, train_df, val_df, name="Model", save_filename="bes
         history['train_acc'].append(train_acc)
         history['val_acc'].append(val_acc)
 
+        # Save checkpoint if validation loss improves
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             torch.save(model.state_dict(), save_filename)
@@ -293,7 +302,7 @@ def train_and_track(spec_dir, train_df, val_df, name="Model", save_filename="bes
     return history
 
 
-# Evaluates trained model checkpoint on unseen test split
+# Evaluate trained model on test dataset and save confusion matrix
 def evaluate_test_set(spec_dir, test_df, train_val_df, model_name="Model", weight_path="best_model.pth"):
     unique_labels = sorted(train_val_df['accent'].unique())
     label2idx = {label: i for i, label in enumerate(unique_labels)}
@@ -310,6 +319,7 @@ def evaluate_test_set(spec_dir, test_df, train_val_df, model_name="Model", weigh
     model.eval()
     all_preds, all_labels = [], []
 
+    # Run inference on test data
     with torch.no_grad():
         for specs, labels in test_loader:
             specs = specs.to(device)
@@ -325,6 +335,7 @@ def evaluate_test_set(spec_dir, test_df, train_val_df, model_name="Model", weigh
     print(f"\nClassification Report - Test Set ({model_name}):\n")
     print(classification_report(all_labels, all_preds, target_names=target_names, digits=4, zero_division=0))
 
+    # Plot and save confusion matrix
     cm = confusion_matrix(all_labels, all_preds)
     plt.figure(figsize=(7, 6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=target_names, yticklabels=target_names)
@@ -338,11 +349,11 @@ def evaluate_test_set(spec_dir, test_df, train_val_df, model_name="Model", weigh
     return test_acc
 
 
-# Main execution entry point
+# Main execution pipeline
 if __name__ == "__main__":
     print(f"Using compute device: {device}")
 
-    # Clean existing graph outputs and temp folders on fresh start
+    # Prepare output and temporary directories
     if PLOTS_DIR.exists():
         shutil.rmtree(PLOTS_DIR)
     PLOTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -356,6 +367,7 @@ if __name__ == "__main__":
     DIR_LINEAR.mkdir(parents=True, exist_ok=True)
 
     try:
+        # Load and combine metadata files
         csv_path = find_metadata_file(INPUT_DIR)
         print(f"Found Metadata File: {csv_path}")
 
@@ -367,6 +379,7 @@ if __name__ == "__main__":
         dfs = [smart_read_file(f) for f in all_meta_files]
         metadata_df = pd.concat(dfs, ignore_index=True)
 
+        # Standardize file ID and target accent labels
         filename_col = "split_filename" if "split_filename" in metadata_df.columns else "filename"
         metadata_df["file_id"] = metadata_df[filename_col].apply(
             lambda x: os.path.splitext(os.path.basename(str(x)))[0].lower().strip()
@@ -375,6 +388,7 @@ if __name__ == "__main__":
         metadata_df["accent"] = metadata_df["file_id"].apply(map_to_main_accent)
         metadata_df = metadata_df[metadata_df["accent"] != "other"].reset_index(drop=True)
 
+        # Map audio files on disk
         valid_extensions = {".wav", ".mp3", ".flac", ".ogg"}
         audio_files_map = {}
 
@@ -384,6 +398,7 @@ if __name__ == "__main__":
                     file_id = os.path.splitext(f)[0].lower().strip()
                     audio_files_map[file_id] = os.path.join(root, f)
 
+        # Extract and save spectrogram tensors
         print("Generating Spectrograms into Local Folder...")
         for file_id, audio_path in tqdm(audio_files_map.items(), desc="Generating Spectrograms"):
             path_log = DIR_LOGMEL / f"{file_id}.pt"
@@ -401,21 +416,25 @@ if __name__ == "__main__":
 
         gc.collect()
 
+        # Keep metadata rows that match existing spectrogram files
         existing_pt_files = {f.stem.lower().strip() for f in DIR_LOGMEL.glob("*.pt")}
         metadata_df = metadata_df[metadata_df["file_id"].isin(existing_pt_files)].reset_index(drop=True)
 
         print(f"Successfully processed {len(existing_pt_files)} spectrogram tensors.")
 
+        # Assign fallback speaker IDs if missing
         speaker_col = "speakerid" if "speakerid" in metadata_df.columns else "speaker_id"
         if speaker_col not in metadata_df.columns:
             metadata_df[speaker_col] = metadata_df["file_id"]
 
+        # Split data by speaker into train/val and test sets
         gss = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
         train_val_idx, test_idx = next(gss.split(metadata_df, groups=metadata_df[speaker_col]))
 
         train_val_df = metadata_df.iloc[train_val_idx].reset_index(drop=True)
         test_df = metadata_df.iloc[test_idx].reset_index(drop=True)
 
+        # Create folds for cross-validation
         gkf = GroupKFold(n_splits=5)
         train_val_df["fold"] = -1
         for fold_idx, (train_idx, val_idx) in enumerate(gkf.split(train_val_df, groups=train_val_df[speaker_col])):
@@ -429,9 +448,11 @@ if __name__ == "__main__":
         path_best_logmel = PROJECT_DIR / "best_logmel.pth"
         path_best_linear = PROJECT_DIR / "best_linear.pth"
 
+        # Train both log-mel and linear mel models
         history_logmel = train_and_track(DIR_LOGMEL, train_df, val_df, name="Log-Mel (Decibel)", save_filename=str(path_best_logmel), num_epochs=30)
         history_linear = train_and_track(DIR_LINEAR, train_df, val_df, name="Linear Mel", save_filename=str(path_best_linear), num_epochs=30)
 
+        # Plot training validation curves comparison
         plt.figure(figsize=(14, 5))
 
         plt.subplot(1, 2, 1)
@@ -456,9 +477,11 @@ if __name__ == "__main__":
         plt.savefig(PLOTS_DIR / "validation_curves_comparison.png")
         plt.close()
 
+        # Evaluate both models on test set
         test_acc_log = evaluate_test_set(DIR_LOGMEL, test_df, train_val_df, model_name="Log-Mel (Decibel)", weight_path=str(path_best_logmel))
         test_acc_lin = evaluate_test_set(DIR_LINEAR, test_df, train_val_df, model_name="Linear Mel", weight_path=str(path_best_linear))
 
+        # Plot final test accuracy comparison bar chart
         plt.figure(figsize=(8, 5))
         bars = plt.bar(['Log-Mel', 'Linear Mel'], [test_acc_log * 100, test_acc_lin * 100], color=['blue', 'orange'])
         plt.title('Final Unseen Test Set Accuracy (%)')
@@ -478,6 +501,7 @@ if __name__ == "__main__":
         print("=" * 65)
 
     finally:
+        # Clean up temporary spectrogram directories
         gc.collect()
         if DIR_LOGMEL.exists():
             shutil.rmtree(DIR_LOGMEL, ignore_errors=True)

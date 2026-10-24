@@ -167,7 +167,7 @@ Classes order: ['chinese' 'indian' 'nigerian' 'usa']
 ================================================================================
 
 ================================================================================
-🏆 OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL 10 FOLDS)
+OPTIMAL HYPERPARAMETERS REPORT (AVERAGED ACROSS ALL 10 FOLDS)
 ================================================================================
 
  Classifier: [Gaussian NB]

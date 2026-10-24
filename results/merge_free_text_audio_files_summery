@@ -1,0 +1,42 @@
+--- Starting Audio Mixing Process ---
+Target Ratio: 70.0% / 30.0%
+Target Samples: 840 (Primary), 360 (Secondary)
+Strict Target Per Accent: 1200
+
+Processing accent: INDIAN...
+  - Initial Split: Selected 840 (Primary) and 361 (Secondary). Total: 1201
+  - Final composition: Primary = 840, Secondary = 361
+  - Total collected samples for indian: 1201
+  - Successfully copied 1201 files to audio_by_accent_raw\indian
+  - Saved consolidated metadata to audio_by_accent_raw\indian\indian_metadata.csv
+
+Processing accent: CHINESE...
+  - Initial Split: Selected 840 (Primary) and 230 (Secondary). Total: 1070
+  - [Compensation Mode Active] Deficit of 130 samples detected.
+    Attempting to pull extra 130 samples from Primary (chinese_speechOcean_metadata.xlsx)...
+    Successfully added 130 extra samples from Primary source.
+  - Final composition: Primary = 970, Secondary = 230
+  - Total collected samples for chinese: 1200
+  - Successfully copied 1200 files to audio_by_accent_raw\chinese
+  - Saved consolidated metadata to audio_by_accent_raw\chinese\chinese_metadata.csv
+
+Processing accent: NIGERIAN...
+  - Initial Split: Selected 840 (Primary) and 310 (Secondary). Total: 1150
+  - [Compensation Mode Active] Deficit of 50 samples detected.
+    Attempting to pull extra 50 samples from Primary (nigerian_mozzila_metadata.xlsx)...
+    Successfully added 50 extra samples from Primary source.
+  - Final composition: Primary = 890, Secondary = 310
+  - Total collected samples for nigerian: 1200
+  - Successfully copied 1200 files to audio_by_accent_raw\nigerian
+  - Saved consolidated metadata to audio_by_accent_raw\nigerian\nigerian_metadata.csv
+
+Processing accent: USA...
+  - Initial Split: Selected 846 (Primary) and 361 (Secondary). Total: 1207
+  - Final composition: Primary = 846, Secondary = 361
+  - Total collected samples for usa: 1207
+  - Successfully copied 1207 files to audio_by_accent_raw\usa
+  - Saved consolidated metadata to audio_by_accent_raw\usa\usa_metadata.csv
+
+--- Process Completed Successfully! ---
+
+Process finished with exit code 0
