@@ -73,7 +73,6 @@ AI_AccentRecognition/
 |
 |-- graphs/                                     # Graphs saved during local runs
 |-- results/                                    # Experiment results
-|-- for final report/                           # Files used while preparing the final report
 |
 |-- archive_cnn.py                              # Compares Linear and Log-Mel spectrograms on archive dataset 
 |-- metadata_generator.py                       # Creates metadata for the three dataset modes
